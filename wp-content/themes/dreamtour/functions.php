@@ -21,8 +21,13 @@ define('DREAMTOUR_THEME_URI', get_template_directory_uri());
  * Configuración del tema
  */
 function dreamtour_setup() {
-    // Soporte para traducciones
+    // Soporte para traducciones - Inglés como default
     load_theme_textdomain('dreamtour', DREAMTOUR_THEME_DIR . '/languages');
+    
+    // Establecer inglés como idioma por defecto
+    if (!get_locale()) {
+        add_filter('locale', 'dreamtour_set_default_locale');
+    }
     
     // Soporte para título dinámico
     add_theme_support('title-tag');
@@ -519,3 +524,193 @@ function dreamtour_gutenberg_setup() {
     ));
 }
 add_action('after_setup_theme', 'dreamtour_gutenberg_setup');
+
+/**
+ * Establecer inglés como idioma por defecto
+ */
+function dreamtour_set_default_locale($locale) {
+    return 'en_US';
+}
+
+/**
+ * Sistema de cambio de idioma
+ */
+function dreamtour_language_switcher() {
+    // Obtener idioma actual
+    $current_locale = get_locale();
+    
+    // Idiomas disponibles
+    $languages = array(
+        'en_US' => array(
+            'name' => 'English',
+            'flag' => '🇬🇧',
+            'code' => 'en'
+        ),
+        'es_ES' => array(
+            'name' => 'Español',
+            'flag' => '🇪🇸',
+            'code' => 'es'
+        ),
+        'it_IT' => array(
+            'name' => 'Italiano',
+            'flag' => '🇮🇹',
+            'code' => 'it'
+        )
+    );
+    
+    ob_start();
+    ?>
+    <div class="language-switcher">
+        <button class="language-toggle" aria-label="<?php esc_attr_e('Select Language', 'dreamtour'); ?>">
+            <?php 
+            if (isset($languages[$current_locale])) {
+                echo $languages[$current_locale]['flag'];
+                echo ' <span>' . esc_html($languages[$current_locale]['code']) . '</span>';
+            } else {
+                echo '🌐 <span>EN</span>';
+            }
+            ?>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <div class="language-dropdown">
+            <?php foreach ($languages as $locale => $lang) : 
+                $url = add_query_arg('lang', $lang['code'], home_url($_SERVER['REQUEST_URI']));
+                $active_class = ($current_locale === $locale) ? 'active' : '';
+            ?>
+                <a href="<?php echo esc_url($url); ?>" 
+                   class="language-option <?php echo esc_attr($active_class); ?>" 
+                   data-locale="<?php echo esc_attr($locale); ?>">
+                    <?php echo $lang['flag']; ?> <?php echo esc_html($lang['name']); ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+/**
+ * Cambiar idioma basado en parámetro URL
+ */
+function dreamtour_switch_language() {
+    if (isset($_GET['lang'])) {
+        $lang = sanitize_text_field($_GET['lang']);
+        
+        $locale_map = array(
+            'en' => 'en_US',
+            'es' => 'es_ES',
+            'it' => 'it_IT'
+        );
+        
+        if (isset($locale_map[$lang])) {
+            setcookie('dreamtour_locale', $locale_map[$lang], time() + (86400 * 30), '/');
+            $_COOKIE['dreamtour_locale'] = $locale_map[$lang];
+        }
+    }
+}
+add_action('init', 'dreamtour_switch_language');
+
+/**
+ * Aplicar idioma seleccionado
+ */
+function dreamtour_set_locale($locale) {
+    if (isset($_COOKIE['dreamtour_locale'])) {
+        return sanitize_text_field($_COOKIE['dreamtour_locale']);
+    }
+    return $locale;
+}
+add_filter('locale', 'dreamtour_set_locale');
+
+/**
+ * Botón flotante de WhatsApp
+ */
+function dreamtour_whatsapp_button() {
+    // Número de WhatsApp (configurable desde el Customizer)
+    $whatsapp_number = get_theme_mod('dreamtour_whatsapp_number', '+393123456789');
+    $whatsapp_message = get_theme_mod('dreamtour_whatsapp_message', __('Hello! I would like more information about your tours.', 'dreamtour'));
+    
+    // Limpiar número (solo números)
+    $clean_number = preg_replace('/[^0-9]/', '', $whatsapp_number);
+    
+    // Codificar mensaje
+    $encoded_message = urlencode($whatsapp_message);
+    
+    // URL de WhatsApp
+    $whatsapp_url = "https://wa.me/{$clean_number}?text={$encoded_message}";
+    
+    ob_start();
+    ?>
+    <a href="<?php echo esc_url($whatsapp_url); ?>" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="<?php esc_attr_e('Contact us on WhatsApp', 'dreamtour'); ?>">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.828.736 5.484 2.016 7.792L.08 31.92l8.32-2.08C10.656 31.248 13.264 32 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.2c-2.488 0-4.816-.688-6.8-1.88l-.488-.28-5.04 1.264 1.344-4.904-.312-.512C3.368 21.056 2.8 18.6 2.8 16 2.8 8.712 8.712 2.8 16 2.8S29.2 8.712 29.2 16 23.288 29.2 16 29.2zm7.2-9.92c-.392-.2-2.336-1.152-2.696-1.28-.36-.136-.624-.2-.888.2-.264.392-1.024 1.28-1.256 1.544-.232.256-.464.296-.856.096-.4-.2-1.68-.616-3.2-1.968-1.184-1.056-1.984-2.36-2.216-2.752-.232-.4-.024-.616.176-.816.176-.184.392-.48.592-.72.192-.24.256-.4.392-.672.128-.264.064-.496-.032-.696-.104-.2-.888-2.136-1.216-2.928-.32-.776-.648-.672-.888-.688-.232-.008-.496-.016-.76-.016s-.696.096-.96.488c-.264.4-1.008.984-1.008 2.4s1.032 2.784 1.176 2.976c.144.192 2.048 3.12 4.96 4.376.696.296 1.24.472 1.664.608.696.216 1.328.184 1.832.112.56-.08 2.336-.952 2.664-1.872.336-.92.336-1.704.232-1.872-.096-.168-.36-.264-.752-.464z"/>
+        </svg>
+    </a>
+    <?php
+    return ob_get_clean();
+}
+
+/**
+ * Añadir botón de WhatsApp al footer
+ */
+function dreamtour_add_whatsapp_button() {
+    if (get_theme_mod('dreamtour_whatsapp_enabled', true)) {
+        echo dreamtour_whatsapp_button();
+    }
+}
+add_action('wp_footer', 'dreamtour_add_whatsapp_button');
+
+/**
+ * Customizer: Configuración de WhatsApp
+ */
+function dreamtour_customize_whatsapp($wp_customize) {
+    // Sección de WhatsApp
+    $wp_customize->add_section('dreamtour_whatsapp', array(
+        'title'    => __('WhatsApp Settings', 'dreamtour'),
+        'priority' => 130,
+    ));
+    
+    // Activar/Desactivar WhatsApp
+    $wp_customize->add_setting('dreamtour_whatsapp_enabled', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    
+    $wp_customize->add_control('dreamtour_whatsapp_enabled', array(
+        'label'   => __('Enable WhatsApp Button', 'dreamtour'),
+        'section' => 'dreamtour_whatsapp',
+        'type'    => 'checkbox',
+    ));
+    
+    // Número de WhatsApp
+    $wp_customize->add_setting('dreamtour_whatsapp_number', array(
+        'default'           => '+393891733185',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('dreamtour_whatsapp_number', array(
+        'label'       => __('WhatsApp Number', 'dreamtour'),
+        'description' => __('Include country code (e.g., +393891733185)', 'dreamtour'),
+        'section'     => 'dreamtour_whatsapp',
+        'type'        => 'text',
+    ));
+    
+    // Mensaje predeterminado
+    $wp_customize->add_setting('dreamtour_whatsapp_message', array(
+        'default'           => __('Hello! I would like more information about your tours.', 'dreamtour'),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    
+    $wp_customize->add_control('dreamtour_whatsapp_message', array(
+        'label'       => __('Default Message', 'dreamtour'),
+        'description' => __('Message that will appear when opening WhatsApp', 'dreamtour'),
+        'section'     => 'dreamtour_whatsapp',
+        'type'        => 'textarea',
+    ));
+}
+add_action('customize_register', 'dreamtour_customize_whatsapp');

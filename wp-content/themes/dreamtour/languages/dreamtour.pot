@@ -1,0 +1,283 @@
+# Copyright (C) 2026 DreamTour Team
+# This file is distributed under the same license as the DreamTour package.
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamTour 1.0.0\n"
+"Report-Msgid-Bugs-To: https://dreamtourviaggi.it\n"
+"POT-Creation-Date: 2026-01-13 12:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: DreamTour Team\n"
+
+#: functions.php
+msgid "Select Language"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Español"
+msgstr ""
+
+msgid "Italiano"
+msgstr ""
+
+msgid "WhatsApp Settings"
+msgstr ""
+
+msgid "Enable WhatsApp Button"
+msgstr ""
+
+msgid "WhatsApp Number"
+msgstr ""
+
+msgid "Include country code (e.g., +393123456789)"
+msgstr ""
+
+msgid "Default Message"
+msgstr ""
+
+msgid "Message that will appear when opening WhatsApp"
+msgstr ""
+
+msgid "Hello! I would like more information about your tours."
+msgstr ""
+
+msgid "Contact us on WhatsApp"
+msgstr ""
+
+#: header.php
+msgid "Navegación principal"
+msgstr ""
+
+msgid "Abrir búsqueda"
+msgstr ""
+
+msgid "Ver Tours"
+msgstr ""
+
+msgid "Cerrar búsqueda"
+msgstr ""
+
+#: footer.php
+msgid "Destinos"
+msgstr ""
+
+msgid "Europa"
+msgstr ""
+
+msgid "Asia"
+msgstr ""
+
+msgid "América"
+msgstr ""
+
+msgid "África"
+msgstr ""
+
+msgid "Oceanía"
+msgstr ""
+
+msgid "DreamTour"
+msgstr ""
+
+msgid "Sobre Nosotros"
+msgstr ""
+
+msgid "Cómo Funciona"
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "Coordinadores"
+msgstr ""
+
+msgid "Únete al Equipo"
+msgstr ""
+
+msgid "Ayuda"
+msgstr ""
+
+msgid "Contacto"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid "Términos y Condiciones"
+msgstr ""
+
+msgid "Política de Privacidad"
+msgstr ""
+
+msgid "Política de Cookies"
+msgstr ""
+
+msgid "Todos los derechos reservados."
+msgstr ""
+
+#: index.php
+msgid "Descubre el Mundo con DreamTour"
+msgstr ""
+
+msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
+msgstr ""
+
+msgid "Explorar Tours"
+msgstr ""
+
+msgid "Conocer Más"
+msgstr ""
+
+msgid "Tours Destacados"
+msgstr ""
+
+msgid "Descubre nuestros viajes más populares"
+msgstr ""
+
+msgid "No hay contenido disponible."
+msgstr ""
+
+msgid "Ver Todos los Tours"
+msgstr ""
+
+msgid "¿Por qué viajar con DreamTour?"
+msgstr ""
+
+msgid "Experiencias únicas en cada destino"
+msgstr ""
+
+msgid "Una Comunidad"
+msgstr ""
+
+msgid "Conoce nuevos amigos viajando en pequeños grupos con personas como tú, siempre acompañados por un Coordinador."
+msgstr ""
+
+msgid "Infinitos Viajes"
+msgstr ""
+
+msgid "Vive experiencias únicas en más de 100 países del mundo, eligiendo el estilo que mejor se adapte a ti."
+msgstr ""
+
+msgid "Máxima Flexibilidad"
+msgstr ""
+
+msgid "Puedes reservar tu plaza con un anticipo y cambiar de idea gratuitamente. El seguro médico y de equipaje siempre está incluido."
+msgstr ""
+
+msgid "Últimas Historias"
+msgstr ""
+
+msgid "Inspiración y consejos de viaje"
+msgstr ""
+
+msgid "Ver Todos los Artículos"
+msgstr ""
+
+msgid "¿Listo para tu próxima aventura?"
+msgstr ""
+
+msgid "Únete a miles de viajeros que ya han descubierto el mundo con DreamTour"
+msgstr ""
+
+msgid "Explorar Destinos"
+msgstr ""
+
+#: single-tour.php
+msgid "Desde"
+msgstr ""
+
+msgid "Reservar Ahora"
+msgstr ""
+
+msgid "Coordinador incluido"
+msgstr ""
+
+msgid "Seguro médico y de equipaje"
+msgstr ""
+
+msgid "Cancelación flexible"
+msgstr ""
+
+msgid "Grupo reducido"
+msgstr ""
+
+msgid "¿Tienes dudas?"
+msgstr ""
+
+msgid "Contáctanos"
+msgstr ""
+
+msgid "Destinos:"
+msgstr ""
+
+msgid "Tipo de viaje:"
+msgstr ""
+
+#: archive-tour.php
+msgid "Nuestros Tours"
+msgstr ""
+
+msgid "Explora destinos increíbles alrededor del mundo"
+msgstr ""
+
+msgid "No se encontraron tours"
+msgstr ""
+
+msgid "Vuelve pronto para descubrir nuevos destinos."
+msgstr ""
+
+#: search.php
+msgid "Resultados de búsqueda para: %s"
+msgstr ""
+
+msgid "No se encontraron resultados"
+msgstr ""
+
+msgid "Intenta con otra búsqueda."
+msgstr ""
+
+#: searchform.php
+msgid "Buscar:"
+msgstr ""
+
+msgid "Buscar tours, destinos..."
+msgstr ""
+
+msgid "Buscar"
+msgstr ""
+
+#: 404.php
+msgid "Página no encontrada"
+msgstr ""
+
+msgid "La página que buscas no existe o ha sido movida."
+msgstr ""
+
+msgid "Volver al Inicio"
+msgstr ""
+
+#: single.php
+msgid "Anterior:"
+msgstr ""
+
+msgid "Siguiente:"
+msgstr ""
+
+msgid "Páginas:"
+msgstr ""
+
+#: template-home.php
+msgid "Viaja. Descubre. Conecta."
+msgstr ""
+
+msgid "Únete a miles de viajeros en experiencias únicas por todo el mundo"
+msgstr ""
+
+msgid "Saber Más"
+msgstr ""
+
+msgid "Leer más"
+msgstr ""

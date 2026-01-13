@@ -1,0 +1,270 @@
+# English (en_US) Translation for DreamTour
+# Copyright (C) 2026 DreamTour Team
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamTour 1.0.0\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Select Language"
+msgstr "Select Language"
+
+msgid "English"
+msgstr "English"
+
+msgid "Español"
+msgstr "Spanish"
+
+msgid "Italiano"
+msgstr "Italian"
+
+msgid "WhatsApp Settings"
+msgstr "WhatsApp Settings"
+
+msgid "Enable WhatsApp Button"
+msgstr "Enable WhatsApp Button"
+
+msgid "WhatsApp Number"
+msgstr "WhatsApp Number"
+
+msgid "Include country code (e.g., +393123456789)"
+msgstr "Include country code (e.g., +393123456789)"
+
+msgid "Default Message"
+msgstr "Default Message"
+
+msgid "Message that will appear when opening WhatsApp"
+msgstr "Message that will appear when opening WhatsApp"
+
+msgid "Hello! I would like more information about your tours."
+msgstr "Hello! I would like more information about your tours."
+
+msgid "Contact us on WhatsApp"
+msgstr "Contact us on WhatsApp"
+
+msgid "Navegación principal"
+msgstr "Main navigation"
+
+msgid "Abrir búsqueda"
+msgstr "Open search"
+
+msgid "Ver Tours"
+msgstr "View Tours"
+
+msgid "Cerrar búsqueda"
+msgstr "Close search"
+
+msgid "Destinos"
+msgstr "Destinations"
+
+msgid "Europa"
+msgstr "Europe"
+
+msgid "Asia"
+msgstr "Asia"
+
+msgid "América"
+msgstr "Americas"
+
+msgid "África"
+msgstr "Africa"
+
+msgid "Oceanía"
+msgstr "Oceania"
+
+msgid "DreamTour"
+msgstr "DreamTour"
+
+msgid "Sobre Nosotros"
+msgstr "About Us"
+
+msgid "Cómo Funciona"
+msgstr "How It Works"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Coordinadores"
+msgstr "Coordinators"
+
+msgid "Únete al Equipo"
+msgstr "Join the Team"
+
+msgid "Ayuda"
+msgstr "Help"
+
+msgid "Contacto"
+msgstr "Contact"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Términos y Condiciones"
+msgstr "Terms and Conditions"
+
+msgid "Política de Privacidad"
+msgstr "Privacy Policy"
+
+msgid "Política de Cookies"
+msgstr "Cookie Policy"
+
+msgid "Todos los derechos reservados."
+msgstr "All rights reserved."
+
+msgid "Descubre el Mundo con DreamTour"
+msgstr "Discover the World with DreamTour"
+
+msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
+msgstr "Group travels, unique experiences. Join our community of travelers."
+
+msgid "Explorar Tours"
+msgstr "Explore Tours"
+
+msgid "Conocer Más"
+msgstr "Learn More"
+
+msgid "Tours Destacados"
+msgstr "Featured Tours"
+
+msgid "Descubre nuestros viajes más populares"
+msgstr "Discover our most popular trips"
+
+msgid "No hay contenido disponible."
+msgstr "No content available."
+
+msgid "Ver Todos los Tours"
+msgstr "View All Tours"
+
+msgid "¿Por qué viajar con DreamTour?"
+msgstr "Why travel with DreamTour?"
+
+msgid "Experiencias únicas en cada destino"
+msgstr "Unique experiences in every destination"
+
+msgid "Una Comunidad"
+msgstr "A Community"
+
+msgid "Conoce nuevos amigos viajando en pequeños grupos con personas como tú, siempre acompañados por un Coordinador."
+msgstr "Meet new friends traveling in small groups with people like you, always accompanied by a Coordinator."
+
+msgid "Infinitos Viajes"
+msgstr "Infinite Journeys"
+
+msgid "Vive experiencias únicas en más de 100 países del mundo, eligiendo el estilo que mejor se adapte a ti."
+msgstr "Experience unique adventures in over 100 countries worldwide, choosing the style that best suits you."
+
+msgid "Máxima Flexibilidad"
+msgstr "Maximum Flexibility"
+
+msgid "Puedes reservar tu plaza con un anticipo y cambiar de idea gratuitamente. El seguro médico y de equipaje siempre está incluido."
+msgstr "You can book your spot with a deposit and change your mind for free. Medical and baggage insurance is always included."
+
+msgid "Últimas Historias"
+msgstr "Latest Stories"
+
+msgid "Inspiración y consejos de viaje"
+msgstr "Travel inspiration and tips"
+
+msgid "Ver Todos los Artículos"
+msgstr "View All Articles"
+
+msgid "¿Listo para tu próxima aventura?"
+msgstr "Ready for your next adventure?"
+
+msgid "Únete a miles de viajeros que ya han descubierto el mundo con DreamTour"
+msgstr "Join thousands of travelers who have already discovered the world with DreamTour"
+
+msgid "Explorar Destinos"
+msgstr "Explore Destinations"
+
+msgid "Desde"
+msgstr "From"
+
+msgid "Reservar Ahora"
+msgstr "Book Now"
+
+msgid "Coordinador incluido"
+msgstr "Coordinator included"
+
+msgid "Seguro médico y de equipaje"
+msgstr "Medical and baggage insurance"
+
+msgid "Cancelación flexible"
+msgstr "Flexible cancellation"
+
+msgid "Grupo reducido"
+msgstr "Small group"
+
+msgid "¿Tienes dudas?"
+msgstr "Have questions?"
+
+msgid "Contáctanos"
+msgstr "Contact Us"
+
+msgid "Destinos:"
+msgstr "Destinations:"
+
+msgid "Tipo de viaje:"
+msgstr "Trip type:"
+
+msgid "Nuestros Tours"
+msgstr "Our Tours"
+
+msgid "Explora destinos increíbles alrededor del mundo"
+msgstr "Explore incredible destinations around the world"
+
+msgid "No se encontraron tours"
+msgstr "No tours found"
+
+msgid "Vuelve pronto para descubrir nuevos destinos."
+msgstr "Come back soon to discover new destinations."
+
+msgid "Resultados de búsqueda para: %s"
+msgstr "Search results for: %s"
+
+msgid "No se encontraron resultados"
+msgstr "No results found"
+
+msgid "Intenta con otra búsqueda."
+msgstr "Try another search."
+
+msgid "Buscar:"
+msgstr "Search:"
+
+msgid "Buscar tours, destinos..."
+msgstr "Search tours, destinations..."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Página no encontrada"
+msgstr "Page not found"
+
+msgid "La página que buscas no existe o ha sido movida."
+msgstr "The page you're looking for doesn't exist or has been moved."
+
+msgid "Volver al Inicio"
+msgstr "Back to Home"
+
+msgid "Anterior:"
+msgstr "Previous:"
+
+msgid "Siguiente:"
+msgstr "Next:"
+
+msgid "Páginas:"
+msgstr "Pages:"
+
+msgid "Viaja. Descubre. Conecta."
+msgstr "Travel. Discover. Connect."
+
+msgid "Únete a miles de viajeros en experiencias únicas por todo el mundo"
+msgstr "Join thousands of travelers in unique experiences around the world"
+
+msgid "Saber Más"
+msgstr "Learn More"
+
+msgid "Leer más"
+msgstr "Read more"

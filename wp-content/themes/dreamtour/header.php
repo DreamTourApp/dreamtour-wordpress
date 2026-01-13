@@ -35,6 +35,9 @@
                     ));
                     ?>
                     
+                    <!-- Language Switcher -->
+                    <?php echo dreamtour_language_switcher(); ?>
+                    
                     <!-- Botón de búsqueda -->
                     <div class="header-search">
                         <button class="search-toggle" aria-label="<?php esc_attr_e('Abrir búsqueda', 'dreamtour'); ?>">

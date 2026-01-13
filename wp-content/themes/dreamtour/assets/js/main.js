@@ -114,6 +114,26 @@
             }
         );
         
+        // Language Switcher Toggle
+        $('.language-toggle').on('click', function(e) {
+            e.stopPropagation();
+            $('.language-switcher').toggleClass('active');
+        });
+        
+        // Close language dropdown when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.language-switcher').length) {
+                $('.language-switcher').removeClass('active');
+            }
+        });
+        
+        // Close language dropdown on ESC
+        $(document).on('keyup', function(e) {
+            if (e.key === 'Escape') {
+                $('.language-switcher').removeClass('active');
+            }
+        });
+        
     });
     
     /**

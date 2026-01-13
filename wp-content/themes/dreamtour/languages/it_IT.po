@@ -1,0 +1,270 @@
+# Italian (Italiano) Translation for DreamTour
+# Copyright (C) 2026 DreamTour Team
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamTour 1.0.0\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Select Language"
+msgstr "Seleziona Lingua"
+
+msgid "English"
+msgstr "Inglese"
+
+msgid "Español"
+msgstr "Spagnolo"
+
+msgid "Italiano"
+msgstr "Italiano"
+
+msgid "WhatsApp Settings"
+msgstr "Impostazioni WhatsApp"
+
+msgid "Enable WhatsApp Button"
+msgstr "Abilita Pulsante WhatsApp"
+
+msgid "WhatsApp Number"
+msgstr "Numero WhatsApp"
+
+msgid "Include country code (e.g., +393123456789)"
+msgstr "Includi il prefisso internazionale (es: +393123456789)"
+
+msgid "Default Message"
+msgstr "Messaggio Predefinito"
+
+msgid "Message that will appear when opening WhatsApp"
+msgstr "Messaggio che apparirà aprendo WhatsApp"
+
+msgid "Hello! I would like more information about your tours."
+msgstr "Ciao! Vorrei maggiori informazioni sui vostri tour."
+
+msgid "Contact us on WhatsApp"
+msgstr "Contattaci su WhatsApp"
+
+msgid "Navegación principal"
+msgstr "Navigazione principale"
+
+msgid "Abrir búsqueda"
+msgstr "Apri ricerca"
+
+msgid "Ver Tours"
+msgstr "Vedi Tour"
+
+msgid "Cerrar búsqueda"
+msgstr "Chiudi ricerca"
+
+msgid "Destinos"
+msgstr "Destinazioni"
+
+msgid "Europa"
+msgstr "Europa"
+
+msgid "Asia"
+msgstr "Asia"
+
+msgid "América"
+msgstr "America"
+
+msgid "África"
+msgstr "Africa"
+
+msgid "Oceanía"
+msgstr "Oceania"
+
+msgid "DreamTour"
+msgstr "DreamTour"
+
+msgid "Sobre Nosotros"
+msgstr "Chi Siamo"
+
+msgid "Cómo Funciona"
+msgstr "Come Funziona"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Coordinadores"
+msgstr "Coordinatori"
+
+msgid "Únete al Equipo"
+msgstr "Unisciti al Team"
+
+msgid "Ayuda"
+msgstr "Aiuto"
+
+msgid "Contacto"
+msgstr "Contatti"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Términos y Condiciones"
+msgstr "Termini e Condizioni"
+
+msgid "Política de Privacidad"
+msgstr "Privacy Policy"
+
+msgid "Política de Cookies"
+msgstr "Cookie Policy"
+
+msgid "Todos los derechos reservados."
+msgstr "Tutti i diritti riservati."
+
+msgid "Descubre el Mundo con DreamTour"
+msgstr "Scopri il Mondo con DreamTour"
+
+msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
+msgstr "Viaggi di gruppo, esperienze uniche. Unisciti alla nostra community di viaggiatori."
+
+msgid "Explorar Tours"
+msgstr "Esplora i Tour"
+
+msgid "Conocer Más"
+msgstr "Scopri di Più"
+
+msgid "Tours Destacados"
+msgstr "Tour in Evidenza"
+
+msgid "Descubre nuestros viajes más populares"
+msgstr "Scopri i nostri viaggi più popolari"
+
+msgid "No hay contenido disponible."
+msgstr "Nessun contenuto disponibile."
+
+msgid "Ver Todos los Tours"
+msgstr "Vedi Tutti i Tour"
+
+msgid "¿Por qué viajar con DreamTour?"
+msgstr "Perché viaggiare con DreamTour?"
+
+msgid "Experiencias únicas en cada destino"
+msgstr "Esperienze uniche in ogni destinazione"
+
+msgid "Una Comunidad"
+msgstr "Una Community"
+
+msgid "Conoce nuevos amigos viajando en pequeños grupos con personas como tú, siempre acompañados por un Coordinador."
+msgstr "Conosci nuovi amici viaggiando in piccoli gruppi con persone come te, sempre accompagnati da un Coordinatore."
+
+msgid "Infinitos Viajes"
+msgstr "Infiniti Viaggi"
+
+msgid "Vive experiencias únicas en más de 100 países del mundo, eligiendo el estilo que mejor se adapte a ti."
+msgstr "Vivi esperienze uniche in più di 100 paesi del mondo, scegliendo lo stile che meglio si adatta a te."
+
+msgid "Máxima Flexibilidad"
+msgstr "Massima Flessibilità"
+
+msgid "Puedes reservar tu plaza con un anticipo y cambiar de idea gratuitamente. El seguro médico y de equipaje siempre está incluido."
+msgstr "Puoi prenotare il tuo posto con un acconto e cambiare idea gratuitamente. L'assicurazione medico-bagaglio è sempre inclusa."
+
+msgid "Últimas Historias"
+msgstr "Ultime Storie"
+
+msgid "Inspiración y consejos de viaje"
+msgstr "Ispirazione e consigli di viaggio"
+
+msgid "Ver Todos los Artículos"
+msgstr "Vedi Tutti gli Articoli"
+
+msgid "¿Listo para tu próxima aventura?"
+msgstr "Pronto per la tua prossima avventura?"
+
+msgid "Únete a miles de viajeros que ya han descubierto el mundo con DreamTour"
+msgstr "Unisciti a migliaia di viaggiatori che hanno già scoperto il mondo con DreamTour"
+
+msgid "Explorar Destinos"
+msgstr "Esplora Destinazioni"
+
+msgid "Desde"
+msgstr "Da"
+
+msgid "Reservar Ahora"
+msgstr "Prenota Ora"
+
+msgid "Coordinador incluido"
+msgstr "Coordinatore incluso"
+
+msgid "Seguro médico y de equipaje"
+msgstr "Assicurazione medico-bagaglio"
+
+msgid "Cancelación flexible"
+msgstr "Cancellazione flessibile"
+
+msgid "Grupo reducido"
+msgstr "Gruppo ridotto"
+
+msgid "¿Tienes dudas?"
+msgstr "Hai dubbi?"
+
+msgid "Contáctanos"
+msgstr "Contattaci"
+
+msgid "Destinos:"
+msgstr "Destinazioni:"
+
+msgid "Tipo de viaje:"
+msgstr "Tipo di viaggio:"
+
+msgid "Nuestros Tours"
+msgstr "I Nostri Tour"
+
+msgid "Explora destinos increíbles alrededor del mundo"
+msgstr "Esplora destinazioni incredibili in tutto il mondo"
+
+msgid "No se encontraron tours"
+msgstr "Nessun tour trovato"
+
+msgid "Vuelve pronto para descubrir nuevos destinos."
+msgstr "Torna presto per scoprire nuove destinazioni."
+
+msgid "Resultados de búsqueda para: %s"
+msgstr "Risultati di ricerca per: %s"
+
+msgid "No se encontraron resultados"
+msgstr "Nessun risultato trovato"
+
+msgid "Intenta con otra búsqueda."
+msgstr "Prova con un'altra ricerca."
+
+msgid "Buscar:"
+msgstr "Cerca:"
+
+msgid "Buscar tours, destinos..."
+msgstr "Cerca tour, destinazioni..."
+
+msgid "Buscar"
+msgstr "Cerca"
+
+msgid "Página no encontrada"
+msgstr "Pagina non trovata"
+
+msgid "La página que buscas no existe o ha sido movida."
+msgstr "La pagina che cerchi non esiste o è stata spostata."
+
+msgid "Volver al Inicio"
+msgstr "Torna alla Home"
+
+msgid "Anterior:"
+msgstr "Precedente:"
+
+msgid "Siguiente:"
+msgstr "Successivo:"
+
+msgid "Páginas:"
+msgstr "Pagine:"
+
+msgid "Viaja. Descubre. Conecta."
+msgstr "Viaggia. Scopri. Connettiti."
+
+msgid "Únete a miles de viajeros en experiencias únicas por todo el mundo"
+msgstr "Unisciti a migliaia di viaggiatori in esperienze uniche in tutto il mondo"
+
+msgid "Saber Más"
+msgstr "Scopri di Più"
+
+msgid "Leer más"
+msgstr "Leggi di più"

@@ -1,0 +1,270 @@
+# Spanish (Español) Translation for DreamTour
+# Copyright (C) 2026 DreamTour Team
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamTour 1.0.0\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Select Language"
+msgstr "Seleccionar Idioma"
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Español"
+msgstr "Español"
+
+msgid "Italiano"
+msgstr "Italiano"
+
+msgid "WhatsApp Settings"
+msgstr "Configuración de WhatsApp"
+
+msgid "Enable WhatsApp Button"
+msgstr "Activar Botón de WhatsApp"
+
+msgid "WhatsApp Number"
+msgstr "Número de WhatsApp"
+
+msgid "Include country code (e.g., +393123456789)"
+msgstr "Incluye el código de país (ej: +393123456789)"
+
+msgid "Default Message"
+msgstr "Mensaje Predeterminado"
+
+msgid "Message that will appear when opening WhatsApp"
+msgstr "Mensaje que aparecerá al abrir WhatsApp"
+
+msgid "Hello! I would like more information about your tours."
+msgstr "¡Hola! Me gustaría más información sobre vuestros tours."
+
+msgid "Contact us on WhatsApp"
+msgstr "Contáctanos por WhatsApp"
+
+msgid "Navegación principal"
+msgstr "Navegación principal"
+
+msgid "Abrir búsqueda"
+msgstr "Abrir búsqueda"
+
+msgid "Ver Tours"
+msgstr "Ver Tours"
+
+msgid "Cerrar búsqueda"
+msgstr "Cerrar búsqueda"
+
+msgid "Destinos"
+msgstr "Destinos"
+
+msgid "Europa"
+msgstr "Europa"
+
+msgid "Asia"
+msgstr "Asia"
+
+msgid "América"
+msgstr "América"
+
+msgid "África"
+msgstr "África"
+
+msgid "Oceanía"
+msgstr "Oceanía"
+
+msgid "DreamTour"
+msgstr "DreamTour"
+
+msgid "Sobre Nosotros"
+msgstr "Sobre Nosotros"
+
+msgid "Cómo Funciona"
+msgstr "Cómo Funciona"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Coordinadores"
+msgstr "Coordinadores"
+
+msgid "Únete al Equipo"
+msgstr "Únete al Equipo"
+
+msgid "Ayuda"
+msgstr "Ayuda"
+
+msgid "Contacto"
+msgstr "Contacto"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Términos y Condiciones"
+msgstr "Términos y Condiciones"
+
+msgid "Política de Privacidad"
+msgstr "Política de Privacidad"
+
+msgid "Política de Cookies"
+msgstr "Política de Cookies"
+
+msgid "Todos los derechos reservados."
+msgstr "Todos los derechos reservados."
+
+msgid "Descubre el Mundo con DreamTour"
+msgstr "Descubre el Mundo con DreamTour"
+
+msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
+msgstr "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
+
+msgid "Explorar Tours"
+msgstr "Explorar Tours"
+
+msgid "Conocer Más"
+msgstr "Conocer Más"
+
+msgid "Tours Destacados"
+msgstr "Tours Destacados"
+
+msgid "Descubre nuestros viajes más populares"
+msgstr "Descubre nuestros viajes más populares"
+
+msgid "No hay contenido disponible."
+msgstr "No hay contenido disponible."
+
+msgid "Ver Todos los Tours"
+msgstr "Ver Todos los Tours"
+
+msgid "¿Por qué viajar con DreamTour?"
+msgstr "¿Por qué viajar con DreamTour?"
+
+msgid "Experiencias únicas en cada destino"
+msgstr "Experiencias únicas en cada destino"
+
+msgid "Una Comunidad"
+msgstr "Una Comunidad"
+
+msgid "Conoce nuevos amigos viajando en pequeños grupos con personas como tú, siempre acompañados por un Coordinador."
+msgstr "Conoce nuevos amigos viajando en pequeños grupos con personas como tú, siempre acompañados por un Coordinador."
+
+msgid "Infinitos Viajes"
+msgstr "Infinitos Viajes"
+
+msgid "Vive experiencias únicas en más de 100 países del mundo, eligiendo el estilo que mejor se adapte a ti."
+msgstr "Vive experiencias únicas en más de 100 países del mundo, eligiendo el estilo que mejor se adapte a ti."
+
+msgid "Máxima Flexibilidad"
+msgstr "Máxima Flexibilidad"
+
+msgid "Puedes reservar tu plaza con un anticipo y cambiar de idea gratuitamente. El seguro médico y de equipaje siempre está incluido."
+msgstr "Puedes reservar tu plaza con un anticipo y cambiar de idea gratuitamente. El seguro médico y de equipaje siempre está incluido."
+
+msgid "Últimas Historias"
+msgstr "Últimas Historias"
+
+msgid "Inspiración y consejos de viaje"
+msgstr "Inspiración y consejos de viaje"
+
+msgid "Ver Todos los Artículos"
+msgstr "Ver Todos los Artículos"
+
+msgid "¿Listo para tu próxima aventura?"
+msgstr "¿Listo para tu próxima aventura?"
+
+msgid "Únete a miles de viajeros que ya han descubierto el mundo con DreamTour"
+msgstr "Únete a miles de viajeros que ya han descubierto el mundo con DreamTour"
+
+msgid "Explorar Destinos"
+msgstr "Explorar Destinos"
+
+msgid "Desde"
+msgstr "Desde"
+
+msgid "Reservar Ahora"
+msgstr "Reservar Ahora"
+
+msgid "Coordinador incluido"
+msgstr "Coordinador incluido"
+
+msgid "Seguro médico y de equipaje"
+msgstr "Seguro médico y de equipaje"
+
+msgid "Cancelación flexible"
+msgstr "Cancelación flexible"
+
+msgid "Grupo reducido"
+msgstr "Grupo reducido"
+
+msgid "¿Tienes dudas?"
+msgstr "¿Tienes dudas?"
+
+msgid "Contáctanos"
+msgstr "Contáctanos"
+
+msgid "Destinos:"
+msgstr "Destinos:"
+
+msgid "Tipo de viaje:"
+msgstr "Tipo de viaje:"
+
+msgid "Nuestros Tours"
+msgstr "Nuestros Tours"
+
+msgid "Explora destinos increíbles alrededor del mundo"
+msgstr "Explora destinos increíbles alrededor del mundo"
+
+msgid "No se encontraron tours"
+msgstr "No se encontraron tours"
+
+msgid "Vuelve pronto para descubrir nuevos destinos."
+msgstr "Vuelve pronto para descubrir nuevos destinos."
+
+msgid "Resultados de búsqueda para: %s"
+msgstr "Resultados de búsqueda para: %s"
+
+msgid "No se encontraron resultados"
+msgstr "No se encontraron resultados"
+
+msgid "Intenta con otra búsqueda."
+msgstr "Intenta con otra búsqueda."
+
+msgid "Buscar:"
+msgstr "Buscar:"
+
+msgid "Buscar tours, destinos..."
+msgstr "Buscar tours, destinos..."
+
+msgid "Buscar"
+msgstr "Buscar"
+
+msgid "Página no encontrada"
+msgstr "Página no encontrada"
+
+msgid "La página que buscas no existe o ha sido movida."
+msgstr "La página que buscas no existe o ha sido movida."
+
+msgid "Volver al Inicio"
+msgstr "Volver al Inicio"
+
+msgid "Anterior:"
+msgstr "Anterior:"
+
+msgid "Siguiente:"
+msgstr "Siguiente:"
+
+msgid "Páginas:"
+msgstr "Páginas:"
+
+msgid "Viaja. Descubre. Conecta."
+msgstr "Viaja. Descubre. Conecta."
+
+msgid "Únete a miles de viajeros en experiencias únicas por todo el mundo"
+msgstr "Únete a miles de viajeros en experiencias únicas por todo el mundo"
+
+msgid "Saber Más"
+msgstr "Saber Más"
+
+msgid "Leer más"
+msgstr "Leer más"
