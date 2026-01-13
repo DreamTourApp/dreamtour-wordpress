@@ -253,7 +253,7 @@ a:hover {
    =================================== */
 .btn {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 14px 32px;
   font-size: var(--font-body);
   font-weight: 600;
   text-align: center;
@@ -272,8 +272,8 @@ a:hover {
 .btn-primary:hover {
   background-color: var(--color-secondary);
   color: var(--color-white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 50, 132, 0.3);
 }
 
 .btn-secondary {
@@ -284,19 +284,22 @@ a:hover {
 .btn-secondary:hover {
   background-color: var(--color-accent);
   color: var(--color-white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(26, 171, 231, 0.3);
 }
 
 .btn-outline {
   background-color: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  font-weight: 700;
 }
 
 .btn-outline:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ===================================
@@ -450,6 +453,13 @@ a:hover {
   gap: var(--spacing-sm);
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.hero-cta .btn {
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 /* ===================================
@@ -900,6 +910,12 @@ a:hover {
   .hero-cta {
     flex-direction: column;
     gap: var(--spacing-xs);
+  }
+  
+  .hero-cta .btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
   }
   
   .hero-prev,
