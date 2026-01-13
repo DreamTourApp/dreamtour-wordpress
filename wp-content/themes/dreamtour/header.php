@@ -16,7 +16,7 @@
                 <!-- Logo -->
                 <div class="site-branding">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="header-logo">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg?v=' . DREAMTOUR_VERSION); ?>" alt="<?php bloginfo('name'); ?>" class="header-logo">
                     </a>
                 </div>
                 

@@ -10,7 +10,7 @@
                         <?php dynamic_sidebar('footer-1'); ?>
                     <?php else : ?>
                         <div class="footer-logo">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="footer-logo-img">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg?v=' . DREAMTOUR_VERSION); ?>" alt="<?php bloginfo('name'); ?>" class="footer-logo-img">
                         </div>
                         <p class="footer-company-info">Dream Tour by Manuel Fernando Araujo Morales</p>
                         <div class="social-links">
