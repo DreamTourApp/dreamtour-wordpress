@@ -12,6 +12,19 @@
         init: function() {
             this.bindEvents();
             this.loadTours();
+            this.checkEditMode();
+        },
+        
+        checkEditMode: function() {
+            // Verificar si hay parámetro edit_tour en URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const editTourId = urlParams.get('edit_tour');
+            
+            if (editTourId) {
+                console.log('Edit mode detected, loading tour:', editTourId);
+                // Cargar el tour y abrir modal automáticamente
+                this.editTour(editTourId);
+            }
         },
         
         bindEvents: function() {
@@ -83,10 +96,13 @@
                 self.saveTour();
             });
             
-            // Editar tour (delegado)
-            $(document).on('click', '.drtr-edit-tour', function() {
+            // Editar tour (delegado) - Redirigir a página de edición
+            $(document).on('click', '.drtr-edit-tour', function(e) {
+                e.preventDefault();
                 const tourId = $(this).data('tour-id');
-                self.editTour(tourId);
+                console.log('Edit button clicked, tour ID:', tourId);
+                // Redirigir a la página de edición
+                window.location.href = window.location.pathname + '?edit_tour=' + tourId;
             });
             
             // Eliminar tour (delegado)
@@ -223,10 +239,19 @@
             $('#drtr-tour-modal').fadeOut();
             this.removeImagePreview();
             $('#drtr-itinerary-container').empty();
+            
+            // Rimuovere parametro edit_tour dall'URL se presente
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('edit_tour')) {
+                console.log('Removing edit_tour parameter from URL');
+                // Reindirizzare alla pagina senza parametri
+                window.location.href = window.location.pathname;
+            }
         },
         
         editTour: function(tourId) {
             const self = this;
+            console.log('editTour function called with ID:', tourId);
             
             $.ajax({
                 url: drtrAjax.ajaxurl,
@@ -236,9 +261,14 @@
                     nonce: drtrAjax.nonce,
                     tour_id: tourId
                 },
+                beforeSend: function() {
+                    console.log('AJAX request starting for tour:', tourId);
+                },
                 success: function(response) {
+                    console.log('AJAX response received:', response);
                     if (response.success) {
                         const tour = response.data;
+                        console.log('Tour data:', tour);
                         
                         $('#drtr-tour-id').val(tour.id);
                         $('#drtr-tour-title').val(tour.title);
@@ -254,8 +284,11 @@
                         $('#drtr-tour-includes').val(tour.includes);
                         $('#drtr-tour-not-includes').val(tour.not_includes);
                         
+                        console.log('Form fields populated');
+                        
                         // Mostrar imagen si existe
                         if (tour.image_url) {
+                            console.log('Loading image:', tour.image_url);
                             $('#drtr-tour-image-id').val(tour.image_id);
                             $('#drtr-image-preview img').attr('src', tour.image_url);
                             $('#drtr-image-preview').show();
@@ -263,14 +296,18 @@
                         }
                         
                         // Cargar itinerario
+                        console.log('Loading itinerary:', tour.itinerary);
                         self.loadItinerary(tour.itinerary);
                         
                         self.openModal(drtrAjax.strings.edit_tour);
+                        console.log('Modal opened');
                     } else {
+                        console.error('Response error:', response.data);
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error, xhr);
                     self.showMessage(drtrAjax.strings.error, 'error');
                 }
             });

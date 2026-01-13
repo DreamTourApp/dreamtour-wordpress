@@ -216,7 +216,12 @@
 }
 
 /* Page Styles */
-.page-wrapper,
+.page-wrapper {
+    max-width: 1400px;
+    margin: var(--spacing-xxl) auto;
+    padding: 0 var(--spacing-md);
+}
+
 .single-post-wrapper {
     max-width: 800px;
     margin: var(--spacing-xxl) auto;
