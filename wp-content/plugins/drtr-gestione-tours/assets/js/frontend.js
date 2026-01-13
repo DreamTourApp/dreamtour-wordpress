@@ -22,8 +22,8 @@
             
             if (editTourId) {
                 console.log('Edit mode detected, loading tour:', editTourId);
-                // Cargar el tour y abrir modal automáticamente
-                this.editTour(editTourId);
+                // Cargar datos del tour en la página de edición
+                this.loadTourData(editTourId);
             }
         },
         
@@ -249,6 +249,55 @@
             }
         },
         
+        loadTourData: function(tourId) {
+            const self = this;
+            console.log('Loading tour data for editing, ID:', tourId);
+            
+            $.ajax({
+                url: drtrAjax.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'drtr_get_tour',
+                    nonce: drtrAjax.nonce,
+                    tour_id: tourId
+                },
+                success: function(response) {
+                    console.log('Tour data loaded:', response);
+                    if (response.success && response.data.tour) {
+                        const tour = response.data.tour;
+                        
+                        // Rellenar campos del formulario
+                        $('#drtr-tour-id').val(tour.id);
+                        $('#drtr-tour-title').val(tour.title);
+                        $('#drtr-tour-description').val(tour.description);
+                        $('#drtr-tour-price').val(tour.price);
+                        $('#drtr-tour-duration').val(tour.duration);
+                        $('#drtr-tour-location').val(tour.location);
+                        $('#drtr-tour-start-date').val(tour.start_date);
+                        $('#drtr-tour-end-date').val(tour.end_date);
+                        $('#drtr-tour-transport').val(tour.transport);
+                        
+                        // Cargar imagen si existe
+                        if (tour.image_url) {
+                            $('#drtr-tour-image-id').val(tour.image_id);
+                            $('#drtr-image-preview img').attr('src', tour.image_url);
+                            $('#drtr-image-preview').show();
+                            $('#drtr-tour-image').hide();
+                        }
+                        
+                        // Cargar itinerario
+                        self.loadItinerary(tour.itinerary);
+                    } else {
+                        self.showMessage(response.data.message || 'Error al cargar el tour', 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading tour:', status, error);
+                    self.showMessage('Error al cargar el tour', 'error');
+                }
+            });
+        },
+        
         editTour: function(tourId) {
             const self = this;
             console.log('editTour function called with ID:', tourId);
@@ -322,6 +371,9 @@
             formData.append('action', 'drtr_save_tour');
             formData.append('nonce', drtrAjax.nonce);
             
+            // Verificar si estamos en modo edición
+            const isEditMode = new URLSearchParams(window.location.search).has('edit_tour');
+            
             $.ajax({
                 url: drtrAjax.ajaxurl,
                 type: 'POST',
@@ -331,8 +383,16 @@
                 success: function(response) {
                     if (response.success) {
                         self.showMessage(drtrAjax.strings.success_save, 'success');
-                        self.closeModal();
-                        self.loadTours();
+                        
+                        // Si estamos en modo edición, redirigir a la lista
+                        if (isEditMode) {
+                            setTimeout(function() {
+                                window.location.href = window.location.pathname;
+                            }, 1500);
+                        } else {
+                            self.closeModal();
+                            self.loadTours();
+                        }
                     } else {
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }

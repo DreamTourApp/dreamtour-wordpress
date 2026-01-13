@@ -536,3 +536,38 @@
         padding: 8px;
     }
 }
+
+/* Edit Page Styles */
+.drtr-edit-page {
+    max-width: 1200px;
+}
+
+.drtr-back-link {
+    margin-bottom: 20px;
+}
+
+.drtr-back-link .drtr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drtr-edit-form-container {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.drtr-form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #ddd;
+}
+
+.drtr-form-actions .drtr-btn {
+    min-width: 150px;
+}
