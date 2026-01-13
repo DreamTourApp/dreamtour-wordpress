@@ -50,6 +50,9 @@ msgstr "Navegación principal"
 msgid "Abrir búsqueda"
 msgstr "Abrir búsqueda"
 
+msgid "Area Riservata"
+msgstr "Área Reservada"
+
 msgid "Ver Tours"
 msgstr "Ver Tours"
 
