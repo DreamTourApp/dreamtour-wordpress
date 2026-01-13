@@ -149,10 +149,10 @@
                         <td>${tour.start_date || '-'}</td>
                         <td>
                             <button class="drtr-btn drtr-btn-edit drtr-edit-tour" data-tour-id="${tour.id}">
-                                <span class="dashicons dashicons-edit"></span> Editar
+                                <span class="dashicons dashicons-edit"></span> ${drtrAjax.strings.edit_button}
                             </button>
                             <button class="drtr-btn drtr-btn-danger drtr-delete-tour" data-tour-id="${tour.id}">
-                                <span class="dashicons dashicons-trash"></span> Eliminar
+                                <span class="dashicons dashicons-trash"></span> ${drtrAjax.strings.delete_button}
                             </button>
                         </td>
                     </tr>
@@ -265,7 +265,7 @@
                         // Cargar itinerario
                         self.loadItinerary(tour.itinerary);
                         
-                        self.openModal('Editar Tour');
+                        self.openModal(drtrAjax.strings.edit_tour);
                     } else {
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }

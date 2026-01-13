@@ -290,3 +290,9 @@ msgstr "Tour Itinerary"
 
 msgid "Agregar Parada"
 msgstr "Add Stop"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"

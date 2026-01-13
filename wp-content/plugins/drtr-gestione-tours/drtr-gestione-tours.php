@@ -3,7 +3,7 @@
  * Plugin Name: DRTR - Gestione Tours
  * Plugin URI: https://dreamtourviaggi.it
  * Description: Sistema completo de gestión de tours con interfaz AJAX para administradores
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: DreamTour Team
  * Author URI: https://dreamtourviaggi.it
  * Text Domain: drtr-tours
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes
-define('DRTR_VERSION', '1.0.3');
+define('DRTR_VERSION', '1.0.4');
 define('DRTR_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DRTR_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DRTR_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -115,6 +115,9 @@ class DRTR_Gestione_Tours {
                     'error' => __('Ha ocurrido un error. Por favor, intenta de nuevo.', 'drtr-tours'),
                     'success_save' => __('Tour guardado correctamente', 'drtr-tours'),
                     'success_delete' => __('Tour eliminado correctamente', 'drtr-tours'),
+                    'edit_button' => __('Editar', 'drtr-tours'),
+                    'delete_button' => __('Eliminar', 'drtr-tours'),
+                    'edit_tour' => __('Editar Tour', 'drtr-tours'),
                     'itinerary_place' => __('Lugar', 'drtr-tours'),
                     'itinerary_place_placeholder' => __('Ej: Milán', 'drtr-tours'),
                     'itinerary_type' => __('Tipo', 'drtr-tours'),
