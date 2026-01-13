@@ -19,7 +19,7 @@
                         <?php the_custom_logo(); ?>
                     <?php else : ?>
                         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-                            <?php bloginfo('name'); ?>
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="header-logo">
                         </a>
                     <?php endif; ?>
                 </div>
