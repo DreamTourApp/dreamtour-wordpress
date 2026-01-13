@@ -46,7 +46,9 @@
             });
             
             // Agregar parada de itinerario (delegado)
-            $(document).on('click', '#drtr-add-itinerary-stop', function() {
+            $(document).on('click', '#drtr-add-itinerary-stop', function(e) {
+                e.preventDefault();
+                console.log('Botón agregar parada clickeado');
                 self.addItineraryStop();
             });
             
@@ -366,8 +368,8 @@
             $('#drtr-tour-image').val('').show();
             $('#drtr-tour-image-id').val('');
         },
-        
-        addItineraryStop: function(data) {
+        ole.log('addItineraryStop llamado', data);
+            data = data || {};
             const stopIndex = $('.drtr-itinerary-stop').length;
             const stopHtml = `
                 <div class="drtr-itinerary-stop" data-index="${stopIndex}">
@@ -380,36 +382,39 @@
                     <div class="drtr-stop-fields">
                         <div class="drtr-stop-field">
                             <label>Lugar</label>
-                            <input type="text" class="drtr-stop-name" placeholder="Ej: Milán" value="${data?.name || ''}">
+                            <input type="text" class="drtr-stop-name" placeholder="Ej: Milán" value="${data.name || ''}">
                         </div>
                         <div class="drtr-stop-field">
                             <label>Tipo</label>
                             <select class="drtr-stop-icon">
-                                <option value="city" ${data?.icon === 'city' ? 'selected' : ''}>🏙️ Ciudad</option>
-                                <option value="train" ${data?.icon === 'train' ? 'selected' : ''}>🚂 Tren</option>
-                                <option value="bus" ${data?.icon === 'bus' ? 'selected' : ''}>🚌 Bus</option>
-                                <option value="plane" ${data?.icon === 'plane' ? 'selected' : ''}>✈️ Avión</option>
-                                <option value="boat" ${data?.icon === 'boat' ? 'selected' : ''}>🚢 Barco</option>
-                                <option value="hotel" ${data?.icon === 'hotel' ? 'selected' : ''}>🏨 Hotel</option>
-                                <option value="visit" ${data?.icon === 'visit' ? 'selected' : ''}>👁️ Visita</option>
-                                <option value="food" ${data?.icon === 'food' ? 'selected' : ''}>🍽️ Comida</option>
-                                <option value="activity" ${data?.icon === 'activity' ? 'selected' : ''}>🎯 Actividad</option>
+                                <option value="city" ${data.icon === 'city' ? 'selected' : ''}>🏙️ Ciudad</option>
+                                <option value="train" ${data.icon === 'train' ? 'selected' : ''}>🚂 Tren</option>
+                                <option value="bus" ${data.icon === 'bus' ? 'selected' : ''}>🚌 Bus</option>
+                                <option value="plane" ${data.icon === 'plane' ? 'selected' : ''}>✈️ Avión</option>
+                                <option value="boat" ${data.icon === 'boat' ? 'selected' : ''}>🚢 Barco</option>
+                                <option value="hotel" ${data.icon === 'hotel' ? 'selected' : ''}>🏨 Hotel</option>
+                                <option value="visit" ${data.icon === 'visit' ? 'selected' : ''}>👁️ Visita</option>
+                                <option value="food" ${data.icon === 'food' ? 'selected' : ''}>🍽️ Comida</option>
+                                <option value="activity" ${data.icon === 'activity' ? 'selected' : ''}>🎯 Actividad</option>
                             </select>
                         </div>
                         <div class="drtr-stop-field">
                             <label>Llegada</label>
-                            <input type="datetime-local" class="drtr-stop-arrival" value="${data?.arrival || ''}">
+                            <input type="datetime-local" class="drtr-stop-arrival" value="${data.arrival || ''}">
                         </div>
                         <div class="drtr-stop-field">
                             <label>Salida</label>
-                            <input type="datetime-local" class="drtr-stop-departure" value="${data?.departure || ''}">
+                            <input type="datetime-local" class="drtr-stop-departure" value="${data.departure || ''}">
                         </div>
                         <div class="drtr-stop-field drtr-stop-field-full">
                             <label>Notas</label>
-                            <textarea class="drtr-stop-notes" rows="2" placeholder="Descripción de la parada...">${data?.notes || ''}</textarea>
+                            <textarea class="drtr-stop-notes" rows="2" placeholder="Descripción de la parada...">${data.notes || ''}</textarea>
                         </div>
                     </div>
                 </div>
+            `;
+            
+            console.log('Añadiendo parada al contenedor');    </div>
             `;
             
             $('#drtr-itinerary-container').append(stopHtml);
