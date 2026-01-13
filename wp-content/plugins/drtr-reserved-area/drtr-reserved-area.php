@@ -104,27 +104,30 @@ class DRTR_Reserved_Area {
 }
 
 /**
- * Hook de activación
- */
-register_activation_hook(__FILE__, 'drtr_ra_activate');
-function drtr_ra_activate() {
-    // Crear página al activar
-    DRTR_RA_Page_Manager::create_reserved_page();
-    flush_rewrite_rules();
-}
-
-/**
- * Hook de desactivación
- */
-register_deactivation_hook(__FILE__, 'drtr_ra_deactivate');
-function drtr_ra_deactivate() {
-    flush_rewrite_rules();
-}
-
-/**
  * Inicializar el plugin
  */
 function drtr_ra_init() {
     return DRTR_Reserved_Area::get_instance();
 }
 add_action('plugins_loaded', 'drtr_ra_init');
+
+/**
+ * Hook de activación
+ */
+function drtr_ra_activate() {
+    // Cargar la clase necesaria
+    require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-page-manager.php';
+    
+    // Crear página al activar
+    DRTR_RA_Page_Manager::create_reserved_page();
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'drtr_ra_activate');
+
+/**
+ * Hook de desactivación
+ */
+function drtr_ra_deactivate() {
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'drtr_ra_deactivate');
