@@ -271,3 +271,45 @@ msgstr "Scopri di Più"
 
 msgid "Leer más"
 msgstr "Leggi di più"
+
+msgid "Destino"
+msgstr "Destinazione"
+
+msgid "Todos los destinos"
+msgstr "Tutte le destinazioni"
+
+msgid "Transporte"
+msgstr "Trasporto"
+
+msgid "Todos"
+msgstr "Tutti"
+
+msgid "Duración"
+msgstr "Durata"
+
+msgid "Todas"
+msgstr "Tutte"
+
+msgid "1-3 días"
+msgstr "1-3 giorni"
+
+msgid "4-7 días"
+msgstr "4-7 giorni"
+
+msgid "8-14 días"
+msgstr "8-14 giorni"
+
+msgid "15+ días"
+msgstr "15+ giorni"
+
+msgid "Limpiar"
+msgstr "Cancella"
+
+msgid "No hay tours disponibles en este momento."
+msgstr "Nessun tour disponibile al momento."
+
+msgid "Próximo"
+msgstr "Prossimo"
+
+msgid "días"
+msgstr "giorni"

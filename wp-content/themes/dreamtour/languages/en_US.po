@@ -271,3 +271,45 @@ msgstr "Learn More"
 
 msgid "Leer más"
 msgstr "Read more"
+
+msgid "Destino"
+msgstr "Destination"
+
+msgid "Todos los destinos"
+msgstr "All destinations"
+
+msgid "Transporte"
+msgstr "Transport"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Duración"
+msgstr "Duration"
+
+msgid "Todas"
+msgstr "All"
+
+msgid "1-3 días"
+msgstr "1-3 days"
+
+msgid "4-7 días"
+msgstr "4-7 days"
+
+msgid "8-14 días"
+msgstr "8-14 days"
+
+msgid "15+ días"
+msgstr "15+ days"
+
+msgid "Limpiar"
+msgstr "Clear"
+
+msgid "No hay tours disponibles en este momento."
+msgstr "No tours available at this time."
+
+msgid "Próximo"
+msgstr "Upcoming"
+
+msgid "días"
+msgstr "days"
