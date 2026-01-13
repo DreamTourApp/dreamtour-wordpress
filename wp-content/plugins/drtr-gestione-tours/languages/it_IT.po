@@ -284,3 +284,9 @@ msgstr "Pranzo"
 
 msgid "Actividad"
 msgstr "Attività"
+
+msgid "Itinerario del Tour"
+msgstr "Itinerario del Tour"
+
+msgid "Agregar Parada"
+msgstr "Aggiungi Tappa"

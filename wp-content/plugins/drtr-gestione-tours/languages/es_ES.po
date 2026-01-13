@@ -273,18 +273,6 @@ msgstr "Descripción de la parada..."
 msgid "Ciudad"
 msgstr "Ciudad"
 
-msgid "Tren"
-msgstr "Tren"
-
-msgid "Bus"
-msgstr "Bus"
-
-msgid "Avión"
-msgstr "Avión"
-
-msgid "Barco"
-msgstr "Barco"
-
 msgid "Hotel"
 msgstr "Hotel"
 
@@ -296,3 +284,9 @@ msgstr "Comida"
 
 msgid "Actividad"
 msgstr "Actividad"
+
+msgid "Itinerario del Tour"
+msgstr "Itinerario del Tour"
+
+msgid "Agregar Parada"
+msgstr "Agregar Parada"
