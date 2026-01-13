@@ -134,6 +134,56 @@
             }
         });
         
+        // Tour Filters
+        function filterTours() {
+            const destination = $('#filter-destination').val();
+            const transport = $('#filter-transport').val();
+            const duration = $('#filter-duration').val();
+            
+            $('.tour-card').each(function() {
+                const $card = $(this);
+                let show = true;
+                
+                // Filter by destination
+                if (destination && $card.data('destination') !== destination) {
+                    show = false;
+                }
+                
+                // Filter by transport
+                if (transport && $card.data('transport') !== transport) {
+                    show = false;
+                }
+                
+                // Filter by duration
+                if (duration) {
+                    const cardDuration = parseInt($card.data('duration'));
+                    if (duration === '1-3' && (cardDuration < 1 || cardDuration > 3)) {
+                        show = false;
+                    } else if (duration === '4-7' && (cardDuration < 4 || cardDuration > 7)) {
+                        show = false;
+                    } else if (duration === '8-14' && (cardDuration < 8 || cardDuration > 14)) {
+                        show = false;
+                    } else if (duration === '15+' && cardDuration < 15) {
+                        show = false;
+                    }
+                }
+                
+                if (show) {
+                    $card.fadeIn(300);
+                } else {
+                    $card.fadeOut(300);
+                }
+            });
+        }
+        
+        $('.filter-select').on('change', filterTours);
+        
+        $('#filter-reset').on('click', function(e) {
+            e.preventDefault();
+            $('.filter-select').val('');
+            $('.tour-card').fadeIn(300);
+        });
+        
     });
     
     /**

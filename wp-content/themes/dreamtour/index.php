@@ -38,43 +38,85 @@ get_header();
             <p class="section-subtitle"><?php esc_html_e('Descubre nuestros viajes más populares', 'dreamtour'); ?></p>
         </div>
         
-        <div class="tours-grid">
+        <!-- Tour Filters -->
+        <div class="tour-filters">
+            <div class="filter-group">
+                <label for="filter-destination"><?php esc_html_e('Destino', 'dreamtour'); ?></label>
+                <select id="filter-destination" class="filter-select">
+                    <option value=""><?php esc_html_e('Todos los destinos', 'dreamtour'); ?></option>
+                    <?php
+                    $destinations = get_terms(array(
+                        'taxonomy' => 'drtr_destination',
+                        'hide_empty' => true,
+                    ));
+                    if ($destinations && !is_wp_error($destinations)) :
+                        foreach ($destinations as $dest) :
+                            echo '<option value="' . esc_attr($dest->slug) . '">' . esc_html($dest->name) . '</option>';
+                        endforeach;
+                    endif;
+                    ?>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="filter-transport"><?php esc_html_e('Transporte', 'dreamtour'); ?></label>
+                <select id="filter-transport" class="filter-select">
+                    <option value=""><?php esc_html_e('Todos', 'dreamtour'); ?></option>
+                    <option value="bus"><?php esc_html_e('Bus', 'dreamtour'); ?></option>
+                    <option value="avion"><?php esc_html_e('Avión', 'dreamtour'); ?></option>
+                    <option value="tren"><?php esc_html_e('Tren', 'dreamtour'); ?></option>
+                    <option value="barco"><?php esc_html_e('Barco', 'dreamtour'); ?></option>
+                    <option value="mixto"><?php esc_html_e('Mixto', 'dreamtour'); ?></option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="filter-duration"><?php esc_html_e('Duración', 'dreamtour'); ?></label>
+                <select id="filter-duration" class="filter-select">
+                    <option value=""><?php esc_html_e('Todas', 'dreamtour'); ?></option>
+                    <option value="1-3"><?php esc_html_e('1-3 días', 'dreamtour'); ?></option>
+                    <option value="4-7"><?php esc_html_e('4-7 días', 'dreamtour'); ?></option>
+                    <option value="8-14"><?php esc_html_e('8-14 días', 'dreamtour'); ?></option>
+                    <option value="15+"><?php esc_html_e('15+ días', 'dreamtour'); ?></option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <button id="filter-reset" class="btn btn-outline btn-sm"><?php esc_html_e('Limpiar', 'dreamtour'); ?></button>
+            </div>
+        </div>
+        
+        <div class="tours-grid" id="tours-container">
             <?php
-            // Query para obtener tours
+            // Query para obtener tours del CPT drtr_tour
             $tour_args = array(
-                'post_type'      => 'tour',
+                'post_type'      => 'drtr_tour',
                 'posts_per_page' => 6,
                 'orderby'        => 'date',
                 'order'          => 'DESC',
+                'post_status'    => 'publish',
             );
             
             $tour_query = new WP_Query($tour_args);
             
             if ($tour_query->have_posts()) :
                 while ($tour_query->have_posts()) : $tour_query->the_post();
-                    get_template_part('template-parts/content', 'tour-card');
+                    get_template_part('template-parts/content', 'drtr-tour-card');
                 endwhile;
                 wp_reset_postdata();
             else :
-                // Si no hay tours, mostrar posts del blog
-                if (have_posts()) :
-                    while (have_posts()) : the_post();
-                        get_template_part('template-parts/content', 'card');
-                    endwhile;
-                else :
-                    ?>
-                    <div class="no-content">
-                        <p><?php esc_html_e('No hay contenido disponible.', 'dreamtour'); ?></p>
-                    </div>
-                    <?php
-                endif;
+                ?>
+                <div class="no-content">
+                    <p><?php esc_html_e('No hay tours disponibles en este momento.', 'dreamtour'); ?></p>
+                </div>
+                <?php
             endif;
             ?>
         </div>
         
         <?php if ($tour_query->have_posts()) : ?>
             <div class="text-center mt-xl">
-                <a href="<?php echo esc_url(home_url('/tours')); ?>" class="btn btn-secondary">
+                <a href="<?php echo esc_url(home_url('/gestione-tours')); ?>" class="btn btn-secondary">
                     <?php esc_html_e('Ver Todos los Tours', 'dreamtour'); ?>
                 </a>
             </div>

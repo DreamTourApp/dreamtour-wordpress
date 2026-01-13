@@ -4,7 +4,7 @@ Theme URI: https://dreamtourviaggi.it
 Author: DreamTour Team
 Author URI: https://dreamtourviaggi.it
 Description: Un tema moderno para viajes de grupo inspirado en WeRoad, con diseño limpio y funcional
-Version: 1.0.1
+Version: 1.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: dreamtour
@@ -331,6 +331,60 @@ a:hover {
 /* ===================================
    CARDS DE TOURS
    =================================== */
+
+/* Tour Filters */
+.tour-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md);
+  background: #f8f9fa;
+  border-radius: var(--radius-lg);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.filter-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-select {
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--color-text-dark);
+  background-color: var(--color-white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-select:hover,
+.filter-select:focus {
+  border-color: var(--color-primary-light);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 171, 231, 0.1);
+}
+
+.filter-group:last-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+#filter-reset {
+  height: fit-content;
+}
+
 .tours-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
