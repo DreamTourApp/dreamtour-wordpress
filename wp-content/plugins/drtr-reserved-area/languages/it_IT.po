@@ -1,0 +1,129 @@
+# Italian Translation for DRTR Reserved Area
+# Copyright (C) 2026 Dream Tour
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR Reserved Area 1.0.0\n"
+"Report-Msgid-Bugs-To: https://dreamtour.app\n"
+"POT-Creation-Date: 2026-01-13 12:00+0000\n"
+"PO-Revision-Date: 2026-01-13 12:00+0000\n"
+"Last-Translator: Dream Tour\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Errore di login. Verifica le tue credenziali."
+msgstr "Errore di login. Verifica le tue credenziali."
+
+msgid "Tutti i campi sono obbligatori."
+msgstr "Tutti i campi sono obbligatori."
+
+msgid "Area Riservata"
+msgstr "Area Riservata"
+
+msgid "Username e password sono obbligatori."
+msgstr "Username e password sono obbligatori."
+
+msgid "Credenziali non valide. Riprova."
+msgstr "Credenziali non valide. Riprova."
+
+msgid "Login effettuato con successo!"
+msgstr "Login effettuato con successo!"
+
+msgid "Accedi con le tue credenziali"
+msgstr "Accedi con le tue credenziali"
+
+msgid "Username o Email"
+msgstr "Username o Email"
+
+msgid "Inserisci username o email"
+msgstr "Inserisci username o email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Inserisci la tua password"
+msgstr "Inserisci la tua password"
+
+msgid "Ricordami"
+msgstr "Ricordami"
+
+msgid "Accedi"
+msgstr "Accedi"
+
+msgid "Password dimenticata?"
+msgstr "Password dimenticata?"
+
+msgid "Benvenuto, %s!"
+msgstr "Benvenuto, %s!"
+
+msgid "Amministratore"
+msgstr "Amministratore"
+
+msgid "Utente"
+msgstr "Utente"
+
+msgid "Esci"
+msgstr "Esci"
+
+msgid "Il Mio Profilo"
+msgstr "Il Mio Profilo"
+
+msgid "Visualizza e modifica le tue informazioni personali"
+msgstr "Visualizza e modifica le tue informazioni personali"
+
+msgid "Vai al Profilo"
+msgstr "Vai al Profilo"
+
+msgid "Gestione Tours"
+msgstr "Gestione Tours"
+
+msgid "Gestisci tutti i tour: aggiungi, modifica ed elimina"
+msgstr "Gestisci tutti i tour: aggiungi, modifica ed elimina"
+
+msgid "Gestisci Tours"
+msgstr "Gestisci Tours"
+
+msgid "Dashboard WordPress"
+msgstr "Dashboard WordPress"
+
+msgid "Accedi al pannello di amministrazione completo"
+msgstr "Accedi al pannello di amministrazione completo"
+
+msgid "Apri Dashboard"
+msgstr "Apri Dashboard"
+
+msgid "Gestione Utenti"
+msgstr "Gestione Utenti"
+
+msgid "Gestisci gli utenti e i loro permessi"
+msgstr "Gestisci gli utenti e i loro permessi"
+
+msgid "Gestisci Utenti"
+msgstr "Gestisci Utenti"
+
+msgid "Impostazioni"
+msgstr "Impostazioni"
+
+msgid "Configura le impostazioni del sito"
+msgstr "Configura le impostazioni del sito"
+
+msgid "Informazioni"
+msgstr "Informazioni"
+
+msgid "Contatta l'amministratore per ulteriori funzionalità"
+msgstr "Contatta l'amministratore per ulteriori funzionalità"
+
+msgid "Statistiche Rapide"
+msgstr "Statistiche Rapide"
+
+msgid "Tours Pubblicati"
+msgstr "Tours Pubblicati"
+
+msgid "Utenti Totali"
+msgstr "Utenti Totali"
+
+msgid "Pagine"
+msgstr "Pagine"

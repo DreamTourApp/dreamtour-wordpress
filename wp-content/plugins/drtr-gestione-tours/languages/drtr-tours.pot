@@ -1,0 +1,244 @@
+# DRTR - Gestione Tours
+# Copyright (C) 2026 DreamTour Team
+# This file is distributed under the same license as the DRTR - Gestione Tours package.
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR - Gestione Tours 1.0.0\n"
+"Report-Msgid-Bugs-To: https://dreamtourviaggi.it\n"
+"POT-Creation-Date: 2026-01-13 21:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Tours"
+msgstr ""
+
+msgid "Tour"
+msgstr ""
+
+msgid "Añadir Nuevo"
+msgstr ""
+
+msgid "Añadir Nuevo Tour"
+msgstr ""
+
+msgid "Nuevo Tour"
+msgstr ""
+
+msgid "Editar Tour"
+msgstr ""
+
+msgid "Ver Tour"
+msgstr ""
+
+msgid "Todos los Tours"
+msgstr ""
+
+msgid "Buscar Tours"
+msgstr ""
+
+msgid "No se encontraron tours"
+msgstr ""
+
+msgid "No se encontraron tours en la papelera"
+msgstr ""
+
+msgid "Destinos"
+msgstr ""
+
+msgid "Destino"
+msgstr ""
+
+msgid "Buscar Destinos"
+msgstr ""
+
+msgid "Todos los Destinos"
+msgstr ""
+
+msgid "Editar Destino"
+msgstr ""
+
+msgid "Actualizar Destino"
+msgstr ""
+
+msgid "Añadir Nuevo Destino"
+msgstr ""
+
+msgid "Nuevo Nombre de Destino"
+msgstr ""
+
+msgid "Tipos de Tour"
+msgstr ""
+
+msgid "Tipo de Tour"
+msgstr ""
+
+msgid "Buscar Tipos"
+msgstr ""
+
+msgid "Todos los Tipos"
+msgstr ""
+
+msgid "Editar Tipo"
+msgstr ""
+
+msgid "Actualizar Tipo"
+msgstr ""
+
+msgid "Añadir Nuevo Tipo"
+msgstr ""
+
+msgid "Nuevo Nombre de Tipo"
+msgstr ""
+
+msgid "Detalles del Tour"
+msgstr ""
+
+msgid "Precio (€)"
+msgstr ""
+
+msgid "Duración (días)"
+msgstr ""
+
+msgid "Tipo de Transporte"
+msgstr ""
+
+msgid "Seleccionar..."
+msgstr ""
+
+msgid "Bus"
+msgstr ""
+
+msgid "Avión"
+msgstr ""
+
+msgid "Tren"
+msgstr ""
+
+msgid "Barco"
+msgstr ""
+
+msgid "Mixto"
+msgstr ""
+
+msgid "Máximo de Personas"
+msgstr ""
+
+msgid "Fecha de Inicio"
+msgstr ""
+
+msgid "Fecha de Fin"
+msgstr ""
+
+msgid "Ubicación/Ciudad"
+msgstr ""
+
+msgid "Valoración (0-5)"
+msgstr ""
+
+msgid "Qué incluye"
+msgstr ""
+
+msgid "Un elemento por línea"
+msgstr ""
+
+msgid "Qué no incluye"
+msgstr ""
+
+msgid "Itinerario"
+msgstr ""
+
+msgid "No tienes permisos"
+msgstr ""
+
+msgid "ID de tour inválido"
+msgstr ""
+
+msgid "Tour no encontrado"
+msgstr ""
+
+msgid "El título es obligatorio"
+msgstr ""
+
+msgid "Tour guardado correctamente"
+msgstr ""
+
+msgid "Error al eliminar el tour"
+msgstr ""
+
+msgid "Tour eliminado correctamente"
+msgstr ""
+
+msgid "Gestione Tours"
+msgstr ""
+
+msgid "No tienes permisos para acceder a esta página."
+msgstr ""
+
+msgid "Gestión de Tours"
+msgstr ""
+
+msgid "Buscar tours..."
+msgstr ""
+
+msgid "Buscar"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Título"
+msgstr ""
+
+msgid "Precio"
+msgstr ""
+
+msgid "Duración"
+msgstr ""
+
+msgid "Transporte"
+msgstr ""
+
+msgid "Ubicación"
+msgstr ""
+
+msgid "Fecha Inicio"
+msgstr ""
+
+msgid "Acciones"
+msgstr ""
+
+msgid "Cargando tours..."
+msgstr ""
+
+msgid "Título *"
+msgstr ""
+
+msgid "Descripción Corta"
+msgstr ""
+
+msgid "Descripción Completa"
+msgstr ""
+
+msgid "Qué Incluye"
+msgstr ""
+
+msgid "Qué NO Incluye"
+msgstr ""
+
+msgid "Cancelar"
+msgstr ""
+
+msgid "Guardar Tour"
+msgstr ""
+
+msgid "¿Estás seguro de eliminar este tour?"
+msgstr ""
+
+msgid "Ha ocurrido un error. Por favor, intenta de nuevo."
+msgstr ""

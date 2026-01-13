@@ -1,0 +1,438 @@
+/**
+ * Estilos para DRTR Reserved Area
+ * Login personalizado y dashboard con permisos
+ */
+
+/* =============================================================================
+   CONTENEDOR GENERAL
+   ============================================================================= */
+
+.drtr-ra-login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* =============================================================================
+   FORMULARIO DE LOGIN
+   ============================================================================= */
+
+.drtr-ra-login-box {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 3rem 2.5rem;
+    max-width: 450px;
+    width: 100%;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.drtr-ra-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.drtr-ra-logo img {
+    max-height: 80px;
+    width: auto;
+}
+
+.drtr-ra-logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #667eea;
+    margin: 0;
+}
+
+.drtr-ra-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 0.5rem 0;
+}
+
+.drtr-ra-subtitle {
+    text-align: center;
+    color: #718096;
+    font-size: 0.95rem;
+    margin: 0 0 2rem 0;
+}
+
+/* Alertas */
+.drtr-ra-alert {
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.drtr-ra-alert-error {
+    background-color: #fed7d7;
+    color: #c53030;
+    border-left: 4px solid #f56565;
+}
+
+.drtr-ra-alert-success {
+    background-color: #c6f6d5;
+    color: #2f855a;
+    border-left: 4px solid #48bb78;
+}
+
+/* Formulario */
+.drtr-ra-form {
+    margin-top: 1.5rem;
+}
+
+.drtr-ra-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.drtr-ra-form-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.drtr-ra-form-group label .dashicons {
+    margin-right: 0.5rem;
+    color: #667eea;
+    font-size: 1.2rem;
+}
+
+.drtr-ra-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: #f7fafc;
+}
+
+.drtr-ra-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.drtr-ra-remember {
+    margin-bottom: 1.5rem;
+}
+
+.drtr-ra-checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal !important;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.drtr-ra-checkbox-label input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Botones */
+.drtr-ra-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    width: 100%;
+}
+
+.drtr-ra-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    border: none;
+}
+
+.drtr-ra-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.drtr-ra-btn-primary .dashicons {
+    font-size: 1.2rem;
+}
+
+.drtr-ra-btn-secondary {
+    background-color: #f7fafc;
+    color: #2d3748;
+    border-color: #e2e8f0;
+}
+
+.drtr-ra-btn-secondary:hover {
+    background-color: #edf2f7;
+    border-color: #cbd5e0;
+}
+
+.drtr-ra-btn-outline {
+    background-color: transparent;
+    color: #667eea;
+    border-color: #667eea;
+}
+
+.drtr-ra-btn-outline:hover {
+    background-color: #667eea;
+    color: #ffffff;
+}
+
+.drtr-ra-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.drtr-ra-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.drtr-ra-links a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* =============================================================================
+   DASHBOARD
+   ============================================================================= */
+
+.drtr-ra-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.drtr-ra-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.drtr-ra-welcome h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 0.5rem 0;
+}
+
+.drtr-ra-user-role {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    padding: 0.375rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.drtr-ra-user-menu .drtr-ra-btn {
+    width: auto;
+}
+
+/* Grid de Cards */
+.drtr-ra-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.drtr-ra-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 2px solid #f7fafc;
+}
+
+.drtr-ra-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.drtr-ra-card-highlight {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.drtr-ra-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #f7fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.drtr-ra-card-icon .dashicons {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+    color: #4a5568;
+}
+
+.drtr-ra-icon-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.drtr-ra-icon-primary .dashicons {
+    color: #ffffff;
+}
+
+.drtr-ra-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 0.75rem 0;
+}
+
+.drtr-ra-card p {
+    color: #718096;
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+}
+
+.drtr-ra-card .drtr-ra-btn {
+    width: 100%;
+}
+
+/* Estadísticas */
+.drtr-ra-stats {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.drtr-ra-stats h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 1.5rem 0;
+}
+
+.drtr-ra-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+}
+
+.drtr-ra-stat-item {
+    text-align: center;
+}
+
+.drtr-ra-stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.drtr-ra-stat-label {
+    display: block;
+    color: #718096;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .drtr-ra-login-box {
+        padding: 2rem 1.5rem;
+    }
+    
+    .drtr-ra-title {
+        font-size: 1.5rem;
+    }
+    
+    .drtr-ra-dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .drtr-ra-user-menu {
+        width: 100%;
+    }
+    
+    .drtr-ra-user-menu .drtr-ra-btn {
+        width: 100%;
+    }
+    
+    .drtr-ra-welcome h2 {
+        font-size: 1.5rem;
+    }
+    
+    .drtr-ra-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .drtr-ra-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .drtr-ra-stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .drtr-ra-login-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .drtr-ra-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

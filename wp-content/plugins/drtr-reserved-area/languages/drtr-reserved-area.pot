@@ -1,0 +1,126 @@
+# DRTR Reserved Area - Translation Template
+# Copyright (C) 2026 Dream Tour
+# This file is distributed under the same license as the DRTR Reserved Area plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR Reserved Area 1.0.0\n"
+"Report-Msgid-Bugs-To: https://dreamtour.app\n"
+"POT-Creation-Date: 2026-01-13 12:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Dream Tour\n"
+
+msgid "Errore di login. Verifica le tue credenziali."
+msgstr ""
+
+msgid "Tutti i campi sono obbligatori."
+msgstr ""
+
+msgid "Area Riservata"
+msgstr ""
+
+msgid "Username e password sono obbligatori."
+msgstr ""
+
+msgid "Credenziali non valide. Riprova."
+msgstr ""
+
+msgid "Login effettuato con successo!"
+msgstr ""
+
+msgid "Accedi con le tue credenziali"
+msgstr ""
+
+msgid "Username o Email"
+msgstr ""
+
+msgid "Inserisci username o email"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Inserisci la tua password"
+msgstr ""
+
+msgid "Ricordami"
+msgstr ""
+
+msgid "Accedi"
+msgstr ""
+
+msgid "Password dimenticata?"
+msgstr ""
+
+msgid "Benvenuto, %s!"
+msgstr ""
+
+msgid "Amministratore"
+msgstr ""
+
+msgid "Utente"
+msgstr ""
+
+msgid "Esci"
+msgstr ""
+
+msgid "Il Mio Profilo"
+msgstr ""
+
+msgid "Visualizza e modifica le tue informazioni personali"
+msgstr ""
+
+msgid "Vai al Profilo"
+msgstr ""
+
+msgid "Gestione Tours"
+msgstr ""
+
+msgid "Gestisci tutti i tour: aggiungi, modifica ed elimina"
+msgstr ""
+
+msgid "Gestisci Tours"
+msgstr ""
+
+msgid "Dashboard WordPress"
+msgstr ""
+
+msgid "Accedi al pannello di amministrazione completo"
+msgstr ""
+
+msgid "Apri Dashboard"
+msgstr ""
+
+msgid "Gestione Utenti"
+msgstr ""
+
+msgid "Gestisci gli utenti e i loro permessi"
+msgstr ""
+
+msgid "Gestisci Utenti"
+msgstr ""
+
+msgid "Impostazioni"
+msgstr ""
+
+msgid "Configura le impostazioni del sito"
+msgstr ""
+
+msgid "Informazioni"
+msgstr ""
+
+msgid "Contatta l'amministratore per ulteriori funzionalità"
+msgstr ""
+
+msgid "Statistiche Rapide"
+msgstr ""
+
+msgid "Tours Pubblicati"
+msgstr ""
+
+msgid "Utenti Totali"
+msgstr ""
+
+msgid "Pagine"
+msgstr ""

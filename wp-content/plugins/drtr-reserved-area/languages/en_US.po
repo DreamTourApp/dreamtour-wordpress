@@ -1,0 +1,129 @@
+# English Translation for DRTR Reserved Area
+# Copyright (C) 2026 Dream Tour
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR Reserved Area 1.0.0\n"
+"Report-Msgid-Bugs-To: https://dreamtour.app\n"
+"POT-Creation-Date: 2026-01-13 12:00+0000\n"
+"PO-Revision-Date: 2026-01-13 12:00+0000\n"
+"Last-Translator: Dream Tour\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Errore di login. Verifica le tue credenziali."
+msgstr "Login error. Check your credentials."
+
+msgid "Tutti i campi sono obbligatori."
+msgstr "All fields are required."
+
+msgid "Area Riservata"
+msgstr "Reserved Area"
+
+msgid "Username e password sono obbligatori."
+msgstr "Username and password are required."
+
+msgid "Credenziali non valide. Riprova."
+msgstr "Invalid credentials. Try again."
+
+msgid "Login effettuato con successo!"
+msgstr "Login successful!"
+
+msgid "Accedi con le tue credenziali"
+msgstr "Login with your credentials"
+
+msgid "Username o Email"
+msgstr "Username or Email"
+
+msgid "Inserisci username o email"
+msgstr "Enter username or email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Inserisci la tua password"
+msgstr "Enter your password"
+
+msgid "Ricordami"
+msgstr "Remember me"
+
+msgid "Accedi"
+msgstr "Login"
+
+msgid "Password dimenticata?"
+msgstr "Forgot password?"
+
+msgid "Benvenuto, %s!"
+msgstr "Welcome, %s!"
+
+msgid "Amministratore"
+msgstr "Administrator"
+
+msgid "Utente"
+msgstr "User"
+
+msgid "Esci"
+msgstr "Logout"
+
+msgid "Il Mio Profilo"
+msgstr "My Profile"
+
+msgid "Visualizza e modifica le tue informazioni personali"
+msgstr "View and edit your personal information"
+
+msgid "Vai al Profilo"
+msgstr "Go to Profile"
+
+msgid "Gestione Tours"
+msgstr "Tours Management"
+
+msgid "Gestisci tutti i tour: aggiungi, modifica ed elimina"
+msgstr "Manage all tours: add, edit and delete"
+
+msgid "Gestisci Tours"
+msgstr "Manage Tours"
+
+msgid "Dashboard WordPress"
+msgstr "WordPress Dashboard"
+
+msgid "Accedi al pannello di amministrazione completo"
+msgstr "Access the complete administration panel"
+
+msgid "Apri Dashboard"
+msgstr "Open Dashboard"
+
+msgid "Gestione Utenti"
+msgstr "User Management"
+
+msgid "Gestisci gli utenti e i loro permessi"
+msgstr "Manage users and their permissions"
+
+msgid "Gestisci Utenti"
+msgstr "Manage Users"
+
+msgid "Impostazioni"
+msgstr "Settings"
+
+msgid "Configura le impostazioni del sito"
+msgstr "Configure site settings"
+
+msgid "Informazioni"
+msgstr "Information"
+
+msgid "Contatta l'amministratore per ulteriori funzionalità"
+msgstr "Contact administrator for additional features"
+
+msgid "Statistiche Rapide"
+msgstr "Quick Stats"
+
+msgid "Tours Pubblicati"
+msgstr "Published Tours"
+
+msgid "Utenti Totali"
+msgstr "Total Users"
+
+msgid "Pagine"
+msgstr "Pages"

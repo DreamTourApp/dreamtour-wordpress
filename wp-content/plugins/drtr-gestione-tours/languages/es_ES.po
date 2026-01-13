@@ -1,0 +1,238 @@
+# Spanish translation for DRTR - Gestione Tours
+# Copyright (C) 2026 DreamTour Team
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR - Gestione Tours 1.0.0\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Tours"
+msgstr "Tours"
+
+msgid "Tour"
+msgstr "Tour"
+
+msgid "Añadir Nuevo"
+msgstr "Añadir Nuevo"
+
+msgid "Añadir Nuevo Tour"
+msgstr "Añadir Nuevo Tour"
+
+msgid "Nuevo Tour"
+msgstr "Nuevo Tour"
+
+msgid "Editar Tour"
+msgstr "Editar Tour"
+
+msgid "Ver Tour"
+msgstr "Ver Tour"
+
+msgid "Todos los Tours"
+msgstr "Todos los Tours"
+
+msgid "Buscar Tours"
+msgstr "Buscar Tours"
+
+msgid "No se encontraron tours"
+msgstr "No se encontraron tours"
+
+msgid "No se encontraron tours en la papelera"
+msgstr "No se encontraron tours en la papelera"
+
+msgid "Destinos"
+msgstr "Destinos"
+
+msgid "Destino"
+msgstr "Destino"
+
+msgid "Buscar Destinos"
+msgstr "Buscar Destinos"
+
+msgid "Todos los Destinos"
+msgstr "Todos los Destinos"
+
+msgid "Editar Destino"
+msgstr "Editar Destino"
+
+msgid "Actualizar Destino"
+msgstr "Actualizar Destino"
+
+msgid "Añadir Nuevo Destino"
+msgstr "Añadir Nuevo Destino"
+
+msgid "Nuevo Nombre de Destino"
+msgstr "Nuevo Nombre de Destino"
+
+msgid "Tipos de Tour"
+msgstr "Tipos de Tour"
+
+msgid "Tipo de Tour"
+msgstr "Tipo de Tour"
+
+msgid "Buscar Tipos"
+msgstr "Buscar Tipos"
+
+msgid "Todos los Tipos"
+msgstr "Todos los Tipos"
+
+msgid "Editar Tipo"
+msgstr "Editar Tipo"
+
+msgid "Actualizar Tipo"
+msgstr "Actualizar Tipo"
+
+msgid "Añadir Nuevo Tipo"
+msgstr "Añadir Nuevo Tipo"
+
+msgid "Nuevo Nombre de Tipo"
+msgstr "Nuevo Nombre de Tipo"
+
+msgid "Detalles del Tour"
+msgstr "Detalles del Tour"
+
+msgid "Precio (€)"
+msgstr "Precio (€)"
+
+msgid "Duración (días)"
+msgstr "Duración (días)"
+
+msgid "Tipo de Transporte"
+msgstr "Tipo de Transporte"
+
+msgid "Seleccionar..."
+msgstr "Seleccionar..."
+
+msgid "Bus"
+msgstr "Autobús"
+
+msgid "Avión"
+msgstr "Avión"
+
+msgid "Tren"
+msgstr "Tren"
+
+msgid "Barco"
+msgstr "Barco"
+
+msgid "Mixto"
+msgstr "Mixto"
+
+msgid "Máximo de Personas"
+msgstr "Máximo de Personas"
+
+msgid "Fecha de Inicio"
+msgstr "Fecha de Inicio"
+
+msgid "Fecha de Fin"
+msgstr "Fecha de Fin"
+
+msgid "Ubicación/Ciudad"
+msgstr "Ubicación/Ciudad"
+
+msgid "Valoración (0-5)"
+msgstr "Valoración (0-5)"
+
+msgid "Qué incluye"
+msgstr "Qué incluye"
+
+msgid "Un elemento por línea"
+msgstr "Un elemento por línea"
+
+msgid "Qué no incluye"
+msgstr "Qué no incluye"
+
+msgid "Itinerario"
+msgstr "Itinerario"
+
+msgid "No tienes permisos"
+msgstr "No tienes permisos"
+
+msgid "ID de tour inválido"
+msgstr "ID de tour inválido"
+
+msgid "Tour no encontrado"
+msgstr "Tour no encontrado"
+
+msgid "El título es obligatorio"
+msgstr "El título es obligatorio"
+
+msgid "Tour guardado correctamente"
+msgstr "Tour guardado correctamente"
+
+msgid "Error al eliminar el tour"
+msgstr "Error al eliminar el tour"
+
+msgid "Tour eliminado correctamente"
+msgstr "Tour eliminado correctamente"
+
+msgid "Gestione Tours"
+msgstr "Gestión de Tours"
+
+msgid "No tienes permisos para acceder a esta página."
+msgstr "No tienes permisos para acceder a esta página."
+
+msgid "Gestión de Tours"
+msgstr "Gestión de Tours"
+
+msgid "Buscar tours..."
+msgstr "Buscar tours..."
+
+msgid "Buscar"
+msgstr "Buscar"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Título"
+msgstr "Título"
+
+msgid "Precio"
+msgstr "Precio"
+
+msgid "Duración"
+msgstr "Duración"
+
+msgid "Transporte"
+msgstr "Transporte"
+
+msgid "Ubicación"
+msgstr "Ubicación"
+
+msgid "Fecha Inicio"
+msgstr "Fecha Inicio"
+
+msgid "Acciones"
+msgstr "Acciones"
+
+msgid "Cargando tours..."
+msgstr "Cargando tours..."
+
+msgid "Título *"
+msgstr "Título *"
+
+msgid "Descripción Corta"
+msgstr "Descripción Corta"
+
+msgid "Descripción Completa"
+msgstr "Descripción Completa"
+
+msgid "Qué Incluye"
+msgstr "Qué Incluye"
+
+msgid "Qué NO Incluye"
+msgstr "Qué NO Incluye"
+
+msgid "Cancelar"
+msgstr "Cancelar"
+
+msgid "Guardar Tour"
+msgstr "Guardar Tour"
+
+msgid "¿Estás seguro de eliminar este tour?"
+msgstr "¿Estás seguro de eliminar este tour?"
+
+msgid "Ha ocurrido un error. Por favor, intenta de nuevo."
+msgstr "Ha ocurrido un error. Por favor, intenta de nuevo."

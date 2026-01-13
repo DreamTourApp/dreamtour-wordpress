@@ -76,6 +76,17 @@ class DRTR_Gestione_Tours {
     }
     
     public function load_textdomain() {
+        // Obtener el locale del sitio (que ya incluye la lógica del tema)
+        $locale = get_locale();
+        
+        // Cargar traducciones del plugin
+        $mofile = DRTR_PLUGIN_DIR . 'languages/' . $locale . '.mo';
+        
+        if (file_exists($mofile)) {
+            load_textdomain('drtr-tours', $mofile);
+        }
+        
+        // Fallback al método estándar de WordPress
         load_plugin_textdomain('drtr-tours', false, dirname(DRTR_PLUGIN_BASENAME) . '/languages');
     }
     

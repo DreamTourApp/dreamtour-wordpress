@@ -1,0 +1,238 @@
+# English translation for DRTR - Gestione Tours
+# Copyright (C) 2026 DreamTour Team
+msgid ""
+msgstr ""
+"Project-Id-Version: DRTR - Gestione Tours 1.0.0\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Tours"
+msgstr "Tours"
+
+msgid "Tour"
+msgstr "Tour"
+
+msgid "Añadir Nuevo"
+msgstr "Add New"
+
+msgid "Añadir Nuevo Tour"
+msgstr "Add New Tour"
+
+msgid "Nuevo Tour"
+msgstr "New Tour"
+
+msgid "Editar Tour"
+msgstr "Edit Tour"
+
+msgid "Ver Tour"
+msgstr "View Tour"
+
+msgid "Todos los Tours"
+msgstr "All Tours"
+
+msgid "Buscar Tours"
+msgstr "Search Tours"
+
+msgid "No se encontraron tours"
+msgstr "No tours found"
+
+msgid "No se encontraron tours en la papelera"
+msgstr "No tours found in trash"
+
+msgid "Destinos"
+msgstr "Destinations"
+
+msgid "Destino"
+msgstr "Destination"
+
+msgid "Buscar Destinos"
+msgstr "Search Destinations"
+
+msgid "Todos los Destinos"
+msgstr "All Destinations"
+
+msgid "Editar Destino"
+msgstr "Edit Destination"
+
+msgid "Actualizar Destino"
+msgstr "Update Destination"
+
+msgid "Añadir Nuevo Destino"
+msgstr "Add New Destination"
+
+msgid "Nuevo Nombre de Destino"
+msgstr "New Destination Name"
+
+msgid "Tipos de Tour"
+msgstr "Tour Types"
+
+msgid "Tipo de Tour"
+msgstr "Tour Type"
+
+msgid "Buscar Tipos"
+msgstr "Search Types"
+
+msgid "Todos los Tipos"
+msgstr "All Types"
+
+msgid "Editar Tipo"
+msgstr "Edit Type"
+
+msgid "Actualizar Tipo"
+msgstr "Update Type"
+
+msgid "Añadir Nuevo Tipo"
+msgstr "Add New Type"
+
+msgid "Nuevo Nombre de Tipo"
+msgstr "New Type Name"
+
+msgid "Detalles del Tour"
+msgstr "Tour Details"
+
+msgid "Precio (€)"
+msgstr "Price (€)"
+
+msgid "Duración (días)"
+msgstr "Duration (days)"
+
+msgid "Tipo de Transporte"
+msgstr "Transport Type"
+
+msgid "Seleccionar..."
+msgstr "Select..."
+
+msgid "Bus"
+msgstr "Bus"
+
+msgid "Avión"
+msgstr "Plane"
+
+msgid "Tren"
+msgstr "Train"
+
+msgid "Barco"
+msgstr "Boat"
+
+msgid "Mixto"
+msgstr "Mixed"
+
+msgid "Máximo de Personas"
+msgstr "Maximum People"
+
+msgid "Fecha de Inicio"
+msgstr "Start Date"
+
+msgid "Fecha de Fin"
+msgstr "End Date"
+
+msgid "Ubicación/Ciudad"
+msgstr "Location/City"
+
+msgid "Valoración (0-5)"
+msgstr "Rating (0-5)"
+
+msgid "Qué incluye"
+msgstr "What's Included"
+
+msgid "Un elemento por línea"
+msgstr "One item per line"
+
+msgid "Qué no incluye"
+msgstr "What's Not Included"
+
+msgid "Itinerario"
+msgstr "Itinerary"
+
+msgid "No tienes permisos"
+msgstr "You don't have permission"
+
+msgid "ID de tour inválido"
+msgstr "Invalid tour ID"
+
+msgid "Tour no encontrado"
+msgstr "Tour not found"
+
+msgid "El título es obligatorio"
+msgstr "Title is required"
+
+msgid "Tour guardado correctamente"
+msgstr "Tour saved successfully"
+
+msgid "Error al eliminar el tour"
+msgstr "Error deleting tour"
+
+msgid "Tour eliminado correctamente"
+msgstr "Tour deleted successfully"
+
+msgid "Gestione Tours"
+msgstr "Tour Management"
+
+msgid "No tienes permisos para acceder a esta página."
+msgstr "You don't have permission to access this page."
+
+msgid "Gestión de Tours"
+msgstr "Tour Management"
+
+msgid "Buscar tours..."
+msgstr "Search tours..."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Título"
+msgstr "Title"
+
+msgid "Precio"
+msgstr "Price"
+
+msgid "Duración"
+msgstr "Duration"
+
+msgid "Transporte"
+msgstr "Transport"
+
+msgid "Ubicación"
+msgstr "Location"
+
+msgid "Fecha Inicio"
+msgstr "Start Date"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "Cargando tours..."
+msgstr "Loading tours..."
+
+msgid "Título *"
+msgstr "Title *"
+
+msgid "Descripción Corta"
+msgstr "Short Description"
+
+msgid "Descripción Completa"
+msgstr "Full Description"
+
+msgid "Qué Incluye"
+msgstr "What's Included"
+
+msgid "Qué NO Incluye"
+msgstr "What's NOT Included"
+
+msgid "Cancelar"
+msgstr "Cancel"
+
+msgid "Guardar Tour"
+msgstr "Save Tour"
+
+msgid "¿Estás seguro de eliminar este tour?"
+msgstr "Are you sure you want to delete this tour?"
+
+msgid "Ha ocurrido un error. Por favor, intenta de nuevo."
+msgstr "An error occurred. Please try again."
