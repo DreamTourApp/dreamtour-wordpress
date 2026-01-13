@@ -120,6 +120,20 @@ class DRTR_Frontend {
                             </div>
                         </div>
                         
+                        <div class="drtr-form-row">
+                            <div class="drtr-form-group">
+                                <label for="drtr-tour-image"><?php _e('Locandina (Imagen)', 'drtr-tours'); ?></label>
+                                <input type="file" id="drtr-tour-image" name="tour_image" accept="image/*" class="drtr-file-input">
+                                <input type="hidden" id="drtr-tour-image-id" name="image_id">
+                                <div id="drtr-image-preview" class="drtr-image-preview" style="display:none;">
+                                    <img src="" alt="Preview">
+                                    <button type="button" class="drtr-remove-image" title="<?php esc_attr_e('Eliminar imagen', 'drtr-tours'); ?>">
+                                        <span class="dashicons dashicons-no-alt"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="drtr-form-row drtr-form-row-2">
                             <div class="drtr-form-group">
                                 <label for="drtr-tour-price"><?php _e('Precio (€)', 'drtr-tours'); ?></label>

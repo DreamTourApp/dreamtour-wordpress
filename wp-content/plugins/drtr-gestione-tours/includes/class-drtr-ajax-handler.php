@@ -106,6 +106,8 @@ class DRTR_Ajax_Handler {
             'title' => $post->post_title,
             'content' => $post->post_content,
             'excerpt' => $post->post_excerpt,
+            'image_id' => get_post_meta($tour_id, '_drtr_image_id', true),
+            'image_url' => '',
             'price' => get_post_meta($tour_id, '_drtr_price', true),
             'duration' => get_post_meta($tour_id, '_drtr_duration', true),
             'transport_type' => get_post_meta($tour_id, '_drtr_transport_type', true),
@@ -118,6 +120,11 @@ class DRTR_Ajax_Handler {
             'not_includes' => get_post_meta($tour_id, '_drtr_not_includes', true),
             'itinerary' => get_post_meta($tour_id, '_drtr_itinerary', true),
         );
+        
+        // Obtener URL de imagen si existe
+        if ($tour_data['image_id']) {
+            $tour_data['image_url'] = wp_get_attachment_url($tour_data['image_id']);
+        }
         
         wp_send_json_success($tour_data);
     }
@@ -161,6 +168,27 @@ class DRTR_Ajax_Handler {
         }
         
         $tour_id = $result;
+        
+        // Manejar subida de imagen si existe
+        if (!empty($_FILES['tour_image']['name'])) {
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            
+            $attachment_id = media_handle_upload('tour_image', $tour_id);
+            
+            if (!is_wp_error($attachment_id)) {
+                update_post_meta($tour_id, '_drtr_image_id', $attachment_id);
+                set_post_thumbnail($tour_id, $attachment_id);
+            }
+        } elseif (isset($_POST['image_id'])) {
+            // Si se envió un ID de imagen existente
+            $image_id = absint($_POST['image_id']);
+            if ($image_id) {
+                update_post_meta($tour_id, '_drtr_image_id', $image_id);
+                set_post_thumbnail($tour_id, $image_id);
+            }
+        }
         
         // Guardar meta fields
         $meta_fields = array(

@@ -252,6 +252,69 @@
     resize: vertical;
 }
 
+/* Image Upload & Preview */
+.drtr-file-input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drtr-file-input:hover {
+    border-color: #003284;
+    background-color: #f8f9fa;
+}
+
+.drtr-image-preview {
+    position: relative;
+    margin-top: 15px;
+    max-width: 300px;
+}
+
+.drtr-image-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.drtr-remove-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.drtr-remove-image:hover {
+    background: #ff4444;
+    transform: scale(1.1);
+}
+
+.drtr-remove-image:hover .dashicons {
+    color: #fff;
+}
+
+.drtr-remove-image .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
 .drtr-modal-actions {
     display: flex;
     justify-content: flex-end;

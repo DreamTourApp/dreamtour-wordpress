@@ -27,3 +27,47 @@
     font-style: italic;
     margin-top: 5px;
 }
+
+/* Image Upload in Admin */
+.drtr-admin-image-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.drtr-admin-image-preview {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.drtr-admin-image-preview img {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: #fff;
+}
+
+.drtr-upload-image-btn {
+    background: #2271b1;
+    color: #fff;
+    border-color: #2271b1;
+}
+
+.drtr-upload-image-btn:hover {
+    background: #135e96;
+    border-color: #135e96;
+    color: #fff;
+}
+
+.drtr-remove-image-btn {
+    background: #d63638;
+    color: #fff;
+    border-color: #d63638;
+}
+
+.drtr-remove-image-btn:hover {
+    background: #b32d2e;
+    border-color: #b32d2e;
+    color: #fff;
+}

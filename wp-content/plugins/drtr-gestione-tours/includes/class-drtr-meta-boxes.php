@@ -45,10 +45,30 @@ class DRTR_Meta_Boxes {
         $includes = get_post_meta($post->ID, '_drtr_includes', true);
         $not_includes = get_post_meta($post->ID, '_drtr_not_includes', true);
         $itinerary = get_post_meta($post->ID, '_drtr_itinerary', true);
+        $image_id = get_post_meta($post->ID, '_drtr_image_id', true);
+        $image_url = $image_id ? wp_get_attachment_url($image_id) : '';
         ?>
         
         <div class="drtr-meta-box-container">
             <table class="form-table">
+                <tr>
+                    <th><label for="drtr_image"><?php _e('Locandina (Imagen)', 'drtr-tours'); ?></label></th>
+                    <td>
+                        <div class="drtr-admin-image-upload">
+                            <input type="hidden" id="drtr_image_id" name="drtr_image_id" value="<?php echo esc_attr($image_id); ?>">
+                            <button type="button" class="button drtr-upload-image-btn">
+                                <?php _e('Seleccionar Imagen', 'drtr-tours'); ?>
+                            </button>
+                            <button type="button" class="button drtr-remove-image-btn" style="<?php echo $image_url ? '' : 'display:none;'; ?>">
+                                <?php _e('Eliminar Imagen', 'drtr-tours'); ?>
+                            </button>
+                            <div class="drtr-admin-image-preview" style="margin-top:10px;<?php echo $image_url ? '' : 'display:none;'; ?>">
+                                <img src="<?php echo esc_url($image_url); ?>" style="max-width:300px;height:auto;display:block;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                
                 <tr>
                     <th><label for="drtr_price"><?php _e('Precio (€)', 'drtr-tours'); ?></label></th>
                     <td>
@@ -164,6 +184,7 @@ class DRTR_Meta_Boxes {
         
         // Guardar campos
         $fields = array(
+            '_drtr_image_id' => 'absint',
             '_drtr_price' => 'sanitize_text_field',
             '_drtr_duration' => 'absint',
             '_drtr_transport_type' => 'sanitize_text_field',

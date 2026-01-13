@@ -124,11 +124,21 @@ class DRTR_Gestione_Tours {
         $post_type = get_post_type();
         if ('post.php' === $hook || 'post-new.php' === $hook) {
             if ('drtr_tour' === $post_type) {
+                wp_enqueue_media();
+                
                 wp_enqueue_style(
                     'drtr-admin-css',
                     DRTR_PLUGIN_URL . 'assets/css/admin.css',
                     array(),
                     DRTR_VERSION
+                );
+                
+                wp_enqueue_script(
+                    'drtr-admin-js',
+                    DRTR_PLUGIN_URL . 'assets/js/admin.js',
+                    array('jquery'),
+                    DRTR_VERSION,
+                    true
                 );
             }
         }

@@ -34,6 +34,17 @@
                 }
             });
             
+            // Vista previa de imagen
+            $('#drtr-tour-image').on('change', function(e) {
+                self.previewImage(e.target);
+            });
+            
+            // Eliminar imagen preview
+            $(document).on('click', '.drtr-remove-image', function(e) {
+                e.preventDefault();
+                self.removeImagePreview();
+            });
+            
             // Buscar
             $('#drtr-search-btn').on('click', function() {
                 self.searchQuery = $('#drtr-search-input').val();
@@ -183,11 +194,13 @@
             $('#drtr-modal-title').text(title || 'Añadir Tour');
             $('#drtr-tour-form')[0].reset();
             $('#drtr-tour-id').val('');
+            this.removeImagePreview();
             $('#drtr-tour-modal').fadeIn();
         },
         
         closeModal: function() {
             $('#drtr-tour-modal').fadeOut();
+            this.removeImagePreview();
         },
         
         editTour: function(tourId) {
@@ -219,6 +232,14 @@
                         $('#drtr-tour-includes').val(tour.includes);
                         $('#drtr-tour-not-includes').val(tour.not_includes);
                         
+                        // Mostrar imagen si existe
+                        if (tour.image_url) {
+                            $('#drtr-tour-image-id').val(tour.image_id);
+                            $('#drtr-image-preview img').attr('src', tour.image_url);
+                            $('#drtr-image-preview').show();
+                            $('#drtr-tour-image').hide();
+                        }
+                        
                         self.openModal('Editar Tour');
                     } else {
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
@@ -232,12 +253,19 @@
         
         saveTour: function() {
             const self = this;
-            const formData = $('#drtr-tour-form').serialize();
+            const form = document.getElementById('drtr-tour-form');
+            const formData = new FormData(form);
+            
+            // Agregar action y nonce
+            formData.append('action', 'drtr_save_tour');
+            formData.append('nonce', drtrAjax.nonce);
             
             $.ajax({
                 url: drtrAjax.ajaxurl,
                 type: 'POST',
-                data: formData + '&action=drtr_save_tour&nonce=' + drtrAjax.nonce,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     if (response.success) {
                         self.showMessage(drtrAjax.strings.success_save, 'success');
@@ -293,6 +321,27 @@
             setTimeout(function() {
                 messageDiv.fadeOut();
             }, 3000);
+        },
+        
+        previewImage: function(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    $('#drtr-image-preview img').attr('src', e.target.result);
+                    $('#drtr-image-preview').fadeIn();
+                    $('#drtr-tour-image').hide();
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        },
+        
+        removeImagePreview: function() {
+            $('#drtr-image-preview').fadeOut();
+            $('#drtr-image-preview img').attr('src', '');
+            $('#drtr-tour-image').val('').show();
+            $('#drtr-tour-image-id').val('');
         }
     };
     

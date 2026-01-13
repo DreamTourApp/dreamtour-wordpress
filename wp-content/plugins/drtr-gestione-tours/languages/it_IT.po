@@ -93,6 +93,18 @@ msgstr "Nuovo Nome Tipo"
 msgid "Detalles del Tour"
 msgstr "Dettagli del Tour"
 
+msgid "Locandina (Imagen)"
+msgstr "Locandina (Immagine)"
+
+msgid "Seleccionar Imagen"
+msgstr "Seleziona Immagine"
+
+msgid "Eliminar Imagen"
+msgstr "Elimina Immagine"
+
+msgid "Eliminar imagen"
+msgstr "Elimina immagine"
+
 msgid "Precio (€)"
 msgstr "Prezzo (€)"
 
