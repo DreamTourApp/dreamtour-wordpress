@@ -277,8 +277,13 @@
                 },
                 success: function(response) {
                     console.log('Tour data loaded:', response);
-                    if (response.success && response.data.tour) {
+                    console.log('response.success:', response.success);
+                    console.log('response.data:', response.data);
+                    console.log('response.data.tour:', response.data ? response.data.tour : 'no data');
+                    
+                    if (response.success && response.data && response.data.tour) {
                         const tour = response.data.tour;
+                        console.log('Tour object:', tour);
                         
                         // Rellenar campos del formulario
                         $('#drtr-tour-id').val(tour.id);
@@ -291,6 +296,8 @@
                         $('#drtr-tour-end-date').val(tour.end_date);
                         $('#drtr-tour-transport').val(tour.transport);
                         
+                        console.log('Form fields populated successfully');
+                        
                         // Cargar imagen si existe
                         if (tour.image_url) {
                             $('#drtr-tour-image-id').val(tour.image_id);
@@ -301,7 +308,9 @@
                         
                         // Cargar itinerario
                         self.loadItinerary(tour.itinerary);
+                        console.log('Tour data loaded and form populated!');
                     } else {
+                        console.error('Condition failed - response.success:', response.success, 'response.data:', response.data, 'response.data.tour:', response.data ? response.data.tour : 'no data');
                         self.showMessage(response.data.message || 'Error al cargar el tour', 'error');
                     }
                 },
