@@ -45,8 +45,8 @@
                 self.removeImagePreview();
             });
             
-            // Agregar parada de itinerario
-            $('#drtr-add-itinerary-stop').on('click', function() {
+            // Agregar parada de itinerario (delegado)
+            $(document).on('click', '#drtr-add-itinerary-stop', function() {
                 self.addItineraryStop();
             });
             
@@ -57,7 +57,7 @@
             });
             
             // Actualizar JSON al cambiar valores
-            $(document).on('change', '.drtr-itinerary-stop input, .drtr-itinerary-stop select', function() {
+            $(document).on('change', '.drtr-itinerary-stop input, .drtr-itinerary-stop select, .drtr-itinerary-stop textarea', function() {
                 self.updateItineraryJSON();
             });
             
