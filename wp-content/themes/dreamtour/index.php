@@ -10,6 +10,38 @@ get_header();
 
 <!-- Hero Section -->
 <section class="hero-section">
+    <!-- Hero Slideshow -->
+    <div class="hero-slideshow">
+        <?php
+        $hero_images_path = get_template_directory() . '/assets/images/hero/';
+        $hero_images_url = get_template_directory_uri() . '/assets/images/hero/';
+        
+        // Ottenere tutte le immagini dalla cartella hero
+        $hero_images = array();
+        if (is_dir($hero_images_path)) {
+            $files = scandir($hero_images_path);
+            foreach ($files as $file) {
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                if (in_array($ext, array('jpg', 'jpeg', 'png', 'gif', 'webp'))) {
+                    $hero_images[] = $hero_images_url . $file;
+                }
+            }
+        }
+        
+        // Se non hay imágenes, usar una de respaldo
+        if (empty($hero_images)) {
+            $hero_images[] = get_template_directory_uri() . '/assets/images/default-hero.jpg';
+        }
+        
+        // Renderizar slides
+        foreach ($hero_images as $index => $image_url) :
+        ?>
+            <div class="hero-slide <?php echo $index === 0 ? 'active' : ''; ?>" style="background-image: url('<?php echo esc_url($image_url); ?>');">
+                <div class="hero-overlay"></div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
     <div class="container">
         <div class="hero-content">
             <h1 class="hero-title">
@@ -28,6 +60,23 @@ get_header();
             </div>
         </div>
     </div>
+    
+    <!-- Slideshow Controls -->
+    <?php if (count($hero_images) > 1) : ?>
+    <div class="hero-slideshow-controls">
+        <button class="hero-prev" aria-label="<?php esc_attr_e('Imagen anterior', 'dreamtour'); ?>">
+            <span class="dashicons dashicons-arrow-left-alt2"></span>
+        </button>
+        <button class="hero-next" aria-label="<?php esc_attr_e('Imagen siguiente', 'dreamtour'); ?>">
+            <span class="dashicons dashicons-arrow-right-alt2"></span>
+        </button>
+    </div>
+    <div class="hero-slideshow-dots">
+        <?php foreach ($hero_images as $index => $image) : ?>
+            <button class="hero-dot <?php echo $index === 0 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>" aria-label="<?php echo esc_attr(sprintf(__('Ir a imagen %d', 'dreamtour'), $index + 1)); ?>"></button>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 </section>
 
 <!-- Tours Section -->
