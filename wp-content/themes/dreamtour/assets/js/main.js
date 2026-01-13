@@ -13,6 +13,9 @@
         // Hero Slider
         initHeroSlider();
         
+        // Tour Booking Form
+        initTourBookingForm();
+        
         // Mobile Menu Toggle
         $('.menu-toggle').on('click', function() {
             $(this).toggleClass('active');
@@ -188,6 +191,91 @@
         });
         
     });
+    
+    /**
+     * Tour Booking Form Initialization
+     */
+    function initTourBookingForm() {
+        const $adultsInput = $('#adults');
+        const $childrenInput = $('#children');
+        const pricePerPerson = parseFloat(document.querySelector('[data-price]')?.getAttribute('data-price') || 0);
+        
+        // Get price from the tour-price-box or from hidden data
+        let tourPrice = 0;
+        const priceText = $('.price-amount').text();
+        if (priceText) {
+            tourPrice = parseFloat(priceText.replace('€', '').replace('.', '').replace(',', '.')) || 0;
+        }
+        
+        function updatePriceCalculation() {
+            const adults = parseInt($adultsInput.val()) || 1;
+            const children = parseInt($childrenInput.val()) || 0;
+            const subtotal = (adults + children) * tourPrice;
+            const deposit = subtotal * 0.5;
+            const paymentType = $('input[name="payment-type"]:checked').val();
+            const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
+            
+            $('#subtotal').text('€' + subtotal.toFixed(2).replace('.', ','));
+            $('#deposit').text('€' + deposit.toFixed(2).replace('.', ','));
+            
+            if (paymentType === 'deposit') {
+                $('#total-amount').text('€' + deposit.toFixed(2).replace('.', ','));
+            } else {
+                $('#total-amount').text('€' + subtotal.toFixed(2).replace('.', ','));
+            }
+        }
+        
+        // Quantity controls
+        $('.qty-plus[data-type="adults"]').on('click', function() {
+            $adultsInput.val(parseInt($adultsInput.val()) + 1);
+            updatePriceCalculation();
+        });
+        
+        $('.qty-minus[data-type="adults"]').on('click', function() {
+            const currentVal = parseInt($adultsInput.val());
+            if (currentVal > 1) {
+                $adultsInput.val(currentVal - 1);
+                updatePriceCalculation();
+            }
+        });
+        
+        $('.qty-plus[data-type="children"]').on('click', function() {
+            $childrenInput.val(parseInt($childrenInput.val()) + 1);
+            updatePriceCalculation();
+        });
+        
+        $('.qty-minus[data-type="children"]').on('click', function() {
+            const currentVal = parseInt($childrenInput.val());
+            if (currentVal > 0) {
+                $childrenInput.val(currentVal - 1);
+                updatePriceCalculation();
+            }
+        });
+        
+        // Payment type change
+        $('input[name="payment-type"]').on('change', function() {
+            updatePriceCalculation();
+        });
+        
+        // Book button
+        $('#book-btn').on('click', function(e) {
+            e.preventDefault();
+            const adults = parseInt($adultsInput.val()) || 1;
+            const children = parseInt($childrenInput.val()) || 0;
+            const paymentType = $('input[name="payment-type"]:checked').val();
+            const subtotal = (adults + children) * tourPrice;
+            const deposit = subtotal * 0.5;
+            const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
+            
+            // Aquí puedes redirigir al usuario a la página de pago o mostrar un modal
+            // Por ahora mostramos un mensaje
+            const message = `Adultos: ${adults}, Bambini: ${children}, Totale: €${totalAmount.toFixed(2)}`;
+            alert('Continuare a reserva: ' + message);
+        });
+        
+        // Initial calculation
+        updatePriceCalculation();
+    }
     
     /**
      * Hero Slider Initialization

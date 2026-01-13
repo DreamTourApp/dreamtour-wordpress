@@ -215,6 +215,231 @@
     font-size: 14px;
 }
 
+/* Booking Form Styles */
+.tour-booking-form {
+    margin: var(--spacing-lg) 0;
+}
+
+.tour-booking-form h3 {
+    font-size: 18px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+}
+
+.booking-field {
+    margin-bottom: var(--spacing-md);
+}
+
+.booking-field label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-dark);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.qty-minus,
+.qty-plus {
+    background-color: #f5f5f5;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+}
+
+.qty-minus:hover,
+.qty-plus:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.quantity-control input {
+    flex: 1;
+    border: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 var(--spacing-xs);
+    background-color: white;
+}
+
+.quantity-control input:focus {
+    outline: none;
+}
+
+/* Payment Preview */
+.payment-preview {
+    background-color: #f8f9fa;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.preview-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-medium);
+}
+
+.preview-row.total {
+    border-top: 2px solid white;
+    padding-top: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 16px;
+}
+
+.deposit-amount,
+.total-amount {
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* Payment Options */
+.payment-options {
+    margin: var(--spacing-md) 0;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid #ddd;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.radio-option:hover {
+    border-color: var(--color-primary);
+    background-color: #f8f9fa;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: var(--spacing-sm);
+    cursor: pointer;
+}
+
+.radio-option span {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-dark);
+}
+
+.booking-notice {
+    font-size: 12px;
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+}
+
+#book-btn {
+    margin-top: var(--spacing-md);
+}
+
+/* Tour Details Grid */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.detail-card {
+    background-color: #f8f9fa;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.detail-card svg {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.detail-card h4 {
+    font-size: 14px;
+    color: var(--color-text-medium);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+}
+
+.detail-card p {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* Tour Sections */
+.tour-section {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tour-section h2 {
+    font-size: 24px;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.itinerary-content,
+.includes-list,
+.not-includes-list {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.includes-list,
+.not-includes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.includes-list li,
+.not-includes-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding-left: 0;
+}
+
+.includes-list svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.not-includes-list svg {
+    color: #ff6b6b;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
 /* Page Styles */
 .page-wrapper {
     max-width: 1400px;
