@@ -279,16 +279,15 @@
                     console.log('Tour data loaded:', response);
                     console.log('response.success:', response.success);
                     console.log('response.data:', response.data);
-                    console.log('response.data.tour:', response.data ? response.data.tour : 'no data');
                     
-                    if (response.success && response.data && response.data.tour) {
-                        const tour = response.data.tour;
+                    if (response.success && response.data) {
+                        const tour = response.data;
                         console.log('Tour object:', tour);
                         
                         // Rellenar campos del formulario
                         $('#drtr-tour-id').val(tour.id);
                         $('#drtr-tour-title').val(tour.title);
-                        $('#drtr-tour-description').val(tour.description);
+                        $('#drtr-tour-description').val(tour.content || tour.description);
                         $('#drtr-tour-price').val(tour.price);
                         $('#drtr-tour-duration').val(tour.duration);
                         $('#drtr-tour-location').val(tour.location);
@@ -310,8 +309,8 @@
                         self.loadItinerary(tour.itinerary);
                         console.log('Tour data loaded and form populated!');
                     } else {
-                        console.error('Condition failed - response.success:', response.success, 'response.data:', response.data, 'response.data.tour:', response.data ? response.data.tour : 'no data');
-                        self.showMessage(response.data.message || 'Error al cargar el tour', 'error');
+                        console.error('Condition failed - response.success:', response.success, 'response.data:', response.data);
+                        self.showMessage('Error al cargar el tour', 'error');
                     }
                 },
                 error: function(xhr, status, error) {
