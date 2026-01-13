@@ -452,7 +452,7 @@
 
 .reserved-area-text {
     white-space: nowrap;
-    max-width: 80px;
+    max-width: 110px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
