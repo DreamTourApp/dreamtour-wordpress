@@ -21,13 +21,11 @@ define('DREAMTOUR_THEME_URI', get_template_directory_uri());
  * Configuración del tema
  */
 function dreamtour_setup() {
-    // Soporte para traducciones - Inglés como default
+    // Soporte para traducciones - Italiano como default
     load_theme_textdomain('dreamtour', DREAMTOUR_THEME_DIR . '/languages');
     
-    // Establecer inglés como idioma por defecto
-    if (!get_locale()) {
-        add_filter('locale', 'dreamtour_set_default_locale');
-    }
+    // Sistema de cambio de idioma
+    add_filter('locale', 'dreamtour_set_locale');
     
     // Soporte para título dinámico
     add_theme_support('title-tag');
@@ -526,10 +524,16 @@ function dreamtour_gutenberg_setup() {
 add_action('after_setup_theme', 'dreamtour_gutenberg_setup');
 
 /**
- * Establecer inglés como idioma por defecto
+ * Establecer idioma basado en cookie o italiano por defecto
  */
-function dreamtour_set_default_locale($locale) {
-    return 'en_US';
+function dreamtour_set_locale($locale) {
+    // Verificar si hay cookie de idioma
+    if (isset($_COOKIE['dreamtour_locale'])) {
+        return sanitize_text_field($_COOKIE['dreamtour_locale']);
+    }
+    
+    // Italiano como idioma por defecto
+    return 'it_IT';
 }
 
 /**
