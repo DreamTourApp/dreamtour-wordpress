@@ -1,0 +1,361 @@
+/* DRTR Tours Manager - Frontend Styles */
+
+.drtr-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.drtr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #003284;
+}
+
+.drtr-header h1 {
+    margin: 0;
+    color: #003284;
+    font-size: 28px;
+}
+
+/* Botones */
+.drtr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.drtr-btn-primary {
+    background: #003284;
+    color: #fff;
+}
+
+.drtr-btn-primary:hover {
+    background: #1aabe7;
+}
+
+.drtr-btn-secondary {
+    background: #6c757d;
+    color: #fff;
+}
+
+.drtr-btn-secondary:hover {
+    background: #5a6268;
+}
+
+.drtr-btn-danger {
+    background: #dc3545;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.drtr-btn-danger:hover {
+    background: #c82333;
+}
+
+.drtr-btn-edit {
+    background: #17a2b8;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.drtr-btn-edit:hover {
+    background: #138496;
+}
+
+/* Búsqueda */
+.drtr-search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.drtr-search-box input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Tabla */
+.drtr-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.drtr-table thead {
+    background: #f8f9fa;
+}
+
+.drtr-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #003284;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.drtr-table td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.drtr-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.drtr-table .drtr-loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.drtr-table .drtr-no-tours {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+/* Paginación */
+.drtr-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.drtr-pagination button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.drtr-pagination button:hover:not(:disabled) {
+    background: #003284;
+    color: #fff;
+    border-color: #003284;
+}
+
+.drtr-pagination button.active {
+    background: #003284;
+    color: #fff;
+    border-color: #003284;
+}
+
+.drtr-pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Modal */
+.drtr-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.drtr-modal-content {
+    background-color: #fff;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.drtr-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.drtr-modal-close:hover {
+    color: #000;
+}
+
+#drtr-modal-title {
+    margin-top: 0;
+    color: #003284;
+}
+
+/* Formulario */
+.drtr-form-row {
+    margin-bottom: 20px;
+}
+
+.drtr-form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.drtr-form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.drtr-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.drtr-form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.drtr-form-group input,
+.drtr-form-group select,
+.drtr-form-group textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.drtr-form-group textarea {
+    resize: vertical;
+}
+
+.drtr-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* Mensajes */
+.drtr-message {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    min-width: 300px;
+}
+
+.drtr-message.success {
+    background: #28a745;
+    color: #fff;
+}
+
+.drtr-message.error {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* Badges */
+.drtr-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.drtr-badge-bus {
+    background: #17a2b8;
+    color: #fff;
+}
+
+.drtr-badge-avion {
+    background: #6f42c1;
+    color: #fff;
+}
+
+.drtr-badge-tren {
+    background: #fd7e14;
+    color: #fff;
+}
+
+.drtr-badge-barco {
+    background: #20c997;
+    color: #fff;
+}
+
+.drtr-badge-mixto {
+    background: #6c757d;
+    color: #fff;
+}
+
+/* Error */
+.drtr-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+/* Spinner WordPress */
+.spinner {
+    float: none;
+    margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .drtr-form-row-2,
+    .drtr-form-row-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .drtr-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .drtr-modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .drtr-table {
+        font-size: 12px;
+    }
+    
+    .drtr-table th,
+    .drtr-table td {
+        padding: 8px;
+    }
+}

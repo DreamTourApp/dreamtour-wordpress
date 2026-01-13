@@ -1,0 +1,29 @@
+/* Admin Styles for Tour Meta Box */
+
+.drtr-meta-box-container {
+    padding: 10px 0;
+}
+
+.drtr-meta-box-container .form-table th {
+    width: 200px;
+    padding: 15px 10px;
+}
+
+.drtr-meta-box-container .form-table td {
+    padding: 15px 10px;
+}
+
+.drtr-meta-box-container input[type="text"],
+.drtr-meta-box-container input[type="number"],
+.drtr-meta-box-container input[type="date"],
+.drtr-meta-box-container select,
+.drtr-meta-box-container textarea {
+    width: 100%;
+    max-width: 500px;
+}
+
+.drtr-meta-box-container .description {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
