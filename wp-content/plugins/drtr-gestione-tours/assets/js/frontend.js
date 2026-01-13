@@ -11,7 +11,13 @@
         
         init: function() {
             this.bindEvents();
-            this.loadTours();
+            
+            // Solo cargar tours si no estamos en modo edición
+            const urlParams = new URLSearchParams(window.location.search);
+            if (!urlParams.has('edit_tour')) {
+                this.loadTours();
+            }
+            
             this.checkEditMode();
         },
         
@@ -20,10 +26,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             const editTourId = urlParams.get('edit_tour');
             
+            console.log('checkEditMode called, URL params:', window.location.search);
+            console.log('editTourId:', editTourId);
+            
             if (editTourId) {
                 console.log('Edit mode detected, loading tour:', editTourId);
                 // Cargar datos del tour en la página de edición
                 this.loadTourData(editTourId);
+            } else {
+                console.log('Not in edit mode');
             }
         },
         
