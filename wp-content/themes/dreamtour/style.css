@@ -60,6 +60,20 @@ Tags: travel, tours, modern, responsive, customizable
 }
 
 /* ===================================
+   ANIMACIONES
+   =================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
    RESET Y ESTILOS BASE
    =================================== */
 * {
@@ -290,20 +304,130 @@ a:hover {
    =================================== */
 .hero-section {
   position: relative;
-  min-height: 500px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-white);
   padding: var(--spacing-xxl) 0;
   overflow: hidden;
+}
+
+/* Hero Slideshow */
+.hero-slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 50, 132, 0.7) 0%, rgba(0, 168, 150, 0.6) 100%);
+  z-index: 1;
 }
 
 .hero-content {
   text-align: center;
   max-width: 800px;
   z-index: 2;
+  position: relative;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+/* Slideshow Controls */
+.hero-slideshow-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-prev,
+.hero-next {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  pointer-events: all;
+}
+
+.hero-prev:hover,
+.hero-next:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.hero-prev .dashicons,
+.hero-next .dashicons {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/* Slideshow Dots */
+.hero-slideshow-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.hero-dot:hover,
+.hero-dot.active {
+  background: white;
+  transform: scale(1.2);
 }
 
 .hero-title {
@@ -731,6 +855,16 @@ a:hover {
   .hero-subtitle {
     font-size: 16px;
   }
+  
+  .hero-prev,
+  .hero-next {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .hero-slideshow-dots {
+    bottom: 20px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -749,6 +883,40 @@ a:hover {
   
   .footer-content {
     grid-template-columns: 1fr;
+  }
+  
+  .hero-section {
+    min-height: 400px;
+  }
+  
+  .hero-title {
+    font-size: 24px;
+  }
+  
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .hero-prev,
+  .hero-next {
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+  }
+  
+  .hero-slideshow-dots {
+    bottom: 15px;
+    gap: 8px;
+  }
+  
+  .hero-dot {
+    width: 10px;
+    height: 10px;
   }
 }
 

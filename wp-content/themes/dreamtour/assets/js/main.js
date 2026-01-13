@@ -10,6 +10,9 @@
      */
     $(document).ready(function() {
         
+        // Hero Slider
+        initHeroSlider();
+        
         // Mobile Menu Toggle
         $('.menu-toggle').on('click', function() {
             $(this).toggleClass('active');
@@ -185,6 +188,104 @@
         });
         
     });
+    
+    /**
+     * Hero Slider Initialization
+     */
+    function initHeroSlider() {
+        const $slideshow = $('#heroSlideshow');
+        const $slides = $('.hero-slide');
+        const $dots = $('.hero-dot');
+        const $prevBtn = $('.hero-prev');
+        const $nextBtn = $('.hero-next');
+        
+        if ($slides.length === 0) return;
+        
+        let currentSlide = 0;
+        let slideInterval;
+        const slideDuration = 5000; // Change slide every 5 seconds
+        
+        /**
+         * Show specific slide
+         */
+        function goToSlide(n) {
+            if (n >= $slides.length) {
+                currentSlide = 0;
+            } else if (n < 0) {
+                currentSlide = $slides.length - 1;
+            } else {
+                currentSlide = n;
+            }
+            
+            $slides.removeClass('active');
+            $dots.removeClass('active');
+            
+            $slides.eq(currentSlide).addClass('active');
+            $dots.eq(currentSlide).addClass('active');
+        }
+        
+        /**
+         * Next slide
+         */
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+            resetAutoplay();
+        }
+        
+        /**
+         * Previous slide
+         */
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+            resetAutoplay();
+        }
+        
+        /**
+         * Autoplay slides
+         */
+        function startAutoplay() {
+            slideInterval = setInterval(nextSlide, slideDuration);
+        }
+        
+        /**
+         * Reset autoplay on user interaction
+         */
+        function resetAutoplay() {
+            clearInterval(slideInterval);
+            startAutoplay();
+        }
+        
+        // Event listeners
+        $prevBtn.on('click', prevSlide);
+        $nextBtn.on('click', nextSlide);
+        
+        $dots.on('click', function() {
+            const slideIndex = $(this).data('slide');
+            goToSlide(slideIndex);
+            resetAutoplay();
+        });
+        
+        // Pause autoplay on hover
+        $slideshow.on('mouseenter', function() {
+            clearInterval(slideInterval);
+        });
+        
+        $slideshow.on('mouseleave', function() {
+            startAutoplay();
+        });
+        
+        // Start autoplay
+        startAutoplay();
+        
+        // Keyboard navigation
+        $(document).on('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+    }
     
     /**
      * Window Load
