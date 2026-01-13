@@ -115,6 +115,22 @@ class DRTR_Gestione_Tours {
                     'error' => __('Ha ocurrido un error. Por favor, intenta de nuevo.', 'drtr-tours'),
                     'success_save' => __('Tour guardado correctamente', 'drtr-tours'),
                     'success_delete' => __('Tour eliminado correctamente', 'drtr-tours'),
+                    'itinerary_place' => __('Lugar', 'drtr-tours'),
+                    'itinerary_place_placeholder' => __('Ej: Milán', 'drtr-tours'),
+                    'itinerary_type' => __('Tipo', 'drtr-tours'),
+                    'itinerary_arrival' => __('Llegada', 'drtr-tours'),
+                    'itinerary_departure' => __('Salida', 'drtr-tours'),
+                    'itinerary_notes' => __('Notas', 'drtr-tours'),
+                    'itinerary_notes_placeholder' => __('Descripción de la parada...', 'drtr-tours'),
+                    'type_city' => __('Ciudad', 'drtr-tours'),
+                    'type_train' => __('Tren', 'drtr-tours'),
+                    'type_bus' => __('Bus', 'drtr-tours'),
+                    'type_plane' => __('Avión', 'drtr-tours'),
+                    'type_boat' => __('Barco', 'drtr-tours'),
+                    'type_hotel' => __('Hotel', 'drtr-tours'),
+                    'type_visit' => __('Visita', 'drtr-tours'),
+                    'type_food' => __('Comida', 'drtr-tours'),
+                    'type_activity' => __('Actividad', 'drtr-tours'),
                 )
             ));
         }

@@ -248,3 +248,51 @@ msgstr "¿Estás seguro de eliminar este tour?"
 
 msgid "Ha ocurrido un error. Por favor, intenta de nuevo."
 msgstr "Ha ocurrido un error. Por favor, intenta de nuevo."
+
+msgid "Lugar"
+msgstr "Lugar"
+
+msgid "Ej: Milán"
+msgstr "Ej: Milán"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Llegada"
+msgstr "Llegada"
+
+msgid "Salida"
+msgstr "Salida"
+
+msgid "Notas"
+msgstr "Notas"
+
+msgid "Descripción de la parada..."
+msgstr "Descripción de la parada..."
+
+msgid "Ciudad"
+msgstr "Ciudad"
+
+msgid "Tren"
+msgstr "Tren"
+
+msgid "Bus"
+msgstr "Bus"
+
+msgid "Avión"
+msgstr "Avión"
+
+msgid "Barco"
+msgstr "Barco"
+
+msgid "Hotel"
+msgstr "Hotel"
+
+msgid "Visita"
+msgstr "Visita"
+
+msgid "Comida"
+msgstr "Comida"
+
+msgid "Actividad"
+msgstr "Actividad"

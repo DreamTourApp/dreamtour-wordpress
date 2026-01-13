@@ -248,3 +248,39 @@ msgstr "Sei sicuro di eliminare questo tour?"
 
 msgid "Ha ocurrido un error. Por favor, intenta de nuevo."
 msgstr "Si è verificato un errore. Riprova per favore."
+
+msgid "Lugar"
+msgstr "Luogo"
+
+msgid "Ej: Milán"
+msgstr "Es: Milano"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Llegada"
+msgstr "Arrivo"
+
+msgid "Salida"
+msgstr "Partenza"
+
+msgid "Notas"
+msgstr "Note"
+
+msgid "Descripción de la parada..."
+msgstr "Descrizione della tappa..."
+
+msgid "Ciudad"
+msgstr "Città"
+
+msgid "Hotel"
+msgstr "Hotel"
+
+msgid "Visita"
+msgstr "Visita"
+
+msgid "Comida"
+msgstr "Pranzo"
+
+msgid "Actividad"
+msgstr "Attività"

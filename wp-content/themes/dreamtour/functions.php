@@ -596,7 +596,7 @@ function dreamtour_language_switcher() {
 }
 
 /**
- * Cambiar idioma basado en parámetro URL
+ * Cambiar idioma basado en parámetro URL y redirigir a URL limpia
  */
 function dreamtour_switch_language() {
     if (isset($_GET['lang'])) {
@@ -611,6 +611,24 @@ function dreamtour_switch_language() {
         if (isset($locale_map[$lang])) {
             setcookie('dreamtour_locale', $locale_map[$lang], time() + (86400 * 30), '/');
             $_COOKIE['dreamtour_locale'] = $locale_map[$lang];
+            
+            // Obtener URL actual sin el parámetro lang
+            $redirect_url = remove_query_arg('lang');
+            
+            // Si hay otros parámetros, preservarlos
+            if (strpos($redirect_url, '?') === false && !empty($_SERVER['QUERY_STRING'])) {
+                $query_string = str_replace('lang=' . $lang, '', $_SERVER['QUERY_STRING']);
+                $query_string = str_replace('&&', '&', $query_string);
+                $query_string = trim($query_string, '&');
+                
+                if (!empty($query_string)) {
+                    $redirect_url .= '?' . $query_string;
+                }
+            }
+            
+            // Redirigir a URL limpia
+            wp_safe_redirect($redirect_url);
+            exit;
         }
     }
 }

@@ -373,6 +373,7 @@
             console.log('addItineraryStop llamado', data);
             data = data || {};
             const stopIndex = $('.drtr-itinerary-stop').length;
+            const strings = drtrAjax.strings;
             const stopHtml = `
                 <div class="drtr-itinerary-stop" data-index="${stopIndex}">
                     <div class="drtr-stop-header">
@@ -383,34 +384,34 @@
                     </div>
                     <div class="drtr-stop-fields">
                         <div class="drtr-stop-field">
-                            <label>Lugar</label>
-                            <input type="text" class="drtr-stop-name" placeholder="Ej: Milán" value="${data.name || ''}">
+                            <label>${strings.itinerary_place}</label>
+                            <input type="text" class="drtr-stop-name" placeholder="${strings.itinerary_place_placeholder}" value="${data.name || ''}">
                         </div>
                         <div class="drtr-stop-field">
-                            <label>Tipo</label>
+                            <label>${strings.itinerary_type}</label>
                             <select class="drtr-stop-icon">
-                                <option value="city" ${data.icon === 'city' ? 'selected' : ''}>🏙️ Ciudad</option>
-                                <option value="train" ${data.icon === 'train' ? 'selected' : ''}>🚂 Tren</option>
-                                <option value="bus" ${data.icon === 'bus' ? 'selected' : ''}>🚌 Bus</option>
-                                <option value="plane" ${data.icon === 'plane' ? 'selected' : ''}>✈️ Avión</option>
-                                <option value="boat" ${data.icon === 'boat' ? 'selected' : ''}>🚢 Barco</option>
-                                <option value="hotel" ${data.icon === 'hotel' ? 'selected' : ''}>🏨 Hotel</option>
-                                <option value="visit" ${data.icon === 'visit' ? 'selected' : ''}>👁️ Visita</option>
-                                <option value="food" ${data.icon === 'food' ? 'selected' : ''}>🍽️ Comida</option>
-                                <option value="activity" ${data.icon === 'activity' ? 'selected' : ''}>🎯 Actividad</option>
+                                <option value="city" ${data.icon === 'city' ? 'selected' : ''}>🏙️ ${strings.type_city}</option>
+                                <option value="train" ${data.icon === 'train' ? 'selected' : ''}>🚂 ${strings.type_train}</option>
+                                <option value="bus" ${data.icon === 'bus' ? 'selected' : ''}>🚌 ${strings.type_bus}</option>
+                                <option value="plane" ${data.icon === 'plane' ? 'selected' : ''}>✈️ ${strings.type_plane}</option>
+                                <option value="boat" ${data.icon === 'boat' ? 'selected' : ''}>🚢 ${strings.type_boat}</option>
+                                <option value="hotel" ${data.icon === 'hotel' ? 'selected' : ''}>🏨 ${strings.type_hotel}</option>
+                                <option value="visit" ${data.icon === 'visit' ? 'selected' : ''}>👁️ ${strings.type_visit}</option>
+                                <option value="food" ${data.icon === 'food' ? 'selected' : ''}>🍽️ ${strings.type_food}</option>
+                                <option value="activity" ${data.icon === 'activity' ? 'selected' : ''}>🎯 ${strings.type_activity}</option>
                             </select>
                         </div>
                         <div class="drtr-stop-field">
-                            <label>Llegada</label>
+                            <label>${strings.itinerary_arrival}</label>
                             <input type="datetime-local" class="drtr-stop-arrival" value="${data.arrival || ''}">
                         </div>
                         <div class="drtr-stop-field">
-                            <label>Salida</label>
+                            <label>${strings.itinerary_departure}</label>
                             <input type="datetime-local" class="drtr-stop-departure" value="${data.departure || ''}">
                         </div>
                         <div class="drtr-stop-field drtr-stop-field-full">
-                            <label>Notas</label>
-                            <textarea class="drtr-stop-notes" rows="2" placeholder="Descripción de la parada...">${data.notes || ''}</textarea>
+                            <label>${strings.itinerary_notes}</label>
+                            <textarea class="drtr-stop-notes" rows="2" placeholder="${strings.itinerary_notes_placeholder}">${data.notes || ''}</textarea>
                         </div>
                     </div>
                 </div>
