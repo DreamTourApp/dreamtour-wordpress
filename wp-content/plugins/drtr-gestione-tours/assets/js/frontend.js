@@ -368,7 +368,9 @@
             $('#drtr-tour-image').val('').show();
             $('#drtr-tour-image-id').val('');
         },
-        ole.log('addItineraryStop llamado', data);
+        
+        addItineraryStop: function(data) {
+            console.log('addItineraryStop llamado', data);
             data = data || {};
             const stopIndex = $('.drtr-itinerary-stop').length;
             const stopHtml = `
@@ -414,9 +416,7 @@
                 </div>
             `;
             
-            console.log('Añadiendo parada al contenedor');    </div>
-            `;
-            
+            console.log('Añadiendo parada al contenedor');
             $('#drtr-itinerary-container').append(stopHtml);
             this.updateItineraryJSON();
         },
