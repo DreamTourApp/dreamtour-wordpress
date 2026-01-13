@@ -56,9 +56,13 @@ class DRTR_Ajax_Handler {
                 $query->the_post();
                 $post_id = get_the_ID();
                 
+                $image_id = get_post_meta($post_id, '_drtr_image_id', true);
+                $image_url = $image_id ? wp_get_attachment_url($image_id) : '';
+                
                 $tours[] = array(
                     'id' => $post_id,
                     'title' => get_the_title(),
+                    'image_url' => $image_url,
                     'price' => get_post_meta($post_id, '_drtr_price', true),
                     'duration' => get_post_meta($post_id, '_drtr_duration', true),
                     'transport_type' => get_post_meta($post_id, '_drtr_transport_type', true),

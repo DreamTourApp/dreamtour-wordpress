@@ -105,16 +105,16 @@ class DRTR_Meta_Boxes {
                 </tr>
                 
                 <tr>
-                    <th><label for="drtr_start_date"><?php _e('Fecha de Inicio', 'drtr-tours'); ?></label></th>
+                    <th><label for="drtr_start_date"><?php _e('Fecha y Hora de Inicio', 'drtr-tours'); ?></label></th>
                     <td>
-                        <input type="date" id="drtr_start_date" name="drtr_start_date" value="<?php echo esc_attr($start_date); ?>" class="regular-text">
+                        <input type="datetime-local" id="drtr_start_date" name="drtr_start_date" value="<?php echo esc_attr($start_date); ?>" class="regular-text">
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="drtr_end_date"><?php _e('Fecha de Fin', 'drtr-tours'); ?></label></th>
+                    <th><label for="drtr_end_date"><?php _e('Fecha y Hora de Fin', 'drtr-tours'); ?></label></th>
                     <td>
-                        <input type="date" id="drtr_end_date" name="drtr_end_date" value="<?php echo esc_attr($end_date); ?>" class="regular-text">
+                        <input type="datetime-local" id="drtr_end_date" name="drtr_end_date" value="<?php echo esc_attr($end_date); ?>" class="regular-text">
                     </td>
                 </tr>
                 

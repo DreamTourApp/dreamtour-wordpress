@@ -315,6 +315,120 @@
     transition: color 0.2s ease;
 }
 
+/* Itinerario */
+.drtr-itinerary-container {
+    margin-bottom: 15px;
+}
+
+.drtr-itinerary-stop {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.drtr-stop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.drtr-stop-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: #003284;
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #003284;
+}
+
+.drtr-remove-stop {
+    background: #fff;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.drtr-remove-stop:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+.drtr-stop-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.drtr-stop-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.drtr-stop-field-full {
+    grid-column: 1 / -1;
+}
+
+.drtr-stop-field label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #495057;
+    font-size: 13px;
+}
+
+.drtr-stop-field input,
+.drtr-stop-field select,
+.drtr-stop-field textarea {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.drtr-stop-field textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.drtr-stop-icon {
+    font-size: 14px;
+}
+
+/* Thumbnail en tabla */
+.drtr-image-cell {
+    width: 60px;
+    text-align: center;
+}
+
+.drtr-tour-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.drtr-no-image {
+    font-size: 40px;
+    color: #ccc;
+}
+
 .drtr-modal-actions {
     display: flex;
     justify-content: flex-end;

@@ -45,6 +45,22 @@
                 self.removeImagePreview();
             });
             
+            // Agregar parada de itinerario
+            $('#drtr-add-itinerary-stop').on('click', function() {
+                self.addItineraryStop();
+            });
+            
+            // Eliminar parada de itinerario
+            $(document).on('click', '.drtr-remove-stop', function() {
+                $(this).closest('.drtr-itinerary-stop').remove();
+                self.updateItineraryJSON();
+            });
+            
+            // Actualizar JSON al cambiar valores
+            $(document).on('change', '.drtr-itinerary-stop input, .drtr-itinerary-stop select', function() {
+                self.updateItineraryJSON();
+            });
+            
             // Buscar
             $('#drtr-search-btn').on('click', function() {
                 self.searchQuery = $('#drtr-search-input').val();
@@ -111,21 +127,22 @@
             tbody.empty();
             
             if (tours.length === 0) {
-                tbody.html('<tr><td colspan="8" class="drtr-no-tours">No se encontraron tours</td></tr>');
+                tbody.html('<tr><td colspan="9" class="drtr-no-tours">No se encontraron tours</td></tr>');
                 return;
             }
             
             tours.forEach(function(tour) {
-                const transportBadge = tour.transport_type ? 
-                    `<span class="drtr-badge drtr-badge-${tour.transport_type}">${tour.transport_type}</span>` : '-';
+                const imageThumb = tour.image_url ? 
+                    `<img src="${tour.image_url}" alt="${tour.title}" class="drtr-tour-thumb">` : 
+                    '<span class="dashicons dashicons-format-image drtr-no-image"></span>';
                 
                 const row = `
                     <tr>
+                        <td class="drtr-image-cell">${imageThumb}</td>
                         <td>${tour.id}</td>
                         <td><strong>${tour.title}</strong></td>
                         <td>${tour.price ? '€' + parseFloat(tour.price).toFixed(2) : '-'}</td>
                         <td>${tour.duration ? tour.duration + ' días' : '-'}</td>
-                        <td>${transportBadge}</td>
                         <td>${tour.location || '-'}</td>
                         <td>${tour.start_date || '-'}</td>
                         <td>
@@ -195,12 +212,15 @@
             $('#drtr-tour-form')[0].reset();
             $('#drtr-tour-id').val('');
             this.removeImagePreview();
+            $('#drtr-itinerary-container').empty();
+            $('#drtr-tour-itinerary').val('');
             $('#drtr-tour-modal').fadeIn();
         },
         
         closeModal: function() {
             $('#drtr-tour-modal').fadeOut();
             this.removeImagePreview();
+            $('#drtr-itinerary-container').empty();
         },
         
         editTour: function(tourId) {
@@ -239,6 +259,9 @@
                             $('#drtr-image-preview').show();
                             $('#drtr-tour-image').hide();
                         }
+                        
+                        // Cargar itinerario
+                        self.loadItinerary(tour.itinerary);
                         
                         self.openModal('Editar Tour');
                     } else {
@@ -342,6 +365,85 @@
             $('#drtr-image-preview img').attr('src', '');
             $('#drtr-tour-image').val('').show();
             $('#drtr-tour-image-id').val('');
+        },
+        
+        addItineraryStop: function(data) {
+            const stopIndex = $('.drtr-itinerary-stop').length;
+            const stopHtml = `
+                <div class="drtr-itinerary-stop" data-index="${stopIndex}">
+                    <div class="drtr-stop-header">
+                        <span class="drtr-stop-number">${stopIndex + 1}</span>
+                        <button type="button" class="drtr-remove-stop">
+                            <span class="dashicons dashicons-no-alt"></span>
+                        </button>
+                    </div>
+                    <div class="drtr-stop-fields">
+                        <div class="drtr-stop-field">
+                            <label>Lugar</label>
+                            <input type="text" class="drtr-stop-name" placeholder="Ej: Milán" value="${data?.name || ''}">
+                        </div>
+                        <div class="drtr-stop-field">
+                            <label>Tipo</label>
+                            <select class="drtr-stop-icon">
+                                <option value="city" ${data?.icon === 'city' ? 'selected' : ''}>🏙️ Ciudad</option>
+                                <option value="train" ${data?.icon === 'train' ? 'selected' : ''}>🚂 Tren</option>
+                                <option value="bus" ${data?.icon === 'bus' ? 'selected' : ''}>🚌 Bus</option>
+                                <option value="plane" ${data?.icon === 'plane' ? 'selected' : ''}>✈️ Avión</option>
+                                <option value="boat" ${data?.icon === 'boat' ? 'selected' : ''}>🚢 Barco</option>
+                                <option value="hotel" ${data?.icon === 'hotel' ? 'selected' : ''}>🏨 Hotel</option>
+                                <option value="visit" ${data?.icon === 'visit' ? 'selected' : ''}>👁️ Visita</option>
+                                <option value="food" ${data?.icon === 'food' ? 'selected' : ''}>🍽️ Comida</option>
+                                <option value="activity" ${data?.icon === 'activity' ? 'selected' : ''}>🎯 Actividad</option>
+                            </select>
+                        </div>
+                        <div class="drtr-stop-field">
+                            <label>Llegada</label>
+                            <input type="datetime-local" class="drtr-stop-arrival" value="${data?.arrival || ''}">
+                        </div>
+                        <div class="drtr-stop-field">
+                            <label>Salida</label>
+                            <input type="datetime-local" class="drtr-stop-departure" value="${data?.departure || ''}">
+                        </div>
+                        <div class="drtr-stop-field drtr-stop-field-full">
+                            <label>Notas</label>
+                            <textarea class="drtr-stop-notes" rows="2" placeholder="Descripción de la parada...">${data?.notes || ''}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('#drtr-itinerary-container').append(stopHtml);
+            this.updateItineraryJSON();
+        },
+        
+        updateItineraryJSON: function() {
+            const stops = [];
+            $('.drtr-itinerary-stop').each(function(index) {
+                const $stop = $(this);
+                stops.push({
+                    order: index + 1,
+                    name: $stop.find('.drtr-stop-name').val(),
+                    icon: $stop.find('.drtr-stop-icon').val(),
+                    arrival: $stop.find('.drtr-stop-arrival').val(),
+                    departure: $stop.find('.drtr-stop-departure').val(),
+                    notes: $stop.find('.drtr-stop-notes').val()
+                });
+            });
+            
+            $('#drtr-tour-itinerary').val(JSON.stringify(stops));
+        },
+        
+        loadItinerary: function(itineraryJSON) {
+            $('#drtr-itinerary-container').empty();
+            
+            if (itineraryJSON) {
+                try {
+                    const stops = JSON.parse(itineraryJSON);
+                    stops.forEach(stop => this.addItineraryStop(stop));
+                } catch(e) {
+                    console.error('Error parsing itinerary:', e);
+                }
+            }
         }
     };
     

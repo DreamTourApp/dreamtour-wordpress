@@ -80,11 +80,11 @@ class DRTR_Frontend {
                 <table id="drtr-tours-table" class="drtr-table">
                     <thead>
                         <tr>
+                            <th><?php _e('Imagen', 'drtr-tours'); ?></th>
                             <th><?php _e('ID', 'drtr-tours'); ?></th>
                             <th><?php _e('Título', 'drtr-tours'); ?></th>
                             <th><?php _e('Precio', 'drtr-tours'); ?></th>
                             <th><?php _e('Duración', 'drtr-tours'); ?></th>
-                            <th><?php _e('Transporte', 'drtr-tours'); ?></th>
                             <th><?php _e('Ubicación', 'drtr-tours'); ?></th>
                             <th><?php _e('Fecha Inicio', 'drtr-tours'); ?></th>
                             <th><?php _e('Acciones', 'drtr-tours'); ?></th>
@@ -92,7 +92,7 @@ class DRTR_Frontend {
                     </thead>
                     <tbody id="drtr-tours-tbody">
                         <tr>
-                            <td colspan="8" class="drtr-loading">
+                            <td colspan="9" class="drtr-loading">
                                 <span class="spinner is-active"></span>
                                 <?php _e('Cargando tours...', 'drtr-tours'); ?>
                             </td>
@@ -165,20 +165,22 @@ class DRTR_Frontend {
                             </div>
                         </div>
                         
-                        <div class="drtr-form-row drtr-form-row-3">
+                        <div class="drtr-form-row drtr-form-row-2">
                             <div class="drtr-form-group">
-                                <label for="drtr-tour-location"><?php _e('Ubicación', 'drtr-tours'); ?></label>
+                                <label for="drtr-tour-start-date"><?php _e('Fecha y Hora Inicio', 'drtr-tours'); ?></label>
+                                <input type="datetime-local" id="drtr-tour-start-date" name="start_date">
+                            </div>
+                            
+                            <div class="drtr-form-group">
+                                <label for="drtr-tour-end-date"><?php _e('Fecha y Hora Fin', 'drtr-tours'); ?></label>
+                                <input type="datetime-local" id="drtr-tour-end-date" name="end_date">
+                            </div>
+                        </div>
+                        
+                        <div class="drtr-form-row">
+                            <div class="drtr-form-group">
+                                <label for="drtr-tour-location"><?php _e('Ubicación Principal', 'drtr-tours'); ?></label>
                                 <input type="text" id="drtr-tour-location" name="location">
-                            </div>
-                            
-                            <div class="drtr-form-group">
-                                <label for="drtr-tour-start-date"><?php _e('Fecha Inicio', 'drtr-tours'); ?></label>
-                                <input type="date" id="drtr-tour-start-date" name="start_date">
-                            </div>
-                            
-                            <div class="drtr-form-group">
-                                <label for="drtr-tour-end-date"><?php _e('Fecha Fin', 'drtr-tours'); ?></label>
-                                <input type="date" id="drtr-tour-end-date" name="end_date">
                             </div>
                         </div>
                         
@@ -205,6 +207,19 @@ class DRTR_Frontend {
                             <div class="drtr-form-group">
                                 <label for="drtr-tour-not-includes"><?php _e('Qué NO Incluye', 'drtr-tours'); ?></label>
                                 <textarea id="drtr-tour-not-includes" name="not_includes" rows="4" placeholder="<?php esc_attr_e('Un elemento por línea', 'drtr-tours'); ?>"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Itinerario -->
+                        <div class="drtr-form-row">
+                            <div class="drtr-form-group">
+                                <label><?php _e('Itinerario del Tour', 'drtr-tours'); ?></label>
+                                <div id="drtr-itinerary-container" class="drtr-itinerary-container"></div>
+                                <button type="button" id="drtr-add-itinerary-stop" class="drtr-btn drtr-btn-secondary">
+                                    <span class="dashicons dashicons-plus"></span>
+                                    <?php _e('Agregar Parada', 'drtr-tours'); ?>
+                                </button>
+                                <input type="hidden" id="drtr-tour-itinerary" name="itinerary">
                             </div>
                         </div>
                         
