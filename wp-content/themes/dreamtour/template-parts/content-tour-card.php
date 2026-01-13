@@ -1,3 +1,4 @@
+<?php
 /**
  * Template part: Tour Card
  * 

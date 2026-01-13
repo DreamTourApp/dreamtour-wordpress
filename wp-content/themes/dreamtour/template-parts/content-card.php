@@ -1,3 +1,4 @@
+<?php
 /**
  * Template part: Blog Card
  * 
