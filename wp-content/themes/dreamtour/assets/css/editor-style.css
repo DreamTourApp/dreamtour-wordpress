@@ -1,0 +1,83 @@
+/* Estilos para el Editor de Bloques de WordPress */
+
+/* Variables - deben coincidir con el tema */
+:root {
+    --color-primary: #003284;
+    --color-primary-light: #1aabe7;
+    --color-primary-lighter: #46c7f0;
+    --color-secondary: #082a5b;
+    --color-accent: #1ba4ce;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Tipografía del editor */
+.editor-styles-wrapper {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.editor-styles-wrapper h1 {
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.editor-styles-wrapper h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.editor-styles-wrapper h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.editor-styles-wrapper p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Enlaces */
+.editor-styles-wrapper a {
+    color: var(--color-primary-light);
+}
+
+.editor-styles-wrapper a:hover {
+    color: var(--color-primary);
+}
+
+/* Botones */
+.editor-styles-wrapper .wp-block-button__link {
+    background-color: var(--color-primary);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* Imágenes */
+.editor-styles-wrapper .wp-block-image {
+    margin: 24px 0;
+}
+
+.editor-styles-wrapper .wp-block-image img {
+    border-radius: 8px;
+}
+
+/* Citas */
+.editor-styles-wrapper .wp-block-quote {
+    border-left: 4px solid var(--color-primary-light);
+    padding-left: 24px;
+    font-style: italic;
+}
+
+/* Listas */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+    padding-left: 32px;
+}

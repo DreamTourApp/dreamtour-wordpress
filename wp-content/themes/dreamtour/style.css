@@ -1,0 +1,652 @@
+/*
+Theme Name: DreamTour
+Theme URI: https://dreamtourviaggi.it
+Author: DreamTour Team
+Author URI: https://dreamtourviaggi.it
+Description: Un tema moderno para viajes de grupo inspirado en WeRoad, con diseño limpio y funcional
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: dreamtour
+Tags: travel, tours, modern, responsive, customizable
+*/
+
+/* ===================================
+   VARIABLES CSS
+   =================================== */
+:root {
+  /* Colores Principales */
+  --color-primary: #003284;
+  --color-primary-light: #1aabe7;
+  --color-primary-lighter: #46c7f0;
+  --color-secondary: #082a5b;
+  --color-accent: #1ba4ce;
+  --color-white: #ffffff;
+  
+  /* Colores de Texto */
+  --color-text-dark: #1a1a1a;
+  --color-text-medium: #666666;
+  --color-text-light: #999999;
+  
+  /* Tipografía - Poppins */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-h1: 34px;
+  --font-h2: 22px;
+  --font-h3: 18px;
+  --font-body: 14px;
+  --font-description: 14px;
+  
+  /* Espaciado */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 64px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  
+  /* Transiciones */
+  --transition: all 0.3s ease;
+}
+
+/* ===================================
+   RESET Y ESTILOS BASE
+   =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================
+   TIPOGRAFÍA
+   =================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-dark);
+}
+
+h1 {
+  font-size: var(--font-h1);
+  font-weight: 900; /* Poppins Black */
+}
+
+h2 {
+  font-size: var(--font-h2);
+  font-weight: 700; /* Poppins Bold */
+}
+
+h3 {
+  font-size: var(--font-h3);
+  font-weight: 600; /* Poppins SemiBold */
+}
+
+p {
+  font-size: var(--font-body);
+  font-weight: 400; /* Poppins Regular */
+  margin-bottom: var(--spacing-sm);
+}
+
+.description, .text-light {
+  font-size: var(--font-description);
+  font-weight: 300; /* Poppins Light */
+  color: var(--color-text-medium);
+}
+
+a {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* ===================================
+   LAYOUT PRINCIPAL
+   =================================== */
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-full {
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+/* ===================================
+   HEADER
+   =================================== */
+.site-header {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) 0;
+}
+
+.site-logo {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.site-logo:hover {
+  color: var(--color-primary-light);
+}
+
+/* ===================================
+   NAVEGACIÓN
+   =================================== */
+.main-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-md);
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  font-size: var(--font-body);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  transition: var(--transition);
+}
+
+.nav-menu a:hover {
+  color: var(--color-primary-light);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* ===================================
+   BOTONES
+   =================================== */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: var(--font-body);
+  font-weight: 600;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--color-primary-light);
+  color: var(--color-white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+.hero-section {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  padding: var(--spacing-xxl) 0;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-white);
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-white);
+  opacity: 0.95;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===================================
+   CARDS DE TOURS
+   =================================== */
+.tours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-xl) 0;
+}
+
+.tour-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.tour-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tour-card-image {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.tour-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.tour-card:hover .tour-card-image img {
+  transform: scale(1.05);
+}
+
+.tour-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tour-card-content {
+  padding: var(--spacing-md);
+}
+
+.tour-meta {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  font-size: 12px;
+  color: var(--color-text-medium);
+}
+
+.tour-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tour-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-dark);
+}
+
+.tour-description {
+  font-size: var(--font-description);
+  font-weight: 300;
+  color: var(--color-text-medium);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+}
+
+.tour-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid #e0e0e0;
+}
+
+.tour-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.tour-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--color-text-medium);
+}
+
+/* ===================================
+   SECCIONES DE CONTENIDO
+   =================================== */
+.content-section {
+  padding: var(--spacing-xxl) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--color-text-medium);
+}
+
+/* ===================================
+   FEATURES SECTION
+   =================================== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.feature-item {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+}
+
+.feature-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-lighter));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: var(--color-white);
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.feature-description {
+  font-size: var(--font-description);
+  font-weight: 300;
+  color: var(--color-text-medium);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+.site-footer {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: var(--spacing-xxl) 0 var(--spacing-md);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-section h3 {
+  color: var(--color-white);
+  margin-bottom: var(--spacing-md);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.footer-section a:hover {
+  color: var(--color-primary-lighter);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 968px) {
+  :root {
+    --font-h1: 28px;
+    --font-h2: 20px;
+    --font-h3: 16px;
+  }
+  
+  .nav-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    flex-direction: column;
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-menu.active {
+    display: flex;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .tours-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container,
+  .container-wide {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .tours-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================
+   UTILIDADES
+   =================================== */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-light { background-color: #f8f9fa; }
+
+.color-white { color: var(--color-white); }
+.color-primary { color: var(--color-primary); }
