@@ -5,11 +5,14 @@
 (function($) {
     'use strict';
     
+    console.log('DRTR Frontend JS loaded');
+    
     const DrtrToursManager = {
         currentPage: 1,
         searchQuery: '',
         
         init: function() {
+            console.log('DrtrToursManager.init() called');
             this.bindEvents();
             
             // Solo cargar tours si no estamos en modo edición
@@ -563,8 +566,15 @@
     
     // Inicializar cuando el DOM esté listo
     $(document).ready(function() {
-        if ($('#drtr-tours-manager').length) {
+        console.log('Document ready');
+        console.log('#drtr-tours-manager exists:', $('#drtr-tours-manager').length > 0);
+        console.log('#drtr-edit-tour-page exists:', $('#drtr-edit-tour-page').length > 0);
+        
+        if ($('#drtr-tours-manager').length || $('#drtr-edit-tour-page').length) {
+            console.log('Initializing DrtrToursManager');
             DrtrToursManager.init();
+        } else {
+            console.log('No DRTR container found, skipping initialization');
         }
     });
     
