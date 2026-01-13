@@ -725,3 +725,23 @@ function dreamtour_customize_whatsapp($wp_customize) {
     ));
 }
 add_action('customize_register', 'dreamtour_customize_whatsapp');
+/**
+ * Get logged-in user display name (truncated)
+ * 
+ * @param int $max_length Maximum characters before truncation
+ * @return string User display name or "Area Riservata"
+ */
+function dreamtour_get_user_display_name($max_length = 6) {
+    if (!is_user_logged_in()) {
+        return __('Area Riservata', 'dreamtour');
+    }
+    
+    $current_user = wp_get_current_user();
+    $display_name = !empty($current_user->display_name) ? $current_user->display_name : $current_user->user_login;
+    
+    if (strlen($display_name) > $max_length) {
+        return substr($display_name, 0, $max_length) . '...';
+    }
+    
+    return $display_name;
+}

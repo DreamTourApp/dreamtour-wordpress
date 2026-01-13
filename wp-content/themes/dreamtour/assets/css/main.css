@@ -452,6 +452,10 @@
 
 .reserved-area-text {
     white-space: nowrap;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 .header-search {
