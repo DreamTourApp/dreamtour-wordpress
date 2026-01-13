@@ -15,13 +15,9 @@
             <div class="header-inner">
                 <!-- Logo -->
                 <div class="site-branding">
-                    <?php if (has_custom_logo()) : ?>
-                        <?php the_custom_logo(); ?>
-                    <?php else : ?>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="header-logo">
-                        </a>
-                    <?php endif; ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logos/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="header-logo">
+                    </a>
                 </div>
                 
                 <!-- Navigation -->
