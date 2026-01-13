@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 /**
  * Define constantes del tema
  */
-define('DREAMTOUR_VERSION', '1.0.0');
+define('DREAMTOUR_VERSION', '1.0.' . time());
 define('DREAMTOUR_THEME_DIR', get_template_directory());
 define('DREAMTOUR_THEME_URI', get_template_directory_uri());
 

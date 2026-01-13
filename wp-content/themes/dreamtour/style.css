@@ -4,7 +4,7 @@ Theme URI: https://dreamtourviaggi.it
 Author: DreamTour Team
 Author URI: https://dreamtourviaggi.it
 Description: Un tema moderno para viajes de grupo inspirado en WeRoad, con diseño limpio y funcional
-Version: 1.0.0
+Version: 1.0.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: dreamtour
@@ -585,7 +585,7 @@ a:hover {
 /* Header Branding & Logo */
 .site-branding {
   width: 100%;
-  
+
 }
 
 .header-logo {
