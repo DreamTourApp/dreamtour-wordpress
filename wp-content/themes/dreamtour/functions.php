@@ -617,17 +617,6 @@ function dreamtour_switch_language() {
 add_action('init', 'dreamtour_switch_language');
 
 /**
- * Aplicar idioma seleccionado
- */
-function dreamtour_set_locale($locale) {
-    if (isset($_COOKIE['dreamtour_locale'])) {
-        return sanitize_text_field($_COOKIE['dreamtour_locale']);
-    }
-    return $locale;
-}
-add_filter('locale', 'dreamtour_set_locale');
-
-/**
  * Botón flotante de WhatsApp
  */
 function dreamtour_whatsapp_button() {
