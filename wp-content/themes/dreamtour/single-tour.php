@@ -53,22 +53,22 @@ while (have_posts()) :
                                 <!-- Quick Meta Info -->
                                 <div class="tour-meta-list">
                                     <?php if ($tour_location) : ?>
-                                        <div class="tour-meta-item">
+                                          <?php _e('Coordinador incluido', 'dreamtour'); ?>
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                <circle cx="12" cy="10" r="3"></circle>
+                                          <?php _e('Seguro médico y de equipaje', 'dreamtour'); ?>
                                             </svg>
                                             <span><?php echo esc_html($tour_location); ?></span>
-                                        </div>
+                                          <?php _e('Cancelación flexible', 'dreamtour'); ?>
                                     <?php endif; ?>
                                     
-                                    <?php if ($tour_duration) : ?>
+                                          <?php _e('Grupo reducido', 'dreamtour'); ?>
                                         <div class="tour-meta-item">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="12" cy="12" r="10"></circle>
                                                 <polyline points="12 6 12 12 16 14"></polyline>
                                             </svg>
-                                            <span><?php echo esc_html($tour_duration); ?> <?php _e('días / giorni / days', 'dreamtour'); ?></span>
+                                            <span><?php echo esc_html($tour_duration); ?> <?php _e('días', 'dreamtour'); ?></span>
                                         </div>
                                     <?php endif; ?>
                                     
@@ -80,7 +80,7 @@ while (have_posts()) :
                                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                             </svg>
-                                            <span><?php echo esc_html($tour_max_people); ?> <?php _e('personas / persone / people', 'dreamtour'); ?></span>
+                                            <span><?php echo esc_html($tour_max_people); ?> <?php _e('personas', 'dreamtour'); ?></span>
                                         </div>
                                     <?php endif; ?>
                                     
@@ -99,7 +99,7 @@ while (have_posts()) :
                     
                     <!-- Main Description -->
                     <section class="tour-section tour-description">
-                        <h2><?php _e('Acerca de este viaje / Informazioni sul viaggio / About this trip', 'dreamtour'); ?></h2>
+                        <h2><?php _e('Acerca de este viaje', 'dreamtour'); ?></h2>
                         <?php 
                         if (!empty($post->post_excerpt)) {
                             echo '<p class="tour-excerpt">' . wp_kses_post($post->post_excerpt) . '</p>';
@@ -111,7 +111,7 @@ while (have_posts()) :
                     <!-- Itinerary -->
                     <?php if ($tour_itinerary) : ?>
                         <section class="tour-section tour-itinerary">
-                            <h2><?php _e('Itinerario / Itinerario / Itinerary', 'dreamtour'); ?></h2>
+                            <h2><?php _e('Itinerario', 'dreamtour'); ?></h2>
                             <div class="itinerary-content">
                                 <?php echo wp_kses_post($tour_itinerary); ?>
                             </div>
@@ -121,7 +121,7 @@ while (have_posts()) :
                     <!-- What's Included -->
                     <?php if ($tour_includes) : ?>
                         <section class="tour-section tour-includes-section">
-                            <h2><?php _e('Qué incluye / Cosa è incluso / What is included', 'dreamtour'); ?></h2>
+                            <h2><?php _e('Qué incluye', 'dreamtour'); ?></h2>
                             <ul class="includes-list">
                                 <?php
                                 $includes_items = array_filter(array_map('trim', explode("\n", $tour_includes)));
@@ -141,7 +141,7 @@ while (have_posts()) :
                     <!-- What's Not Included -->
                     <?php if ($tour_not_includes) : ?>
                         <section class="tour-section tour-not-includes-section">
-                            <h2><?php _e('Qué no incluye / Cosa non è incluso / What is not included', 'dreamtour'); ?></h2>
+                            <h2><?php _e('Qué no incluye', 'dreamtour'); ?></h2>
                             <ul class="not-includes-list">
                                 <?php
                                 $not_includes_items = array_filter(array_map('trim', explode("\n", $tour_not_includes)));
@@ -161,7 +161,7 @@ while (have_posts()) :
                     
                     <!-- Tour Details -->
                     <section class="tour-section tour-details-section">
-                        <h2><?php _e('Detalles del Tour / Dettagli del tour / Tour details', 'dreamtour'); ?></h2>
+                        <h2><?php _e('Detalles del Tour', 'dreamtour'); ?></h2>
                         <div class="details-grid">
                             <?php if ($tour_duration) : ?>
                                 <div class="detail-card">
@@ -169,8 +169,8 @@ while (have_posts()) :
                                         <circle cx="12" cy="12" r="10"></circle>
                                         <polyline points="12 6 12 12 16 14"></polyline>
                                     </svg>
-                                    <h4><?php _e('Duración / Durata / Duration', 'dreamtour'); ?></h4>
-                                    <p><?php echo esc_html($tour_duration); ?> <?php _e('días / giorni / days', 'dreamtour'); ?></p>
+                                    <h4><?php _e('Duración', 'dreamtour'); ?></h4>
+                                    <p><?php echo esc_html($tour_duration); ?> <?php _e('días', 'dreamtour'); ?></p>
                                 </div>
                             <?php endif; ?>
                             
@@ -180,7 +180,7 @@ while (have_posts()) :
                                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                         <circle cx="12" cy="10" r="3"></circle>
                                     </svg>
-                                    <h4><?php _e('Ubicación / Luogo / Location', 'dreamtour'); ?></h4>
+                                    <h4><?php _e('Ubicación', 'dreamtour'); ?></h4>
                                     <p><?php echo esc_html($tour_location); ?></p>
                                 </div>
                             <?php endif; ?>
@@ -190,7 +190,7 @@ while (have_posts()) :
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M19 17h2c.5523 0 1-.4477 1-1v-3c0-.5523-.4477-1-1-1h-2m0-4h2c.5523 0 1 .4477 1 1v3c0 .5523-.4477 1-1 1h-2M7 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zm0 0H5c-.5523 0-1 .4477-1 1v10c0 .5523.4477 1 1 1h2"></path>
                                     </svg>
-                                    <h4><?php _e('Transporte / Trasporto / Transport', 'dreamtour'); ?></h4>
+                                    <h4><?php _e('Transporte', 'dreamtour'); ?></h4>
                                     <p><?php echo esc_html(ucfirst($tour_transport_type)); ?></p>
                                 </div>
                             <?php endif; ?>
@@ -203,7 +203,7 @@ while (have_posts()) :
                                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                     </svg>
-                                    <h4><?php _e('Máx. Personas / Persone max / Max people', 'dreamtour'); ?></h4>
+                                    <h4><?php _e('Máx. Personas', 'dreamtour'); ?></h4>
                                     <p><?php echo esc_html($tour_max_people); ?></p>
                                 </div>
                             <?php endif; ?>
@@ -214,7 +214,7 @@ while (have_posts()) :
                                         <line x1="12" y1="1" x2="12" y2="23"></line>
                                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                                     </svg>
-                                    <h4><?php _e('Precio / Prezzo / Price', 'dreamtour'); ?></h4>
+                                    <h4><?php _e('Precio', 'dreamtour'); ?></h4>
                                     <p>€<?php echo esc_html(number_format($tour_price, 2, ',', '.')); ?></p>
                                 </div>
                             <?php endif; ?>
@@ -224,7 +224,7 @@ while (have_posts()) :
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                                     </svg>
-                                    <h4><?php _e('Valoración / Valutazione / Rating', 'dreamtour'); ?></h4>
+                                    <h4><?php _e('Valoración', 'dreamtour'); ?></h4>
                                     <p><?php echo esc_html($tour_rating); ?>/5 ⭐</p>
                                 </div>
                             <?php endif; ?>
@@ -236,7 +236,7 @@ while (have_posts()) :
                         <footer class="tour-footer">
                             <?php if ($destinations && !is_wp_error($destinations)) : ?>
                                 <div class="tour-taxonomy">
-                                    <strong><?php _e('Destinos / Destinazioni / Destinations:', 'dreamtour'); ?></strong>
+                                    <strong><?php _e('Destinos:', 'dreamtour'); ?></strong>
                                     <?php
                                     $destination_links = array();
                                     foreach ($destinations as $destination) {
@@ -249,7 +249,7 @@ while (have_posts()) :
                             
                             <?php if ($tour_types && !is_wp_error($tour_types)) : ?>
                                 <div class="tour-taxonomy">
-                                    <strong><?php _e('Tipo de viaje / Tipologia di viaggio / Trip type:', 'dreamtour'); ?></strong>
+                                    <strong><?php _e('Tipo de viaje:', 'dreamtour'); ?></strong>
                                     <?php
                                     $type_links = array();
                                     foreach ($tour_types as $type) {
@@ -269,18 +269,18 @@ while (have_posts()) :
                         <!-- Price Box -->
                         <?php if ($tour_price) : ?>
                             <div class="tour-price-box" data-price="<?php echo esc_attr($tour_price); ?>">
-                                <span class="price-label"><?php _e('Precio por persona / Prezzo per persona / Price per person', 'dreamtour'); ?></span>
+                                <span class="price-label"><?php _e('Precio por persona', 'dreamtour'); ?></span>
                                 <span class="price-amount">€<?php echo esc_html(number_format($tour_price, 2, ',', '.')); ?></span>
                             </div>
                         <?php endif; ?>
                         
                         <!-- Booking Form -->
                         <div class="tour-booking-form">
-                            <h3><?php _e('Reservar tu plaza / Prenota il tuo posto / Book your spot', 'dreamtour'); ?></h3>
+                            <h3><?php _e('Reservar tu plaza', 'dreamtour'); ?></h3>
                             
                             <!-- Passengers Selection -->
                             <div class="booking-field">
-                                <label><?php _e('Adultos / Adulti / Adults', 'dreamtour'); ?></label>
+                                <label><?php _e('Adultos', 'dreamtour'); ?></label>
                                 <div class="quantity-control">
                                     <button type="button" class="qty-minus" data-type="adults">−</button>
                                     <input type="number" id="adults" name="adults" value="1" min="1" readonly>
@@ -289,7 +289,7 @@ while (have_posts()) :
                             </div>
                             
                             <div class="booking-field">
-                                <label><?php _e('Niños (0-12 años) / Bambini (0-12 anni) / Children (0-12)', 'dreamtour'); ?></label>
+                                <label><?php _e('Niños (0-12 años)', 'dreamtour'); ?></label>
                                 <div class="quantity-control">
                                     <button type="button" class="qty-minus" data-type="children">−</button>
                                     <input type="number" id="children" name="children" value="0" min="0" readonly>
@@ -300,17 +300,17 @@ while (have_posts()) :
                             <!-- Payment Preview -->
                             <div class="payment-preview">
                                 <div class="preview-row">
-                                    <span><?php _e('Subtotal / Subtotale / Subtotal', 'dreamtour'); ?></span>
+                                    <span><?php _e('Subtotal', 'dreamtour'); ?></span>
                                     <span id="subtotal">€0</span>
                                 </div>
                                 
                                 <div class="preview-row">
-                                    <span><?php _e('Acconto (50%) / Acconto (50%) / Deposit (50%)', 'dreamtour'); ?></span>
+                                    <span><?php _e('Acconto (50%)', 'dreamtour'); ?></span>
                                     <span id="deposit" class="deposit-amount">€0</span>
                                 </div>
                                 
                                 <div class="preview-row total">
-                                    <span><?php _e('Total a pagar hoy / Totale da pagare oggi / Total to pay today', 'dreamtour'); ?></span>
+                                    <span><?php _e('Total a pagar hoy', 'dreamtour'); ?></span>
                                     <span id="total-amount" class="total-amount">€0</span>
                                 </div>
                             </div>
@@ -319,20 +319,20 @@ while (have_posts()) :
                             <div class="payment-options">
                                 <label class="radio-option">
                                     <input type="radio" name="payment-type" value="deposit" checked>
-                                    <span><?php _e('Pagar Acconto (50%) / Paga Acconto (50%) / Pay Deposit (50%)', 'dreamtour'); ?></span>
+                                    <span><?php _e('Pagar Acconto (50%)', 'dreamtour'); ?></span>
                                 </label>
                                 <label class="radio-option">
                                     <input type="radio" name="payment-type" value="full">
-                                    <span><?php _e('Pagar completo / Paga tutto / Pay full amount', 'dreamtour'); ?></span>
+                                    <span><?php _e('Pagar completo', 'dreamtour'); ?></span>
                                 </label>
                             </div>
                             
                             <!-- Book Button -->
                             <button type="button" class="btn btn-primary btn-block" id="book-btn">
-                                <?php _e('Continuar a Reserva / Continua alla prenotazione / Continue to booking', 'dreamtour'); ?>
+                                <?php _e('Continuar a Reserva', 'dreamtour'); ?>
                             </button>
                             
-                            <p class="booking-notice"><?php _e('Cancelación flexible hasta 14 días antes / Cancellazione flessibile fino a 14 giorni prima / Flexible cancellation up to 14 days before', 'dreamtour'); ?></p>
+                            <p class="booking-notice"><?php _e('Cancelación flexible hasta 14 días antes', 'dreamtour'); ?></p>
                         </div>
                         
                         <!-- Quick Info -->
@@ -365,9 +365,9 @@ while (have_posts()) :
                         
                         <!-- Contact -->
                         <div class="tour-contact">
-                            <p><?php _e('¿Tienes dudas? / Hai dubbi? / Any questions?', 'dreamtour'); ?></p>
+                            <p><?php _e('¿Tienes dudas?', 'dreamtour'); ?></p>
                             <a href="#" class="btn btn-outline btn-block">
-                                <?php _e('Contáctanos / Contattaci / Contact us', 'dreamtour'); ?>
+                                <?php _e('Contáctanos', 'dreamtour'); ?>
                             </a>
                         </div>
                     </div>
