@@ -287,15 +287,21 @@
                         // Rellenar campos del formulario
                         $('#drtr-tour-id').val(tour.id);
                         $('#drtr-tour-title').val(tour.title);
-                        $('#drtr-tour-description').val(tour.content || tour.description);
+                        $('#drtr-tour-content').val(tour.content);
+                        $('#drtr-tour-excerpt').val(tour.excerpt);
                         $('#drtr-tour-price').val(tour.price);
                         $('#drtr-tour-duration').val(tour.duration);
                         $('#drtr-tour-location').val(tour.location);
                         $('#drtr-tour-start-date').val(tour.start_date);
                         $('#drtr-tour-end-date').val(tour.end_date);
-                        $('#drtr-tour-transport').val(tour.transport);
+                        $('#drtr-tour-transport').val(tour.transport_type);
+                        $('#drtr-tour-max-people').val(tour.max_people);
+                        $('#drtr-tour-includes').val(tour.includes);
+                        $('#drtr-tour-not-includes').val(tour.not_includes);
                         
                         console.log('Form fields populated successfully');
+                        console.log('Content loaded:', tour.content ? tour.content.substring(0, 50) + '...' : 'empty');
+                        console.log('Excerpt loaded:', tour.excerpt ? tour.excerpt.substring(0, 50) + '...' : 'empty');
                         
                         // Cargar imagen si existe
                         if (tour.image_url) {
@@ -397,13 +403,6 @@
             const form = document.getElementById('drtr-tour-form');
             const formData = new FormData(form);
             
-            // Debug: verificar datos del formulario
-            console.log('=== SAVE TOUR DEBUG ===');
-            console.log('Title:', formData.get('title'));
-            console.log('Content:', formData.get('content'));
-            console.log('Excerpt:', formData.get('excerpt'));
-            console.log('Tour ID:', formData.get('tour_id'));
-            
             // Agregar action y nonce
             formData.append('action', 'drtr_save_tour');
             formData.append('nonce', drtrAjax.nonce);
@@ -418,7 +417,6 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    console.log('Save response:', response);
                     if (response.success) {
                         self.showMessage(drtrAjax.strings.success_save, 'success');
                         
@@ -435,8 +433,7 @@
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.error('Save error:', error);
+                error: function() {
                     self.showMessage(drtrAjax.strings.error, 'error');
                 }
             });
