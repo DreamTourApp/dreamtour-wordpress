@@ -244,7 +244,7 @@ class DRTR_Frontend {
                     <!-- Itinerario -->
                     <div class="drtr-form-section">
                         <h3><?php _e('Itinerario', 'drtr-tours'); ?></h3>
-                        <button type="button" id="drtr-add-itinerary-btn" class="drtr-btn drtr-btn-secondary">
+                        <button type="button" id="drtr-add-itinerary-stop" class="drtr-btn drtr-btn-secondary">
                             <span class="dashicons dashicons-plus"></span>
                             <?php _e('Agregar Parada', 'drtr-tours'); ?>
                         </button>
@@ -403,7 +403,7 @@ class DRTR_Frontend {
                     <!-- Itinerario -->
                     <div class="drtr-form-section">
                         <h3><?php _e('Itinerario', 'drtr-tours'); ?></h3>
-                        <button type="button" id="drtr-add-itinerary-btn" class="drtr-btn drtr-btn-secondary">
+                        <button type="button" id="drtr-add-itinerary-stop" class="drtr-btn drtr-btn-secondary">
                             <span class="dashicons dashicons-plus"></span>
                             <?php _e('Agregar Parada', 'drtr-tours'); ?>
                         </button>
