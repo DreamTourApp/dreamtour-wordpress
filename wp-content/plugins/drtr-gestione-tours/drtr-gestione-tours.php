@@ -67,8 +67,8 @@ class DRTR_Gestione_Tours {
         // Registrar CPT
         DRTR_Post_Type::register_post_type();
         
-        // Limpiar y recrear términos de viaje para garantizar traducciones
-        $this->reset_travel_intent_terms();
+        // Limpiar y recrear términos de viaje para garantizar traducciones y orden
+        DRTR_Post_Type::reset_travel_intents();
         
         // Flush rewrite rules
         flush_rewrite_rules();

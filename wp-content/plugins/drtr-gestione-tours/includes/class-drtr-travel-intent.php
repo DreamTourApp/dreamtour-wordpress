@@ -10,6 +10,9 @@ function drtr_get_travel_intents() {
     $intents = get_terms(array(
         'taxonomy' => 'drtr_travel_intent',
         'hide_empty' => false,
+        'orderby' => 'meta_value_num',
+        'meta_key' => 'drtr_intent_order',
+        'order' => 'ASC',
     ));
     
     if (is_wp_error($intents)) {

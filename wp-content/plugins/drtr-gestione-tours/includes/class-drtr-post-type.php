@@ -160,12 +160,38 @@ class DRTR_Post_Type {
             'december'           => array('label' => __('Diciembre', 'drtr-tours'), 'icon' => '🗓️'),
         );
         
+        $order = 1;
         foreach ($intents as $slug => $intent_data) {
             if (!term_exists($slug, 'drtr_travel_intent')) {
                 wp_insert_term($intent_data['label'], 'drtr_travel_intent', array('slug' => $slug));
+                $term = get_term_by('slug', $slug, 'drtr_travel_intent');
                 // Guardar el icono como metadata del término
-                update_term_meta(get_term_by('slug', $slug, 'drtr_travel_intent')->term_id, 'drtr_intent_icon', $intent_data['icon']);
+                update_term_meta($term->term_id, 'drtr_intent_icon', $intent_data['icon']);
+                // Guardar el número de orden para ordenar correctamente
+                update_term_meta($term->term_id, 'drtr_intent_order', $order);
+            }
+            $order++;
+        }
+    }
+    
+    /**
+     * Reset intents para recriarlos con números de orden
+     */
+    public static function reset_travel_intents() {
+        // Obtener todos los términos de viaje existentes
+        $terms = get_terms(array(
+            'taxonomy' => 'drtr_travel_intent',
+            'hide_empty' => false,
+        ));
+        
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                wp_delete_term($term->term_id, 'drtr_travel_intent');
             }
         }
+        
+        // Recrear los términos
+        $instance = self::get_instance();
+        $instance->add_travel_intent_terms();
     }
 }
