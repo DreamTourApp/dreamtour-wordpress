@@ -146,8 +146,24 @@ class DRTR_Ajax_Handler {
         
         $tour_id = isset($_POST['tour_id']) ? absint($_POST['tour_id']) : 0;
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
-        $excerpt = isset($_POST['excerpt']) ? sanitize_textarea_field($_POST['excerpt']) : '';
+        
+        // RAW values antes de sanitizar
+        $content_raw = isset($_POST['content']) ? $_POST['content'] : '';
+        $excerpt_raw = isset($_POST['excerpt']) ? $_POST['excerpt'] : '';
+        
+        error_log('=== DRTR SAVE DEBUG ===');
+        error_log('Tour ID: ' . $tour_id);
+        error_log('Title: ' . $title);
+        error_log('Content RAW (first 100): ' . substr($content_raw, 0, 100));
+        error_log('Excerpt RAW (first 100): ' . substr($excerpt_raw, 0, 100));
+        error_log('Content RAW length: ' . strlen($content_raw));
+        error_log('Excerpt RAW length: ' . strlen($excerpt_raw));
+        
+        $content = wp_kses_post($content_raw);
+        $excerpt = sanitize_textarea_field($excerpt_raw);
+        
+        error_log('Content AFTER sanitize length: ' . strlen($content));
+        error_log('Excerpt AFTER sanitize length: ' . strlen($excerpt));
         
         if (empty($title)) {
             wp_send_json_error(array('message' => __('El título es obligatorio', 'drtr-tours')));
@@ -161,18 +177,24 @@ class DRTR_Ajax_Handler {
             'post_status' => 'publish',
         );
         
+        error_log('Post data array: ' . print_r($post_data, true));
+        
         if ($tour_id) {
             $post_data['ID'] = $tour_id;
             $result = wp_update_post($post_data, true);
+            error_log('wp_update_post called with ID: ' . $tour_id);
         } else {
             $result = wp_insert_post($post_data, true);
+            error_log('wp_insert_post called (new tour)');
         }
         
         if (is_wp_error($result)) {
+            error_log('WP Error: ' . $result->get_error_message());
             wp_send_json_error(array('message' => $result->get_error_message()));
         }
         
         $tour_id = $result;
+        error_log('Saved! Tour ID: ' . $tour_id);
         
         // Manejar subida de imagen si existe
         if (!empty($_FILES['tour_image']['name'])) {
@@ -230,19 +252,32 @@ class DRTR_Ajax_Handler {
         // Verificar que se guardó correctamente (debug)
         if (current_user_can('manage_options')) {
             $saved_post = get_post($tour_id);
-            error_log('DRTR Save - Verification:');
+            error_log('=== POST-SAVE VERIFICATION ===');
             error_log('  Tour ID: ' . $tour_id);
-            error_log('  Title: ' . $saved_post->post_title);
-            error_log('  Content length: ' . strlen($saved_post->post_content));
-            error_log('  Excerpt length: ' . strlen($saved_post->post_excerpt));
+            error_log('  Saved Title: ' . $saved_post->post_title);
+            error_log('  Saved Content length: ' . strlen($saved_post->post_content));
+            error_log('  Saved Excerpt length: ' . strlen($saved_post->post_excerpt));
+            error_log('  Saved Content (first 100): ' . substr($saved_post->post_content, 0, 100));
+            error_log('  Saved Excerpt (first 100): ' . substr($saved_post->post_excerpt, 0, 100));
+            
+            // Query diretta al database
+            global $wpdb;
+            $db_check = $wpdb->get_row($wpdb->prepare(
+                "SELECT post_content, post_excerpt FROM {$wpdb->posts} WHERE ID = %d",
+                $tour_id
+            ));
+            error_log('  DB Content length: ' . strlen($db_check->post_content));
+            error_log('  DB Excerpt length: ' . strlen($db_check->post_excerpt));
         }
         
         wp_send_json_success(array(
             'message' => __('Tour guardado correctamente', 'drtr-tours'),
             'tour_id' => $tour_id,
             'debug' => array(
-                'content_saved' => !empty($content),
-                'excerpt_saved' => !empty($excerpt),
+                'content_received' => strlen($content_raw),
+                'excerpt_received' => strlen($excerpt_raw),
+                'content_saved' => strlen($content),
+                'excerpt_saved' => strlen($excerpt),
             ),
         ));
     }
