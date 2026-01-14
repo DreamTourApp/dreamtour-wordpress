@@ -135,29 +135,29 @@ class DRTR_Post_Type {
      */
     private function add_travel_intent_terms() {
         $intents = array(
-            // Meses
-            'january'            => array('label' => 'Enero', 'icon' => '🗓️'),
-            'february'           => array('label' => 'Febrero', 'icon' => '🗓️'),
-            'march'              => array('label' => 'Marzo', 'icon' => '🗓️'),
-            'april'              => array('label' => 'Abril', 'icon' => '🗓️'),
-            'may'                => array('label' => 'Mayo', 'icon' => '🗓️'),
-            'june'               => array('label' => 'Junio', 'icon' => '🗓️'),
-            'july'               => array('label' => 'Julio', 'icon' => '🗓️'),
-            'august'             => array('label' => 'Agosto', 'icon' => '🗓️'),
-            'september'          => array('label' => 'Septiembre', 'icon' => '🗓️'),
-            'october'            => array('label' => 'Octubre', 'icon' => '🗓️'),
-            'november'           => array('label' => 'Noviembre', 'icon' => '🗓️'),
-            'december'           => array('label' => 'Diciembre', 'icon' => '🗓️'),
-            
             // Intenciones de viaje
-            'group_cruises'      => array('label' => 'Crociere di gruppo', 'icon' => '⛴️'),
-            'group_flights'      => array('label' => 'Voli di gruppo', 'icon' => '✈️'),
-            'beach_days'         => array('label' => 'Giornate al mare', 'icon' => '🏖️'),
-            'italy_trips'        => array('label' => 'Viaggi in Italia', 'icon' => '🇮🇹'),
-            'gift_cards'         => array('label' => 'Carte regalo', 'icon' => '🎁'),
-            'bernina_express'    => array('label' => 'Bernina Express panoramico', 'icon' => '🚂'),
-            'christmas_markets'  => array('label' => 'Mercatini di Natale', 'icon' => '🎄'),
-            'mountain_trips'     => array('label' => 'Vacanze in montagna', 'icon' => '⛰️'),
+            'group_cruises'      => array('label' => __('Crociere di gruppo', 'drtr-tours'), 'icon' => '⛴️'),
+            'group_flights'      => array('label' => __('Voli di gruppo', 'drtr-tours'), 'icon' => '✈️'),
+            'beach_days'         => array('label' => __('Giornate al mare', 'drtr-tours'), 'icon' => '🏖️'),
+            'italy_trips'        => array('label' => __('Viaggi in Italia', 'drtr-tours'), 'icon' => '🇮🇹'),
+            'gift_cards'         => array('label' => __('Carte regalo', 'drtr-tours'), 'icon' => '🎁'),
+            'bernina_express'    => array('label' => __('Bernina Express panoramico', 'drtr-tours'), 'icon' => '🚂'),
+            'christmas_markets'  => array('label' => __('Mercatini di Natale', 'drtr-tours'), 'icon' => '🎄'),
+            'mountain_trips'     => array('label' => __('Vacanze in montagna', 'drtr-tours'), 'icon' => '⛰️'),
+            
+            // Meses
+            'january'            => array('label' => __('Enero', 'drtr-tours'), 'icon' => '🗓️'),
+            'february'           => array('label' => __('Febrero', 'drtr-tours'), 'icon' => '🗓️'),
+            'march'              => array('label' => __('Marzo', 'drtr-tours'), 'icon' => '🗓️'),
+            'april'              => array('label' => __('Abril', 'drtr-tours'), 'icon' => '🗓️'),
+            'may'                => array('label' => __('Mayo', 'drtr-tours'), 'icon' => '🗓️'),
+            'june'               => array('label' => __('Junio', 'drtr-tours'), 'icon' => '🗓️'),
+            'july'               => array('label' => __('Julio', 'drtr-tours'), 'icon' => '🗓️'),
+            'august'             => array('label' => __('Agosto', 'drtr-tours'), 'icon' => '🗓️'),
+            'september'          => array('label' => __('Septiembre', 'drtr-tours'), 'icon' => '🗓️'),
+            'october'            => array('label' => __('Octubre', 'drtr-tours'), 'icon' => '🗓️'),
+            'november'           => array('label' => __('Noviembre', 'drtr-tours'), 'icon' => '🗓️'),
+            'december'           => array('label' => __('Diciembre', 'drtr-tours'), 'icon' => '🗓️'),
         );
         
         foreach ($intents as $slug => $intent_data) {

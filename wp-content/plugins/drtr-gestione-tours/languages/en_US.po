@@ -299,3 +299,64 @@ msgstr "Delete"
 
 msgid "Intenciones de Viaje"
 msgstr "Travel Intents"
+# Meses / Months
+msgid "Enero"
+msgstr "January"
+
+msgid "Febrero"
+msgstr "February"
+
+msgid "Marzo"
+msgstr "March"
+
+msgid "Abril"
+msgstr "April"
+
+msgid "Mayo"
+msgstr "May"
+
+msgid "Junio"
+msgstr "June"
+
+msgid "Julio"
+msgstr "July"
+
+msgid "Agosto"
+msgstr "August"
+
+msgid "Septiembre"
+msgstr "September"
+
+msgid "Octubre"
+msgstr "October"
+
+msgid "Noviembre"
+msgstr "November"
+
+msgid "Diciembre"
+msgstr "December"
+
+# Intenciones de Viaje / Travel Intents
+msgid "Crociere di gruppo"
+msgstr "Group Cruises"
+
+msgid "Voli di gruppo"
+msgstr "Group Flights"
+
+msgid "Giornate al mare"
+msgstr "Beach Days"
+
+msgid "Viaggi in Italia"
+msgstr "Italy Trips"
+
+msgid "Carte regalo"
+msgstr "Gift Cards"
+
+msgid "Bernina Express panoramico"
+msgstr "Panoramic Bernina Express"
+
+msgid "Mercatini di Natale"
+msgstr "Christmas Markets"
+
+msgid "Vacanze in montagna"
+msgstr "Mountain Vacations"

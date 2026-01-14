@@ -67,8 +67,28 @@ class DRTR_Gestione_Tours {
         // Registrar CPT
         DRTR_Post_Type::register_post_type();
         
+        // Limpiar y recrear términos de viaje para garantizar traducciones
+        $this->reset_travel_intent_terms();
+        
         // Flush rewrite rules
         flush_rewrite_rules();
+    }
+    
+    private function reset_travel_intent_terms() {
+        // Obtener todos los términos de viaje existentes
+        $terms = get_terms(array(
+            'taxonomy' => 'drtr_travel_intent',
+            'hide_empty' => false,
+        ));
+        
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                wp_delete_term($term->term_id, 'drtr_travel_intent');
+            }
+        }
+        
+        // Recrear los términos usando DRTR_Post_Type
+        DRTR_Post_Type::get_instance();
     }
     
     public function init() {

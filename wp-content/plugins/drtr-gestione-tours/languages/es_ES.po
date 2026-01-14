@@ -296,3 +296,67 @@ msgstr "Editar"
 
 msgid "Eliminar"
 msgstr "Eliminar"
+msgid "Intenciones de Viaje"
+msgstr "Intenciones de Viaje"
+
+# Meses / Months
+msgid "Enero"
+msgstr "Enero"
+
+msgid "Febrero"
+msgstr "Febrero"
+
+msgid "Marzo"
+msgstr "Marzo"
+
+msgid "Abril"
+msgstr "Abril"
+
+msgid "Mayo"
+msgstr "Mayo"
+
+msgid "Junio"
+msgstr "Junio"
+
+msgid "Julio"
+msgstr "Julio"
+
+msgid "Agosto"
+msgstr "Agosto"
+
+msgid "Septiembre"
+msgstr "Septiembre"
+
+msgid "Octubre"
+msgstr "Octubre"
+
+msgid "Noviembre"
+msgstr "Noviembre"
+
+msgid "Diciembre"
+msgstr "Diciembre"
+
+# Intenciones de Viaje / Travel Intents
+msgid "Crociere di gruppo"
+msgstr "Cruceros en Grupo"
+
+msgid "Voli di gruppo"
+msgstr "Vuelos en Grupo"
+
+msgid "Giornate al mare"
+msgstr "Días de Playa"
+
+msgid "Viaggi in Italia"
+msgstr "Viajes a Italia"
+
+msgid "Carte regalo"
+msgstr "Tarjetas de Regalo"
+
+msgid "Bernina Express panoramico"
+msgstr "Bernina Express Panorámico"
+
+msgid "Mercatini di Natale"
+msgstr "Mercados Navideños"
+
+msgid "Vacanze in montagna"
+msgstr "Vacaciones en Montaña"
