@@ -145,19 +145,19 @@ class DRTR_Post_Type {
             'christmas_markets'  => array('label' => __('Mercatini di Natale', 'drtr-tours'), 'icon' => '🎄'),
             'mountain_trips'     => array('label' => __('Vacanze in montagna', 'drtr-tours'), 'icon' => '⛰️'),
             
-            // Meses (Ordenados alfabéticamente)
-            'april'              => array('label' => __('Abril', 'drtr-tours'), 'icon' => '🗓️'),
-            'august'             => array('label' => __('Agosto', 'drtr-tours'), 'icon' => '🗓️'),
-            'december'           => array('label' => __('Diciembre', 'drtr-tours'), 'icon' => '🗓️'),
-            'february'           => array('label' => __('Febrero', 'drtr-tours'), 'icon' => '🗓️'),
+            // Meses (Ordenados por número del mes)
             'january'            => array('label' => __('Enero', 'drtr-tours'), 'icon' => '🗓️'),
-            'july'               => array('label' => __('Julio', 'drtr-tours'), 'icon' => '🗓️'),
-            'june'               => array('label' => __('Junio', 'drtr-tours'), 'icon' => '🗓️'),
+            'february'           => array('label' => __('Febrero', 'drtr-tours'), 'icon' => '🗓️'),
             'march'              => array('label' => __('Marzo', 'drtr-tours'), 'icon' => '🗓️'),
+            'april'              => array('label' => __('Abril', 'drtr-tours'), 'icon' => '🗓️'),
             'may'                => array('label' => __('Mayo', 'drtr-tours'), 'icon' => '🗓️'),
-            'november'           => array('label' => __('Noviembre', 'drtr-tours'), 'icon' => '🗓️'),
-            'october'            => array('label' => __('Octubre', 'drtr-tours'), 'icon' => '🗓️'),
+            'june'               => array('label' => __('Junio', 'drtr-tours'), 'icon' => '🗓️'),
+            'july'               => array('label' => __('Julio', 'drtr-tours'), 'icon' => '🗓️'),
+            'august'             => array('label' => __('Agosto', 'drtr-tours'), 'icon' => '🗓️'),
             'september'          => array('label' => __('Septiembre', 'drtr-tours'), 'icon' => '🗓️'),
+            'october'            => array('label' => __('Octubre', 'drtr-tours'), 'icon' => '🗓️'),
+            'november'           => array('label' => __('Noviembre', 'drtr-tours'), 'icon' => '🗓️'),
+            'december'           => array('label' => __('Diciembre', 'drtr-tours'), 'icon' => '🗓️'),
         );
         
         foreach ($intents as $slug => $intent_data) {
