@@ -161,6 +161,11 @@ function dreamtour_enqueue_scripts() {
             DREAMTOUR_VERSION, 
             true
         );
+        
+        // Localizar script con traducciones
+        wp_localize_script('dreamtour-intents-filter', 'dreamtourFilters', array(
+            'noResults' => __('No hay tours que coincidan con tus criterios de búsqueda.', 'dreamtour')
+        ));
     }
     
     // Pasar datos a JavaScript

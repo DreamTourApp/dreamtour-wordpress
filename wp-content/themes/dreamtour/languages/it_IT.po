@@ -382,3 +382,6 @@ msgstr "Intenzione di Viaggio"
 
 msgid "Todas las intenciones"
 msgstr "Tutte le intenzioni"
+
+msgid "No hay tours que coincidan con tus criterios de búsqueda."
+msgstr "Non ci sono tour che corrispondono ai tuoi criteri di ricerca."

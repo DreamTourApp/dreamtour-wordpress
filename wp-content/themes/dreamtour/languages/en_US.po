@@ -382,3 +382,6 @@ msgstr "Travel Intent"
 
 msgid "Todas las intenciones"
 msgstr "All intents"
+
+msgid "No hay tours que coincidan con tus criterios de búsqueda."
+msgstr "No tours match your search criteria."

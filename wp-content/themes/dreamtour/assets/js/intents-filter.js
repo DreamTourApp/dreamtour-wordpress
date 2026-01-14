@@ -144,8 +144,9 @@
             const $visibleTours = $('.tour-card:visible');
             if ($visibleTours.length === 0) {
                 if (!$('#no-tours-message').length) {
+                    const noResultsText = typeof dreamtourFilters !== 'undefined' ? dreamtourFilters.noResults : 'No hay tours que coincidan con tus criterios de búsqueda.';
                     $('#tours-container').append(
-                        '<div id="no-tours-message" class="no-content"><p>No hay tours que coincidan con tus criterios de búsqueda.</p></div>'
+                        '<div id="no-tours-message" class="no-content"><p>' + noResultsText + '</p></div>'
                     );
                 }
             } else {
