@@ -10,10 +10,13 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+// Cargar version helper
+require_once dirname(dirname(__FILE__)) . '/version-helper.php';
+
 /**
  * Define constantes del tema
  */
-define('DREAMTOUR_VERSION', '1.0.' . time());
+define('DREAMTOUR_VERSION', dreamtour_get_version('1.0.0', dirname(__FILE__)));
 define('DREAMTOUR_THEME_DIR', get_template_directory());
 define('DREAMTOUR_THEME_URI', get_template_directory_uri());
 
