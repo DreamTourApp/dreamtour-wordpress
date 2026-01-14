@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Cargar version helper
-require_once dirname(dirname(__FILE__)) . '/version-helper.php';
+require_once WP_CONTENT_DIR . '/version-helper.php';
 
 // Definir constantes
 define('DRTR_VERSION', dreamtour_get_version('1.1.1', dirname(__FILE__)));
