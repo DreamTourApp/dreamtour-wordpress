@@ -89,17 +89,35 @@
     margin: var(--spacing-xl) 0;
 }
 
-.tour-hero-image {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    margin-bottom: var(--spacing-lg);
+.tour-top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: stretch;
+    margin-bottom: var(--spacing-xl);
 }
 
-.tour-hero-image img {
+.tour-top-image {
+    width: 100%;
+    height: 380px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.tour-top-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.tour-top-info {
+    background: var(--color-white);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
 }
 
 .tour-header {
@@ -213,6 +231,31 @@
 .tour-contact p {
     margin-bottom: var(--spacing-sm);
     font-size: 14px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1080px) {
+    .single-tour-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .tour-sidebar {
+        position: static;
+    }
+    .tour-top {
+        grid-template-columns: 1fr;
+    }
+    .tour-top-image {
+        height: 320px;
+    }
+}
+
+@media (max-width: 640px) {
+    .tour-top-image {
+        height: 240px;
+    }
+    .tour-meta-list {
+        gap: var(--spacing-sm);
+    }
 }
 
 /* Booking Form Styles */
