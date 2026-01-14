@@ -95,20 +95,37 @@ class DRTR_Gestione_Tours {
     }
     
     public function ensure_travel_intents_order() {
-        // Asegurar que los términos de viaje existentes tengan el número de orden
-        $terms = get_terms(array(
-            'taxonomy' => 'drtr_travel_intent',
-            'hide_empty' => false,
-        ));
+        // Definir el orden correcto basado en el array de class-drtr-post-type.php
+        $correct_order = array(
+            // Intenciones de viaje (1-8)
+            'group_cruises' => 1,
+            'group_flights' => 2,
+            'beach_days' => 3,
+            'italy_trips' => 4,
+            'gift_cards' => 5,
+            'bernina_express' => 6,
+            'christmas_markets' => 7,
+            'mountain_trips' => 8,
+            // Meses (9-20)
+            'january' => 9,
+            'february' => 10,
+            'march' => 11,
+            'april' => 12,
+            'may' => 13,
+            'june' => 14,
+            'july' => 15,
+            'august' => 16,
+            'september' => 17,
+            'october' => 18,
+            'november' => 19,
+            'december' => 20,
+        );
         
-        if (!is_wp_error($terms) && !empty($terms)) {
-            $order = 1;
-            foreach ($terms as $term) {
-                $current_order = get_term_meta($term->term_id, 'drtr_intent_order', true);
-                if (empty($current_order)) {
-                    update_term_meta($term->term_id, 'drtr_intent_order', $order);
-                }
-                $order++;
+        // Asignar el orden correcto a cada término
+        foreach ($correct_order as $slug => $order) {
+            $term = get_term_by('slug', $slug, 'drtr_travel_intent');
+            if ($term && !is_wp_error($term)) {
+                update_term_meta($term->term_id, 'drtr_intent_order', $order);
             }
         }
     }
