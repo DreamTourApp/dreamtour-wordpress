@@ -101,10 +101,34 @@ while (have_posts()) :
                     <section class="tour-section tour-description">
                         <h2><?php _e('Acerca de este viaje', 'dreamtour'); ?></h2>
                         <?php 
-                        if (!empty($post->post_excerpt)) {
-                            echo '<p class="tour-excerpt">' . wp_kses_post($post->post_excerpt) . '</p>';
+                        // Debug: verificar si hay datos
+                        $current_post = get_post();
+                        $excerpt_length = strlen($current_post->post_excerpt);
+                        $content_length = strlen($current_post->post_content);
+                        
+                        // Mostrar debug solo para administradores
+                        if (current_user_can('manage_options')) {
+                            echo '<!-- DEBUG: Excerpt length: ' . $excerpt_length . ', Content length: ' . $content_length . ' -->';
                         }
-                        the_content(); 
+                        
+                        if (!empty($current_post->post_excerpt)) {
+                            echo '<div class="tour-excerpt-wrapper">';
+                            echo '<p class="tour-excerpt">' . wp_kses_post($current_post->post_excerpt) . '</p>';
+                            echo '</div>';
+                        }
+                        
+                        if (!empty($current_post->post_content)) {
+                            echo '<div class="tour-content-wrapper">';
+                            the_content();
+                            echo '</div>';
+                        }
+                        
+                        // Si no hay contenido, mostrar mensaje para admin
+                        if (current_user_can('manage_options') && empty($current_post->post_content) && empty($current_post->post_excerpt)) {
+                            echo '<div class="admin-notice" style="background:#fff3cd;padding:15px;border-left:4px solid #ffc107;margin:20px 0;">';
+                            echo '<strong>⚠️ Aviso (solo admin):</strong> Este tour no tiene descripción. <a href="' . admin_url('post.php?post=' . get_the_ID() . '&action=edit') . '">Editar tour</a>';
+                            echo '</div>';
+                        }
                         ?>
                     </section>
                     

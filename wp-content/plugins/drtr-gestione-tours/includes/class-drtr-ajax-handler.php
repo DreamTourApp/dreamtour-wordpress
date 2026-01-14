@@ -227,9 +227,23 @@ class DRTR_Ajax_Handler {
             wp_set_object_terms($tour_id, array(), 'drtr_travel_intent');
         }
         
+        // Verificar que se guardó correctamente (debug)
+        if (current_user_can('manage_options')) {
+            $saved_post = get_post($tour_id);
+            error_log('DRTR Save - Verification:');
+            error_log('  Tour ID: ' . $tour_id);
+            error_log('  Title: ' . $saved_post->post_title);
+            error_log('  Content length: ' . strlen($saved_post->post_content));
+            error_log('  Excerpt length: ' . strlen($saved_post->post_excerpt));
+        }
+        
         wp_send_json_success(array(
             'message' => __('Tour guardado correctamente', 'drtr-tours'),
             'tour_id' => $tour_id,
+            'debug' => array(
+                'content_saved' => !empty($content),
+                'excerpt_saved' => !empty($excerpt),
+            ),
         ));
     }
     

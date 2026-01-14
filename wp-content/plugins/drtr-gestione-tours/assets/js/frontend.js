@@ -418,6 +418,10 @@
                 contentType: false,
                 success: function(response) {
                     if (response.success) {
+                        console.log('Save successful:', response);
+                        if (response.data.debug) {
+                            console.log('Debug info:', response.data.debug);
+                        }
                         self.showMessage(drtrAjax.strings.success_save, 'success');
                         
                         // Si estamos en modo edición, redirigir a la lista
