@@ -15,9 +15,9 @@
             console.log('DrtrToursManager.init() called');
             this.bindEvents();
             
-            // Solo cargar tours si no estamos en modo edición
+            // Solo cargar tours si no estamos en modo edición ni en modo nuevo tour
             const urlParams = new URLSearchParams(window.location.search);
-            if (!urlParams.has('edit_tour')) {
+            if (!urlParams.has('edit_tour') && !urlParams.has('new_tour')) {
                 this.loadTours();
             }
             
@@ -577,8 +577,9 @@
         console.log('Document ready');
         console.log('#drtr-tours-manager exists:', $('#drtr-tours-manager').length > 0);
         console.log('#drtr-edit-tour-page exists:', $('#drtr-edit-tour-page').length > 0);
+        console.log('#drtr-new-tour-page exists:', $('#drtr-new-tour-page').length > 0);
         
-        if ($('#drtr-tours-manager').length || $('#drtr-edit-tour-page').length) {
+        if ($('#drtr-tours-manager').length || $('#drtr-edit-tour-page').length || $('#drtr-new-tour-page').length) {
             console.log('Initializing DrtrToursManager');
             DrtrToursManager.init();
         } else {
