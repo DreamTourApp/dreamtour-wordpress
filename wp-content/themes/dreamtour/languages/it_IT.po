@@ -376,3 +376,9 @@ msgstr "Cancellazione flessibile fino a 14 giorni prima"
 
 msgid "Itinerario"
 msgstr "Itinerario"
+
+msgid "Intención de Viaje"
+msgstr "Intenzione di Viaggio"
+
+msgid "Todas las intenciones"
+msgstr "Tutte le intenzioni"

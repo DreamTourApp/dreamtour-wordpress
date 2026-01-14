@@ -90,17 +90,21 @@ get_header();
         <!-- Tour Filters -->
         <div class="tour-filters">
             <div class="filter-group">
-                <label for="filter-destination"><?php esc_html_e('Destino', 'dreamtour'); ?></label>
-                <select id="filter-destination" class="filter-select">
-                    <option value=""><?php esc_html_e('Todos los destinos', 'dreamtour'); ?></option>
+                <label for="filter-intent"><?php esc_html_e('Intención de Viaje', 'dreamtour'); ?></label>
+                <select id="filter-intent" class="filter-select">
+                    <option value=""><?php esc_html_e('Todas las intenciones', 'dreamtour'); ?></option>
                     <?php
-                    $destinations = get_terms(array(
-                        'taxonomy' => 'drtr_destination',
+                    $intents = get_terms(array(
+                        'taxonomy' => 'drtr_travel_intent',
                         'hide_empty' => true,
+                        'orderby' => 'meta_value_num',
+                        'meta_key' => 'drtr_intent_order',
+                        'order' => 'ASC',
                     ));
-                    if ($destinations && !is_wp_error($destinations)) :
-                        foreach ($destinations as $dest) :
-                            echo '<option value="' . esc_attr($dest->slug) . '">' . esc_html($dest->name) . '</option>';
+                    if ($intents && !is_wp_error($intents)) :
+                        foreach ($intents as $intent) :
+                            $icon = get_term_meta($intent->term_id, 'drtr_intent_icon', true);
+                            echo '<option value="' . esc_attr($intent->slug) . '">' . esc_html($icon ? $icon . ' ' : '') . esc_html($intent->name) . '</option>';
                         endforeach;
                     endif;
                     ?>
