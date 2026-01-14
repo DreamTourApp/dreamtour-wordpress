@@ -168,3 +168,4 @@ class DRTR_Post_Type {
             }
         }
     }
+}
