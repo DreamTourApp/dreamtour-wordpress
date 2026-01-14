@@ -58,6 +58,9 @@ class DRTR_Gestione_Tours {
         // Cargar traducciones
         add_action('init', array($this, 'load_textdomain'));
         
+        // Asegurar que los términos de viaje están con el orden correcto
+        add_action('init', array($this, 'ensure_travel_intents_order'), 99);
+        
         // Encolar scripts y estilos
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
@@ -89,6 +92,25 @@ class DRTR_Gestione_Tours {
         
         // Recrear los términos usando DRTR_Post_Type
         DRTR_Post_Type::get_instance();
+    }
+    
+    public function ensure_travel_intents_order() {
+        // Asegurar que los términos de viaje existentes tengan el número de orden
+        $terms = get_terms(array(
+            'taxonomy' => 'drtr_travel_intent',
+            'hide_empty' => false,
+        ));
+        
+        if (!is_wp_error($terms) && !empty($terms)) {
+            $order = 1;
+            foreach ($terms as $term) {
+                $current_order = get_term_meta($term->term_id, 'drtr_intent_order', true);
+                if (empty($current_order)) {
+                    update_term_meta($term->term_id, 'drtr_intent_order', $order);
+                }
+                $order++;
+            }
+        }
     }
     
     public function init() {

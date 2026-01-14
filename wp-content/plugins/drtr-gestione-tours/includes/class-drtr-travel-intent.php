@@ -10,14 +10,18 @@ function drtr_get_travel_intents() {
     $intents = get_terms(array(
         'taxonomy' => 'drtr_travel_intent',
         'hide_empty' => false,
-        'orderby' => 'meta_value_num',
-        'meta_key' => 'drtr_intent_order',
-        'order' => 'ASC',
     ));
     
     if (is_wp_error($intents)) {
         return array();
     }
+    
+    // Ordenar manualmente por el número de orden guardado en metadata
+    usort($intents, function($a, $b) {
+        $order_a = (int) get_term_meta($a->term_id, 'drtr_intent_order', true);
+        $order_b = (int) get_term_meta($b->term_id, 'drtr_intent_order', true);
+        return $order_a - $order_b;
+    });
     
     $result = array();
     foreach ($intents as $intent) {
