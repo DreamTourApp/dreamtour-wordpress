@@ -10,18 +10,18 @@ get_header();
 while (have_posts()) :
     the_post();
     
-    // Get meta fields with DRTR prefix
-    $tour_price = get_post_meta(get_the_ID(), '_drtr_price', true);
-    $tour_duration = get_post_meta(get_the_ID(), '_drtr_duration', true);
-    $tour_rating = get_post_meta(get_the_ID(), '_drtr_rating', true);
-    $tour_location = get_post_meta(get_the_ID(), '_drtr_location', true);
-    $tour_max_people = get_post_meta(get_the_ID(), '_drtr_max_people', true);
-    $tour_transport_type = get_post_meta(get_the_ID(), '_drtr_transport_type', true);
-    $tour_start_date = get_post_meta(get_the_ID(), '_drtr_start_date', true);
-    $tour_end_date = get_post_meta(get_the_ID(), '_drtr_end_date', true);
-    $tour_includes = get_post_meta(get_the_ID(), '_drtr_includes', true);
-    $tour_not_includes = get_post_meta(get_the_ID(), '_drtr_not_includes', true);
-    $tour_itinerary = get_post_meta(get_the_ID(), '_drtr_itinerary', true);
+    // Get meta fields with DRTR prefix (nueva forma) o sin prefijo (forma antigua)
+    $tour_price = get_post_meta(get_the_ID(), '_drtr_price', true) ?: get_post_meta(get_the_ID(), 'price', true);
+    $tour_duration = get_post_meta(get_the_ID(), '_drtr_duration', true) ?: get_post_meta(get_the_ID(), 'duration', true);
+    $tour_rating = get_post_meta(get_the_ID(), '_drtr_rating', true) ?: get_post_meta(get_the_ID(), 'rating', true);
+    $tour_location = get_post_meta(get_the_ID(), '_drtr_location', true) ?: get_post_meta(get_the_ID(), 'location', true);
+    $tour_max_people = get_post_meta(get_the_ID(), '_drtr_max_people', true) ?: get_post_meta(get_the_ID(), 'max_people', true);
+    $tour_transport_type = get_post_meta(get_the_ID(), '_drtr_transport_type', true) ?: get_post_meta(get_the_ID(), 'transport_type', true);
+    $tour_start_date = get_post_meta(get_the_ID(), '_drtr_start_date', true) ?: get_post_meta(get_the_ID(), 'start_date', true);
+    $tour_end_date = get_post_meta(get_the_ID(), '_drtr_end_date', true) ?: get_post_meta(get_the_ID(), 'end_date', true);
+    $tour_includes = get_post_meta(get_the_ID(), '_drtr_includes', true) ?: get_post_meta(get_the_ID(), 'includes', true);
+    $tour_not_includes = get_post_meta(get_the_ID(), '_drtr_not_includes', true) ?: get_post_meta(get_the_ID(), 'not_includes', true);
+    $tour_itinerary = get_post_meta(get_the_ID(), '_drtr_itinerary', true) ?: get_post_meta(get_the_ID(), 'itinerary', true);
     
     // Calculate deposit (50%)
     $tour_deposit = $tour_price ? round($tour_price * 0.5, 2) : 0;
@@ -31,7 +31,7 @@ while (have_posts()) :
         
         <?php if (has_post_thumbnail()) : ?>
             <div class="tour-hero-image">
-                <?php the_post_thumbnail('dreamtour-hero'); ?>
+                <?php the_post_thumbnail('full'); ?>
             </div>
         <?php endif; ?>
         
@@ -194,9 +194,9 @@ while (have_posts()) :
                     </section>
                     
                     <?php
-                    // Mostrar términos de taxonomía
-                    $destinations = get_the_terms(get_the_ID(), 'destination');
-                    $tour_types = get_the_terms(get_the_ID(), 'tour_type');
+                    // Mostrar términos de taxonomía (soportar ambas, tema y plugin)
+                    $destinations = get_the_terms(get_the_ID(), 'drtr_destination') ?: get_the_terms(get_the_ID(), 'destination');
+                    $tour_types = get_the_terms(get_the_ID(), 'drtr_tour_type') ?: get_the_terms(get_the_ID(), 'tour_type');
                     
                     if ($destinations || $tour_types) :
                         ?>
