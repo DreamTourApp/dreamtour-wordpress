@@ -4,6 +4,14 @@
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Favicons & Web App Icons -->
+    <link rel="icon" type="image/x-icon" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon/favicon.ico'); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon/favicon-16x16.png'); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon/favicon-32x32.png'); ?>">
+    <link rel="apple-touch-icon" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon/apple-touch-icon.png'); ?>">
+    <link rel="manifest" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon/site.webmanifest'); ?>">
+    
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
