@@ -103,30 +103,44 @@ while (have_posts()) :
                         <?php 
                         // Debug: verificar si hay datos
                         $current_post = get_post();
-                        $excerpt_length = strlen($current_post->post_excerpt);
-                        $content_length = strlen($current_post->post_content);
+                        $excerpt_text = $current_post->post_excerpt;
+                        $content_text = $current_post->post_content;
+                        $excerpt_length = strlen(trim($excerpt_text));
+                        $content_length = strlen(trim($content_text));
                         
                         // Mostrar debug solo para administradores
                         if (current_user_can('manage_options')) {
-                            echo '<!-- DEBUG: Excerpt length: ' . $excerpt_length . ', Content length: ' . $content_length . ' -->';
+                            echo '<!-- DEBUG INFO -->';
+                            echo '<!-- Post ID: ' . get_the_ID() . ' -->';
+                            echo '<!-- Post Type: ' . get_post_type() . ' -->';
+                            echo '<!-- Excerpt length: ' . $excerpt_length . ' -->';
+                            echo '<!-- Content length: ' . $content_length . ' -->';
+                            echo '<!-- Excerpt (first 100 chars): ' . esc_html(substr($excerpt_text, 0, 100)) . ' -->';
+                            echo '<!-- Content (first 100 chars): ' . esc_html(substr($content_text, 0, 100)) . ' -->';
+                            echo '<!-- /DEBUG INFO -->';
                         }
                         
-                        if (!empty($current_post->post_excerpt)) {
+                        // Mostrar excerpt si existe
+                        if ($excerpt_length > 0) {
                             echo '<div class="tour-excerpt-wrapper">';
-                            echo '<p class="tour-excerpt">' . wp_kses_post($current_post->post_excerpt) . '</p>';
+                            echo '<p class="tour-excerpt"><strong>Resumen:</strong> ' . wp_kses_post($excerpt_text) . '</p>';
                             echo '</div>';
                         }
                         
-                        if (!empty($current_post->post_content)) {
+                        // Mostrar contenido si existe
+                        if ($content_length > 0) {
                             echo '<div class="tour-content-wrapper">';
                             the_content();
                             echo '</div>';
                         }
                         
-                        // Si no hay contenido, mostrar mensaje para admin
-                        if (current_user_can('manage_options') && empty($current_post->post_content) && empty($current_post->post_excerpt)) {
+                        // Si no hay contenido, mostrar mensaje detallado para admin
+                        if (current_user_can('manage_options') && $excerpt_length === 0 && $content_length === 0) {
                             echo '<div class="admin-notice" style="background:#fff3cd;padding:15px;border-left:4px solid #ffc107;margin:20px 0;">';
-                            echo '<strong>⚠️ Aviso (solo admin):</strong> Este tour no tiene descripción. <a href="' . admin_url('post.php?post=' . get_the_ID() . '&action=edit') . '">Editar tour</a>';
+                            echo '<strong>⚠️ Aviso (solo admin):</strong> Este tour no tiene descripción.<br>';
+                            echo 'Post ID: ' . get_the_ID() . ', Type: ' . get_post_type() . '<br>';
+                            echo '<a href="' . admin_url('post.php?post=' . get_the_ID() . '&action=edit') . '">Editar en WordPress</a> | ';
+                            echo '<a href="' . home_url('/gestione-tours/?edit_tour=' . get_the_ID()) . '">Editar en gestor</a>';
                             echo '</div>';
                         }
                         ?>
