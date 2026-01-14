@@ -113,7 +113,73 @@ while (have_posts()) :
                         <section class="tour-section tour-itinerary">
                             <h2><?php _e('Itinerario', 'dreamtour'); ?></h2>
                             <div class="itinerary-content">
-                                <?php echo wp_kses_post($tour_itinerary); ?>
+                                <?php 
+                                // Try to parse as JSON first
+                                $itinerary_data = json_decode($tour_itinerary, true);
+                                
+                                if (json_last_error() === JSON_ERROR_NONE && is_array($itinerary_data)) {
+                                    // Sort by order
+                                    usort($itinerary_data, function($a, $b) {
+                                        return ($a['order'] ?? 0) - ($b['order'] ?? 0);
+                                    });
+                                    
+                                    echo '<div class="itinerary-timeline">';
+                                    foreach ($itinerary_data as $stop) {
+                                        $name = esc_html($stop['name'] ?? '');
+                                        $icon = esc_attr($stop['icon'] ?? 'visit');
+                                        $arrival = isset($stop['arrival']) ? date_i18n('H:i', strtotime($stop['arrival'])) : '';
+                                        $arrival_date = isset($stop['arrival']) ? date_i18n('j M Y', strtotime($stop['arrival'])) : '';
+                                        $departure = isset($stop['departure']) ? date_i18n('H:i', strtotime($stop['departure'])) : '';
+                                        $notes = esc_html($stop['notes'] ?? '');
+                                        
+                                        // Icon mapping
+                                        $icon_svg = '';
+                                        switch ($icon) {
+                                            case 'city':
+                                                $icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
+                                                break;
+                                            case 'visit':
+                                                $icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>';
+                                                break;
+                                            case 'hotel':
+                                                $icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
+                                                break;
+                                            case 'restaurant':
+                                                $icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>';
+                                                break;
+                                            default:
+                                                $icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+                                        }
+                                        
+                                        echo '<div class="timeline-item">';
+                                        echo '<div class="timeline-marker">';
+                                        echo '<div class="timeline-icon">' . $icon_svg . '</div>';
+                                        echo '</div>';
+                                        echo '<div class="timeline-content">';
+                                        echo '<div class="timeline-header">';
+                                        echo '<h3 class="timeline-title">' . $name . '</h3>';
+                                        if ($arrival_date) {
+                                            echo '<span class="timeline-date">' . $arrival_date . '</span>';
+                                        }
+                                        echo '</div>';
+                                        if ($arrival || $departure) {
+                                            echo '<div class="timeline-time">';
+                                            if ($arrival) echo '<span class="time-arrival"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg> ' . $arrival . '</span>';
+                                            if ($departure) echo '<span class="time-departure"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg> ' . $departure . '</span>';
+                                            echo '</div>';
+                                        }
+                                        if ($notes) {
+                                            echo '<p class="timeline-notes">' . $notes . '</p>';
+                                        }
+                                        echo '</div>';
+                                        echo '</div>';
+                                    }
+                                    echo '</div>';
+                                } else {
+                                    // Fallback to HTML content
+                                    echo wp_kses_post($tour_itinerary);
+                                }
+                                ?>
                             </div>
                         </section>
                     <?php endif; ?>

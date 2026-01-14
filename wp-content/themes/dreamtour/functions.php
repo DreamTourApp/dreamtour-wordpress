@@ -130,6 +130,15 @@ function dreamtour_enqueue_styles() {
             DREAMTOUR_VERSION
         );
     }
+    
+    // Itinerary timeline styles (only on single tour pages)
+    if (is_singular('drtr_tour')) {
+        wp_enqueue_style('dreamtour-itinerary-timeline', 
+            DREAMTOUR_THEME_URI . '/assets/css/itinerary-timeline.css', 
+            array('dreamtour-main'), 
+            DREAMTOUR_VERSION
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'dreamtour_enqueue_styles');
 
