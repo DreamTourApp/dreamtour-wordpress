@@ -23,26 +23,6 @@ while (have_posts()) :
     $tour_not_includes = get_post_meta(get_the_ID(), '_drtr_not_includes', true) ?: get_post_meta(get_the_ID(), 'not_includes', true);
     $tour_itinerary = get_post_meta(get_the_ID(), '_drtr_itinerary', true) ?: get_post_meta(get_the_ID(), 'itinerary', true);
 
-    // Debug logging to detect missing data in production (check wp-content/debug.log)
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        $meta_debug = array(
-            'post_id' => get_the_ID(),
-            'slug' => get_post_field('post_name', get_the_ID()),
-            'price' => $tour_price,
-            'duration' => $tour_duration,
-            'rating' => $tour_rating,
-            'location' => $tour_location,
-            'max_people' => $tour_max_people,
-            'transport_type' => $tour_transport_type,
-            'start_date' => $tour_start_date,
-            'end_date' => $tour_end_date,
-            'includes_length' => $tour_includes ? strlen($tour_includes) : 0,
-            'not_includes_length' => $tour_not_includes ? strlen($tour_not_includes) : 0,
-            'itinerary_length' => $tour_itinerary ? strlen($tour_itinerary) : 0,
-        );
-        error_log('[single-tour] meta ' . wp_json_encode($meta_debug));
-    }
-    
     // Calculate deposit (50%)
     $tour_deposit = $tour_price ? round($tour_price * 0.5, 2) : 0;
     
@@ -50,25 +30,9 @@ while (have_posts()) :
     $destinations = get_the_terms(get_the_ID(), 'drtr_destination') ?: get_the_terms(get_the_ID(), 'destination');
     $tour_types = get_the_terms(get_the_ID(), 'drtr_tour_type') ?: get_the_terms(get_the_ID(), 'tour_type');
 
-    // Debug logging for taxonomies
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        $tax_debug = array(
-            'destinations' => $destinations && !is_wp_error($destinations) ? wp_list_pluck($destinations, 'slug') : 'none',
-            'tour_types' => $tour_types && !is_wp_error($tour_types) ? wp_list_pluck($tour_types, 'slug') : 'none',
-        );
-        error_log('[single-tour] taxonomies ' . wp_json_encode($tax_debug));
-    }
     ?>
     
     <article id="post-<?php the_ID(); ?>" <?php post_class('single-tour'); ?>>
-        
-        <!-- Hero Image -->
-        <?php if (has_post_thumbnail()) : ?>
-            <div class="tour-hero-image">
-                <?php the_post_thumbnail('full'); ?>
-            </div>
-        <?php endif; ?>
-        
         <div class="container">
             <div class="single-tour-wrapper">
                 
@@ -402,51 +366,6 @@ while (have_posts()) :
             </div>
         </div>
     </article>
-    
-    <?php if (defined('WP_DEBUG') && WP_DEBUG) : ?>
-        <div style="margin: 20px 0; padding: 12px; background: #fff4e5; border: 1px solid #f0c36d; color: #5f4b32; font-size: 14px;">
-            <strong>Debug single-tour</strong>
-            <ul style="margin: 8px 0 0; padding-left: 18px; list-style: disc;">
-                <li>ID: <?php echo (int) get_the_ID(); ?></li>
-                <li>Slug: <?php echo esc_html(get_post_field('post_name', get_the_ID())); ?></li>
-                <li>Price: <?php echo esc_html($tour_price); ?></li>
-                <li>Duration: <?php echo esc_html($tour_duration); ?></li>
-                <li>Location: <?php echo esc_html($tour_location); ?></li>
-                <li>Max people: <?php echo esc_html($tour_max_people); ?></li>
-                <li>Transport: <?php echo esc_html($tour_transport_type); ?></li>
-                <li>Start date: <?php echo esc_html($tour_start_date); ?></li>
-                <li>End date: <?php echo esc_html($tour_end_date); ?></li>
-                <li>Includes length: <?php echo $tour_includes ? strlen($tour_includes) : 0; ?></li>
-                <li>Not includes length: <?php echo $tour_not_includes ? strlen($tour_not_includes) : 0; ?></li>
-                <li>Itinerary length: <?php echo $tour_itinerary ? strlen($tour_itinerary) : 0; ?></li>
-                <li>Destinations: <?php echo ($destinations && !is_wp_error($destinations)) ? esc_html(implode(', ', wp_list_pluck($destinations, 'slug'))) : 'none'; ?></li>
-                <li>Tour types: <?php echo ($tour_types && !is_wp_error($tour_types)) ? esc_html(implode(', ', wp_list_pluck($tour_types, 'slug'))) : 'none'; ?></li>
-            </ul>
-        </div>
-        <script>
-            console.log('[single-tour]', {
-                id: <?php echo (int) get_the_ID(); ?>,
-                slug: <?php echo wp_json_encode(get_post_field('post_name', get_the_ID())); ?>,
-                meta: <?php echo wp_json_encode(array(
-                    'price' => $tour_price,
-                    'duration' => $tour_duration,
-                    'rating' => $tour_rating,
-                    'location' => $tour_location,
-                    'max_people' => $tour_max_people,
-                    'transport_type' => $tour_transport_type,
-                    'start_date' => $tour_start_date,
-                    'end_date' => $tour_end_date,
-                    'includes_length' => $tour_includes ? strlen($tour_includes) : 0,
-                    'not_includes_length' => $tour_not_includes ? strlen($tour_not_includes) : 0,
-                    'itinerary_length' => $tour_itinerary ? strlen($tour_itinerary) : 0,
-                )); ?>,
-                taxonomies: <?php echo wp_json_encode(array(
-                    'destinations' => ($destinations && !is_wp_error($destinations)) ? wp_list_pluck($destinations, 'slug') : array(),
-                    'tour_types' => ($tour_types && !is_wp_error($tour_types)) ? wp_list_pluck($tour_types, 'slug') : array(),
-                )); ?>
-            });
-        </script>
-    <?php endif; ?>
     
     <?php
 endwhile;
