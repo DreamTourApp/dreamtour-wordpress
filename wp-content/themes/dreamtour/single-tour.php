@@ -22,6 +22,26 @@ while (have_posts()) :
     $tour_includes = get_post_meta(get_the_ID(), '_drtr_includes', true) ?: get_post_meta(get_the_ID(), 'includes', true);
     $tour_not_includes = get_post_meta(get_the_ID(), '_drtr_not_includes', true) ?: get_post_meta(get_the_ID(), 'not_includes', true);
     $tour_itinerary = get_post_meta(get_the_ID(), '_drtr_itinerary', true) ?: get_post_meta(get_the_ID(), 'itinerary', true);
+
+    // Debug logging to detect missing data in production (check wp-content/debug.log)
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        $meta_debug = array(
+            'post_id' => get_the_ID(),
+            'slug' => get_post_field('post_name', get_the_ID()),
+            'price' => $tour_price,
+            'duration' => $tour_duration,
+            'rating' => $tour_rating,
+            'location' => $tour_location,
+            'max_people' => $tour_max_people,
+            'transport_type' => $tour_transport_type,
+            'start_date' => $tour_start_date,
+            'end_date' => $tour_end_date,
+            'includes_length' => $tour_includes ? strlen($tour_includes) : 0,
+            'not_includes_length' => $tour_not_includes ? strlen($tour_not_includes) : 0,
+            'itinerary_length' => $tour_itinerary ? strlen($tour_itinerary) : 0,
+        );
+        error_log('[single-tour] meta ' . wp_json_encode($meta_debug));
+    }
     
     // Calculate deposit (50%)
     $tour_deposit = $tour_price ? round($tour_price * 0.5, 2) : 0;
@@ -29,6 +49,15 @@ while (have_posts()) :
     // Taxonomías
     $destinations = get_the_terms(get_the_ID(), 'drtr_destination') ?: get_the_terms(get_the_ID(), 'destination');
     $tour_types = get_the_terms(get_the_ID(), 'drtr_tour_type') ?: get_the_terms(get_the_ID(), 'tour_type');
+
+    // Debug logging for taxonomies
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        $tax_debug = array(
+            'destinations' => $destinations && !is_wp_error($destinations) ? wp_list_pluck($destinations, 'slug') : 'none',
+            'tour_types' => $tour_types && !is_wp_error($tour_types) ? wp_list_pluck($tour_types, 'slug') : 'none',
+        );
+        error_log('[single-tour] taxonomies ' . wp_json_encode($tax_debug));
+    }
     ?>
     
     <article id="post-<?php the_ID(); ?>" <?php post_class('single-tour'); ?>>
