@@ -1,8 +1,31 @@
 .drtr-intents-select {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 12px 0;
+}
+
+.drtr-intents-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.drtr-intents-section-title {
+    margin: 0;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #003284;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #003284;
+}
+
+.drtr-intents-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 12px;
-    margin: 12px 0;
 }
 
 .drtr-intent-label {
@@ -53,13 +76,18 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .drtr-intents-select {
+    .drtr-intents-group {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }
 
 @media (max-width: 480px) {
     .drtr-intents-select {
+        gap: 16px;
+    }
+    
+    .drtr-intents-group {
         grid-template-columns: 1fr;
     }
 }
+

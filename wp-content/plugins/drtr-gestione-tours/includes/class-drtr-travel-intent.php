@@ -37,20 +37,68 @@ function drtr_get_travel_intents() {
 }
 
 /**
- * Renderizar multiselect de intents
+ * Obtener intents divididos por tipo (viajes vs meses)
+ */
+function drtr_get_travel_intents_grouped() {
+    $all_intents = drtr_get_travel_intents();
+    
+    $months = array(
+        'january', 'february', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'october', 'november', 'december'
+    );
+    
+    $grouped = array(
+        'experiences' => array(),
+        'months' => array(),
+    );
+    
+    foreach ($all_intents as $term_id => $intent) {
+        if (in_array($intent['slug'], $months)) {
+            $grouped['months'][$term_id] = $intent;
+        } else {
+            $grouped['experiences'][$term_id] = $intent;
+        }
+    }
+    
+    return $grouped;
+}
+
+/**
+ * Renderizar multiselect de intents dividido en dos secciones
  */
 function drtr_render_intents_multiselect($selected_ids = array()) {
-    $intents = drtr_get_travel_intents();
+    $grouped = drtr_get_travel_intents_grouped();
     ?>
     <div class="drtr-intents-select">
-        <?php foreach ($intents as $term_id => $intent) : ?>
-            <label class="drtr-intent-label">
-                <input type="checkbox" name="travel_intents[]" value="<?php echo esc_attr($term_id); ?>" 
-                    <?php checked(in_array($term_id, $selected_ids)); ?> class="drtr-intent-checkbox">
-                <span class="drtr-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
-                <span class="drtr-intent-name"><?php echo esc_html($intent['name']); ?></span>
-            </label>
-        <?php endforeach; ?>
+        <!-- Sección: Experiencias de Viaje -->
+        <div class="drtr-intents-section">
+            <h4 class="drtr-intents-section-title"><?php _e('Intenciones de Viaje', 'drtr-tours'); ?></h4>
+            <div class="drtr-intents-group">
+                <?php foreach ($grouped['experiences'] as $term_id => $intent) : ?>
+                    <label class="drtr-intent-label">
+                        <input type="checkbox" name="travel_intents[]" value="<?php echo esc_attr($term_id); ?>" 
+                            <?php checked(in_array($term_id, $selected_ids)); ?> class="drtr-intent-checkbox">
+                        <span class="drtr-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                        <span class="drtr-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+        <!-- Sección: Meses -->
+        <div class="drtr-intents-section">
+            <h4 class="drtr-intents-section-title"><?php _e('Meses', 'drtr-tours'); ?></h4>
+            <div class="drtr-intents-group">
+                <?php foreach ($grouped['months'] as $term_id => $intent) : ?>
+                    <label class="drtr-intent-label">
+                        <input type="checkbox" name="travel_intents[]" value="<?php echo esc_attr($term_id); ?>" 
+                            <?php checked(in_array($term_id, $selected_ids)); ?> class="drtr-intent-checkbox">
+                        <span class="drtr-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                        <span class="drtr-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
     <?php
 }
