@@ -403,6 +403,32 @@ while (have_posts()) :
         </div>
     </article>
     
+    <?php if (defined('WP_DEBUG') && WP_DEBUG) : ?>
+        <script>
+            console.log('[single-tour]', {
+                id: <?php echo (int) get_the_ID(); ?>,
+                slug: <?php echo wp_json_encode(get_post_field('post_name', get_the_ID())); ?>,
+                meta: <?php echo wp_json_encode(array(
+                    'price' => $tour_price,
+                    'duration' => $tour_duration,
+                    'rating' => $tour_rating,
+                    'location' => $tour_location,
+                    'max_people' => $tour_max_people,
+                    'transport_type' => $tour_transport_type,
+                    'start_date' => $tour_start_date,
+                    'end_date' => $tour_end_date,
+                    'includes_length' => $tour_includes ? strlen($tour_includes) : 0,
+                    'not_includes_length' => $tour_not_includes ? strlen($tour_not_includes) : 0,
+                    'itinerary_length' => $tour_itinerary ? strlen($tour_itinerary) : 0,
+                )); ?>,
+                taxonomies: <?php echo wp_json_encode(array(
+                    'destinations' => ($destinations && !is_wp_error($destinations)) ? wp_list_pluck($destinations, 'slug') : array(),
+                    'tour_types' => ($tour_types && !is_wp_error($tour_types)) ? wp_list_pluck($tour_types, 'slug') : array(),
+                )); ?>
+            });
+        </script>
+    <?php endif; ?>
+    
     <?php
 endwhile;
 
