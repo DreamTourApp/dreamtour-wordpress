@@ -1,0 +1,65 @@
+.drtr-intents-select {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.drtr-intent-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.drtr-intent-label:hover {
+    border-color: #003284;
+    background-color: #f0f5ff;
+}
+
+.drtr-intent-label input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.drtr-intent-label input[type="checkbox"]:checked + .drtr-intent-icon,
+.drtr-intent-label input[type="checkbox"]:checked ~ .drtr-intent-name {
+    color: #003284;
+    font-weight: 600;
+}
+
+.drtr-intent-label input[type="checkbox"]:checked ~ * {
+    color: #003284;
+}
+
+.drtr-intent-icon {
+    font-size: 24px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.drtr-intent-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .drtr-intents-select {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .drtr-intents-select {
+        grid-template-columns: 1fr;
+    }
+}

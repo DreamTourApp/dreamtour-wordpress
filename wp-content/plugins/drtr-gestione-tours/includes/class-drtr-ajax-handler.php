@@ -123,6 +123,7 @@ class DRTR_Ajax_Handler {
             'includes' => get_post_meta($tour_id, '_drtr_includes', true),
             'not_includes' => get_post_meta($tour_id, '_drtr_not_includes', true),
             'itinerary' => get_post_meta($tour_id, '_drtr_itinerary', true),
+            'travel_intents' => drtr_get_tour_intents($tour_id),
         );
         
         // Obtener URL de imagen si existe
@@ -216,6 +217,14 @@ class DRTR_Ajax_Handler {
                 $value = call_user_func($sanitize_callback, $_POST[$field_name]);
                 update_post_meta($tour_id, $meta_key, $value);
             }
+        }
+        
+        // Guardar Travel Intents (taxonomía)
+        if (isset($_POST['travel_intents']) && !empty($_POST['travel_intents'])) {
+            $intent_ids = array_map('absint', (array) $_POST['travel_intents']);
+            wp_set_object_terms($tour_id, $intent_ids, 'drtr_travel_intent');
+        } else {
+            wp_set_object_terms($tour_id, array(), 'drtr_travel_intent');
         }
         
         wp_send_json_success(array(

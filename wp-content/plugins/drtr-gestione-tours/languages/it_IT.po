@@ -296,3 +296,6 @@ msgstr "Modifica"
 
 msgid "Eliminar"
 msgstr "Elimina"
+
+msgid "Intenciones de Viaje"
+msgstr "Intenzioni di Viaggio"

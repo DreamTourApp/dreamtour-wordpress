@@ -287,6 +287,12 @@ class DRTR_Frontend {
                         </div>
                     </div>
                     
+                    <!-- Travel Intents -->
+                    <div class="drtr-form-section">
+                        <h3><?php _e('Intenciones de Viaje', 'drtr-tours'); ?></h3>
+                        <?php drtr_render_intents_multiselect(array()); ?>
+                    </div>
+                    
                     <div class="drtr-form-actions">
                         <a href="<?php echo esc_url(get_permalink()); ?>" class="drtr-btn drtr-btn-secondary">
                             <?php _e('Cancelar', 'drtr-tours'); ?>
@@ -444,6 +450,12 @@ class DRTR_Frontend {
                             <label for="drtr-tour-rating"><?php _e('Valoración (0-5)', 'drtr-tours'); ?></label>
                             <input type="number" id="drtr-tour-rating" name="rating" min="0" max="5" step="0.1">
                         </div>
+                    </div>
+                    
+                    <!-- Travel Intents -->
+                    <div class="drtr-form-section">
+                        <h3><?php _e('Intenciones de Viaje', 'drtr-tours'); ?></h3>
+                        <?php drtr_render_intents_multiselect(drtr_get_tour_intents($tour_id)); ?>
                     </div>
                     
                     <div class="drtr-form-actions">

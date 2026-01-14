@@ -307,6 +307,14 @@
                         
                         // Cargar itinerario
                         self.loadItinerary(tour.itinerary);
+                        
+                        // Cargar Travel Intents si están disponibles
+                        if (tour.travel_intents && Array.isArray(tour.travel_intents)) {
+                            tour.travel_intents.forEach(function(intentId) {
+                                $('input[name="travel_intents[]"][value="' + intentId + '"]').prop('checked', true);
+                            });
+                        }
+                        
                         console.log('Tour data loaded and form populated!');
                     } else {
                         console.error('Condition failed - response.success:', response.success, 'response.data:', response.data);

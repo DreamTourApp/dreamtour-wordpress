@@ -28,6 +28,7 @@ require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-post-type.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-meta-boxes.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-ajax-handler.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-frontend.php';
+require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-travel-intent.php';
 
 /**
  * Clase principal del plugin
@@ -98,6 +99,13 @@ class DRTR_Gestione_Tours {
             wp_enqueue_style(
                 'drtr-frontend-css',
                 DRTR_PLUGIN_URL . 'assets/css/frontend.css',
+                array(),
+                DRTR_VERSION
+            );
+            
+            wp_enqueue_style(
+                'drtr-intents-css',
+                DRTR_PLUGIN_URL . 'assets/css/intents.css',
                 array(),
                 DRTR_VERSION
             );
