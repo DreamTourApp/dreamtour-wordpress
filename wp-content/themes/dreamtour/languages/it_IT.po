@@ -314,8 +314,11 @@ msgstr "Prossimo"
 msgid "días"
 msgstr "giorni"
 
+msgid "personas"
+msgstr "persone"
+
 msgid "Acerca de este viaje"
-msgstr "Informazioni sul viaggio"
+msgstr "Di Questo Viaggio"
 
 msgid "Qué incluye"
 msgstr "Cosa è incluso"

@@ -314,6 +314,9 @@ msgstr "Upcoming"
 msgid "días"
 msgstr "days"
 
+msgid "personas"
+msgstr "people"
+
 msgid "Acerca de este viaje"
 msgstr "About This Trip"
 
