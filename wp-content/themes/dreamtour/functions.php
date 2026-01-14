@@ -121,6 +121,15 @@ function dreamtour_enqueue_styles() {
         array('dreamtour-style'), 
         DREAMTOUR_VERSION
     );
+    
+    // Intent filter styles (only on homepage)
+    if (is_front_page()) {
+        wp_enqueue_style('dreamtour-intents-filter', 
+            DREAMTOUR_THEME_URI . '/assets/css/intents-filter.css', 
+            array('dreamtour-main'), 
+            DREAMTOUR_VERSION
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'dreamtour_enqueue_styles');
 
@@ -143,6 +152,16 @@ function dreamtour_enqueue_scripts() {
         DREAMTOUR_VERSION, 
         true
     );
+    
+    // Intent filter script (only on homepage)
+    if (is_front_page()) {
+        wp_enqueue_script('dreamtour-intents-filter', 
+            DREAMTOUR_THEME_URI . '/assets/js/intents-filter.js', 
+            array('jquery'), 
+            DREAMTOUR_VERSION, 
+            true
+        );
+    }
     
     // Pasar datos a JavaScript
     wp_localize_script('dreamtour-main', 'dreamtourData', array(

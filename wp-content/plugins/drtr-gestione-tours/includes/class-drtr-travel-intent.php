@@ -115,3 +115,51 @@ function drtr_get_tour_intents($post_id) {
     
     return wp_list_pluck($terms, 'term_id');
 }
+
+/**
+ * Renderizar filtro de intents para homepage (frontend)
+ */
+function drtr_render_intents_filter() {
+    $grouped = drtr_get_travel_intents_grouped();
+    ?>
+    <div class="filter-group filter-group-intents">
+        <button type="button" class="filter-intents-toggle" id="filter-intents-toggle">
+            <span><?php esc_html_e('Intención de Viaje', 'dreamtour'); ?></span>
+            <span class="filter-count" id="filter-count" style="display:none;">0</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        
+        <div class="filter-intents-dropdown" id="filter-intents-dropdown" style="display:none;">
+            <!-- Sección: Experiencias de Viaje -->
+            <div class="filter-intents-section">
+                <h4 class="filter-intents-section-title"><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></h4>
+                <div class="filter-intents-group">
+                    <?php foreach ($grouped['experiences'] as $term_id => $intent) : ?>
+                        <label class="filter-intent-label">
+                            <input type="checkbox" name="filter_intents[]" value="<?php echo esc_attr($intent['slug']); ?>" class="filter-intent-checkbox">
+                            <span class="filter-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                            <span class="filter-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
+            <!-- Sección: Meses -->
+            <div class="filter-intents-section">
+                <h4 class="filter-intents-section-title"><?php esc_html_e('Meses', 'dreamtour'); ?></h4>
+                <div class="filter-intents-group">
+                    <?php foreach ($grouped['months'] as $term_id => $intent) : ?>
+                        <label class="filter-intent-label">
+                            <input type="checkbox" name="filter_intents[]" value="<?php echo esc_attr($intent['slug']); ?>" class="filter-intent-checkbox">
+                            <span class="filter-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                            <span class="filter-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}

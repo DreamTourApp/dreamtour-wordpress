@@ -15,9 +15,20 @@ $image_id = get_post_meta(get_the_ID(), '_drtr_image_id', true);
 
 // Obtener destinos (taxonomía)
 $destinations = get_the_terms(get_the_ID(), 'drtr_destination');
+
+// Obtener travel intents (taxonomía)
+$travel_intents = get_the_terms(get_the_ID(), 'drtr_travel_intent');
+$intent_slugs = array();
+if ($travel_intents && !is_wp_error($travel_intents)) {
+    $intent_slugs = wp_list_pluck($travel_intents, 'slug');
+}
 ?>
 
-<div class="tour-card" data-destination="<?php echo $destinations && !is_wp_error($destinations) ? esc_attr($destinations[0]->slug) : ''; ?>" data-transport="<?php echo esc_attr($tour_transport); ?>" data-duration="<?php echo esc_attr($tour_duration); ?>">
+<div class="tour-card" 
+    data-destination="<?php echo $destinations && !is_wp_error($destinations) ? esc_attr($destinations[0]->slug) : ''; ?>" 
+    data-transport="<?php echo esc_attr($tour_transport); ?>" 
+    data-duration="<?php echo esc_attr($tour_duration); ?>"
+    data-intents="<?php echo esc_attr(implode(',', $intent_slugs)); ?>">
     <a href="<?php the_permalink(); ?>" class="tour-card-link">
         
         <div class="tour-card-image">
