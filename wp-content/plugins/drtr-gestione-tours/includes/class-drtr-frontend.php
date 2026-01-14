@@ -16,40 +16,22 @@ class DRTR_Frontend {
     
     private function __construct() {
         add_action('init', array($this, 'create_management_page'));
+        add_action('init', array($this, 'register_shortcode'));
+        add_action('template_redirect', array($this, 'handle_management_page'));
         add_filter('the_content', array($this, 'render_management_interface'));
     }
     
     /**
-     * Crear página de gestión programáticamente
+     * Registrar shortcode para la página de gestión
      */
-    public function create_management_page() {
-        $page_slug = 'gestione-tours';
-        
-        // Verificar si la página ya existe
-        $page = get_page_by_path($page_slug);
-        
-        if (!$page) {
-            $page_data = array(
-                'post_title' => __('Gestione Tours', 'drtr-tours'),
-                'post_content' => '[drtr_tours_manager]',
-                'post_status' => 'publish',
-                'post_type' => 'page',
-                'post_name' => $page_slug,
-            );
-            
-            wp_insert_post($page_data);
-        }
+    public function register_shortcode() {
+        add_shortcode('drtr_tours_manager', array($this, 'render_shortcode'));
     }
     
     /**
-     * Renderizar interfaz de gestión
+     * Procesar shortcode [drtr_tours_manager]
      */
-    public function render_management_interface($content) {
-        if (!is_page('gestione-tours')) {
-            return $content;
-        }
-        
-        // Verificar que solo administradores puedan ver
+    public function render_shortcode() {
         if (!current_user_can('manage_options')) {
             return '<div class="drtr-error"><p>' . __('No tienes permisos para acceder a esta página.', 'drtr-tours') . '</p></div>';
         }
@@ -64,6 +46,7 @@ class DRTR_Frontend {
             return $this->render_edit_page(intval($_GET['edit_tour']));
         }
         
+        // Mostrar interfaz de gestión
         ob_start();
         ?>
         <div id="drtr-tours-manager" class="drtr-container">
@@ -101,12 +84,7 @@ class DRTR_Frontend {
                         </tr>
                     </thead>
                     <tbody id="drtr-tours-tbody">
-                        <tr>
-                            <td colspan="9" class="drtr-loading">
-                                <span class="spinner is-active"></span>
-                                <?php _e('Cargando tours...', 'drtr-tours'); ?>
-                            </td>
-                        </tr>
+                        <!-- Cargado con JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -119,6 +97,55 @@ class DRTR_Frontend {
         </div>
         <?php
         return ob_get_clean();
+    }
+    
+    /**
+     * Manejar redirecciones en la página de gestión
+     */
+    public function handle_management_page() {
+        if (!is_page('gestione-tours')) {
+            return;
+        }
+        
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        
+        // Si hay parámetro new_tour o edit_tour, forzar la renderización
+        if (isset($_GET['new_tour']) || isset($_GET['edit_tour'])) {
+            // El shortcode se encargará de renderizar la página correcta
+            return;
+        }
+    }
+    
+    /**
+     * Crear página de gestión programáticamente
+     */
+    public function create_management_page() {
+        $page_slug = 'gestione-tours';
+        
+        // Verificar si la página ya existe
+        $page = get_page_by_path($page_slug);
+        
+        if (!$page) {
+            $page_data = array(
+                'post_title' => __('Gestione Tours', 'drtr-tours'),
+                'post_content' => '[drtr_tours_manager]',
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_name' => $page_slug,
+            );
+            
+            wp_insert_post($page_data);
+        }
+    }
+    
+    /**
+     * Renderizar interfaz de gestión (deprecated - ahora usa shortcode)
+     */
+    public function render_management_interface($content) {
+        // El shortcode [drtr_tours_manager] se encarga de toda la renderización
+        return $content;
     }
     
     /**
