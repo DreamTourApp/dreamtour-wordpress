@@ -123,7 +123,7 @@ while (have_posts()) :
                         // Mostrar excerpt si existe
                         if ($excerpt_length > 0) {
                             echo '<div class="tour-excerpt-wrapper">';
-                            echo '<p class="tour-excerpt"><strong>Resumen:</strong> ' . wp_kses_post($excerpt_text) . '</p>';
+                            echo '<p class="tour-excerpt">' . wp_kses_post($excerpt_text) . '</p>';
                             echo '</div>';
                         }
                         
