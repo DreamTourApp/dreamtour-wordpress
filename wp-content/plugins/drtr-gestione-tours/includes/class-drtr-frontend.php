@@ -289,7 +289,6 @@ class DRTR_Frontend {
                     
                     <!-- Travel Intents -->
                     <div class="drtr-form-section">
-                        <h3><?php _e('Intenciones de Viaje', 'drtr-tours'); ?></h3>
                         <?php drtr_render_intents_multiselect(array()); ?>
                     </div>
                     
@@ -454,7 +453,6 @@ class DRTR_Frontend {
                     
                     <!-- Travel Intents -->
                     <div class="drtr-form-section">
-                        <h3><?php _e('Intenciones de Viaje', 'drtr-tours'); ?></h3>
                         <?php drtr_render_intents_multiselect(drtr_get_tour_intents($tour_id)); ?>
                     </div>
                     
