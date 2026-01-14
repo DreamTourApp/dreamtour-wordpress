@@ -397,6 +397,13 @@
             const form = document.getElementById('drtr-tour-form');
             const formData = new FormData(form);
             
+            // Debug: verificar datos del formulario
+            console.log('=== SAVE TOUR DEBUG ===');
+            console.log('Title:', formData.get('title'));
+            console.log('Content:', formData.get('content'));
+            console.log('Excerpt:', formData.get('excerpt'));
+            console.log('Tour ID:', formData.get('tour_id'));
+            
             // Agregar action y nonce
             formData.append('action', 'drtr_save_tour');
             formData.append('nonce', drtrAjax.nonce);
@@ -411,6 +418,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
+                    console.log('Save response:', response);
                     if (response.success) {
                         self.showMessage(drtrAjax.strings.success_save, 'success');
                         
@@ -427,7 +435,8 @@
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('Save error:', error);
                     self.showMessage(drtrAjax.strings.error, 'error');
                 }
             });

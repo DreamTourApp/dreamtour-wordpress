@@ -144,10 +144,18 @@ class DRTR_Ajax_Handler {
             wp_send_json_error(array('message' => __('No tienes permisos', 'drtr-tours')));
         }
         
+        // Log para debugging
+        error_log('DRTR Save Tour - POST data: ' . print_r($_POST, true));
+        
         $tour_id = isset($_POST['tour_id']) ? absint($_POST['tour_id']) : 0;
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
         $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
         $excerpt = isset($_POST['excerpt']) ? sanitize_textarea_field($_POST['excerpt']) : '';
+        
+        // Log de valores
+        error_log('DRTR Save Tour - Title: ' . $title);
+        error_log('DRTR Save Tour - Content length: ' . strlen($content));
+        error_log('DRTR Save Tour - Excerpt length: ' . strlen($excerpt));
         
         if (empty($title)) {
             wp_send_json_error(array('message' => __('El título es obligatorio', 'drtr-tours')));
@@ -163,16 +171,18 @@ class DRTR_Ajax_Handler {
         
         if ($tour_id) {
             $post_data['ID'] = $tour_id;
-            $result = wp_update_post($post_data);
+            $result = wp_update_post($post_data, true);
         } else {
-            $result = wp_insert_post($post_data);
+            $result = wp_insert_post($post_data, true);
         }
         
         if (is_wp_error($result)) {
+            error_log('DRTR Save Tour - Error: ' . $result->get_error_message());
             wp_send_json_error(array('message' => $result->get_error_message()));
         }
         
         $tour_id = $result;
+        error_log('DRTR Save Tour - Saved tour ID: ' . $tour_id);
         
         // Manejar subida de imagen si existe
         if (!empty($_FILES['tour_image']['name'])) {
