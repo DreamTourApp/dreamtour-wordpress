@@ -313,3 +313,63 @@ msgstr "Upcoming"
 
 msgid "días"
 msgstr "days"
+
+msgid "Acerca de este viaje"
+msgstr "About This Trip"
+
+msgid "Qué incluye"
+msgstr "What is Included"
+
+msgid "Qué no incluye"
+msgstr "What is Not Included"
+
+msgid "Detalles del Tour"
+msgstr "Tour Details"
+
+msgid "Ubicación"
+msgstr "Location"
+
+msgid "Máx. Personas"
+msgstr "Max People"
+
+msgid "Precio"
+msgstr "Price"
+
+msgid "Valoración"
+msgstr "Rating"
+
+msgid "Precio por persona"
+msgstr "Price per Person"
+
+msgid "Reservar tu plaza"
+msgstr "Book Your Spot"
+
+msgid "Adultos"
+msgstr "Adults"
+
+msgid "Niños (0-12 años)"
+msgstr "Children (0-12 years)"
+
+msgid "Subtotal"
+msgstr "Subtotal"
+
+msgid "Acconto (50%)"
+msgstr "Deposit (50%)"
+
+msgid "Total a pagar hoy"
+msgstr "Total to Pay Today"
+
+msgid "Pagar Acconto (50%)"
+msgstr "Pay Deposit (50%)"
+
+msgid "Pagar completo"
+msgstr "Pay Full Amount"
+
+msgid "Continuar a Reserva"
+msgstr "Continue to Booking"
+
+msgid "Cancelación flexible hasta 14 días antes"
+msgstr "Flexible Cancellation up to 14 Days Before"
+
+msgid "Itinerario"
+msgstr "Itinerary"
