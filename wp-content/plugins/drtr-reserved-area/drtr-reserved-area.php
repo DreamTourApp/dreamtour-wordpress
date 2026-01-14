@@ -22,7 +22,7 @@ require_once WP_CONTENT_DIR . '/version-helper.php';
 /**
  * Definir constantes del plugin
  */
-define('DRTR_RA_VERSION', dreamtour_get_version('1.0.0', dirname(__FILE__)));
+define('DRTR_RA_VERSION', dreamtour_get_version('1.0.0'));
 define('DRTR_RA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DRTR_RA_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DRTR_RA_PLUGIN_BASENAME', plugin_basename(__FILE__));

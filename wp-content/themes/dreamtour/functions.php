@@ -16,7 +16,7 @@ require_once WP_CONTENT_DIR . '/version-helper.php';
 /**
  * Define constantes del tema
  */
-define('DREAMTOUR_VERSION', dreamtour_get_version('1.0.0', dirname(__FILE__)));
+define('DREAMTOUR_VERSION', dreamtour_get_version('1.0.0'));
 define('DREAMTOUR_THEME_DIR', get_template_directory());
 define('DREAMTOUR_THEME_URI', get_template_directory_uri());
 
