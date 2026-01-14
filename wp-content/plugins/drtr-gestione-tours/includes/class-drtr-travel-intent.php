@@ -163,3 +163,61 @@ function drtr_render_intents_filter() {
     </div>
     <?php
 }
+
+/**
+ * Renderizar dos filtros separados: Intenciones de Viaje y Meses
+ */
+function drtr_render_split_intents_filters() {
+    $grouped = drtr_get_travel_intents_grouped();
+    ?>
+    <!-- Filtro: Intenciones de Viaje -->
+    <div class="filter-group filter-group-intents">
+        <button type="button" class="filter-intents-toggle" id="filter-experiences-toggle">
+            <span><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></span>
+            <span class="filter-count" id="filter-experiences-count" style="display:none;">0</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        
+        <div class="filter-intents-dropdown" id="filter-experiences-dropdown" style="display:none;">
+            <div class="filter-intents-section">
+                <div class="filter-intents-group">
+                    <?php foreach ($grouped['experiences'] as $term_id => $intent) : ?>
+                        <label class="filter-intent-label">
+                            <input type="checkbox" name="filter_experiences[]" value="<?php echo esc_attr($intent['slug']); ?>" class="filter-experience-checkbox">
+                            <span class="filter-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                            <span class="filter-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filtro: Meses -->
+    <div class="filter-group filter-group-intents">
+        <button type="button" class="filter-intents-toggle" id="filter-months-toggle">
+            <span><?php esc_html_e('Meses', 'dreamtour'); ?></span>
+            <span class="filter-count" id="filter-months-count" style="display:none;">0</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        
+        <div class="filter-intents-dropdown" id="filter-months-dropdown" style="display:none;">
+            <div class="filter-intents-section">
+                <div class="filter-intents-group">
+                    <?php foreach ($grouped['months'] as $term_id => $intent) : ?>
+                        <label class="filter-intent-label">
+                            <input type="checkbox" name="filter_months[]" value="<?php echo esc_attr($intent['slug']); ?>" class="filter-month-checkbox">
+                            <span class="filter-intent-icon"><?php echo esc_html($intent['icon']); ?></span>
+                            <span class="filter-intent-name"><?php echo esc_html($intent['name']); ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}

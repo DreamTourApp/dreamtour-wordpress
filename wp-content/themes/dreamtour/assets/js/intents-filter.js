@@ -1,55 +1,99 @@
 /**
- * Travel Intent Filter - Homepage
+ * Split Travel Intent and Month Filters - Homepage
  */
 (function($) {
     'use strict';
     
     $(document).ready(function() {
-        const $toggle = $('#filter-intents-toggle');
-        const $dropdown = $('#filter-intents-dropdown');
-        const $count = $('#filter-count');
-        const $checkboxes = $('.filter-intent-checkbox');
+        const $experiencesToggle = $('#filter-experiences-toggle');
+        const $monthsToggle = $('#filter-months-toggle');
+        const $experiencesDropdown = $('#filter-experiences-dropdown');
+        const $monthsDropdown = $('#filter-months-dropdown');
+        const $experiencesCount = $('#filter-experiences-count');
+        const $monthsCount = $('#filter-months-count');
+        const $experienceCheckboxes = $('.filter-experience-checkbox');
+        const $monthCheckboxes = $('.filter-month-checkbox');
         
-        // Toggle dropdown
-        $toggle.on('click', function(e) {
+        // Toggle experiences dropdown
+        $experiencesToggle.on('click', function(e) {
             e.stopPropagation();
-            $dropdown.toggle();
-            $toggle.toggleClass('active');
+            $experiencesDropdown.toggle();
+            $monthsDropdown.hide(); // Close the other one
+            $experiencesToggle.toggleClass('active');
+            $monthsToggle.removeClass('active');
         });
         
-        // Close dropdown when clicking outside
+        // Toggle months dropdown
+        $monthsToggle.on('click', function(e) {
+            e.stopPropagation();
+            $monthsDropdown.toggle();
+            $experiencesDropdown.hide(); // Close the other one
+            $monthsToggle.toggleClass('active');
+            $experiencesToggle.removeClass('active');
+        });
+        
+        // Close dropdowns when clicking outside
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.filter-group-intents').length) {
-                $dropdown.hide();
-                $toggle.removeClass('active');
+                $experiencesDropdown.hide();
+                $monthsDropdown.hide();
+                $experiencesToggle.removeClass('active');
+                $monthsToggle.removeClass('active');
             }
         });
         
-        // Prevent dropdown from closing when clicking inside
-        $dropdown.on('click', function(e) {
+        // Prevent dropdowns from closing when clicking inside
+        $experiencesDropdown.on('click', function(e) {
             e.stopPropagation();
         });
         
-        // Update count and filter tours
-        $checkboxes.on('change', function() {
-            updateCount();
+        $monthsDropdown.on('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Update count and filter tours for experiences
+        $experienceCheckboxes.on('change', function() {
+            updateExperiencesCount();
             filterTours();
         });
         
-        function updateCount() {
-            const count = $checkboxes.filter(':checked').length;
+        // Update count and filter tours for months
+        $monthCheckboxes.on('change', function() {
+            updateMonthsCount();
+            filterTours();
+        });
+        
+        function updateExperiencesCount() {
+            const count = $experienceCheckboxes.filter(':checked').length;
             if (count > 0) {
-                $count.text(count).show();
+                $experiencesCount.text(count).show();
             } else {
-                $count.hide();
+                $experiencesCount.hide();
+            }
+        }
+        
+        function updateMonthsCount() {
+            const count = $monthCheckboxes.filter(':checked').length;
+            if (count > 0) {
+                $monthsCount.text(count).show();
+            } else {
+                $monthsCount.hide();
             }
         }
         
         function filterTours() {
-            const selectedIntents = [];
-            $checkboxes.filter(':checked').each(function() {
-                selectedIntents.push($(this).val());
+            const selectedExperiences = [];
+            const selectedMonths = [];
+            
+            $experienceCheckboxes.filter(':checked').each(function() {
+                selectedExperiences.push($(this).val());
             });
+            
+            $monthCheckboxes.filter(':checked').each(function() {
+                selectedMonths.push($(this).val());
+            });
+            
+            const allSelected = [...selectedExperiences, ...selectedMonths];
             
             // Get other filter values
             const transport = $('#filter-transport').val();
@@ -59,12 +103,12 @@
             $('.tour-card').each(function() {
                 let show = true;
                 
-                // Filter by intents (OR logic)
-                if (selectedIntents.length > 0) {
+                // Filter by intents (OR logic combining experiences and months)
+                if (allSelected.length > 0) {
                     const tourIntents = $(this).data('intents');
                     if (tourIntents) {
-                        const tourIntentsArray = tourIntents.toString().split(',');
-                        const hasMatch = selectedIntents.some(intent => 
+                        const tourIntentsArray = tourIntents.toString().split(',').map(s => s.trim());
+                        const hasMatch = allSelected.some(intent => 
                             tourIntentsArray.includes(intent)
                         );
                         show = show && hasMatch;
@@ -111,12 +155,16 @@
         
         // Reset filters
         $('#filter-reset').on('click', function() {
-            $checkboxes.prop('checked', false);
+            $experienceCheckboxes.prop('checked', false);
+            $monthCheckboxes.prop('checked', false);
             $('#filter-transport').val('');
             $('#filter-duration').val('');
-            updateCount();
+            updateExperiencesCount();
+            updateMonthsCount();
             $('.tour-card').show();
             $('#no-tours-message').remove();
+            $experiencesDropdown.hide();
+            $monthsDropdown.hide();
         });
         
         // Connect existing filters to new system

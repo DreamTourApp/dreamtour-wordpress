@@ -90,9 +90,9 @@ get_header();
         <!-- Tour Filters -->
         <div class="tour-filters">
             <?php 
-            // Include travel intent filter helper
-            if (function_exists('drtr_render_intents_filter')) {
-                drtr_render_intents_filter();
+            // Include travel intent split filters (Intenciones + Meses)
+            if (function_exists('drtr_render_split_intents_filters')) {
+                drtr_render_split_intents_filters();
             }
             ?>
             
