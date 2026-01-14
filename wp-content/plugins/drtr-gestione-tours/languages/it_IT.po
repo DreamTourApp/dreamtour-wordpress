@@ -360,3 +360,15 @@ msgstr "Mercatini di Natale"
 
 msgid "Vacanze in montagna"
 msgstr "Vacanze in Montagna"
+# Form fields / Campi del modulo
+msgid "Precio (€) *"
+msgstr "Prezzo (€) *"
+
+msgid "Duración (días) *"
+msgstr "Durata (giorni) *"
+
+msgid "Fecha y Hora de Inicio *"
+msgstr "Data e Ora di Inizio *"
+
+msgid "Fecha y Hora de Fin *"
+msgstr "Data e Ora di Fine *"

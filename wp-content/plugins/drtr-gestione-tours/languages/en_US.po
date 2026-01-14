@@ -360,3 +360,15 @@ msgstr "Christmas Markets"
 
 msgid "Vacanze in montagna"
 msgstr "Mountain Vacations"
+# Form fields
+msgid "Precio (€) *"
+msgstr "Price (€) *"
+
+msgid "Duración (días) *"
+msgstr "Duration (days) *"
+
+msgid "Fecha y Hora de Inicio *"
+msgstr "Start Date and Time *"
+
+msgid "Fecha y Hora de Fin *"
+msgstr "End Date and Time *"
