@@ -313,3 +313,63 @@ msgstr "Prossimo"
 
 msgid "días"
 msgstr "giorni"
+
+msgid "Acerca de este viaje"
+msgstr "Informazioni sul viaggio"
+
+msgid "Qué incluye"
+msgstr "Cosa è incluso"
+
+msgid "Qué no incluye"
+msgstr "Cosa non è incluso"
+
+msgid "Detalles del Tour"
+msgstr "Dettagli del tour"
+
+msgid "Ubicación"
+msgstr "Luogo"
+
+msgid "Máx. Personas"
+msgstr "Persone max"
+
+msgid "Precio"
+msgstr "Prezzo"
+
+msgid "Valoración"
+msgstr "Valutazione"
+
+msgid "Precio por persona"
+msgstr "Prezzo per persona"
+
+msgid "Reservar tu plaza"
+msgstr "Prenota il tuo posto"
+
+msgid "Adultos"
+msgstr "Adulti"
+
+msgid "Niños (0-12 años)"
+msgstr "Bambini (0-12 anni)"
+
+msgid "Subtotal"
+msgstr "Subtotale"
+
+msgid "Acconto (50%)"
+msgstr "Acconto (50%)"
+
+msgid "Total a pagar hoy"
+msgstr "Totale da pagare oggi"
+
+msgid "Pagar Acconto (50%)"
+msgstr "Paga Acconto (50%)"
+
+msgid "Pagar completo"
+msgstr "Paga tutto"
+
+msgid "Continuar a Reserva"
+msgstr "Continua alla prenotazione"
+
+msgid "Cancelación flexible hasta 14 días antes"
+msgstr "Cancellazione flessibile fino a 14 giorni prima"
+
+msgid "Itinerario"
+msgstr "Itinerario"
