@@ -53,16 +53,16 @@ while (have_posts()) :
                                 <!-- Quick Meta Info -->
                                 <div class="tour-meta-list">
                                     <?php if ($tour_location) : ?>
-                                          <?php _e('Coordinador incluido', 'dreamtour'); ?>
+                                        <div class="tour-meta-item">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                          <?php _e('Seguro médico y de equipaje', 'dreamtour'); ?>
+                                                <circle cx="12" cy="10" r="3"></circle>
                                             </svg>
                                             <span><?php echo esc_html($tour_location); ?></span>
-                                          <?php _e('Cancelación flexible', 'dreamtour'); ?>
+                                        </div>
                                     <?php endif; ?>
                                     
-                                          <?php _e('Grupo reducido', 'dreamtour'); ?>
+                                    <?php if ($tour_duration) : ?>
                                         <div class="tour-meta-item">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="12" cy="12" r="10"></circle>
@@ -341,25 +341,25 @@ while (have_posts()) :
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <?php _e('Coordinador incluido / Coordinatore incluso / Coordinator included', 'dreamtour'); ?>
+                                <?php _e('Coordinador incluido', 'dreamtour'); ?>
                             </li>
                             <li>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <?php _e('Seguro médico y de equipaje / Assicurazione medica e bagaglio / Medical and baggage insurance', 'dreamtour'); ?>
+                                <?php _e('Seguro médico y de equipaje', 'dreamtour'); ?>
                             </li>
                             <li>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <?php _e('Cancelación flexible / Cancellazione flessibile / Flexible cancellation', 'dreamtour'); ?>
+                                <?php _e('Cancelación flexible', 'dreamtour'); ?>
                             </li>
                             <li>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <?php _e('Grupo reducido / Gruppo ristretto / Small group', 'dreamtour'); ?>
+                                <?php _e('Grupo reducido', 'dreamtour'); ?>
                             </li>
                         </ul>
                         
