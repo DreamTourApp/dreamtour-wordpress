@@ -143,7 +143,7 @@ class DRTR_Frontend {
             
             <!-- Formulario de creación -->
             <div class="drtr-edit-form-container">
-                <form id="drtr-tour-form">
+                <form id="drtr-tour-form" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="drtr-tour-id" name="tour_id" value="">
                     
                     <div class="drtr-form-row">
@@ -302,7 +302,7 @@ class DRTR_Frontend {
             
             <!-- Formulario de edición -->
             <div class="drtr-edit-form-container">
-                <form id="drtr-tour-form">
+                <form id="drtr-tour-form" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="drtr-tour-id" name="tour_id" value="<?php echo esc_attr($tour_id); ?>">
                     
                     <div class="drtr-form-row">
