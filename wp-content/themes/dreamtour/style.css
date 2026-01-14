@@ -468,8 +468,9 @@ a:hover {
 
 /* Tour Filters */
 .tour-filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: var(--spacing-md);
   margin: var(--spacing-lg) 0;
   padding: var(--spacing-md);
@@ -481,6 +482,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  flex: 1 1 200px;
+  min-width: 180px;
 }
 
 .filter-group label {
@@ -507,6 +510,22 @@ a:hover {
   border-color: var(--color-primary-light);
   outline: none;
   box-shadow: 0 0 0 3px rgba(26, 171, 231, 0.1);
+}
+
+/* Reset button styling */
+#filter-reset {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  padding: 10px 20px;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+#filter-reset:hover {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-white);
 }
 
 .filter-group:last-child {
