@@ -20,6 +20,7 @@ class DRTR_Ajax_Handler {
         add_action('wp_ajax_drtr_get_tour', array($this, 'get_tour'));
         add_action('wp_ajax_drtr_save_tour', array($this, 'save_tour'));
         add_action('wp_ajax_drtr_duplicate_tour', array($this, 'duplicate_tour'));
+        add_action('wp_ajax_drtr_toggle_status', array($this, 'toggle_status'));
         add_action('wp_ajax_drtr_delete_tour', array($this, 'delete_tour'));
     }
     
@@ -111,6 +112,7 @@ class DRTR_Ajax_Handler {
             'title' => $post->post_title,
             'content' => $post->post_content,
             'excerpt' => $post->post_excerpt,
+            'status' => $post->post_status,
             'image_id' => get_post_meta($tour_id, '_drtr_image_id', true),
             'image_url' => '',
             'price' => get_post_meta($tour_id, '_drtr_price', true),
@@ -175,7 +177,7 @@ class DRTR_Ajax_Handler {
             'post_content' => $content,
             'post_excerpt' => $excerpt,
             'post_type' => 'drtr_tour',
-            'post_status' => 'publish',
+            'post_status' => isset($_POST['post_status']) ? sanitize_text_field($_POST['post_status']) : 'draft',
         );
         
         error_log('Post data array: ' . print_r($post_data, true));
@@ -358,6 +360,46 @@ class DRTR_Ajax_Handler {
         wp_send_json_success(array(
             'message' => __('Tour duplicado correctamente', 'drtr-tours'),
             'tour_id' => $new_tour_id,
+        ));
+    }
+    
+    /**
+     * Cambiar estado de publicación de un tour
+     */
+    public function toggle_status() {
+        check_ajax_referer('drtr_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('No tienes permisos', 'drtr-tours')));
+        }
+        
+        $tour_id = isset($_POST['tour_id']) ? absint($_POST['tour_id']) : 0;
+        $new_status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+        
+        if (!$tour_id || !in_array($new_status, array('publish', 'draft'))) {
+            wp_send_json_error(array('message' => __('Parámetros inválidos', 'drtr-tours')));
+        }
+        
+        $post = get_post($tour_id);
+        
+        if (!$post || $post->post_type !== 'drtr_tour') {
+            wp_send_json_error(array('message' => __('Tour no encontrado', 'drtr-tours')));
+        }
+        
+        $result = wp_update_post(array(
+            'ID' => $tour_id,
+            'post_status' => $new_status,
+        ));
+        
+        if (is_wp_error($result)) {
+            wp_send_json_error(array('message' => $result->get_error_message()));
+        }
+        
+        $status_label = $new_status === 'publish' ? __('publicado', 'drtr-tours') : __('borrador', 'drtr-tours');
+        
+        wp_send_json_success(array(
+            'message' => sprintf(__('Tour marcado como %s', 'drtr-tours'), $status_label),
+            'status' => $new_status,
         ));
     }
     

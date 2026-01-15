@@ -300,6 +300,10 @@ class DRTR_Frontend {
                             <span class="dashicons dashicons-yes"></span>
                             <?php _e('Crear Tour', 'drtr-tours'); ?>
                         </button>
+                        <button type="submit" name="post_status" value="publish" class="drtr-btn drtr-btn-success">
+                            <span class="dashicons dashicons-saved"></span>
+                            <?php _e('Crear y Publicar', 'drtr-tours'); ?>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -454,6 +458,17 @@ class DRTR_Frontend {
                     <!-- Travel Intents -->
                     <div class="drtr-form-section">
                         <?php drtr_render_intents_multiselect(drtr_get_tour_intents($tour_id)); ?>
+                    </div>
+                    
+                    <!-- Estado de Publicación -->
+                    <div class="drtr-form-section">
+                        <h3><?php _e('Estado de Publicación', 'drtr-tours'); ?></h3>
+                        <div class="drtr-form-group">
+                            <label class="drtr-toggle-label">
+                                <input type="checkbox" id="drtr-tour-publish-toggle" name="post_status" value="publish">
+                                <span class="drtr-toggle-text"><?php _e('Publicar tour (visible en la web)', 'drtr-tours'); ?></span>
+                            </label>
+                        </div>
                     </div>
                     
                     <div class="drtr-form-actions">

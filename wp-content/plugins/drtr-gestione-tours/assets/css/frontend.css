@@ -91,6 +91,58 @@
     background: #5a6268;
 }
 
+.drtr-btn-success {
+    background: #28a745;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.drtr-btn-success:hover {
+    background: #218838;
+}
+
+/* Status badges */
+.drtr-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.drtr-status-publish {
+    background: #d4edda;
+    color: #155724;
+}
+
+.drtr-status-draft {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Toggle para publicación */
+.drtr-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.drtr-toggle-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.drtr-toggle-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
 /* Búsqueda */
 .drtr-search-box {
     display: flex;

@@ -142,6 +142,12 @@
                 self.duplicateTour(tourId);
             });
             
+            // Publicar tour (delegado)
+            $(document).on('click', '.drtr-publish-tour', function() {
+                const tourId = $(this).data('tour-id');
+                self.toggleStatus(tourId, 'publish');
+            });
+            
             // Eliminar tour (delegado)
             $(document).on('click', '.drtr-delete-tour', function() {
                 const tourId = $(this).data('tour-id');
@@ -152,7 +158,7 @@
         loadTours: function() {
             const self = this;
             
-            $('#drtr-tours-tbody').html('<tr><td colspan="8" class="drtr-loading"><span class="spinner is-active"></span> Cargando tours...</td></tr>');
+            $('#drtr-tours-tbody').html('<tr><td colspan="9" class="drtr-loading"><span class="spinner is-active"></span> Cargando tours...</td></tr>');
             
             $.ajax({
                 url: drtrAjax.ajaxurl,
@@ -192,6 +198,15 @@
                     `<img src="${tour.image_url}" alt="${tour.title}" class="drtr-tour-thumb">` : 
                     '<span class="dashicons dashicons-format-image drtr-no-image"></span>';
                 
+                const statusBadge = tour.status === 'publish' ? 
+                    '<span class="drtr-status-badge drtr-status-publish">Publicado</span>' :
+                    '<span class="drtr-status-badge drtr-status-draft">Borrador</span>';
+                
+                const publishButton = tour.status === 'draft' ?
+                    `<button class="drtr-btn drtr-btn-success drtr-publish-tour" data-tour-id="${tour.id}">
+                        <span class="dashicons dashicons-yes"></span> Publicar
+                    </button>` : '';
+                
                 const row = `
                     <tr>
                         <td class="drtr-image-cell">${imageThumb}</td>
@@ -201,7 +216,9 @@
                         <td>${tour.duration ? tour.duration + ' días' : '-'}</td>
                         <td>${tour.location || '-'}</td>
                         <td>${self.formatDate(tour.start_date)}</td>
+                        <td>${statusBadge}</td>
                         <td>
+                            ${publishButton}
                             <button class="drtr-btn drtr-btn-edit drtr-edit-tour" data-tour-id="${tour.id}">
                                 <span class="dashicons dashicons-edit"></span> ${drtrAjax.strings.edit_button}
                             </button>
@@ -348,6 +365,11 @@
                             });
                         }
                         
+                        // Cargar estado de publicación
+                        if (tour.status && tour.status === 'publish') {
+                            $('#drtr-tour-publish-toggle').prop('checked', true);
+                        }
+                        
                         console.log('Tour data loaded and form populated!');
                     } else {
                         console.error('Condition failed - response.success:', response.success, 'response.data:', response.data);
@@ -434,6 +456,12 @@
             formData.append('action', 'drtr_save_tour');
             formData.append('nonce', drtrAjax.nonce);
             
+            // Gestionar el checkbox de publicación
+            const publishToggle = $('#drtr-tour-publish-toggle');
+            if (publishToggle.length > 0) {
+                formData.set('post_status', publishToggle.is(':checked') ? 'publish' : 'draft');
+            }
+            
             // Verificar si estamos en modo edición
             const isEditMode = new URLSearchParams(window.location.search).has('edit_tour');
             
@@ -484,6 +512,32 @@
                     action: 'drtr_duplicate_tour',
                     nonce: drtrAjax.nonce,
                     tour_id: tourId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        self.showMessage(response.data.message, 'success');
+                        self.loadTours();
+                    } else {
+                        self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
+                    }
+                },
+                error: function() {
+                    self.showMessage(drtrAjax.strings.error, 'error');
+                }
+            });
+        },
+        
+        toggleStatus: function(tourId, newStatus) {
+            const self = this;
+            
+            $.ajax({
+                url: drtrAjax.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'drtr_toggle_status',
+                    nonce: drtrAjax.nonce,
+                    tour_id: tourId,
+                    status: newStatus
                 },
                 success: function(response) {
                     if (response.success) {
