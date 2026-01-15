@@ -154,6 +154,14 @@ if (!current_user_can('manage_options')) {
         echo '<h2>📊 Statistiche Database</h2>';
         echo '<p><strong>Totale prenotazioni trovate:</strong> ' . $all_bookings->found_posts . '</p>';
         
+        // Debug query
+        echo '<div class="alert alert-info">';
+        echo '<strong>Debug Query Args:</strong><br>';
+        echo '<pre>' . print_r($args_all, true) . '</pre>';
+        echo '<strong>SQL Query:</strong><br>';
+        echo '<pre>' . $all_bookings->request . '</pre>';
+        echo '</div>';
+        
         // Contare per status
         $status_counts = array();
         if ($all_bookings->have_posts()) {
@@ -172,12 +180,17 @@ if (!current_user_can('manage_options')) {
                 echo '<li><strong>' . $status . ':</strong> ' . $count . ' prenotazioni</li>';
             }
             echo '</ul>';
+        } else {
+            echo '<div class="alert alert-warning">Nessuna prenotazione trovata con WP_Query, ma la query SQL diretta ne ha trovate!</div>';
         }
         
         // Query 2: Mostrare tutte le prenotazioni con dettagli
         echo '<h2>📋 Elenco Completo Prenotazioni</h2>';
         
-        if ($all_bookings->have_posts()) {
+        // Ricreare la query per il secondo loop
+        $all_bookings_2 = new WP_Query($args_all);
+        
+        if ($all_bookings_2->have_posts()) {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
@@ -195,10 +208,8 @@ if (!current_user_can('manage_options')) {
             echo '<tbody>';
             
             // Reset query
-            $all_bookings = new WP_Query($args_all);
-            
-            while ($all_bookings->have_posts()) {
-                $all_bookings->the_post();
+            while ($all_bookings_2->have_posts()) {
+                $all_bookings_2->the_post();
                 $booking_id = get_the_ID();
                 $post_status = get_post_status();
                 $post_date = get_the_date('Y-m-d H:i:s');
@@ -230,10 +241,11 @@ if (!current_user_can('manage_options')) {
             // Mostrare tutti i meta per ogni prenotazione
             echo '<h2>🔧 Metadati Dettagliati</h2>';
             
-            $all_bookings = new WP_Query($args_all);
+            // Ricreare la query per il terzo loop
+            $all_bookings_3 = new WP_Query($args_all);
             
-            while ($all_bookings->have_posts()) {
-                $all_bookings->the_post();
+            while ($all_bookings_3->have_posts()) {
+                $all_bookings_3->the_post();
                 $booking_id = get_the_ID();
                 
                 echo '<h3 id="meta-' . $booking_id . '">Prenotazione #' . $booking_id . ' - ' . get_the_title() . '</h3>';
