@@ -153,12 +153,27 @@
                 const tourId = $(this).data('tour-id');
                 self.deleteTour(tourId);
             });
+            
+            // Calcular precio niños automáticamente cuando cambia el precio adulto
+            $(document).on('input', '#drtr-tour-price', function() {
+                const adultPrice = parseFloat($(this).val());
+                const childPriceField = $('#drtr-tour-child-price');
+                
+                // Solo calcular si el campo de niños está vacío o si es la primera vez
+                if (adultPrice && !isNaN(adultPrice) && !childPriceField.data('manually-edited')) {
+                    const childPrice = Math.max(0, adultPrice - 5);
+                    childPriceField.val(childPrice.toFixed(2));
+                }
+            });
+            
+            // Marcar el campo como editado manualmente si el usuario lo modifica
+            $(document).on('input', '#drtr-tour-child-price', function() {
+                $(this).data('manually-edited', true);
+            });
         },
         
         loadTours: function() {
             const self = this;
-            
-            $('#drtr-tours-tbody').html('<tr><td colspan="9" class="drtr-loading"><span class="spinner is-active"></span> Cargando tours...</td></tr>');
             
             $.ajax({
                 url: drtrAjax.ajaxurl,
@@ -334,6 +349,11 @@
                         $('#drtr-tour-content').val(tour.content);
                         $('#drtr-tour-excerpt').val(tour.excerpt);
                         $('#drtr-tour-price').val(tour.price);
+                        $('#drtr-tour-child-price').val(tour.child_price || '');
+                        // Marcar como editado manualmente si ya tiene un valor
+                        if (tour.child_price) {
+                            $('#drtr-tour-child-price').data('manually-edited', true);
+                        }
                         $('#drtr-tour-duration').val(tour.duration);
                         $('#drtr-tour-location').val(tour.location);
                         $('#drtr-tour-start-date').val(tour.start_date);

@@ -360,3 +360,13 @@ msgstr "Mercados Navideños"
 
 msgid "Vacanze in montagna"
 msgstr "Vacaciones en Montaña"
+
+# Form fields / Campos del formulario
+msgid "Precio (€) *"
+msgstr "Precio (€) *"
+
+msgid "Precio Niños (€)"
+msgstr "Precio Niños (€)"
+
+msgid "Por defecto: precio adulto -5€"
+msgstr "Por defecto: precio adulto -5€"

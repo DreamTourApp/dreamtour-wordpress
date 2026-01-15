@@ -116,6 +116,7 @@ class DRTR_Ajax_Handler {
             'image_id' => get_post_meta($tour_id, '_drtr_image_id', true),
             'image_url' => '',
             'price' => get_post_meta($tour_id, '_drtr_price', true),
+            'child_price' => get_post_meta($tour_id, '_drtr_child_price', true),
             'duration' => get_post_meta($tour_id, '_drtr_duration', true),
             'transport_type' => get_post_meta($tour_id, '_drtr_transport_type', true),
             'max_people' => get_post_meta($tour_id, '_drtr_max_people', true),
@@ -223,6 +224,7 @@ class DRTR_Ajax_Handler {
         // Guardar meta fields
         $meta_fields = array(
             '_drtr_price' => 'sanitize_text_field',
+            '_drtr_child_price' => 'sanitize_text_field',
             '_drtr_duration' => 'absint',
             '_drtr_transport_type' => 'sanitize_text_field',
             '_drtr_max_people' => 'absint',
@@ -326,6 +328,7 @@ class DRTR_Ajax_Handler {
         $meta_fields = array(
             '_drtr_image_id',
             '_drtr_price',
+            '_drtr_child_price',
             '_drtr_duration',
             '_drtr_transport_type',
             '_drtr_max_people',

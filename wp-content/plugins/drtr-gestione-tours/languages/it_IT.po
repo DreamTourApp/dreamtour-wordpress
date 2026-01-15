@@ -368,6 +368,12 @@ msgstr "Vacanze in Montagna"
 msgid "Precio (€) *"
 msgstr "Prezzo (€) *"
 
+msgid "Precio Niños (€)"
+msgstr "Prezzo Bambini (€)"
+
+msgid "Por defecto: precio adulto -5€"
+msgstr "Predefinito: prezzo adulto -5€"
+
 msgid "Duración (días) *"
 msgstr "Durata (giorni) *"
 

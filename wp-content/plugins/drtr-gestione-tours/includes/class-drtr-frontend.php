@@ -215,10 +215,18 @@ class DRTR_Frontend {
                         </div>
                         
                         <div class="drtr-form-group">
+                            <label for="drtr-tour-child-price"><?php _e('Precio Niños (€)', 'drtr-tours'); ?></label>
+                            <input type="number" id="drtr-tour-child-price" name="child_price" step="0.01" min="0">
+                            <small class="drtr-field-hint"><?php _e('Por defecto: precio adulto -5€', 'drtr-tours'); ?></small>
+                        </div>
+                        
+                        <div class="drtr-form-group">
                             <label for="drtr-tour-duration"><?php _e('Duración (días) *', 'drtr-tours'); ?></label>
                             <input type="number" id="drtr-tour-duration" name="duration" min="1" required>
                         </div>
-                        
+                    </div>
+                    
+                    <div class="drtr-form-row drtr-form-row-2">
                         <div class="drtr-form-group">
                             <label for="drtr-tour-location"><?php _e('Ubicación', 'drtr-tours'); ?></label>
                             <input type="text" id="drtr-tour-location" name="location">
@@ -383,10 +391,18 @@ class DRTR_Frontend {
                         </div>
                         
                         <div class="drtr-form-group">
+                            <label for="drtr-tour-child-price"><?php _e('Precio Niños (€)', 'drtr-tours'); ?></label>
+                            <input type="number" id="drtr-tour-child-price" name="child_price" step="0.01" min="0">
+                            <small class="drtr-field-hint"><?php _e('Por defecto: precio adulto -5€', 'drtr-tours'); ?></small>
+                        </div>
+                        
+                        <div class="drtr-form-group">
                             <label for="drtr-tour-duration"><?php _e('Duración (días) *', 'drtr-tours'); ?></label>
                             <input type="number" id="drtr-tour-duration" name="duration" min="1" required>
                         </div>
-                        
+                    </div>
+                    
+                    <div class="drtr-form-row drtr-form-row-2">
                         <div class="drtr-form-group">
                             <label for="drtr-tour-location"><?php _e('Ubicación', 'drtr-tours'); ?></label>
                             <input type="text" id="drtr-tour-location" name="location">

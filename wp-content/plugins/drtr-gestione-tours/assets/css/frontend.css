@@ -302,6 +302,14 @@
     color: #333;
 }
 
+.drtr-field-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+}
+
 .drtr-form-group input,
 .drtr-form-group select,
 .drtr-form-group textarea {
