@@ -54,48 +54,4 @@ class DRTR_RA_Page_Manager {
             }
         }
     }
-    
-    /**
-     * Crear página de mie prenotazioni
-     */
-    public static function create_bookings_page() {
-        $page = get_page_by_path('mie-prenotazioni');
-        
-        if (!$page) {
-            $page_id = wp_insert_post(array(
-                'post_title'   => __('Le Mie Prenotazioni', 'drtr-reserved-area'),
-                'post_name'    => 'mie-prenotazioni',
-                'post_content' => '[drtr_user_bookings]',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
-                'post_author'  => 1,
-            ));
-            
-            if (!is_wp_error($page_id)) {
-                update_post_meta($page_id, '_drtr_ra_page', '1');
-            }
-        }
-    }
-    
-    /**
-     * Crear página de gestione prenotazioni admin
-     */
-    public static function create_admin_bookings_page() {
-        $page = get_page_by_path('gestione-prenotazioni');
-        
-        if (!$page) {
-            $page_id = wp_insert_post(array(
-                'post_title'   => __('Gestione Prenotazioni', 'drtr-reserved-area'),
-                'post_name'    => 'gestione-prenotazioni',
-                'post_content' => '[drtr_admin_bookings]',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
-                'post_author'  => 1,
-            ));
-            
-            if (!is_wp_error($page_id)) {
-                update_post_meta($page_id, '_drtr_ra_page', '1');
-            }
-        }
-    }
 }

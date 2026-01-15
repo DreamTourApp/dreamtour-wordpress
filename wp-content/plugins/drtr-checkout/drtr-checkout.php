@@ -27,6 +27,7 @@ define('DRTR_CHECKOUT_BASENAME', plugin_basename(__FILE__));
 // Incluir archivos necesarios
 require_once DRTR_CHECKOUT_DIR . 'includes/class-drtr-booking.php';
 require_once DRTR_CHECKOUT_DIR . 'includes/class-drtr-checkout.php';
+require_once DRTR_CHECKOUT_DIR . 'includes/class-drtr-bookings-pages.php';
 
 /**
  * Clase principal del plugin
@@ -63,6 +64,10 @@ class DRTR_Checkout_Plugin {
         
         // Crear página Grazie Prenotazione si no existe
         $this->create_thank_you_page();
+        
+        // Crear páginas prenotazioni
+        DRTR_Bookings_Pages::create_bookings_page();
+        DRTR_Bookings_Pages::create_admin_bookings_page();
         
         // Flush rewrite rules
         flush_rewrite_rules();
@@ -126,6 +131,7 @@ class DRTR_Checkout_Plugin {
         // Inicializar componentes
         DRTR_Booking::get_instance();
         DRTR_Checkout::get_instance();
+        DRTR_Bookings_Pages::get_instance();
     }
     
     public function missing_dependency_notice() {

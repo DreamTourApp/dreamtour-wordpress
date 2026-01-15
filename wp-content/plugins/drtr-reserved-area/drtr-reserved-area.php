@@ -121,10 +121,8 @@ function drtr_ra_activate() {
     // Cargar la clase necesaria
     require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-page-manager.php';
     
-    // Crear páginas al activar
+    // Crear página al activar
     DRTR_RA_Page_Manager::create_reserved_page();
-    DRTR_RA_Page_Manager::create_bookings_page();
-    DRTR_RA_Page_Manager::create_admin_bookings_page();
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'drtr_ra_activate');
