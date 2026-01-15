@@ -179,7 +179,7 @@ class DRTR_RA_Dashboard {
                         </div>
                         <h3><?php _e('Le Mie Prenotazioni', 'drtr-reserved-area'); ?></h3>
                         <p><?php _e('Visualizza lo storico delle tue prenotazioni', 'drtr-reserved-area'); ?></p>
-                        <a href="#" class="drtr-ra-btn drtr-ra-btn-outline drtr-show-bookings">
+                        <a href="<?php echo esc_url(home_url('/mie-prenotazioni')); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
                             <?php _e('Vedi Prenotazioni', 'drtr-reserved-area'); ?>
                         </a>
                     </div>
