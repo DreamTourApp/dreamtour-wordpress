@@ -486,7 +486,7 @@
 /* Page Styles */
 .page-wrapper {
     max-width: 1400px;
-    margin: var(--spacing-xxl) auto;
+    /* margin: var(--spacing-xxl) auto; */
     padding: 0 var(--spacing-md);
 }
 
