@@ -216,6 +216,9 @@ msgstr "Posizione"
 msgid "Fecha Inicio"
 msgstr "Data Inizio"
 
+msgid "Estado"
+msgstr "Stato"
+
 msgid "Acciones"
 msgstr "Azioni"
 

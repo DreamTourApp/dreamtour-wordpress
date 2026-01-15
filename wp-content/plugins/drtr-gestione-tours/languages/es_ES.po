@@ -216,6 +216,9 @@ msgstr "Ubicación"
 msgid "Fecha Inicio"
 msgstr "Fecha Inicio"
 
+msgid "Estado"
+msgstr "Estado"
+
 msgid "Acciones"
 msgstr "Acciones"
 

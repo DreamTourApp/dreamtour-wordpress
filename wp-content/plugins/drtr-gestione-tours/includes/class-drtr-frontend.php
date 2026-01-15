@@ -80,6 +80,7 @@ class DRTR_Frontend {
                             <th><?php _e('Duración', 'drtr-tours'); ?></th>
                             <th><?php _e('Ubicación', 'drtr-tours'); ?></th>
                             <th><?php _e('Fecha Inicio', 'drtr-tours'); ?></th>
+                            <th><?php _e('Estado', 'drtr-tours'); ?></th>
                             <th><?php _e('Acciones', 'drtr-tours'); ?></th>
                         </tr>
                     </thead>
