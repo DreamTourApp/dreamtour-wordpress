@@ -58,8 +58,62 @@ class DRTR_Checkout_Plugin {
     }
     
     public function activate() {
+        // Crear página Checkout si no existe
+        $this->create_checkout_page();
+        
+        // Crear página Grazie Prenotazione si no existe
+        $this->create_thank_you_page();
+        
         // Flush rewrite rules
         flush_rewrite_rules();
+    }
+    
+    /**
+     * Crear página Checkout con shortcode
+     */
+    private function create_checkout_page() {
+        $page_slug = 'checkout';
+        $page_check = get_page_by_path($page_slug);
+        
+        if (!$page_check) {
+            $page_data = array(
+                'post_title' => __('Checkout', 'drtr-checkout'),
+                'post_content' => '[drtr_checkout]',
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_name' => $page_slug,
+                'post_author' => 1,
+            );
+            
+            wp_insert_post($page_data);
+        }
+    }
+    
+    /**
+     * Crear página Grazie Prenotazione
+     */
+    private function create_thank_you_page() {
+        $page_slug = 'grazie-prenotazione';
+        $page_check = get_page_by_path($page_slug);
+        
+        if (!$page_check) {
+            $page_data = array(
+                'post_title' => __('Grazie per la tua Prenotazione', 'drtr-checkout'),
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_name' => $page_slug,
+                'post_author' => 1,
+                'page_template' => 'page-thank-you.php',
+            );
+            
+            $page_id = wp_insert_post($page_data);
+            
+            // Impostare template
+            if ($page_id) {
+                update_post_meta($page_id, '_wp_page_template', 'page-thank-you.php');
+            }
+        }
     }
     
     public function init() {
