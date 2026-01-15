@@ -155,22 +155,33 @@ get_header();
 
 .about-hero {
     text-align: center;
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
-    border-radius: 20px;
+    padding: 3rem 0;
     margin-bottom: 4rem;
-    color: white;
+    position: relative;
+}
+
+.about-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 2px;
 }
 
 .about-title {
     font-size: 3rem;
     font-weight: 900;
     margin-bottom: 1rem;
+    color: #003284;
 }
 
 .about-subtitle {
     font-size: 1.25rem;
-    opacity: 0.9;
+    color: #4a5568;
 }
 
 .about-founder {

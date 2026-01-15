@@ -213,42 +213,6 @@ class DRTR_RA_Dashboard {
                             </a>
                         </div>
                         
-                        <!-- Card Dashboard WP - Solo Admin -->
-                        <div class="drtr-ra-card">
-                            <div class="drtr-ra-card-icon">
-                                <i class="dashicons dashicons-dashboard"></i>
-                            </div>
-                            <h3><?php _e('Dashboard WordPress', 'drtr-reserved-area'); ?></h3>
-                            <p><?php _e('Accedi al pannello di amministrazione completo', 'drtr-reserved-area'); ?></p>
-                            <a href="<?php echo esc_url(admin_url()); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
-                                <?php _e('Apri Dashboard', 'drtr-reserved-area'); ?>
-                            </a>
-                        </div>
-                        
-                        <!-- Card Utenti - Solo Admin -->
-                        <div class="drtr-ra-card">
-                            <div class="drtr-ra-card-icon">
-                                <i class="dashicons dashicons-groups"></i>
-                            </div>
-                            <h3><?php _e('Gestione Utenti', 'drtr-reserved-area'); ?></h3>
-                            <p><?php _e('Gestisci gli utenti e i loro permessi', 'drtr-reserved-area'); ?></p>
-                            <a href="<?php echo esc_url(admin_url('users.php')); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
-                                <?php _e('Gestisci Utenti', 'drtr-reserved-area'); ?>
-                            </a>
-                        </div>
-                        
-                        <!-- Card Impostazioni - Solo Admin -->
-                        <div class="drtr-ra-card">
-                            <div class="drtr-ra-card-icon">
-                                <i class="dashicons dashicons-admin-settings"></i>
-                            </div>
-                            <h3><?php _e('Impostazioni', 'drtr-reserved-area'); ?></h3>
-                            <p><?php _e('Configura le impostazioni del sito', 'drtr-reserved-area'); ?></p>
-                            <a href="<?php echo esc_url(admin_url('options-general.php')); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
-                                <?php _e('Impostazioni', 'drtr-reserved-area'); ?>
-                            </a>
-                        </div>
-                        
                     <?php else : ?>
                         
                         <!-- Card para usuarios no-admin -->
