@@ -21,6 +21,7 @@ class DRTR_RA_Auth {
     private function __construct() {
         add_action('wp_ajax_nopriv_drtr_ra_login', array($this, 'ajax_login'));
         add_action('wp_ajax_drtr_ra_logout', array($this, 'ajax_logout'));
+        add_action('wp_ajax_drtr_ra_update_booking_status', array($this, 'ajax_update_booking_status'));
         add_action('init', array($this, 'handle_logout'));
     }
     
@@ -79,5 +80,68 @@ class DRTR_RA_Auth {
     public static function get_logout_url() {
         $page_url = get_permalink(get_page_by_path('area-riservata'));
         return wp_nonce_url(add_query_arg('drtr_logout', '1', $page_url), 'drtr_logout');
+    }
+    
+    /**
+     * AJAX: Aggiornare stato prenotazione
+     */
+    public function ajax_update_booking_status() {
+        // Verificare nonce
+        if (!check_ajax_referer('drtr_ra_nonce', 'nonce', false)) {
+            wp_send_json_error(array(
+                'message' => __('Errore di sicurezza.', 'drtr-reserved-area')
+            ));
+        }
+        
+        // Verificare permessi admin
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => __('Non hai i permessi per questa azione.', 'drtr-reserved-area')
+            ));
+        }
+        
+        // Ottenere dati
+        $booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : 0;
+        $new_status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+        
+        if (!$booking_id || !$new_status) {
+            wp_send_json_error(array(
+                'message' => __('Dati mancanti.', 'drtr-reserved-area')
+            ));
+        }
+        
+        // Verificare che il post esista e sia una prenotazione
+        $booking = get_post($booking_id);
+        if (!$booking || $booking->post_type !== 'drtr_booking') {
+            wp_send_json_error(array(
+                'message' => __('Prenotazione non trovata.', 'drtr-reserved-area')
+            ));
+        }
+        
+        // Aggiornare stato
+        $result = wp_update_post(array(
+            'ID' => $booking_id,
+            'post_status' => $new_status
+        ));
+        
+        if (is_wp_error($result)) {
+            wp_send_json_error(array(
+                'message' => __('Errore durante l\'aggiornamento.', 'drtr-reserved-area')
+            ));
+        }
+        
+        // Status labels per la risposta
+        $status_labels = array(
+            'booking_pending' => __('In Attesa', 'drtr-reserved-area'),
+            'booking_deposit' => __('Acconto Pagato', 'drtr-reserved-area'),
+            'booking_paid' => __('Pagato', 'drtr-reserved-area'),
+            'booking_cancelled' => __('Cancellato', 'drtr-reserved-area'),
+            'booking_completed' => __('Completato', 'drtr-reserved-area'),
+        );
+        
+        wp_send_json_success(array(
+            'message' => __('Stato aggiornato con successo!', 'drtr-reserved-area'),
+            'status_label' => isset($status_labels[$new_status]) ? $status_labels[$new_status] : $new_status
+        ));
     }
 }
