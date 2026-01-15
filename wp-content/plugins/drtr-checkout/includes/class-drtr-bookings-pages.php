@@ -246,6 +246,12 @@ class DRTR_Bookings_Pages {
             return;
         }
         
+        // Ottenere filtri dalla richiesta
+        $filter_name = isset($_GET['filter_name']) ? sanitize_text_field($_GET['filter_name']) : '';
+        $filter_email = isset($_GET['filter_email']) ? sanitize_email($_GET['filter_email']) : '';
+        $filter_phone = isset($_GET['filter_phone']) ? sanitize_text_field($_GET['filter_phone']) : '';
+        $filter_tour = isset($_GET['filter_tour']) ? absint($_GET['filter_tour']) : 0;
+        
         // Ottenere tutte le prenotazioni
         $args = array(
             'post_type' => 'drtr_booking',
@@ -255,7 +261,57 @@ class DRTR_Bookings_Pages {
             'order' => 'DESC'
         );
         
+        // Aggiungere meta query per filtri
+        $meta_query = array('relation' => 'AND');
+        
+        if (!empty($filter_tour)) {
+            $meta_query[] = array(
+                'key' => '_booking_tour_id',
+                'value' => $filter_tour,
+                'compare' => '='
+            );
+        }
+        
+        if (!empty($filter_email)) {
+            $meta_query[] = array(
+                'key' => '_booking_email',
+                'value' => $filter_email,
+                'compare' => 'LIKE'
+            );
+        }
+        
+        if (!empty($filter_phone)) {
+            $meta_query[] = array(
+                'key' => '_booking_phone',
+                'value' => $filter_phone,
+                'compare' => 'LIKE'
+            );
+        }
+        
+        if (!empty($filter_name)) {
+            $meta_query[] = array(
+                'relation' => 'OR',
+                array(
+                    'key' => '_booking_first_name',
+                    'value' => $filter_name,
+                    'compare' => 'LIKE'
+                ),
+                array(
+                    'key' => '_booking_last_name',
+                    'value' => $filter_name,
+                    'compare' => 'LIKE'
+                )
+            );
+        }
+        
+        if (count($meta_query) > 1) {
+            $args['meta_query'] = $meta_query;
+        }
+        
         $bookings_query = new WP_Query($args);
+        
+        // Renderizzare form filtri
+        $this->render_bookings_filters($filter_name, $filter_email, $filter_phone, $filter_tour);
         
         if ($bookings_query->have_posts()) {
             echo '<div class="drtr-bookings-table-wrapper">';
@@ -405,5 +461,94 @@ class DRTR_Bookings_Pages {
             echo '<p>' . __('Nessuna prenotazione trovata.', 'drtr-checkout') . '</p>';
             echo '</div>';
         }
+    }
+    
+    /**
+     * Renderizzare form filtri
+     */
+    private function render_bookings_filters($filter_name, $filter_email, $filter_phone, $filter_tour) {
+        // Ottenere tutti i tour con prenotazioni
+        $tours_with_bookings = array();
+        $all_bookings = new WP_Query(array(
+            'post_type' => 'drtr_booking',
+            'posts_per_page' => -1,
+            'post_status' => 'any',
+            'fields' => 'ids'
+        ));
+        
+        if ($all_bookings->have_posts()) {
+            foreach ($all_bookings->posts as $booking_id) {
+                $tour_id = get_post_meta($booking_id, '_booking_tour_id', true);
+                if ($tour_id && !isset($tours_with_bookings[$tour_id])) {
+                    $tour_post = get_post($tour_id);
+                    if ($tour_post) {
+                        // Ottenere date del tour
+                        $tour_dates = get_post_meta($tour_id, '_drtr_dates', true);
+                        $date_label = '';
+                        if (!empty($tour_dates) && is_array($tour_dates)) {
+                            $first_date = reset($tour_dates);
+                            if (!empty($first_date['start'])) {
+                                $date_label = ' - ' . date_i18n('d/m/Y', strtotime($first_date['start']));
+                            }
+                        }
+                        $tours_with_bookings[$tour_id] = $tour_post->post_title . $date_label;
+                    }
+                }
+            }
+        }
+        wp_reset_postdata();
+        
+        echo '<div class="drtr-bookings-filters">';
+        echo '<form method="get" action="" class="drtr-filters-form">';
+        echo '<input type="hidden" name="page_id" value="' . get_the_ID() . '">';
+        
+        echo '<div class="drtr-filters-row">';
+        
+        // Filtro nome
+        echo '<div class="drtr-filter-field">';
+        echo '<label for="filter_name">' . __('Nome Cliente', 'drtr-checkout') . '</label>';
+        echo '<input type="text" id="filter_name" name="filter_name" value="' . esc_attr($filter_name) . '" placeholder="' . esc_attr__('Cerca per nome...', 'drtr-checkout') . '">';
+        echo '</div>';
+        
+        // Filtro email
+        echo '<div class="drtr-filter-field">';
+        echo '<label for="filter_email">' . __('Email', 'drtr-checkout') . '</label>';
+        echo '<input type="text" id="filter_email" name="filter_email" value="' . esc_attr($filter_email) . '" placeholder="' . esc_attr__('Cerca per email...', 'drtr-checkout') . '">';
+        echo '</div>';
+        
+        // Filtro telefono
+        echo '<div class="drtr-filter-field">';
+        echo '<label for="filter_phone">' . __('Telefono', 'drtr-checkout') . '</label>';
+        echo '<input type="text" id="filter_phone" name="filter_phone" value="' . esc_attr($filter_phone) . '" placeholder="' . esc_attr__('Cerca per telefono...', 'drtr-checkout') . '">';
+        echo '</div>';
+        
+        // Filtro tour
+        echo '<div class="drtr-filter-field">';
+        echo '<label for="filter_tour">' . __('Tour', 'drtr-checkout') . '</label>';
+        echo '<select id="filter_tour" name="filter_tour">';
+        echo '<option value="">' . __('Tutti i tour', 'drtr-checkout') . '</option>';
+        foreach ($tours_with_bookings as $tour_id => $tour_title) {
+            echo '<option value="' . esc_attr($tour_id) . '" ' . selected($filter_tour, $tour_id, false) . '>';
+            echo esc_html($tour_title);
+            echo '</option>';
+        }
+        echo '</select>';
+        echo '</div>';
+        
+        echo '</div>'; // .drtr-filters-row
+        
+        // Pulsanti azione
+        echo '<div class="drtr-filters-actions">';
+        echo '<button type="submit" class="drtr-ra-btn drtr-ra-btn-primary">';
+        echo '<i class="dashicons dashicons-search"></i> ' . __('Filtra', 'drtr-checkout');
+        echo '</button>';
+        
+        echo '<a href="' . esc_url(get_permalink()) . '" class="drtr-ra-btn drtr-ra-btn-secondary">';
+        echo '<i class="dashicons dashicons-update"></i> ' . __('Resetta', 'drtr-checkout');
+        echo '</a>';
+        echo '</div>';
+        
+        echo '</form>';
+        echo '</div>';
     }
 }

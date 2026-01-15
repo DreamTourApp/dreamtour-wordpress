@@ -679,3 +679,88 @@
     }
 }
 
+/* =============================================================================
+   FILTRI PRENOTAZIONI
+   ============================================================================= */
+
+.drtr-bookings-filters {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.drtr-filters-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.drtr-filters-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.drtr-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.drtr-filter-field label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #003284;
+}
+
+.drtr-filter-field input[type="text"],
+.drtr-filter-field select {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+.drtr-filter-field input[type="text"]:focus,
+.drtr-filter-field select:focus {
+    outline: none;
+    border-color: #003284;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 50, 132, 0.1);
+}
+
+.drtr-filters-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.drtr-ra-btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.drtr-ra-btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+    .drtr-filters-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .drtr-filters-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .drtr-filters-actions .drtr-ra-btn {
+        width: 100%;
+    }
+}
+
