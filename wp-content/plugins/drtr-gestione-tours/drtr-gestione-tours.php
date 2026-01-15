@@ -186,6 +186,7 @@ class DRTR_Gestione_Tours {
                     'success_save' => __('Tour guardado correctamente', 'drtr-tours'),
                     'success_delete' => __('Tour eliminado correctamente', 'drtr-tours'),
                     'edit_button' => __('Editar', 'drtr-tours'),
+                    'duplicate_button' => __('Duplicar', 'drtr-tours'),
                     'delete_button' => __('Eliminar', 'drtr-tours'),
                     'edit_tour' => __('Editar Tour', 'drtr-tours'),
                     'itinerary_place' => __('Lugar', 'drtr-tours'),

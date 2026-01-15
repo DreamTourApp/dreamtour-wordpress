@@ -136,6 +136,12 @@
                 window.location.href = window.location.pathname + '?edit_tour=' + tourId;
             });
             
+            // Duplicar tour (delegado)
+            $(document).on('click', '.drtr-duplicate-tour', function() {
+                const tourId = $(this).data('tour-id');
+                self.duplicateTour(tourId);
+            });
+            
             // Eliminar tour (delegado)
             $(document).on('click', '.drtr-delete-tour', function() {
                 const tourId = $(this).data('tour-id');
@@ -197,6 +203,9 @@
                         <td>
                             <button class="drtr-btn drtr-btn-edit drtr-edit-tour" data-tour-id="${tour.id}">
                                 <span class="dashicons dashicons-edit"></span> ${drtrAjax.strings.edit_button}
+                            </button>
+                            <button class="drtr-btn drtr-btn-secondary drtr-duplicate-tour" data-tour-id="${tour.id}">
+                                <span class="dashicons dashicons-admin-page"></span> ${drtrAjax.strings.duplicate_button}
                             </button>
                             <button class="drtr-btn drtr-btn-danger drtr-delete-tour" data-tour-id="${tour.id}">
                                 <span class="dashicons dashicons-trash"></span> ${drtrAjax.strings.delete_button}
@@ -450,6 +459,35 @@
                             self.closeModal();
                             self.loadTours();
                         }
+                    } else {
+                        self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
+                    }
+                },
+                error: function() {
+                    self.showMessage(drtrAjax.strings.error, 'error');
+                }
+            });
+        },
+        
+        duplicateTour: function(tourId) {
+            const self = this;
+            
+            if (!confirm('¿Estás seguro de que quieres duplicar este tour?')) {
+                return;
+            }
+            
+            $.ajax({
+                url: drtrAjax.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'drtr_duplicate_tour',
+                    nonce: drtrAjax.nonce,
+                    tour_id: tourId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        self.showMessage(response.data.message, 'success');
+                        self.loadTours();
                     } else {
                         self.showMessage(response.data.message || drtrAjax.strings.error, 'error');
                     }

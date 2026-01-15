@@ -19,6 +19,7 @@ class DRTR_Ajax_Handler {
         add_action('wp_ajax_drtr_get_tours', array($this, 'get_tours'));
         add_action('wp_ajax_drtr_get_tour', array($this, 'get_tour'));
         add_action('wp_ajax_drtr_save_tour', array($this, 'save_tour'));
+        add_action('wp_ajax_drtr_duplicate_tour', array($this, 'duplicate_tour'));
         add_action('wp_ajax_drtr_delete_tour', array($this, 'delete_tour'));
     }
     
@@ -279,6 +280,84 @@ class DRTR_Ajax_Handler {
                 'content_saved' => strlen($content),
                 'excerpt_saved' => strlen($excerpt),
             ),
+        ));
+    }
+    
+    /**
+     * Duplicar tour
+     */
+    public function duplicate_tour() {
+        check_ajax_referer('drtr_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('No tienes permisos', 'drtr-tours')));
+        }
+        
+        $tour_id = isset($_POST['tour_id']) ? absint($_POST['tour_id']) : 0;
+        
+        if (!$tour_id) {
+            wp_send_json_error(array('message' => __('ID de tour inválido', 'drtr-tours')));
+        }
+        
+        $original_post = get_post($tour_id);
+        
+        if (!$original_post || $original_post->post_type !== 'drtr_tour') {
+            wp_send_json_error(array('message' => __('Tour no encontrado', 'drtr-tours')));
+        }
+        
+        // Crear nuevo post duplicado
+        $new_post_data = array(
+            'post_title' => $original_post->post_title . ' (Copia)',
+            'post_content' => $original_post->post_content,
+            'post_excerpt' => $original_post->post_excerpt,
+            'post_type' => 'drtr_tour',
+            'post_status' => 'draft', // Crear como borrador
+        );
+        
+        $new_tour_id = wp_insert_post($new_post_data, true);
+        
+        if (is_wp_error($new_tour_id)) {
+            wp_send_json_error(array('message' => $new_tour_id->get_error_message()));
+        }
+        
+        // Copiar todos los meta fields
+        $meta_fields = array(
+            '_drtr_image_id',
+            '_drtr_price',
+            '_drtr_duration',
+            '_drtr_transport_type',
+            '_drtr_max_people',
+            '_drtr_start_date',
+            '_drtr_end_date',
+            '_drtr_location',
+            '_drtr_rating',
+            '_drtr_includes',
+            '_drtr_not_includes',
+            '_drtr_itinerary',
+        );
+        
+        foreach ($meta_fields as $meta_key) {
+            $meta_value = get_post_meta($tour_id, $meta_key, true);
+            if ($meta_value) {
+                update_post_meta($new_tour_id, $meta_key, $meta_value);
+            }
+        }
+        
+        // Copiar thumbnail si existe
+        $thumbnail_id = get_post_meta($tour_id, '_drtr_image_id', true);
+        if ($thumbnail_id) {
+            set_post_thumbnail($new_tour_id, $thumbnail_id);
+        }
+        
+        // Copiar taxonomías (travel intents)
+        $terms = wp_get_object_terms($tour_id, 'drtr_travel_intent', array('fields' => 'ids'));
+        if (!is_wp_error($terms) && !empty($terms)) {
+            wp_set_object_terms($new_tour_id, $terms, 'drtr_travel_intent');
+        }
+        
+        wp_send_json_success(array(
+            'message' => __('Tour duplicado correctamente', 'drtr-tours'),
+            'tour_id' => $new_tour_id,
         ));
     }
     

@@ -79,6 +79,18 @@
     background: #138496;
 }
 
+.drtr-duplicate-tour {
+    background: #6c757d;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.drtr-duplicate-tour:hover {
+    background: #5a6268;
+}
+
 /* Búsqueda */
 .drtr-search-box {
     display: flex;
