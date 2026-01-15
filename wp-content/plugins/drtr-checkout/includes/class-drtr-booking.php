@@ -65,8 +65,8 @@ class DRTR_Booking {
     public function register_booking_statuses() {
         register_post_status('booking_pending', array(
             'label' => __('In Attesa', 'drtr-tours'),
-            'public' => false,
-            'exclude_from_search' => true,
+            'public' => true,
+            'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
             'label_count' => _n_noop('In Attesa <span class="count">(%s)</span>', 'In Attesa <span class="count">(%s)</span>', 'drtr-tours')
@@ -74,8 +74,8 @@ class DRTR_Booking {
         
         register_post_status('booking_deposit', array(
             'label' => __('Acconto Pagato', 'drtr-tours'),
-            'public' => false,
-            'exclude_from_search' => true,
+            'public' => true,
+            'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
             'label_count' => _n_noop('Acconto <span class="count">(%s)</span>', 'Acconto <span class="count">(%s)</span>', 'drtr-tours')
@@ -83,8 +83,8 @@ class DRTR_Booking {
         
         register_post_status('booking_paid', array(
             'label' => __('Pagato', 'drtr-tours'),
-            'public' => false,
-            'exclude_from_search' => true,
+            'public' => true,
+            'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
             'label_count' => _n_noop('Pagato <span class="count">(%s)</span>', 'Pagato <span class="count">(%s)</span>', 'drtr-tours')
@@ -92,8 +92,8 @@ class DRTR_Booking {
         
         register_post_status('booking_cancelled', array(
             'label' => __('Cancellato', 'drtr-tours'),
-            'public' => false,
-            'exclude_from_search' => true,
+            'public' => true,
+            'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
             'label_count' => _n_noop('Cancellato <span class="count">(%s)</span>', 'Cancellato <span class="count">(%s)</span>', 'drtr-tours')
@@ -101,8 +101,8 @@ class DRTR_Booking {
         
         register_post_status('booking_completed', array(
             'label' => __('Completato', 'drtr-tours'),
-            'public' => false,
-            'exclude_from_search' => true,
+            'public' => true,
+            'exclude_from_search' => false,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
             'label_count' => _n_noop('Completato <span class="count">(%s)</span>', 'Completato <span class="count">(%s)</span>', 'drtr-tours')
