@@ -19,8 +19,8 @@ class DRTR_RA_Dashboard {
     }
     
     private function __construct() {
-        add_shortcode('drtr_reserved_area', array($this, 'render_reserved_area'));
-    }
+        add_shortcode('drtr_reserved_area', array($this, 'render_reserved_area'));        add_shortcode('drtr_user_bookings', array($this, 'render_user_bookings_page'));
+        add_shortcode('drtr_admin_bookings', array($this, 'render_admin_bookings_page'));    }
     
     /**
      * Renderizar el área reservada
@@ -269,40 +269,64 @@ class DRTR_RA_Dashboard {
                 </div>
                 <?php endif; ?>
             </div>
-            
-            <!-- Sezione Prenotazioni (nascosta di default) -->
-            <div id="drtr-ra-bookings-section" class="drtr-ra-bookings-section" style="display: none;">
-                <div class="drtr-ra-section-header">
-                    <h3><?php _e('Le Mie Prenotazioni', 'drtr-reserved-area'); ?></h3>
-                    <button class="drtr-ra-btn drtr-ra-btn-secondary drtr-hide-bookings">
-                        <i class="dashicons dashicons-arrow-left-alt2"></i>
-                        <?php _e('Torna al Dashboard', 'drtr-reserved-area'); ?>
-                    </button>
-                </div>
-                
-                <div id="drtr-bookings-list">
-                    <?php $this->render_user_bookings($current_user->ID); ?>
-                </div>
-            </div>
-            
-            <!-- Sezione Admin Prenotazioni (solo admin) -->
-            <?php if (current_user_can('manage_options')): ?>
-            <div id="drtr-ra-admin-bookings-section" class="drtr-ra-bookings-section" style="display: none;">
-                <div class="drtr-ra-section-header">
-                    <h3><?php _e('Gestione Prenotazioni', 'drtr-reserved-area'); ?></h3>
-                    <button class="drtr-ra-btn drtr-ra-btn-secondary drtr-hide-admin-bookings">
-                        <i class="dashicons dashicons-arrow-left-alt2"></i>
-                        <?php _e('Torna al Dashboard', 'drtr-reserved-area'); ?>
-                    </button>
-                </div>
-                
-                <div id="drtr-admin-bookings-list">
-                    <?php $this->render_admin_bookings(); ?>
-                </div>
-            </div>
-            <?php endif; ?>
         </div>
         <?php
+    }
+    
+    /**
+     * Renderizzare pagina prenotazioni utente (shortcode)
+     */
+    public function render_user_bookings_page() {
+        // Verificare se l'utente è loggato
+        if (!is_user_logged_in()) {
+            return '<div class="drtr-ra-login-required">' . 
+                   '<p>' . __('Devi effettuare il login per visualizzare le tue prenotazioni.', 'drtr-reserved-area') . '</p>' .
+                   '<a href="' . esc_url(home_url('/area-riservata')) . '" class="drtr-ra-btn drtr-ra-btn-primary">' . __('Vai al Login', 'drtr-reserved-area') . '</a>' .
+                   '</div>';
+        }
+        
+        ob_start();
+        ?>
+        <div class="drtr-ra-bookings-page">
+            <div class="drtr-ra-page-header">
+                <h1><?php _e('Le Mie Prenotazioni', 'drtr-reserved-area'); ?></h1>
+                <a href="<?php echo esc_url(home_url('/area-riservata')); ?>" class="drtr-ra-btn drtr-ra-btn-secondary">
+                    <i class="dashicons dashicons-arrow-left-alt2"></i>
+                    <?php _e('Torna al Dashboard', 'drtr-reserved-area'); ?>
+                </a>
+            </div>
+            <?php $this->render_user_bookings(get_current_user_id()); ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+    
+    /**
+     * Renderizzare pagina gestione prenotazioni admin (shortcode)
+     */
+    public function render_admin_bookings_page() {
+        // Verificare se l'utente è admin
+        if (!current_user_can('manage_options')) {
+            return '<div class="drtr-ra-login-required">' . 
+                   '<p>' . __('Non hai i permessi per accedere a questa pagina.', 'drtr-reserved-area') . '</p>' .
+                   '<a href="' . esc_url(home_url('/area-riservata')) . '" class="drtr-ra-btn drtr-ra-btn-primary">' . __('Torna al Dashboard', 'drtr-reserved-area') . '</a>' .
+                   '</div>';
+        }
+        
+        ob_start();
+        ?>
+        <div class="drtr-ra-bookings-page">
+            <div class="drtr-ra-page-header">
+                <h1><?php _e('Gestione Prenotazioni', 'drtr-reserved-area'); ?></h1>
+                <a href="<?php echo esc_url(home_url('/area-riservata')); ?>" class="drtr-ra-btn drtr-ra-btn-secondary">
+                    <i class="dashicons dashicons-arrow-left-alt2"></i>
+                    <?php _e('Torna al Dashboard', 'drtr-reserved-area'); ?>
+                </a>
+            </div>
+            <?php $this->render_admin_bookings(); ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     /**

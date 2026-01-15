@@ -78,7 +78,7 @@ class DRTR_Reserved_Area {
     }
     
     public function enqueue_assets() {
-        if (is_page('area-riservata')) {
+        if (is_page(array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni'))) {
             wp_enqueue_style(
                 'drtr-ra-style',
                 DRTR_RA_PLUGIN_URL . 'assets/css/style.css',
@@ -121,8 +121,10 @@ function drtr_ra_activate() {
     // Cargar la clase necesaria
     require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-page-manager.php';
     
-    // Crear página al activar
+    // Crear páginas al activar
     DRTR_RA_Page_Manager::create_reserved_page();
+    DRTR_RA_Page_Manager::create_bookings_page();
+    DRTR_RA_Page_Manager::create_admin_bookings_page();
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'drtr_ra_activate');

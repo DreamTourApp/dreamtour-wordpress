@@ -385,6 +385,42 @@
    BOOKINGS SECTION
    ============================================================================= */
 
+.drtr-ra-bookings-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.drtr-ra-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.drtr-ra-page-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #003284;
+    font-weight: 700;
+}
+
+.drtr-ra-login-required {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.drtr-ra-login-required p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
 .drtr-ra-bookings-section {
     background: #fff;
     border-radius: 10px;
