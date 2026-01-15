@@ -98,6 +98,15 @@ function dreamtour_setup() {
 add_action('after_setup_theme', 'dreamtour_setup');
 
 /**
+ * Personalizar document title
+ */
+function dreamtour_custom_document_title($title) {
+    $title['title'] = str_replace(get_bloginfo('name'), 'Dream Tour', $title['title']);
+    return $title;
+}
+add_filter('document_title_parts', 'dreamtour_custom_document_title');
+
+/**
  * Registrar y encolar estilos
  */
 function dreamtour_enqueue_styles() {
