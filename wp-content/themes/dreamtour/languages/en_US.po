@@ -218,6 +218,27 @@ msgstr "Months"
 msgid "Tipo de viaje:"
 msgstr "Trip type:"
 
+msgid "Transporte"
+msgstr "Transport"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Bus"
+msgstr "Bus"
+
+msgid "Avión"
+msgstr "Plane"
+
+msgid "Tren"
+msgstr "Train"
+
+msgid "Barco"
+msgstr "Boat"
+
+msgid "Mixto"
+msgstr "Mixed"
+
 msgid "Nuestros Tours"
 msgstr "Our Tours"
 
@@ -283,12 +304,6 @@ msgstr "Destination"
 
 msgid "Todos los destinos"
 msgstr "All destinations"
-
-msgid "Transporte"
-msgstr "Transport"
-
-msgid "Todos"
-msgstr "All"
 
 msgid "Duración"
 msgstr "Duration"
