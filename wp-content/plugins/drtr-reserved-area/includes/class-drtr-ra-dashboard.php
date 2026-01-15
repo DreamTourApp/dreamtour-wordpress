@@ -186,6 +186,18 @@ class DRTR_RA_Dashboard {
                     
                     <?php if ($is_admin) : ?>
                         
+                        <!-- Card Gestione Prenotazioni - Solo Admin -->
+                        <div class="drtr-ra-card drtr-ra-card-highlight">
+                            <div class="drtr-ra-card-icon drtr-ra-icon-primary">
+                                <i class="dashicons dashicons-list-view"></i>
+                            </div>
+                            <h3><?php _e('Gestione Prenotazioni', 'drtr-reserved-area'); ?></h3>
+                            <p><?php _e('Visualizza e gestisci tutte le prenotazioni', 'drtr-reserved-area'); ?></p>
+                            <a href="<?php echo esc_url(home_url('/gestione-prenotazioni')); ?>" class="drtr-ra-btn drtr-ra-btn-primary">
+                                <?php _e('Gestisci Prenotazioni', 'drtr-reserved-area'); ?>
+                            </a>
+                        </div>
+                        
                         <!-- Card Gestione Tours - Solo Admin -->
                         <div class="drtr-ra-card drtr-ra-card-highlight">
                             <div class="drtr-ra-card-icon drtr-ra-icon-primary">
