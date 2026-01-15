@@ -268,6 +268,7 @@ class DRTR_Bookings_Pages {
             echo '<th>' . __('Data', 'drtr-checkout') . '</th>';
             echo '<th>' . __('Pax', 'drtr-checkout') . '</th>';
             echo '<th>' . __('Totale', 'drtr-checkout') . '</th>';
+            echo '<th>' . __('Tipo', 'drtr-checkout') . '</th>';
             echo '<th>' . __('Pagamento', 'drtr-checkout') . '</th>';
             echo '<th>';
             echo __('Stato', 'drtr-checkout');
@@ -290,6 +291,7 @@ class DRTR_Bookings_Pages {
                 $phone = get_post_meta($booking_id, '_booking_phone', true);
                 $total = get_post_meta($booking_id, '_booking_total', true);
                 $deposit = get_post_meta($booking_id, '_booking_deposit', true);
+                $payment_type = get_post_meta($booking_id, '_booking_payment_type', true);
                 $payment_method = get_post_meta($booking_id, '_booking_payment_method', true);
                 $status = get_post_status();
                 $created_at = get_post_meta($booking_id, '_booking_created_at', true);
@@ -351,6 +353,19 @@ class DRTR_Bookings_Pages {
                 echo '<td>';
                 echo '<strong>€' . number_format($total, 2, ',', '.') . '</strong><br>';
                 echo '<small>Acconto: €' . number_format($deposit, 2, ',', '.') . '</small>';
+                echo '</td>';
+                echo '<td>';
+                if ($payment_type === 'deposit') {
+                    echo '<span class="drtr-badge drtr-badge-warning">';
+                    echo '<i class="dashicons dashicons-minus" style="font-size: 14px; vertical-align: middle;"></i> ';
+                    echo __('Acconto 50%', 'drtr-checkout');
+                    echo '</span>';
+                } else {
+                    echo '<span class="drtr-badge drtr-badge-success">';
+                    echo '<i class="dashicons dashicons-yes" style="font-size: 14px; vertical-align: middle;"></i> ';
+                    echo __('Completo', 'drtr-checkout');
+                    echo '</span>';
+                }
                 echo '</td>';
                 echo '<td>';
                 $payment_icons = array(
