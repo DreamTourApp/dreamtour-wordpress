@@ -196,6 +196,9 @@ class DRTR_RA_Dashboard {
                             <a href="<?php echo esc_url(home_url('/gestione-prenotazioni')); ?>" class="drtr-ra-btn drtr-ra-btn-primary">
                                 <?php _e('Gestisci Prenotazioni', 'drtr-reserved-area'); ?>
                             </a>
+                            <a href="<?php echo esc_url(plugins_url('drtr-checkout/debug-bookings.php')); ?>" class="drtr-ra-btn drtr-ra-btn-outline" style="margin-top: 8px;">
+                                🔍 Debug Prenotazioni
+                            </a>
                         </div>
                         
                         <!-- Card Gestione Tours - Solo Admin -->
