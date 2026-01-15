@@ -2,8 +2,8 @@
 /**
  * Gestione Checkout e Processamento Prenotazioni
  * 
- * @package DRTR_Gestione_Tours
- * @since 1.2.0
+ * @package DRTR_Checkout
+ * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
@@ -83,7 +83,7 @@ class DRTR_Checkout {
             $user_phone = get_user_meta($current_user->ID, 'phone', true);
         }
         
-        include DRTR_PLUGIN_DIR . 'templates/checkout.php';
+        include DRTR_CHECKOUT_DIR . 'templates/checkout.php';
     }
     
     /**

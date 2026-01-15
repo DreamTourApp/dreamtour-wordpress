@@ -2,8 +2,8 @@
 /**
  * Gestione Custom Post Type Prenotazioni
  * 
- * @package DRTR_Gestione_Tours
- * @since 1.2.0
+ * @package DRTR_Checkout
+ * @since 1.0.0
  */
 
 if (!defined('ABSPATH')) {
