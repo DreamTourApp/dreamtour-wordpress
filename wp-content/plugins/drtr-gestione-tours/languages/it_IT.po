@@ -299,6 +299,10 @@ msgstr "Elimina"
 
 msgid "Intenciones de Viaje"
 msgstr "Intenzioni di Viaggio"
+
+msgid "Meses"
+msgstr "Mesi"
+
 # Meses / Mesi
 msgid "Enero"
 msgstr "Gennaio"

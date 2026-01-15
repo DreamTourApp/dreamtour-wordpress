@@ -209,6 +209,12 @@ msgstr "Contattaci"
 msgid "Destinos:"
 msgstr "Destinazioni:"
 
+msgid "Intenciones de Viaje"
+msgstr "Intenzioni di Viaggio"
+
+msgid "Meses"
+msgstr "Mesi"
+
 msgid "Tipo de viaje:"
 msgstr "Tipo di viaggio:"
 
