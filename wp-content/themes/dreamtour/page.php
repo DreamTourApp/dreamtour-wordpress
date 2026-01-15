@@ -22,9 +22,16 @@ get_header();
                     </div>
                 <?php endif; ?>
                 
+                <?php 
+                // Nascondi il titolo nelle pagine con shortcode che già hanno il titolo nel contenuto
+                $hide_title_pages = array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni', 'checkout', 'grazie-prenotazione');
+                $current_page_slug = $post->post_name;
+                if (!in_array($current_page_slug, $hide_title_pages)) : 
+                ?>
                 <header class="page-header">
                     <h1 class="page-title"><?php the_title(); ?></h1>
                 </header>
+                <?php endif; ?>
                 
                 <div class="page-content">
                     <?php
