@@ -189,6 +189,7 @@ class DRTR_Bookings_Pages {
                 $created_at = get_post_meta($booking_id, '_booking_created_at', true);
                 
                 $tour_title = $tour_id ? get_the_title($tour_id) : __('Tour non disponibile', 'drtr-checkout');
+                $tour_url = $tour_id ? get_permalink($tour_id) : '';
                 
                 // Status labels
                 $status_labels = array(
@@ -212,7 +213,13 @@ class DRTR_Bookings_Pages {
                 
                 echo '<tr>';
                 echo '<td><strong>#' . esc_html($booking_id) . '</strong></td>';
-                echo '<td>' . esc_html($tour_title) . '</td>';
+                echo '<td>';
+                if ($tour_url) {
+                    echo '<a href="' . esc_url($tour_url) . '" target="_blank">' . esc_html($tour_title) . ' <i class="dashicons dashicons-external" style="font-size: 14px; vertical-align: middle;"></i></a>';
+                } else {
+                    echo esc_html($tour_title);
+                }
+                echo '</td>';
                 echo '<td>' . esc_html(date_i18n('d/m/Y H:i', strtotime($created_at))) . '</td>';
                 echo '<td>' . sprintf(__('%d adulti, %d bambini', 'drtr-checkout'), $adults, $children) . '</td>';
                 echo '<td><strong>€' . number_format($total, 2, ',', '.') . '</strong></td>';
