@@ -272,14 +272,19 @@
             const adults = parseInt($adultsInput.val()) || 1;
             const children = parseInt($childrenInput.val()) || 0;
             const paymentType = $('input[name="payment-type"]:checked').val();
-            const subtotal = (adults * tourPrice) + (children * childPrice);
-            const deposit = subtotal * 0.5;
-            const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
+            const tourId = $(this).data('tour-id') || $('[data-tour-id]').data('tour-id');
             
-            // Aquí puedes redirigir al usuario a la página de pago o mostrar un modal
-            // Por ahora mostramos un mensaje
-            const message = `Adultos: ${adults}, Bambini: ${children}, Totale: €${totalAmount.toFixed(2)}`;
-            alert('Continuare a reserva: ' + message);
+            // Costruire URL checkout
+            const checkoutUrl = dreamtourData.siteUrl + '/checkout/';
+            const params = new URLSearchParams({
+                tour_id: tourId,
+                adults: adults,
+                children: children,
+                payment_type: paymentType
+            });
+            
+            // Reindirizzare a checkout
+            window.location.href = checkoutUrl + '?' + params.toString();
         });
         
         // Initial calculation

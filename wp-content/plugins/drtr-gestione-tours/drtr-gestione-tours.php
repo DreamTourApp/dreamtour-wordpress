@@ -29,6 +29,8 @@ require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-meta-boxes.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-ajax-handler.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-frontend.php';
 require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-travel-intent.php';
+require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-booking.php';
+require_once DRTR_PLUGIN_DIR . 'includes/class-drtr-checkout.php';
 
 /**
  * Clase principal del plugin

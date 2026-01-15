@@ -182,6 +182,7 @@ function dreamtour_enqueue_scripts() {
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'nonce'   => wp_create_nonce('dreamtour-nonce'),
         'themeUrl' => DREAMTOUR_THEME_URI,
+        'siteUrl' => home_url(),
     ));
     
     // Script de comentarios si es necesario

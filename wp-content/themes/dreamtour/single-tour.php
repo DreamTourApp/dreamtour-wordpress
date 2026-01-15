@@ -437,7 +437,7 @@ while (have_posts()) :
                             </div>
                             
                             <!-- Book Button -->
-                            <button type="button" class="btn btn-primary btn-block" id="book-btn">
+                            <button type="button" class="btn btn-primary btn-block" id="book-btn" data-tour-id="<?php echo get_the_ID(); ?>">
                                 <?php _e('Continuar a Reserva', 'dreamtour'); ?>
                             </button>
                             
