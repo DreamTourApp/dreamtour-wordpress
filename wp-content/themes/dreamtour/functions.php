@@ -122,8 +122,8 @@ function dreamtour_enqueue_styles() {
         DREAMTOUR_VERSION
     );
     
-    // Intent filter styles (only on homepage)
-    if (is_front_page()) {
+    // Intent filter styles (only on homepage and tours archive)
+    if (is_front_page() || is_post_type_archive(array('tour', 'drtr_tour')) || is_tax(array('drtr_destination', 'drtr_tour_type'))) {
         wp_enqueue_style('dreamtour-intents-filter', 
             DREAMTOUR_THEME_URI . '/assets/css/intents-filter.css', 
             array('dreamtour-main'), 
@@ -162,8 +162,8 @@ function dreamtour_enqueue_scripts() {
         true
     );
     
-    // Intent filter script (only on homepage)
-    if (is_front_page()) {
+    // Intent filter script (only on homepage and tours archive)
+    if (is_front_page() || is_post_type_archive(array('tour', 'drtr_tour')) || is_tax(array('drtr_destination', 'drtr_tour_type'))) {
         wp_enqueue_script('dreamtour-intents-filter', 
             DREAMTOUR_THEME_URI . '/assets/js/intents-filter.js', 
             array('jquery'), 
