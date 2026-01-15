@@ -24,6 +24,23 @@
             this.checkEditMode();
         },
         
+        formatDate: function(datetimeString) {
+            if (!datetimeString) return '-';
+            
+            try {
+                const date = new Date(datetimeString);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            } catch (e) {
+                return datetimeString;
+            }
+        },
+        
         checkEditMode: function() {
             // Verificar si hay parámetro edit_tour en URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -176,7 +193,7 @@
                         <td>${tour.price ? '€' + parseFloat(tour.price).toFixed(2) : '-'}</td>
                         <td>${tour.duration ? tour.duration + ' días' : '-'}</td>
                         <td>${tour.location || '-'}</td>
-                        <td>${tour.start_date || '-'}</td>
+                        <td>${self.formatDate(tour.start_date)}</td>
                         <td>
                             <button class="drtr-btn drtr-btn-edit drtr-edit-tour" data-tour-id="${tour.id}">
                                 <span class="dashicons dashicons-edit"></span> ${drtrAjax.strings.edit_button}

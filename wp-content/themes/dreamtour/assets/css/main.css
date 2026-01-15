@@ -514,7 +514,7 @@
 
 .page-header,
 .post-header-content {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
 }
 
 .page-title,
