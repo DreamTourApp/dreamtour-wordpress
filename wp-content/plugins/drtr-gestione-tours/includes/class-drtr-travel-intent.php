@@ -172,6 +172,7 @@ function drtr_render_split_intents_filters() {
     ?>
     <!-- Filtro: Intenciones de Viaje -->
     <div class="filter-group filter-group-intents">
+        <label for="filter-experiences-toggle"><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></label>
         <button type="button" class="filter-intents-toggle" id="filter-experiences-toggle">
             <span><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></span>
             <span class="filter-count" id="filter-experiences-count" style="display:none;">0</span>
@@ -197,6 +198,7 @@ function drtr_render_split_intents_filters() {
     
     <!-- Filtro: Meses -->
     <div class="filter-group filter-group-intents">
+        <label for="filter-months-toggle"><?php esc_html_e('Meses', 'dreamtour'); ?></label>
         <button type="button" class="filter-intents-toggle" id="filter-months-toggle">
             <span><?php esc_html_e('Meses', 'dreamtour'); ?></span>
             <span class="filter-count" id="filter-months-count" style="display:none;">0</span>

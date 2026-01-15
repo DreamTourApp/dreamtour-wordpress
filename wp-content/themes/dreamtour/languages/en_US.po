@@ -209,6 +209,12 @@ msgstr "Contact Us"
 msgid "Destinos:"
 msgstr "Destinations:"
 
+msgid "Intenciones de Viaje"
+msgstr "Travel Intents"
+
+msgid "Meses"
+msgstr "Months"
+
 msgid "Tipo de viaje:"
 msgstr "Trip type:"
 
