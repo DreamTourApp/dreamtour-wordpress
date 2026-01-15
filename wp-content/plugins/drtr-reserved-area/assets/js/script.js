@@ -81,14 +81,14 @@
         /**
          * Toggle sezione prenotazioni
          */
-        $('.drtr-show-bookings').on('click', function(e) {
+        $(document).on('click', '.drtr-show-bookings', function(e) {
             e.preventDefault();
             $('.drtr-ra-cards').fadeOut(300, function() {
                 $('#drtr-ra-bookings-section').fadeIn(300);
             });
         });
         
-        $('.drtr-hide-bookings').on('click', function(e) {
+        $(document).on('click', '.drtr-hide-bookings', function(e) {
             e.preventDefault();
             $('#drtr-ra-bookings-section').fadeOut(300, function() {
                 $('.drtr-ra-cards').fadeIn(300);
@@ -98,14 +98,14 @@
         /**
          * Toggle sezione admin prenotazioni
          */
-        $('.drtr-show-admin-bookings').on('click', function(e) {
+        $(document).on('click', '.drtr-show-admin-bookings', function(e) {
             e.preventDefault();
             $('.drtr-ra-cards').fadeOut(300, function() {
                 $('#drtr-ra-admin-bookings-section').fadeIn(300);
             });
         });
         
-        $('.drtr-hide-admin-bookings').on('click', function(e) {
+        $(document).on('click', '.drtr-hide-admin-bookings', function(e) {
             e.preventDefault();
             $('#drtr-ra-admin-bookings-section').fadeOut(300, function() {
                 $('.drtr-ra-cards').fadeIn(300);
