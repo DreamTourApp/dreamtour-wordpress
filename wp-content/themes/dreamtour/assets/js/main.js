@@ -202,15 +202,24 @@
         
         // Get price from the tour-price-box or from hidden data
         let tourPrice = 0;
-        const priceText = $('.price-amount').text();
-        if (priceText) {
-            tourPrice = parseFloat(priceText.replace('€', '').replace('.', '').replace(',', '.')) || 0;
+        let childPrice = 0;
+        const priceBox = document.querySelector('.tour-price-box');
+        
+        if (priceBox) {
+            tourPrice = parseFloat(priceBox.getAttribute('data-price') || 0);
+            childPrice = parseFloat(priceBox.getAttribute('data-child-price') || tourPrice);
+        } else {
+            const priceText = $('.price-amount').text();
+            if (priceText) {
+                tourPrice = parseFloat(priceText.replace('€', '').replace('.', '').replace(',', '.')) || 0;
+                childPrice = tourPrice;
+            }
         }
         
         function updatePriceCalculation() {
             const adults = parseInt($adultsInput.val()) || 1;
             const children = parseInt($childrenInput.val()) || 0;
-            const subtotal = (adults + children) * tourPrice;
+            const subtotal = (adults * tourPrice) + (children * childPrice);
             const deposit = subtotal * 0.5;
             const paymentType = $('input[name="payment-type"]:checked').val();
             const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
@@ -263,7 +272,7 @@
             const adults = parseInt($adultsInput.val()) || 1;
             const children = parseInt($childrenInput.val()) || 0;
             const paymentType = $('input[name="payment-type"]:checked').val();
-            const subtotal = (adults + children) * tourPrice;
+            const subtotal = (adults * tourPrice) + (children * childPrice);
             const deposit = subtotal * 0.5;
             const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
             

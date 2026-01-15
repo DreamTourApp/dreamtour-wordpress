@@ -12,6 +12,11 @@ while (have_posts()) :
     
     // Get meta fields with DRTR prefix (nueva forma) o sin prefijo (forma antigua)
     $tour_price = get_post_meta(get_the_ID(), '_drtr_price', true) ?: get_post_meta(get_the_ID(), 'price', true);
+    $tour_child_price = get_post_meta(get_the_ID(), '_drtr_child_price', true);
+    // Se non c'è prezzo bambini, usa prezzo adulto - 5
+    if (!$tour_child_price && $tour_price) {
+        $tour_child_price = max(0, $tour_price - 5);
+    }
     $tour_duration = get_post_meta(get_the_ID(), '_drtr_duration', true) ?: get_post_meta(get_the_ID(), 'duration', true);
     $tour_rating = get_post_meta(get_the_ID(), '_drtr_rating', true) ?: get_post_meta(get_the_ID(), 'rating', true);
     $tour_location = get_post_meta(get_the_ID(), '_drtr_location', true) ?: get_post_meta(get_the_ID(), 'location', true);
@@ -372,7 +377,7 @@ while (have_posts()) :
                     <div class="tour-booking-card">
                         <!-- Price Box -->
                         <?php if ($tour_price) : ?>
-                            <div class="tour-price-box" data-price="<?php echo esc_attr($tour_price); ?>">
+                            <div class="tour-price-box" data-price="<?php echo esc_attr($tour_price); ?>" data-child-price="<?php echo esc_attr($tour_child_price); ?>">
                                 <span class="price-label"><?php _e('Precio por persona', 'dreamtour'); ?></span>
                                 <span class="price-amount">€<?php echo esc_html(number_format($tour_price, 2, ',', '.')); ?></span>
                             </div>
