@@ -24,7 +24,7 @@ get_header();
                 
                 <?php 
                 // Nascondi il titolo nelle pagine con shortcode che già hanno il titolo nel contenuto
-                $hide_title_pages = array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni', 'checkout', 'grazie-prenotazione');
+                $hide_title_pages = array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni', 'checkout', 'grazie-prenotazione', 'gestione-tours');
                 $current_page_slug = $post->post_name;
                 if (!in_array($current_page_slug, $hide_title_pages)) : 
                 ?>
