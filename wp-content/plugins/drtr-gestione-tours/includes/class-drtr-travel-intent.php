@@ -125,7 +125,7 @@ function drtr_render_intents_filter() {
     <div class="filter-group filter-group-intents">
         <button type="button" class="filter-intents-toggle" id="filter-intents-toggle">
             <span><?php esc_html_e('Intención de Viaje', 'dreamtour'); ?></span>
-            <span class="filter-count" id="filter-count">0</span>
+            <span class="filter-count" id="filter-count" style="display:none;">0</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -175,7 +175,7 @@ function drtr_render_split_intents_filters() {
         <label for="filter-experiences-toggle"><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></label>
         <button type="button" class="filter-intents-toggle" id="filter-experiences-toggle">
             <span><?php esc_html_e('Intenciones de Viaje', 'dreamtour'); ?></span>
-            <span class="filter-count" id="filter-experiences-count">0</span>
+            <span class="filter-count" id="filter-experiences-count" style="display:none;">0</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -201,7 +201,7 @@ function drtr_render_split_intents_filters() {
         <label for="filter-months-toggle"><?php esc_html_e('Meses', 'dreamtour'); ?></label>
         <button type="button" class="filter-intents-toggle" id="filter-months-toggle">
             <span><?php esc_html_e('Meses', 'dreamtour'); ?></span>
-            <span class="filter-count" id="filter-months-count">0</span>
+            <span class="filter-count" id="filter-months-count" style="display:none;">0</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
