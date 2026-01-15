@@ -148,6 +148,7 @@ class DRTR_Bookings_Pages {
         $args = array(
             'post_type' => 'drtr_booking',
             'posts_per_page' => -1,
+            'post_status' => 'any', // Includere tutti gli status personalizzati
             'meta_query' => array(
                 array(
                     'key' => '_booking_user_id',
@@ -249,6 +250,7 @@ class DRTR_Bookings_Pages {
         $args = array(
             'post_type' => 'drtr_booking',
             'posts_per_page' => -1,
+            'post_status' => 'any', // Includere tutti gli status personalizzati
             'orderby' => 'date',
             'order' => 'DESC'
         );

@@ -144,7 +144,7 @@ if (!current_user_can('manage_options')) {
         $args_all = array(
             'post_type' => 'drtr_booking',
             'posts_per_page' => -1,
-            'post_status' => 'any',
+            'post_status' => 'any', // IMPORTANTE: Include tutti gli status personalizzati
             'orderby' => 'ID',
             'order' => 'DESC'
         );
