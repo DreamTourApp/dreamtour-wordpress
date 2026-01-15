@@ -269,7 +269,10 @@ class DRTR_Bookings_Pages {
             echo '<th>' . __('Pax', 'drtr-checkout') . '</th>';
             echo '<th>' . __('Totale', 'drtr-checkout') . '</th>';
             echo '<th>' . __('Pagamento', 'drtr-checkout') . '</th>';
-            echo '<th>' . __('Stato', 'drtr-checkout') . '</th>';
+            echo '<th>';
+            echo __('Stato', 'drtr-checkout');
+            echo ' <span class="dashicons dashicons-info-outline" style="font-size: 16px; vertical-align: middle; cursor: help;" title="' . esc_attr(__('In Attesa: Prenotazione ricevuta, in attesa di pagamento | Acconto Pagato: Acconto ricevuto | Pagato: Pagamento completo ricevuto | Completato: Tour completato | Cancellato: Prenotazione annullata', 'drtr-checkout')) . '"></span>';
+            echo '</th>';
             echo '<th>' . __('Azioni', 'drtr-checkout') . '</th>';
             echo '</tr>';
             echo '</thead>';
@@ -311,6 +314,15 @@ class DRTR_Bookings_Pages {
                     'booking_completed' => __('Completato', 'drtr-checkout'),
                 );
                 
+                // Status descriptions
+                $status_descriptions = array(
+                    'booking_pending' => __('Prenotazione ricevuta, in attesa di ricevere il pagamento', 'drtr-checkout'),
+                    'booking_deposit' => __('Acconto del 50% ricevuto, in attesa del saldo', 'drtr-checkout'),
+                    'booking_paid' => __('Pagamento completo ricevuto, prenotazione confermata', 'drtr-checkout'),
+                    'booking_cancelled' => __('Prenotazione annullata dal cliente o dall\'amministratore', 'drtr-checkout'),
+                    'booking_completed' => __('Tour completato con successo', 'drtr-checkout'),
+                );
+                
                 $status_class = array(
                     'booking_pending' => 'pending',
                     'booking_deposit' => 'deposit',
@@ -350,9 +362,10 @@ class DRTR_Bookings_Pages {
                 echo esc_html(ucfirst(str_replace('_', ' ', $payment_method)));
                 echo '</td>';
                 echo '<td>';
-                echo '<select class="drtr-status-select" data-booking-id="' . esc_attr($booking_id) . '">';
+                echo '<select class="drtr-status-select" data-booking-id="' . esc_attr($booking_id) . '" title="' . esc_attr(isset($status_descriptions[$status]) ? $status_descriptions[$status] : '') . '">';
                 foreach ($status_labels as $status_key => $status_name) {
-                    echo '<option value="' . esc_attr($status_key) . '" ' . selected($status, $status_key, false) . '>';
+                    $tooltip = isset($status_descriptions[$status_key]) ? $status_descriptions[$status_key] : '';
+                    echo '<option value="' . esc_attr($status_key) . '" ' . selected($status, $status_key, false) . ' title="' . esc_attr($tooltip) . '">';
                     echo esc_html($status_name);
                     echo '</option>';
                 }

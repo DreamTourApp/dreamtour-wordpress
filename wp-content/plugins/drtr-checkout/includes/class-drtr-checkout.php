@@ -129,13 +129,8 @@ class DRTR_Checkout {
             wp_send_json_error(array('message' => $booking_id->get_error_message()));
         }
         
-        // Determinare stato iniziale
-        $initial_status = 'booking_pending';
-        if ($booking_data['payment_method'] === 'bank_transfer') {
-            $initial_status = $booking_data['payment_type'] === 'deposit' ? 'booking_deposit' : 'booking_pending';
-        }
-        
-        $booking_class->update_booking_status($booking_id, $initial_status);
+        // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
+        // Non serve cambiare lo status qui perché create_booking già imposta 'booking_pending'
         
         // Inviare email
         $this->send_booking_emails($booking_id, $booking_data);
@@ -179,6 +174,8 @@ class DRTR_Checkout {
         $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
         $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
         
+        $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+        
         ob_start();
         ?>
         <!DOCTYPE html>
@@ -188,6 +185,10 @@ class DRTR_Checkout {
         </head>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="<?php echo esc_url($logo_url); ?>" alt="DreamTour" style="max-width: 200px; height: auto;">
+                </div>
+                
                 <h1 style="color: #003284;"><?php _e('Grazie per la tua prenotazione!', 'drtr-tours'); ?></h1>
                 
                 <p><?php printf(__('Ciao %s,', 'drtr-tours'), $booking_data['first_name']); ?></p>
@@ -252,6 +253,8 @@ class DRTR_Checkout {
         $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
         $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
         
+        $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+        
         ob_start();
         ?>
         <!DOCTYPE html>
@@ -261,6 +264,10 @@ class DRTR_Checkout {
         </head>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="<?php echo esc_url($logo_url); ?>" alt="DreamTour" style="max-width: 200px; height: auto;">
+                </div>
+                
                 <h1 style="color: #003284;"><?php printf(__('Nuova Prenotazione #%d', 'drtr-tours'), $booking_id); ?></h1>
                 
                 <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
