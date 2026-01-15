@@ -66,18 +66,18 @@
         function updateExperiencesCount() {
             const count = $experienceCheckboxes.filter(':checked').length;
             if (count > 0) {
-                $experiencesCount.text(count).show();
+                $experiencesCount.text(count).removeAttr('style');
             } else {
-                $experiencesCount.hide();
+                $experiencesCount.attr('style', 'display:none');
             }
         }
         
         function updateMonthsCount() {
             const count = $monthCheckboxes.filter(':checked').length;
             if (count > 0) {
-                $monthsCount.text(count).show();
+                $monthsCount.text(count).removeAttr('style');
             } else {
-                $monthsCount.hide();
+                $monthsCount.attr('style', 'display:none');
             }
         }
         
