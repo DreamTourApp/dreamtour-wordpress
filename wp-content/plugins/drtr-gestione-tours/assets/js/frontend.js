@@ -178,6 +178,7 @@
         },
         
         renderTours: function(tours) {
+            const self = this;
             const tbody = $('#drtr-tours-tbody');
             tbody.empty();
             
