@@ -467,7 +467,7 @@ jQuery(document).ready(function($) {
         const $message = $('#checkout-message');
         
         // Disable submit button
-        $submitBtn.prop('disabled', true).text('<?php _e('Elaborazione...', 'drtr-tours'); ?>');
+        $submitBtn.prop('disabled', true).text(<?php echo wp_json_encode(__('Elaborazione...', 'drtr-checkout')); ?>);
         
         // Prepare data
         const formData = new FormData($form[0]);
@@ -493,13 +493,13 @@ jQuery(document).ready(function($) {
                 } else {
                     $message.removeClass('success').addClass('error')
                         .html(response.data.message).show();
-                    $submitBtn.prop('disabled', false).text('<?php _e('Conferma Prenotazione', 'drtr-tours'); ?>');
+                    $submitBtn.prop('disabled', false).text(<?php echo wp_json_encode(__('Conferma Prenotazione', 'drtr-checkout')); ?>);
                 }
             },
             error: function() {
                 $message.removeClass('success').addClass('error')
-                    .html('<?php _e('Errore durante l\'elaborazione. Riprova.', 'drtr-tours'); ?>').show();
-                $submitBtn.prop('disabled', false).text('<?php _e('Conferma Prenotazione', 'drtr-tours'); ?>');
+                    .html(<?php echo wp_json_encode(__('Errore durante l\'elaborazione. Riprova.', 'drtr-checkout')); ?>).show();
+                $submitBtn.prop('disabled', false).text(<?php echo wp_json_encode(__('Conferma Prenotazione', 'drtr-checkout')); ?>);
             }
         });
     });
