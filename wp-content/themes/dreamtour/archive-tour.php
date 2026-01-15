@@ -8,20 +8,6 @@
 get_header();
 ?>
 
-<!-- Hero Section -->
-<section class="hero-section" style="min-height: 350px;">
-    <div class="container">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <?php esc_html_e('Nuestros Tours', 'dreamtour'); ?>
-            </h1>
-            <p class="hero-subtitle">
-                <?php esc_html_e('Explora destinos increíbles alrededor del mundo', 'dreamtour'); ?>
-            </p>
-        </div>
-    </div>
-</section>
-
 <section class="content-section">
     <div class="container">
         
