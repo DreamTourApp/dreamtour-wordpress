@@ -684,6 +684,7 @@
 .header-cta {
     display: flex;
     align-items: center;
+    width: 140px;
 }
 
 /* Header Reserved Area Link */

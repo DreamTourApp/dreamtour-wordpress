@@ -474,7 +474,8 @@ a:hover {
   gap: var(--spacing-md);
   margin: var(--spacing-lg) 0;
   padding: var(--spacing-md);
-  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-lg);
 }
 
@@ -482,7 +483,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
-  flex: 1 1 200px;
+  flex: 1 1 220px;
   min-width: 180px;
 }
 
