@@ -209,6 +209,13 @@
     color: #ffffff;
 }
 
+/* Pulsanti più piccoli per header pagine */
+.drtr-ra-page-header .drtr-ra-btn {
+    width: auto;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+}
+
 .drtr-ra-links {
     text-align: center;
     margin-top: 1.5rem;
@@ -741,12 +748,12 @@
 }
 
 .drtr-ra-btn-secondary {
-    background-color: #6c757d;
+    background-color: #1ba4ce;
     color: white;
 }
 
 .drtr-ra-btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #1591b5;
 }
 
 @media (max-width: 768px) {
