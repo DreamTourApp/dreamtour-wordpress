@@ -134,44 +134,18 @@ class DRTR_Checkout {
             define('DONOTCACHEDB', true);
         }
         
-        // Write to file for debugging
-        $debug_file = WP_CONTENT_DIR . '/drtr-checkout-debug.txt';
-        $timestamp = date('Y-m-d H:i:s');
-        file_put_contents($debug_file, "\n[$timestamp] METODO CHIAMATO!\n", FILE_APPEND);
-        file_put_contents($debug_file, "POST data: " . print_r($_POST, true) . "\n", FILE_APPEND);
-        
-        // Send headers immediately
-        @header('Content-Type: application/json; charset=utf-8');
-        @header('Cache-Control: no-cache, must-revalidate, max-age=0');
-        
-        error_log('DRTR CHECKOUT: process_checkout chiamato');
-        error_log('DRTR CHECKOUT: POST data: ' . print_r($_POST, true));
-        
-        file_put_contents($debug_file, "Prima del nonce check\n", FILE_APPEND);
-        
-        // TEMPORANEAMENTE COMMENTATO PER DEBUG
-        // check_ajax_referer('dreamtour-nonce', 'nonce');
-        
-        error_log('DRTR CHECKOUT: nonce verificato (SKIPPED)');
-        file_put_contents($debug_file, "Dopo nonce check (SKIPPED)\n", FILE_APPEND);
+        // Verify nonce
+        check_ajax_referer('dreamtour-nonce', 'nonce');
         
         // Validare dati
         $required_fields = array('tour_id', 'adults', 'first_name', 'last_name', 'email', 'phone', 'payment_method');
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
-                error_log('DRTR CHECKOUT: campo mancante - ' . $field);
-                file_put_contents($debug_file, "Campo mancante: $field\n", FILE_APPEND);
                 wp_send_json_error(array('message' => sprintf(__('Campo obbligatorio mancante: %s', 'drtr-tours'), $field)));
             }
         }
         
-        file_put_contents($debug_file, "Tutti i campi validati\n", FILE_APPEND);
-        
-        error_log('DRTR CHECKOUT: tutti i campi validati');
-        
         // Preparare dati prenotazione
-        file_put_contents($debug_file, "Preparando dati booking...\n", FILE_APPEND);
-        
         $booking_data = array(
             'tour_id' => absint($_POST['tour_id']),
             'adults' => absint($_POST['adults']),
@@ -192,23 +166,13 @@ class DRTR_Checkout {
             $booking_data['user_id'] = get_current_user_id();
         }
         
-        file_put_contents($debug_file, "Dati preparati, creando booking...\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: creando booking...');
-        
         // Creare prenotazione
         $booking_class = DRTR_Booking::get_instance();
         $booking_id = $booking_class->create_booking($booking_data);
         
-        file_put_contents($debug_file, "Booking ID ricevuto: " . print_r($booking_id, true) . "\n", FILE_APPEND);
-        
         if (is_wp_error($booking_id)) {
-            error_log('DRTR CHECKOUT: errore booking - ' . $booking_id->get_error_message());
-            file_put_contents($debug_file, "ERRORE: " . $booking_id->get_error_message() . "\n", FILE_APPEND);
             wp_send_json_error(array('message' => $booking_id->get_error_message()));
         }
-        
-        file_put_contents($debug_file, "Booking creato con successo - ID: $booking_id\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: booking creato - ID: ' . $booking_id);
         
         // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
         // Non serve cambiare lo status qui perché create_booking già imposta 'booking_pending'
@@ -227,25 +191,14 @@ class DRTR_Checkout {
         error_log('DRTR CHECKOUT: inviando risposta JSON success');
         wp_send_json_success(array(
             'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
+            'booking_id' in background (async) per evitare timeout AJAX
+        wp_schedule_single_event(time() + 5, 'drtr_send_booking_emails_async', array($booking_id, $booking_data));
+        
+        wp_send_json_success(array(
+            'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
             'booking_id' => $booking_id,
             'redirect' => add_query_arg('booking_id', $booking_id, home_url('/grazie-prenotazione'))
-        ));
-        file_put_contents($debug_file, "FINE - Non dovrebbe arrivare qui\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: fine metodo (non dovrebbe arrivare qui)');
-    }
-    
-    /**
-     * Send emails asynchronously
-     */
-    public function send_emails_async($booking_id, $booking_data) {
-        $this->send_booking_emails($booking_id, $booking_data);
-    }
-    
-    /**
-     * Inviare email di conferma
-     */
-    private function send_booking_emails($booking_id, $booking_data) {
-        $debug_file = WP_CONTENT_DIR . '/drtr-checkout-debug.txt';
+        )
         file_put_contents($debug_file, "send_booking_emails() START\n", FILE_APPEND);
         
         $tour = get_post($booking_data['tour_id']);
@@ -256,57 +209,34 @@ class DRTR_Checkout {
         // Add start date and time to tour title
         $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
         file_put_contents($debug_file, "Tour start date: $tour_start_date\n", FILE_APPEND);
+        tour = get_post($booking_data['tour_id']);
+        $tour_title = $tour->post_title;
         
+        // Add start date and time to tour title
+        $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
         if ($tour_start_date) {
             $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
             if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
                 $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
-                file_put_contents($debug_file, "DateTime formattato OK\n", FILE_APPEND);
             }
         }
-        
-        file_put_contents($debug_file, "Preparando email cliente...\n", FILE_APPEND);
         
         // Email al cliente
         $to_customer = $booking_data['email'];
         $subject_customer = sprintf(__('Conferma Prenotazione - %s', 'drtr-tours'), $tour_title);
         
-        file_put_contents($debug_file, "Generando template cliente...\n", FILE_APPEND);
         $message_customer = $this->get_customer_email_template($booking_data, $tour_title);
-        file_put_contents($debug_file, "Template cliente generato\n", FILE_APPEND);
         
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        
-        file_put_contents($debug_file, "Inviando wp_mail cliente...\n", FILE_APPEND);
-        $sent_customer = wp_mail($to_customer, $subject_customer, $message_customer, $headers);
-        file_put_contents($debug_file, "wp_mail cliente result: " . ($sent_customer ? 'SUCCESS' : 'FAILED') . "\n", FILE_APPEND);
-        
-        file_put_contents($debug_file, "Preparando email admin...\n", FILE_APPEND);
+        wp_mail($to_customer, $subject_customer, $message_customer, $headers);
         
         // Email all'admin
         $admin_email = get_option('admin_email');
         $subject_admin = sprintf(__('Nuova Prenotazione #%d - %s', 'drtr-tours'), $booking_id, $tour_title);
         
-        file_put_contents($debug_file, "Generando template admin...\n", FILE_APPEND);
         $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
-        file_put_contents($debug_file, "Template admin generato\n", FILE_APPEND);
         
-        file_put_contents($debug_file, "Inviando wp_mail admin...\n", FILE_APPEND);
-        $sent_admin = wp_mail($admin_email, $subject_admin, $message_admin, $headers);
-        file_put_contents($debug_file, "wp_mail admin result: " . ($sent_admin ? 'SUCCESS' : 'FAILED') . "\n", FILE_APPEND);
-        
-        file_put_contents($debug_file, "send_booking_emails() END\n", FILE_APPEND);
-    }
-    
-    /**
-     * Template email cliente
-     */
-    private function get_customer_email_template($booking_data, $tour_title) {
-        $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
-        $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
-        
-        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
-        
+        wp_mail($admin_email, $subject_admin, $message_admin, $headers
         ob_start();
         ?>
         <!DOCTYPE html>
