@@ -97,7 +97,6 @@ class DRTR_Checkout {
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
                 wp_send_json_error(array('message' => sprintf(__('Campo obbligatorio mancante: %s', 'drtr-tours'), $field)));
-                return;
             }
         }
         
@@ -128,7 +127,6 @@ class DRTR_Checkout {
         
         if (is_wp_error($booking_id)) {
             wp_send_json_error(array('message' => $booking_id->get_error_message()));
-            return;
         }
         
         // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
@@ -142,8 +140,6 @@ class DRTR_Checkout {
             'booking_id' => $booking_id,
             'redirect' => add_query_arg('booking_id', $booking_id, home_url('/grazie-prenotazione'))
         ));
-        
-        wp_die(); // Terminate AJAX request properly
     }
     
     /**
