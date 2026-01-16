@@ -57,8 +57,10 @@ class DRTR_Posti {
         DRTR_Posti_Frontend::get_instance();
         DRTR_Posti_Email::get_instance();
         
-        // Force table creation if they don't exist
-        if (!DRTR_Posti_DB::tables_exist()) {
+        // Force table creation if they don't exist (only once per request)
+        static $tables_checked = false;
+        if (!$tables_checked && !DRTR_Posti_DB::tables_exist()) {
+            $tables_checked = true;
             error_log("DRTR POSTI: Tabelle non esistono, le creo ora...");
             DRTR_Posti_DB::create_tables();
         }

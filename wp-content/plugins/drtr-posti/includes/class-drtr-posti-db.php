@@ -91,19 +91,29 @@ class DRTR_Posti_DB {
         
         error_log("DRTR POSTI: Creazione tabelle iniziata...");
         
+        error_log("DRTR POSTI: SQL Bus: " . substr($sql_bus, 0, 200));
         $result1 = dbDelta($sql_bus);
         error_log("DRTR POSTI: Bus config table result: " . print_r($result1, true));
         
+        error_log("DRTR POSTI: SQL Seats: " . substr($sql_seats, 0, 200));
         $result2 = dbDelta($sql_seats);
         error_log("DRTR POSTI: Seats table result: " . print_r($result2, true));
         
+        error_log("DRTR POSTI: SQL Tokens: " . substr($sql_tokens, 0, 200));
         $result3 = dbDelta($sql_tokens);
         error_log("DRTR POSTI: Tokens table result: " . print_r($result3, true));
         
+        error_log("DRTR POSTI: SQL Tour settings: " . substr($sql_tour_settings, 0, 200));
         $result4 = dbDelta($sql_tour_settings);
         error_log("DRTR POSTI: Tour settings table result: " . print_r($result4, true));
         
-        // Verify tables were created
+        // Verify tables were created with better check
+        global $wpdb;
+        $table = $wpdb->prefix . 'drtr_posti';
+        $table_check = $wpdb->get_var("SHOW TABLES LIKE '$table'");
+        error_log("DRTR POSTI: SHOW TABLES result: " . var_export($table_check, true));
+        error_log("DRTR POSTI: Expected table name: " . $table);
+        
         $tables_created = self::tables_exist();
         error_log("DRTR POSTI: Tabelle create? " . ($tables_created ? "SI" : "NO"));
         
