@@ -169,6 +169,8 @@ class DRTR_Checkout {
         error_log('DRTR CHECKOUT: tutti i campi validati');
         
         // Preparare dati prenotazione
+        file_put_contents($debug_file, "Preparando dati booking...\n", FILE_APPEND);
+        
         $booking_data = array(
             'tour_id' => absint($_POST['tour_id']),
             'adults' => absint($_POST['adults']),
@@ -176,7 +178,7 @@ class DRTR_Checkout {
             'first_name' => sanitize_text_field($_POST['first_name']),
             'last_name' => sanitize_text_field($_POST['last_name']),
             'email' => sanitize_email($_POST['email']),
-            'phone_prefix' => sanitize_text_field($_POST['phone_prefix']),
+            'phone_prefix' => sanitize_text_field($_POST['phone_prefix'] ?? ''),
             'phone' => sanitize_text_field($_POST['phone']),
             'payment_type' => sanitize_text_field($_POST['payment_type']),
             'payment_method' => sanitize_text_field($_POST['payment_method']),
@@ -189,33 +191,42 @@ class DRTR_Checkout {
             $booking_data['user_id'] = get_current_user_id();
         }
         
+        file_put_contents($debug_file, "Dati preparati, creando booking...\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: creando booking...');
         
         // Creare prenotazione
         $booking_class = DRTR_Booking::get_instance();
         $booking_id = $booking_class->create_booking($booking_data);
         
+        file_put_contents($debug_file, "Booking ID ricevuto: " . print_r($booking_id, true) . "\n", FILE_APPEND);
+        
         if (is_wp_error($booking_id)) {
             error_log('DRTR CHECKOUT: errore booking - ' . $booking_id->get_error_message());
+            file_put_contents($debug_file, "ERRORE: " . $booking_id->get_error_message() . "\n", FILE_APPEND);
             wp_send_json_error(array('message' => $booking_id->get_error_message()));
         }
         
+        file_put_contents($debug_file, "Booking creato con successo - ID: $booking_id\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: booking creato - ID: ' . $booking_id);
         
         // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
         // Non serve cambiare lo status qui perché create_booking già imposta 'booking_pending'
         
         // Inviare email
+        file_put_contents($debug_file, "Inviando email...\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: inviando email...');
         $this->send_booking_emails($booking_id, $booking_data);
+        file_put_contents($debug_file, "Email inviate\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: email inviate');
         
+        file_put_contents($debug_file, "Inviando risposta JSON success...\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: inviando risposta JSON success');
         wp_send_json_success(array(
             'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
             'booking_id' => $booking_id,
             'redirect' => add_query_arg('booking_id', $booking_id, home_url('/grazie-prenotazione'))
         ));
+        file_put_contents($debug_file, "FINE - Non dovrebbe arrivare qui\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: fine metodo (non dovrebbe arrivare qui)');
     }
     
