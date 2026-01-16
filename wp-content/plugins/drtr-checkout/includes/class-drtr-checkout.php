@@ -100,6 +100,21 @@ class DRTR_Checkout {
      * Processare checkout
      */
     public function process_checkout() {
+        // Disable caching for this request
+        if (!defined('DONOTCACHEPAGE')) {
+            define('DONOTCACHEPAGE', true);
+        }
+        if (!defined('DONOTCACHEOBJECT')) {
+            define('DONOTCACHEOBJECT', true);
+        }
+        if (!defined('DONOTCACHEDB')) {
+            define('DONOTCACHEDB', true);
+        }
+        
+        // Send headers immediately
+        @header('Content-Type: application/json; charset=utf-8');
+        @header('Cache-Control: no-cache, must-revalidate, max-age=0');
+        
         error_log('DRTR CHECKOUT: process_checkout chiamato');
         error_log('DRTR CHECKOUT: POST data: ' . print_r($_POST, true));
         
