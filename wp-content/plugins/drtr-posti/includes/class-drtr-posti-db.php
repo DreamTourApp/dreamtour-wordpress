@@ -89,10 +89,13 @@ class DRTR_Posti_DB {
         
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
+        // Suppress output from dbDelta
+        ob_start();
         dbDelta($sql_bus);
         dbDelta($sql_seats);
         dbDelta($sql_tokens);
         dbDelta($sql_tour_settings);
+        ob_end_clean();
         
         // Insert default bus configuration
         self::insert_default_bus_config();
@@ -105,6 +108,9 @@ class DRTR_Posti_DB {
         global $wpdb;
         
         $table = $wpdb->prefix . 'drtr_bus_config';
+        
+        // Suppress any output
+        $wpdb->show_errors(false);
         $exists = $wpdb->get_var("SELECT COUNT(*) FROM $table");
         
         if ($exists == 0) {
@@ -123,6 +129,8 @@ class DRTR_Posti_DB {
                 'layout' => $layout
             ]);
         }
+        
+        $wpdb->show_errors(true);
     }
     
     /**
