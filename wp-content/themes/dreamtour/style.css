@@ -222,8 +222,9 @@ a:hover {
   gap: var(--spacing-md);
   margin: 0;
   padding: 0;
-  flex-wrap: wrap;
   align-items: center;
+  flex-direction: row;
+
 }
 
 .nav-menu li {
