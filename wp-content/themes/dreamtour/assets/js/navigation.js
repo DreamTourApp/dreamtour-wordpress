@@ -35,12 +35,14 @@
          */
         var mobileMenuToggle = $('.menu-toggle');
         var mobileMenu = $('.nav-menu');
+        var extraMenu = $('.nav-menu-extra');
         
         mobileMenuToggle.on('click', function() {
             var expanded = $(this).attr('aria-expanded') === 'true' || false;
             
             $(this).attr('aria-expanded', !expanded);
             mobileMenu.toggleClass('active');
+            extraMenu.toggleClass('active');
             $('body').toggleClass('menu-open');
         });
         

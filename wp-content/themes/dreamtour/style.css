@@ -262,6 +262,11 @@ a:hover {
   color: var(--color-primary-light);
 }
 
+/* Body lock when menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
 /* Mobile Menu Toggle */
 .menu-toggle {
   display: none;
@@ -878,7 +883,8 @@ a:hover {
     --font-h3: 16px;
   }
   
-  .nav-menu {
+  .nav-menu,
+  .nav-menu-extra {
     display: none;
     position: fixed;
     top: 70px;
@@ -888,14 +894,41 @@ a:hover {
     flex-direction: column;
     padding: var(--spacing-md);
     box-shadow: var(--shadow-md);
+    z-index: 999;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  
+  .nav-menu-extra {
+    top: auto;
+    position: relative;
+    box-shadow: none;
+    padding: 0;
+    margin-top: var(--spacing-sm);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: var(--spacing-sm);
   }
   
   .nav-menu.active {
     display: flex;
   }
   
+  .nav-menu.active + .nav-menu-extra {
+    display: flex;
+  }
+  
   .menu-toggle {
     display: block;
+  }
+  
+  .header-search,
+  .header-cta {
+    display: none;
+  }
+  
+  .header-reserved-area {
+    margin-left: auto;
+    margin-right: var(--spacing-sm);
   }
   
   .tours-grid {
