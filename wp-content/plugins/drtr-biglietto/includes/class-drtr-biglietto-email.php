@@ -78,7 +78,7 @@ class DRTR_Biglietto_Email {
     private function send_ticket_email($email, $name, $tour, $tickets, $pdf_url) {
         $subject = sprintf(__('I tuoi biglietti per %s', 'drtr-biglietto'), get_the_title($tour));
         
-        $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         
         // Build tickets HTML
         $tickets_html = '';
