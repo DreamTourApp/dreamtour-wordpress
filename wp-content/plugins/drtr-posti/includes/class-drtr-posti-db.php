@@ -30,11 +30,14 @@ class DRTR_Posti_DB {
         
         $charset_collate = $wpdb->get_charset_collate();
         
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        error_log("DRTR POSTI: Creazione tabelle con SQL diretto...");
+        
+        // Create tables with direct SQL instead of dbDelta (more reliable)
         
         // Table for bus configurations
         $table_bus = $wpdb->prefix . 'drtr_bus_config';
-        $sql_bus = "CREATE TABLE $table_bus (
+        $wpdb->query("DROP TABLE IF EXISTS $table_bus");
+        $wpdb->query("CREATE TABLE $table_bus (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
             total_seats int(11) NOT NULL DEFAULT 50,
@@ -42,12 +45,13 @@ class DRTR_Posti_DB {
             seats_per_row int(11) NOT NULL DEFAULT 4,
             layout text,
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY  (id)
-        ) $charset_collate;";
+            PRIMARY KEY (id)
+        ) $charset_collate");
         
         // Table for seat assignments
         $table_seats = $wpdb->prefix . 'drtr_posti';
-        $sql_seats = "CREATE TABLE $table_seats (
+        $wpdb->query("DROP TABLE IF EXISTS $table_seats");
+        $wpdb->query("CREATE TABLE $table_seats (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             booking_id bigint(20) NOT NULL,
             tour_id bigint(20) NOT NULL,
@@ -57,68 +61,57 @@ class DRTR_Posti_DB {
             position varchar(10) NOT NULL,
             assigned_by varchar(50) DEFAULT 'customer',
             assigned_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY  (id),
+            PRIMARY KEY (id),
             UNIQUE KEY unique_seat (tour_id, seat_number),
             KEY booking_id (booking_id),
             KEY tour_id (tour_id)
-        ) $charset_collate;";
+        ) $charset_collate");
         
         // Table for seat selection tokens
         $table_tokens = $wpdb->prefix . 'drtr_posti_tokens';
-        $sql_tokens = "CREATE TABLE $table_tokens (
+        $wpdb->query("DROP TABLE IF EXISTS $table_tokens");
+        $wpdb->query("CREATE TABLE $table_tokens (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             booking_id bigint(20) NOT NULL,
             token varchar(64) NOT NULL,
             expires_at datetime NOT NULL,
             used tinyint(1) DEFAULT 0,
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY  (id),
+            PRIMARY KEY (id),
             UNIQUE KEY token (token),
             KEY booking_id (booking_id)
-        ) $charset_collate;";
+        ) $charset_collate");
         
         // Table for tour seat settings
         $table_tour_settings = $wpdb->prefix . 'drtr_tour_seat_settings';
-        $sql_tour_settings = "CREATE TABLE $table_tour_settings (
+        $wpdb->query("DROP TABLE IF EXISTS $table_tour_settings");
+        $wpdb->query("CREATE TABLE $table_tour_settings (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             tour_id bigint(20) NOT NULL,
             selection_enabled tinyint(1) DEFAULT 1,
             auto_assign tinyint(1) DEFAULT 0,
             bus_config_id bigint(20) DEFAULT 1,
-            PRIMARY KEY  (id),
+            PRIMARY KEY (id),
             UNIQUE KEY tour_id (tour_id)
-        ) $charset_collate;";
+        ) $charset_collate");
         
-        error_log("DRTR POSTI: Creazione tabelle iniziata...");
+        // Check for errors
+        if ($wpdb->last_error) {
+            error_log("DRTR POSTI: Errore SQL: " . $wpdb->last_error);
+        }
         
-        error_log("DRTR POSTI: SQL Bus: " . substr($sql_bus, 0, 200));
-        $result1 = dbDelta($sql_bus);
-        error_log("DRTR POSTI: Bus config table result: " . print_r($result1, true));
-        
-        error_log("DRTR POSTI: SQL Seats: " . substr($sql_seats, 0, 200));
-        $result2 = dbDelta($sql_seats);
-        error_log("DRTR POSTI: Seats table result: " . print_r($result2, true));
-        
-        error_log("DRTR POSTI: SQL Tokens: " . substr($sql_tokens, 0, 200));
-        $result3 = dbDelta($sql_tokens);
-        error_log("DRTR POSTI: Tokens table result: " . print_r($result3, true));
-        
-        error_log("DRTR POSTI: SQL Tour settings: " . substr($sql_tour_settings, 0, 200));
-        $result4 = dbDelta($sql_tour_settings);
-        error_log("DRTR POSTI: Tour settings table result: " . print_r($result4, true));
-        
-        // Verify tables were created with better check
-        global $wpdb;
-        $table = $wpdb->prefix . 'drtr_posti';
-        $table_check = $wpdb->get_var("SHOW TABLES LIKE '$table'");
+        // Verify tables were created
+        $table_check = $wpdb->get_var("SHOW TABLES LIKE '$table_seats'");
         error_log("DRTR POSTI: SHOW TABLES result: " . var_export($table_check, true));
-        error_log("DRTR POSTI: Expected table name: " . $table);
+        error_log("DRTR POSTI: Expected table name: " . $table_seats);
         
-        $tables_created = self::tables_exist();
+        $tables_created = ($table_check === $table_seats);
         error_log("DRTR POSTI: Tabelle create? " . ($tables_created ? "SI" : "NO"));
         
         // Insert default bus configuration
-        self::insert_default_bus_config();
+        if ($tables_created) {
+            self::insert_default_bus_config();
+        }
     }
     
     /**
