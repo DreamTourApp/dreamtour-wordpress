@@ -30,6 +30,8 @@ class DRTR_Posti_DB {
         
         $charset_collate = $wpdb->get_charset_collate();
         
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        
         // Table for bus configurations
         $table_bus = $wpdb->prefix . 'drtr_bus_config';
         $sql_bus = "CREATE TABLE $table_bus (
@@ -87,15 +89,23 @@ class DRTR_Posti_DB {
             UNIQUE KEY tour_id (tour_id)
         ) $charset_collate;";
         
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        error_log("DRTR POSTI: Creazione tabelle iniziata...");
         
-        // Suppress output from dbDelta
-        ob_start();
-        dbDelta($sql_bus);
-        dbDelta($sql_seats);
-        dbDelta($sql_tokens);
-        dbDelta($sql_tour_settings);
-        ob_end_clean();
+        $result1 = dbDelta($sql_bus);
+        error_log("DRTR POSTI: Bus config table result: " . print_r($result1, true));
+        
+        $result2 = dbDelta($sql_seats);
+        error_log("DRTR POSTI: Seats table result: " . print_r($result2, true));
+        
+        $result3 = dbDelta($sql_tokens);
+        error_log("DRTR POSTI: Tokens table result: " . print_r($result3, true));
+        
+        $result4 = dbDelta($sql_tour_settings);
+        error_log("DRTR POSTI: Tour settings table result: " . print_r($result4, true));
+        
+        // Verify tables were created
+        $tables_created = self::tables_exist();
+        error_log("DRTR POSTI: Tabelle create? " . ($tables_created ? "SI" : "NO"));
         
         // Insert default bus configuration
         self::insert_default_bus_config();

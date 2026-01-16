@@ -57,6 +57,12 @@ class DRTR_Posti {
         DRTR_Posti_Frontend::get_instance();
         DRTR_Posti_Email::get_instance();
         
+        // Force table creation if they don't exist
+        if (!DRTR_Posti_DB::tables_exist()) {
+            error_log("DRTR POSTI: Tabelle non esistono, le creo ora...");
+            DRTR_Posti_DB::create_tables();
+        }
+        
         // Load text domain
         load_plugin_textdomain('drtr-posti', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
