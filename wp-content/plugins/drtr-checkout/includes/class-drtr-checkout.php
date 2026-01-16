@@ -27,7 +27,6 @@ class DRTR_Checkout {
         add_action('wp_ajax_drtr_test_ajax', array($this, 'test_ajax'));
         add_action('wp_ajax_nopriv_drtr_test_ajax', array($this, 'test_ajax'));
         add_action('wp_ajax_drtr_clear_debug_log', array($this, 'clear_debug_log'));
-        add_action('drtr_send_booking_emails_async', array($this, 'send_emails_async'), 10, 2);
         add_shortcode('drtr_checkout', array($this, 'checkout_shortcode'));
         add_shortcode('drtr_debug_checkout', array($this, 'debug_checkout_shortcode'));
     }
@@ -236,7 +235,14 @@ class DRTR_Checkout {
         
         $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
         
-        wp_mail($admin_email, $subject_admin, $message_admin, $headers
+        wp_mail($admin_email, $subject_admin, $message_admin, $headers);
+    }
+    
+    /**
+     * Template email cliente
+     */
+    private function get_customer_email_template($booking_data, $tour_title) {
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         ob_start();
         ?>
         <!DOCTYPE html>
