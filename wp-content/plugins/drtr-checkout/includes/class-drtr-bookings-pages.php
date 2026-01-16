@@ -577,24 +577,43 @@ class DRTR_Bookings_Pages {
      * AJAX handler for updating booking status
      */
     public function ajax_update_booking_status() {
-        check_ajax_referer('drtr-booking-nonce', 'nonce');
+        // Log for debugging
+        error_log('DRTR: ajax_update_booking_status called');
         
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Permessi insufficienti', 'drtr-checkout')));
+        // Check nonce
+        if (!check_ajax_referer('drtr-booking-nonce', 'nonce', false)) {
+            error_log('DRTR: Nonce verification failed');
+            wp_send_json_error(array('message' => __('Verifica di sicurezza fallita', 'drtr-checkout')));
+            return;
         }
         
-        $booking_id = intval($_POST['booking_id']);
-        $new_status = sanitize_text_field($_POST['status']);
+        // Check permissions
+        if (!current_user_can('manage_options')) {
+            error_log('DRTR: User lacks permissions');
+            wp_send_json_error(array('message' => __('Permessi insufficienti', 'drtr-checkout')));
+            return;
+        }
+        
+        // Validate input
+        $booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : 0;
+        $new_status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+        
+        error_log('DRTR: booking_id=' . $booking_id . ', status=' . $new_status);
         
         if (!$booking_id || !$new_status) {
+            error_log('DRTR: Missing data');
             wp_send_json_error(array('message' => __('Dati mancanti', 'drtr-checkout')));
+            return;
         }
         
         // Get booking instance
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-drtr-booking.php';
         $booking = DRTR_Booking::get_instance();
         
         // Update status
-        $result = $booking->update_status($booking_id, $new_status);
+        $result = $booking->update_booking_status($booking_id, $new_status);
+        
+        error_log('DRTR: Update result=' . ($result ? 'true' : 'false'));
         
         if ($result) {
             // Get status label for response
@@ -621,6 +640,7 @@ class DRTR_Bookings_Pages {
                 'email_sent' => $email_sent
             ));
         } else {
+            error_log('DRTR: Failed to update status');
             wp_send_json_error(array('message' => __('Errore durante l\'aggiornamento dello status', 'drtr-checkout')));
         }
     }
