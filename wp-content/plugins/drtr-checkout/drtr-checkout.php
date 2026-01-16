@@ -135,7 +135,10 @@ class DRTR_Checkout_Plugin {
             
             // Impostare template
             if ($page_id) {
-     
+                update_post_meta($page_id, '_wp_page_template', 'page-thank-you.php');
+            }
+        }
+    }
     
     /**
      * Crear página Debug Checkout
@@ -156,8 +159,7 @@ class DRTR_Checkout_Plugin {
             
             wp_insert_post($page_data);
         }
-    }           update_post_meta($page_id, '_wp_page_template', 'page-thank-you.php');
-            }
+    }
         }
     }
     
