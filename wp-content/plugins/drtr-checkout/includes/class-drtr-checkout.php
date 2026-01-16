@@ -90,15 +90,23 @@ class DRTR_Checkout {
      * Processare checkout
      */
     public function process_checkout() {
+        error_log('DRTR Checkout: process_checkout iniziato');
+        
         check_ajax_referer('dreamtour-nonce', 'nonce');
+        
+        error_log('DRTR Checkout: nonce verificato');
         
         // Validare dati
         $required_fields = array('tour_id', 'adults', 'first_name', 'last_name', 'email', 'phone', 'payment_method');
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
+                error_log('DRTR Checkout: campo mancante - ' . $field);
                 wp_send_json_error(array('message' => sprintf(__('Campo obbligatorio mancante: %s', 'drtr-tours'), $field)));
+                return;
             }
         }
+        
+        error_log('DRTR Checkout: campi validati');
         
         // Preparare dati prenotazione
         $booking_data = array(
@@ -123,18 +131,26 @@ class DRTR_Checkout {
         
         // Creare prenotazione
         $booking_class = DRTR_Booking::get_instance();
+        error_log('DRTR Checkout: creazione prenotazione per tour_id=' . $booking_data['tour_id']);
+        
         $booking_id = $booking_class->create_booking($booking_data);
         
         if (is_wp_error($booking_id)) {
+            error_log('DRTR Checkout: errore creazione - ' . $booking_id->get_error_message());
             wp_send_json_error(array('message' => $booking_id->get_error_message()));
+            return;
         }
+        
+        error_log('DRTR Checkout: prenotazione creata ID=' . $booking_id);
         
         // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
         // Non serve cambiare lo status qui perché create_booking già imposta 'booking_pending'
         
         // Inviare email
+        error_log('DRTR Checkout: invio email');
         $this->send_booking_emails($booking_id, $booking_data);
         
+        error_log('DRTR Checkout: successo - redirect');
         wp_send_json_success(array(
             'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
             'booking_id' => $booking_id,
