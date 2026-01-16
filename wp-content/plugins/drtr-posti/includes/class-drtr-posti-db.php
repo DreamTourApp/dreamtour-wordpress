@@ -47,19 +47,19 @@ class DRTR_Posti_DB {
         error_log("DRTR POSTI: DROP result: " . var_export($drop_result, true));
         
         $create_query = "CREATE TABLE $table_seats (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            booking_id bigint(20) NOT NULL,
-            tour_id bigint(20) NOT NULL,
-            passenger_name varchar(255) NOT NULL,
-            seat_number varchar(10) NOT NULL,
-            row_number int(11) NOT NULL,
-            position varchar(10) NOT NULL,
-            assigned_by varchar(50) DEFAULT 'customer',
-            assigned_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
-            UNIQUE KEY unique_seat (tour_id, seat_number),
-            KEY booking_id (booking_id),
-            KEY tour_id (tour_id)
+            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            `booking_id` bigint(20) NOT NULL,
+            `tour_id` bigint(20) NOT NULL,
+            `passenger_name` varchar(255) NOT NULL,
+            `seat_number` varchar(10) NOT NULL,
+            `row_number` int(11) NOT NULL,
+            `position` varchar(10) NOT NULL,
+            `assigned_by` varchar(50) DEFAULT 'customer',
+            `assigned_at` datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `unique_seat` (`tour_id`, `seat_number`),
+            KEY `booking_id` (`booking_id`),
+            KEY `tour_id` (`tour_id`)
         ) $charset_collate";
         
         error_log("DRTR POSTI: Executing CREATE (first 300 chars): " . substr($create_query, 0, 300));
@@ -90,42 +90,42 @@ class DRTR_Posti_DB {
         $table_bus = $wpdb->prefix . 'drtr_bus_config';
         $wpdb->query("DROP TABLE IF EXISTS $table_bus");
         $wpdb->query("CREATE TABLE $table_bus (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            name varchar(255) NOT NULL,
-            total_seats int(11) NOT NULL DEFAULT 50,
-            rows_count int(11) NOT NULL DEFAULT 13,
-            seats_per_row int(11) NOT NULL DEFAULT 4,
-            layout text,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
+            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            `name` varchar(255) NOT NULL,
+            `total_seats` int(11) NOT NULL DEFAULT 50,
+            `rows_count` int(11) NOT NULL DEFAULT 13,
+            `seats_per_row` int(11) NOT NULL DEFAULT 4,
+            `layout` text,
+            `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`)
         ) $charset_collate");
         
         // Table for seat selection tokens
         $table_tokens = $wpdb->prefix . 'drtr_posti_tokens';
         $wpdb->query("DROP TABLE IF EXISTS $table_tokens");
         $wpdb->query("CREATE TABLE $table_tokens (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            booking_id bigint(20) NOT NULL,
-            token varchar(64) NOT NULL,
-            expires_at datetime NOT NULL,
-            used tinyint(1) DEFAULT 0,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
-            UNIQUE KEY token (token),
-            KEY booking_id (booking_id)
+            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            `booking_id` bigint(20) NOT NULL,
+            `token` varchar(64) NOT NULL,
+            `expires_at` datetime NOT NULL,
+            `used` tinyint(1) DEFAULT 0,
+            `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `token` (`token`),
+            KEY `booking_id` (`booking_id`)
         ) $charset_collate");
         
         // Table for tour seat settings
         $table_tour_settings = $wpdb->prefix . 'drtr_tour_seat_settings';
         $wpdb->query("DROP TABLE IF EXISTS $table_tour_settings");
         $wpdb->query("CREATE TABLE $table_tour_settings (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            tour_id bigint(20) NOT NULL,
-            selection_enabled tinyint(1) DEFAULT 1,
-            auto_assign tinyint(1) DEFAULT 0,
-            bus_config_id bigint(20) DEFAULT 1,
-            PRIMARY KEY (id),
-            UNIQUE KEY tour_id (tour_id)
+            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            `tour_id` bigint(20) NOT NULL,
+            `selection_enabled` tinyint(1) DEFAULT 1,
+            `auto_assign` tinyint(1) DEFAULT 0,
+            `bus_config_id` bigint(20) DEFAULT 1,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `tour_id` (`tour_id`)
         ) $charset_collate");
         
         // Insert default bus configuration
