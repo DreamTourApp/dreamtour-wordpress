@@ -97,7 +97,18 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
                 <?php endif; ?>
             </div>
             
-            <h3 class="tour-title"><?php the_title(); ?></h3>
+            <h3 class="tour-title">
+                <?php 
+                the_title();
+                // Add start date and time if available
+                if ($tour_start_date) {
+                    $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                    if ($date_obj) {
+                        echo ' - ' . $date_obj->format('d/m/y');
+                    }
+                }
+                ?>
+            </h3>
             
             <?php 
             $short_description = get_post_meta(get_the_ID(), '_drtr_short_description', true);

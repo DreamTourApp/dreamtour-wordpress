@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
                         if ($tour_start_date) {
                             $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
                             if ($date_obj) {
-                                echo ' - ' . $date_obj->format('d/m/y H:i');
+                                echo ' - ' . $date_obj->format('d/m/y');
                             }
                         }
                         ?>

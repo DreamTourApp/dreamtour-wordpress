@@ -154,7 +154,7 @@ class DRTR_Checkout {
         if ($tour_start_date) {
             $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
             if ($date_obj) {
-                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+                $tour_title .= ' - ' . $date_obj->format('d/m/y');
             }
         }
         
