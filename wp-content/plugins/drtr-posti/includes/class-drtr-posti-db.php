@@ -32,21 +32,21 @@ class DRTR_Posti_DB {
         
         // Table for bus configurations
         $table_bus = $wpdb->prefix . 'drtr_bus_config';
-        $sql_bus = "CREATE TABLE IF NOT EXISTS $table_bus (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
+        $sql_bus = "CREATE TABLE $table_bus (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
             total_seats int(11) NOT NULL DEFAULT 50,
             rows_count int(11) NOT NULL DEFAULT 13,
             seats_per_row int(11) NOT NULL DEFAULT 4,
             layout text,
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
+            PRIMARY KEY  (id)
         ) $charset_collate;";
         
         // Table for seat assignments
         $table_seats = $wpdb->prefix . 'drtr_posti';
-        $sql_seats = "CREATE TABLE IF NOT EXISTS $table_seats (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
+        $sql_seats = "CREATE TABLE $table_seats (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             booking_id bigint(20) NOT NULL,
             tour_id bigint(20) NOT NULL,
             passenger_name varchar(255) NOT NULL,
@@ -55,7 +55,7 @@ class DRTR_Posti_DB {
             position varchar(10) NOT NULL,
             assigned_by varchar(50) DEFAULT 'customer',
             assigned_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
+            PRIMARY KEY  (id),
             UNIQUE KEY unique_seat (tour_id, seat_number),
             KEY booking_id (booking_id),
             KEY tour_id (tour_id)
@@ -63,35 +63,38 @@ class DRTR_Posti_DB {
         
         // Table for seat selection tokens
         $table_tokens = $wpdb->prefix . 'drtr_posti_tokens';
-        $sql_tokens = "CREATE TABLE IF NOT EXISTS $table_tokens (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
+        $sql_tokens = "CREATE TABLE $table_tokens (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             booking_id bigint(20) NOT NULL,
             token varchar(64) NOT NULL,
             expires_at datetime NOT NULL,
             used tinyint(1) DEFAULT 0,
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
+            PRIMARY KEY  (id),
             UNIQUE KEY token (token),
             KEY booking_id (booking_id)
         ) $charset_collate;";
         
         // Table for tour seat settings
         $table_tour_settings = $wpdb->prefix . 'drtr_tour_seat_settings';
-        $sql_tour_settings = "CREATE TABLE IF NOT EXISTS $table_tour_settings (
-            id bigint(20) NOT NULL AUTO_INCREMENT,
+        $sql_tour_settings = "CREATE TABLE $table_tour_settings (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             tour_id bigint(20) NOT NULL,
             selection_enabled tinyint(1) DEFAULT 1,
             auto_assign tinyint(1) DEFAULT 0,
             bus_config_id bigint(20) DEFAULT 1,
-            PRIMARY KEY (id),
+            PRIMARY KEY  (id),
             UNIQUE KEY tour_id (tour_id)
         ) $charset_collate;";
         
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        
+        error_log('DRTR Posti: Starting table creation');
         dbDelta($sql_bus);
         dbDelta($sql_seats);
         dbDelta($sql_tokens);
         dbDelta($sql_tour_settings);
+        error_log('DRTR Posti: Tables created successfully');
         
         // Insert default bus configuration
         self::insert_default_bus_config();
