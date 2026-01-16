@@ -56,6 +56,22 @@ class DRTR_Checkout_Plugin {
         
         // Cargar traducciones
         add_action('init', array($this, 'load_textdomain'));
+        
+        // Agregar enlaces en la página de plugins
+        add_filter('plugin_action_links_' . DRTR_CHECKOUT_BASENAME, array($this, 'add_plugin_action_links'));
+    }
+    
+    /**
+     * Agregar enlaces en la página de plugins
+     */
+    public function add_plugin_action_links($links) {
+        $debug_link = '<a href="' . home_url('/debug-checkout') . '" style="color: #d9534f; font-weight: bold;">🔍 Debug</a>';
+        $settings_link = '<a href="' . admin_url('admin.php?page=gestione-prenotazioni') . '">Impostazioni</a>';
+        
+        array_unshift($links, $debug_link);
+        array_unshift($links, $settings_link);
+        
+        return $links;
     }
     
     public function activate() {
@@ -64,6 +80,9 @@ class DRTR_Checkout_Plugin {
         
         // Crear página Grazie Prenotazione si no existe
         $this->create_thank_you_page();
+        
+        // Crear página Debug Checkout
+        $this->create_debug_page();
         
         // Crear páginas prenotazioni
         DRTR_Bookings_Pages::create_bookings_page();
@@ -116,7 +135,28 @@ class DRTR_Checkout_Plugin {
             
             // Impostare template
             if ($page_id) {
-                update_post_meta($page_id, '_wp_page_template', 'page-thank-you.php');
+     
+    
+    /**
+     * Crear página Debug Checkout
+     */
+    private function create_debug_page() {
+        $page_slug = 'debug-checkout';
+        $page_check = get_page_by_path($page_slug);
+        
+        if (!$page_check) {
+            $page_data = array(
+                'post_title' => __('Debug Checkout', 'drtr-checkout'),
+                'post_content' => '[drtr_debug_checkout]',
+                'post_status' => 'publish',
+                'post_type' => 'page',
+                'post_name' => $page_slug,
+                'post_author' => 1,
+            );
+            
+            wp_insert_post($page_data);
+        }
+    }           update_post_meta($page_id, '_wp_page_template', 'page-thank-you.php');
             }
         }
     }
