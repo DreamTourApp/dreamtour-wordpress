@@ -128,10 +128,26 @@ class DRTR_Posti_DB {
     }
     
     /**
+     * Check if tables exist
+     */
+    public static function tables_exist() {
+        global $wpdb;
+        $table = $wpdb->prefix . 'drtr_posti';
+        $result = $wpdb->get_var("SHOW TABLES LIKE '$table'");
+        return ($result === $table);
+    }
+    
+    /**
      * Get available seats for a tour
      */
     public static function get_available_seats($tour_id) {
         global $wpdb;
+        
+        // Check if tables exist
+        if (!self::tables_exist()) {
+            error_log('DRTR Posti: Tables do not exist. Please activate the plugin.');
+            return [];
+        }
         
         $table = $wpdb->prefix . 'drtr_posti';
         $occupied = $wpdb->get_results($wpdb->prepare(
