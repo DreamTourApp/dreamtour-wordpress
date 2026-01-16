@@ -57,13 +57,9 @@ class DRTR_Posti {
         DRTR_Posti_Frontend::get_instance();
         DRTR_Posti_Email::get_instance();
         
-        // Force table creation if they don't exist (only once per request)
-        static $tables_checked = false;
-        if (!$tables_checked && !DRTR_Posti_DB::tables_exist()) {
-            $tables_checked = true;
-            error_log("DRTR POSTI: Tabelle non esistono, le creo ora...");
-            DRTR_Posti_DB::create_tables();
-        }
+        // DO NOT auto-create tables here - causes infinite loops
+        // Tables will be created on plugin activation only
+        // To force recreation, deactivate and reactivate the plugin
         
         // Load text domain
         load_plugin_textdomain('drtr-posti', false, dirname(plugin_basename(__FILE__)) . '/languages');

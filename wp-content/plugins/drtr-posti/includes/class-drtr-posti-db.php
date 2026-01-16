@@ -31,27 +31,22 @@ class DRTR_Posti_DB {
         $charset_collate = $wpdb->get_charset_collate();
         
         error_log("DRTR POSTI: Creazione tabelle con SQL diretto...");
+        error_log("DRTR POSTI: Charset collate: " . $charset_collate);
+        
+        // Enable error reporting
+        $wpdb->show_errors();
         
         // Create tables with direct SQL instead of dbDelta (more reliable)
         
-        // Table for bus configurations
-        $table_bus = $wpdb->prefix . 'drtr_bus_config';
-        $wpdb->query("DROP TABLE IF EXISTS $table_bus");
-        $wpdb->query("CREATE TABLE $table_bus (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-            name varchar(255) NOT NULL,
-            total_seats int(11) NOT NULL DEFAULT 50,
-            rows_count int(11) NOT NULL DEFAULT 13,
-            seats_per_row int(11) NOT NULL DEFAULT 4,
-            layout text,
-            created_at datetime DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
-        ) $charset_collate");
-        
-        // Table for seat assignments
+        // Table for seat assignments (most important)
         $table_seats = $wpdb->prefix . 'drtr_posti';
-        $wpdb->query("DROP TABLE IF EXISTS $table_seats");
-        $wpdb->query("CREATE TABLE $table_seats (
+        
+        $drop_query = "DROP TABLE IF EXISTS $table_seats";
+        error_log("DRTR POSTI: Executing DROP: " . $drop_query);
+        $drop_result = $wpdb->query($drop_query);
+        error_log("DRTR POSTI: DROP result: " . var_export($drop_result, true));
+        
+        $create_query = "CREATE TABLE $table_seats (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             booking_id bigint(20) NOT NULL,
             tour_id bigint(20) NOT NULL,
@@ -65,6 +60,44 @@ class DRTR_Posti_DB {
             UNIQUE KEY unique_seat (tour_id, seat_number),
             KEY booking_id (booking_id),
             KEY tour_id (tour_id)
+        ) $charset_collate";
+        
+        error_log("DRTR POSTI: Executing CREATE (first 300 chars): " . substr($create_query, 0, 300));
+        $create_result = $wpdb->query($create_query);
+        error_log("DRTR POSTI: CREATE result: " . var_export($create_result, true));
+        
+        if ($wpdb->last_error) {
+            error_log("DRTR POSTI: SQL Error: " . $wpdb->last_error);
+        }
+        
+        // Verify table was created
+        $table_check = $wpdb->get_var("SHOW TABLES LIKE '$table_seats'");
+        error_log("DRTR POSTI: SHOW TABLES result: " . var_export($table_check, true));
+        error_log("DRTR POSTI: Expected table name: " . $table_seats);
+        
+        $tables_created = ($table_check === $table_seats);
+        error_log("DRTR POSTI: Tabelle create? " . ($tables_created ? "SI" : "NO"));
+        
+        if (!$tables_created) {
+            error_log("DRTR POSTI: ERRORE CRITICO - Impossibile creare le tabelle!");
+            error_log("DRTR POSTI: DB User: " . DB_USER);
+            error_log("DRTR POSTI: DB Name: " . DB_NAME);
+            return false;
+        }
+        
+        // Only create other tables if first one succeeded
+        // Table for bus configurations
+        $table_bus = $wpdb->prefix . 'drtr_bus_config';
+        $wpdb->query("DROP TABLE IF EXISTS $table_bus");
+        $wpdb->query("CREATE TABLE $table_bus (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            name varchar(255) NOT NULL,
+            total_seats int(11) NOT NULL DEFAULT 50,
+            rows_count int(11) NOT NULL DEFAULT 13,
+            seats_per_row int(11) NOT NULL DEFAULT 4,
+            layout text,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
         ) $charset_collate");
         
         // Table for seat selection tokens
@@ -95,23 +128,11 @@ class DRTR_Posti_DB {
             UNIQUE KEY tour_id (tour_id)
         ) $charset_collate");
         
-        // Check for errors
-        if ($wpdb->last_error) {
-            error_log("DRTR POSTI: Errore SQL: " . $wpdb->last_error);
-        }
-        
-        // Verify tables were created
-        $table_check = $wpdb->get_var("SHOW TABLES LIKE '$table_seats'");
-        error_log("DRTR POSTI: SHOW TABLES result: " . var_export($table_check, true));
-        error_log("DRTR POSTI: Expected table name: " . $table_seats);
-        
-        $tables_created = ($table_check === $table_seats);
-        error_log("DRTR POSTI: Tabelle create? " . ($tables_created ? "SI" : "NO"));
-        
         // Insert default bus configuration
-        if ($tables_created) {
-            self::insert_default_bus_config();
-        }
+        self::insert_default_bus_config();
+        
+        error_log("DRTR POSTI: Creazione tabelle completata!");
+        return true;
     }
     
     /**
