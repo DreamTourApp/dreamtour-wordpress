@@ -234,34 +234,57 @@ class DRTR_Checkout {
      * Inviare email di conferma
      */
     private function send_booking_emails($booking_id, $booking_data) {
+        $debug_file = WP_CONTENT_DIR . '/drtr-checkout-debug.txt';
+        file_put_contents($debug_file, "send_booking_emails() START\n", FILE_APPEND);
+        
         $tour = get_post($booking_data['tour_id']);
         $tour_title = $tour->post_title;
         
+        file_put_contents($debug_file, "Tour title: $tour_title\n", FILE_APPEND);
+        
         // Add start date and time to tour title
         $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
+        file_put_contents($debug_file, "Tour start date: $tour_start_date\n", FILE_APPEND);
+        
         if ($tour_start_date) {
             $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
             if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
                 $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+                file_put_contents($debug_file, "DateTime formattato OK\n", FILE_APPEND);
             }
         }
+        
+        file_put_contents($debug_file, "Preparando email cliente...\n", FILE_APPEND);
         
         // Email al cliente
         $to_customer = $booking_data['email'];
         $subject_customer = sprintf(__('Conferma Prenotazione - %s', 'drtr-tours'), $tour_title);
         
+        file_put_contents($debug_file, "Generando template cliente...\n", FILE_APPEND);
         $message_customer = $this->get_customer_email_template($booking_data, $tour_title);
+        file_put_contents($debug_file, "Template cliente generato\n", FILE_APPEND);
         
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        wp_mail($to_customer, $subject_customer, $message_customer, $headers);
+        
+        file_put_contents($debug_file, "Inviando wp_mail cliente...\n", FILE_APPEND);
+        $sent_customer = wp_mail($to_customer, $subject_customer, $message_customer, $headers);
+        file_put_contents($debug_file, "wp_mail cliente result: " . ($sent_customer ? 'SUCCESS' : 'FAILED') . "\n", FILE_APPEND);
+        
+        file_put_contents($debug_file, "Preparando email admin...\n", FILE_APPEND);
         
         // Email all'admin
         $admin_email = get_option('admin_email');
         $subject_admin = sprintf(__('Nuova Prenotazione #%d - %s', 'drtr-tours'), $booking_id, $tour_title);
         
+        file_put_contents($debug_file, "Generando template admin...\n", FILE_APPEND);
         $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
+        file_put_contents($debug_file, "Template admin generato\n", FILE_APPEND);
         
-        wp_mail($admin_email, $subject_admin, $message_admin, $headers);
+        file_put_contents($debug_file, "Inviando wp_mail admin...\n", FILE_APPEND);
+        $sent_admin = wp_mail($admin_email, $subject_admin, $message_admin, $headers);
+        file_put_contents($debug_file, "wp_mail admin result: " . ($sent_admin ? 'SUCCESS' : 'FAILED') . "\n", FILE_APPEND);
+        
+        file_put_contents($debug_file, "send_booking_emails() END\n", FILE_APPEND);
     }
     
     /**
