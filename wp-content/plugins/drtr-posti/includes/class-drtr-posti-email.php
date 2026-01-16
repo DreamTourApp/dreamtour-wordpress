@@ -105,7 +105,18 @@ class DRTR_Posti_Email {
         }
         
         // Email content
-        $subject = sprintf(__('Seleziona i tuoi posti - %s', 'drtr-posti'), get_the_title($tour_id));
+        $tour_title = get_the_title($tour_id);
+        
+        // Add start date and time to tour title
+        $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+        if ($tour_start_date) {
+            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+            if ($date_obj) {
+                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+            }
+        }
+        
+        $subject = sprintf(__('Seleziona i tuoi posti - %s', 'drtr-posti'), $tour_title);
         
         $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         
@@ -130,7 +141,7 @@ class DRTR_Posti_Email {
                 <div class="content">
                     <h2>' . __('Ciao', 'drtr-posti') . ' ' . esc_html($customer_name) . ',</h2>
                     <p>' . __('La tua prenotazione è stata confermata!', 'drtr-posti') . '</p>
-                    <p><strong>' . __('Tour:', 'drtr-posti') . '</strong> ' . esc_html(get_the_title($tour_id)) . '</p>
+                    <p><strong>' . __('Tour:', 'drtr-posti') . '</strong> ' . esc_html($tour_title) . '</p>
                     <p>' . __('Ora puoi selezionare i tuoi posti nell\'autobus. Clicca sul pulsante qui sotto per visualizzare la mappa dei posti disponibili:', 'drtr-posti') . '</p>
                     <div style="text-align: center;">
                         <a href="' . esc_url($selection_url) . '" class="button">' . __('Seleziona Posti', 'drtr-posti') . '</a>

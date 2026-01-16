@@ -60,9 +60,19 @@ class DRTR_Biglietto_Email {
             ];
         }
         
+        // Get tour title with date and time
+        $tour_title = get_the_title($tour_id);
+        $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+        if ($tour_start_date) {
+            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+            if ($date_obj) {
+                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+            }
+        }
+        
         // Generate PDF ticket
         $pdf_url = DRTR_Biglietto_PDF::generate_ticket_pdf($booking_id, $tickets, [
-            'tour_title' => get_the_title($tour_id),
+            'tour_title' => $tour_title,
             'tour_date' => $tour_date,
             'customer_name' => $customer_name,
             'num_seats' => count($tickets)
@@ -76,7 +86,18 @@ class DRTR_Biglietto_Email {
      * Send actual email with tickets
      */
     private function send_ticket_email($email, $name, $tour, $tickets, $pdf_url) {
-        $subject = sprintf(__('I tuoi biglietti per %s', 'drtr-biglietto'), get_the_title($tour));
+        // Get tour title with date and time
+        $tour_title = get_the_title($tour);
+        $tour_id = is_object($tour) ? $tour->ID : $tour;
+        $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+        if ($tour_start_date) {
+            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+            if ($date_obj) {
+                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+            }
+        }
+        
+        $subject = sprintf(__('I tuoi biglietti per %s', 'drtr-biglietto'), $tour_title);
         
         $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         
@@ -121,7 +142,7 @@ class DRTR_Biglietto_Email {
                 <div class="content">
                     <h2>' . __('Ciao', 'drtr-biglietto') . ' ' . esc_html($name) . '!</h2>
                     <p>' . __('Ecco i tuoi biglietti per il tour:', 'drtr-biglietto') . '</p>
-                    <h3 style="color: #003284;">' . esc_html(get_the_title($tour)) . '</h3>
+                    <h3 style="color: #003284;">' . esc_html($tour_title) . '</h3>
                     
                     <div class="info-box">
                         <strong>📋 ' . __('Informazioni importanti:', 'drtr-biglietto') . '</strong>
