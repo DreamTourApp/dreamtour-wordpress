@@ -174,7 +174,7 @@ class DRTR_Checkout {
         $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
         $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
         
-        $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         
         ob_start();
         ?>
@@ -253,7 +253,7 @@ class DRTR_Checkout {
         $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
         $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
         
-        $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
         
         ob_start();
         ?>
