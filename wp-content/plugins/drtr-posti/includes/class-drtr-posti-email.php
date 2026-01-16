@@ -110,9 +110,9 @@ class DRTR_Posti_Email {
         // Add start date and time to tour title
         $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
         if ($tour_start_date) {
-            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
-            if ($date_obj) {
-                $tour_title .= ' - ' . $date_obj->format('d/m/y');
+            $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+            if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
+                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
             }
         }
         
