@@ -238,6 +238,7 @@ a:hover {
   padding: var(--spacing-xs) var(--spacing-sm);
   transition: var(--transition);
   display: block;
+  width: 120px;
 }
 
 .nav-menu a:hover {
