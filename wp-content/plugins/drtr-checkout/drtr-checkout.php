@@ -160,8 +160,6 @@ class DRTR_Checkout_Plugin {
             wp_insert_post($page_data);
         }
     }
-        }
-    }
     
     public function init() {
         // Verificar que el plugin drtr-gestione-tours esté activo
