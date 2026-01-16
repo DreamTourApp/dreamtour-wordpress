@@ -89,12 +89,10 @@ class DRTR_Posti_DB {
         
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
-        error_log('DRTR Posti: Starting table creation');
         dbDelta($sql_bus);
         dbDelta($sql_seats);
         dbDelta($sql_tokens);
         dbDelta($sql_tour_settings);
-        error_log('DRTR Posti: Tables created successfully');
         
         // Insert default bus configuration
         self::insert_default_bus_config();
@@ -145,7 +143,6 @@ class DRTR_Posti_DB {
         
         // Check if tables exist
         if (!self::tables_exist()) {
-            error_log('DRTR Posti: Tables do not exist. Please activate the plugin.');
             return [];
         }
         

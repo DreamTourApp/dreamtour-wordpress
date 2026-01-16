@@ -34,7 +34,6 @@ class DRTR_Posti_Email {
         
         // Check if tables exist before proceeding
         if (!DRTR_Posti_DB::tables_exist()) {
-            error_log('DRTR Posti: Cannot send seat selection email - tables do not exist. Please activate the plugin.');
             return;
         }
         
