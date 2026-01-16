@@ -39,6 +39,12 @@
                     ));
                     ?>
                     
+                    <!-- Additional Menu Items -->
+                    <ul class="nav-menu nav-menu-extra">
+                        <li><a href="<?php echo esc_url(home_url('/chi-siamo')); ?>"><?php esc_html_e('Chi Siamo', 'dreamtour'); ?></a></li>
+                        <li><a href="<?php echo esc_url(home_url('/contatti')); ?>"><?php esc_html_e('Contatti', 'dreamtour'); ?></a></li>
+                    </ul>
+                    
                     <!-- Language Switcher -->
                     <?php echo dreamtour_language_switcher(); ?>
                     

@@ -406,3 +406,9 @@ msgstr "Tutte le intenzioni"
 
 msgid "No hay tours que coincidan con tus criterios de búsqueda."
 msgstr "Non ci sono tour che corrispondono ai tuoi criteri di ricerca."
+
+msgid "Chi Siamo"
+msgstr "Chi Siamo"
+
+msgid "Contatti"
+msgstr "Contatti"

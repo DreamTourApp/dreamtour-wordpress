@@ -238,6 +238,30 @@ a:hover {
   color: var(--color-primary-light);
 }
 
+.nav-menu-extra {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu-extra li {
+  position: relative;
+}
+
+.nav-menu-extra a {
+  font-size: var(--font-body);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  transition: var(--transition);
+}
+
+.nav-menu-extra a:hover {
+  color: var(--color-primary-light);
+}
+
 /* Mobile Menu Toggle */
 .menu-toggle {
   display: none;

@@ -298,3 +298,9 @@ msgstr "Saber Más"
 
 msgid "Leer más"
 msgstr "Leer más"
+
+msgid "Chi Siamo"
+msgstr "Sobre Nosotros"
+
+msgid "Contatti"
+msgstr "Contacto"
