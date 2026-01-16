@@ -205,6 +205,17 @@ class DRTR_Bookings_Pages {
                 $tour_title = $tour_id ? get_the_title($tour_id) : __('Tour non disponibile', 'drtr-checkout');
                 $tour_url = $tour_id ? get_permalink($tour_id) : '';
                 
+                // Add start date and time to tour title
+                if ($tour_id) {
+                    $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+                    if ($tour_start_date) {
+                        $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                        if ($date_obj) {
+                            $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+                        }
+                    }
+                }
+                
                 // Status labels
                 $status_labels = array(
                     'booking_pending' => __('In Attesa', 'drtr-checkout'),
@@ -374,6 +385,17 @@ class DRTR_Bookings_Pages {
                 $created_at = get_post_meta($booking_id, '_booking_created_at', true);
                 
                 $tour_title = $tour_id ? get_the_title($tour_id) : __('Tour non disponibile', 'drtr-checkout');
+                
+                // Add start date and time to tour title
+                if ($tour_id) {
+                    $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+                    if ($tour_start_date) {
+                        $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                        if ($date_obj) {
+                            $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+                        }
+                    }
+                }
                 
                 // Nome cliente
                 $customer_name = '';
