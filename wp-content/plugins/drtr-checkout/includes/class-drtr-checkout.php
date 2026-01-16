@@ -150,40 +150,52 @@ class DRTR_Checkout {
      * Inviare email di conferma
      */
     private function send_booking_emails($booking_id, $booking_data) {
-        // Suppress any output during email sending
-        ob_start();
-        
-        $tour = get_post($booking_data['tour_id']);
-        $tour_title = $tour->post_title;
-        
-        // Add start date and time to tour title
-        $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
-        if ($tour_start_date) {
-            $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
-            if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
-                $tour_title .= ' - ' . $date_obj->format('d/m/y');
+        try {
+            // Suppress any output during email sending
+            if (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+            ob_start();
+            
+            $tour = get_post($booking_data['tour_id']);
+            $tour_title = $tour->post_title;
+            
+            // Add start date and time to tour title
+            $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
+            if ($tour_start_date) {
+                $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
+                    $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+                }
+            }
+            
+            // Email al cliente
+            $to_customer = $booking_data['email'];
+            $subject_customer = sprintf(__('Conferma Prenotazione - %s', 'drtr-tours'), $tour_title);
+            
+            $message_customer = $this->get_customer_email_template($booking_data, $tour_title);
+            
+            $headers = array('Content-Type: text/html; charset=UTF-8');
+            @wp_mail($to_customer, $subject_customer, $message_customer, $headers);
+            
+            // Email all'admin
+            $admin_email = get_option('admin_email');
+            $subject_admin = sprintf(__('Nuova Prenotazione #%d - %s', 'drtr-tours'), $booking_id, $tour_title);
+            
+            $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
+            
+            @wp_mail($admin_email, $subject_admin, $message_admin, $headers);
+            
+            // Clean any output buffer
+            if (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+        } catch (Exception $e) {
+            // Silently catch any exception to prevent AJAX failure
+            if (ob_get_level() > 0) {
+                ob_end_clean();
             }
         }
-        
-        // Email al cliente
-        $to_customer = $booking_data['email'];
-        $subject_customer = sprintf(__('Conferma Prenotazione - %s', 'drtr-tours'), $tour_title);
-        
-        $message_customer = $this->get_customer_email_template($booking_data, $tour_title);
-        
-        $headers = array('Content-Type: text/html; charset=UTF-8');
-        wp_mail($to_customer, $subject_customer, $message_customer, $headers);
-        
-        // Email all'admin
-        $admin_email = get_option('admin_email');
-        $subject_admin = sprintf(__('Nuova Prenotazione #%d - %s', 'drtr-tours'), $booking_id, $tour_title);
-        
-        $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
-        
-        wp_mail($admin_email, $subject_admin, $message_admin, $headers);
-        
-        // Clean any output buffer
-        ob_end_clean();
     }
     
     /**
