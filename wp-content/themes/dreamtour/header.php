@@ -36,7 +36,6 @@
                         'menu_class'     => 'nav-menu',
                         'container'      => false,
                         'fallback_cb'    => false,
-                        'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s<li class="menu-item-extra"><a href="' . esc_url(home_url('/chi-siamo')) . '">' . esc_html__('Chi Siamo', 'dreamtour') . '</a></li><li class="menu-item-extra"><a href="' . esc_url(home_url('/contatti')) . '">' . esc_html__('Contatti', 'dreamtour') . '</a></li></ul>',
                     ));
                     ?>
                     

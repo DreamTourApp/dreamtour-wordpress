@@ -243,10 +243,6 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-.menu-item-extra {
-  list-style: none;
-}
-
 /* Body lock when menu is open */
 body.menu-open {
   overflow: hidden;
