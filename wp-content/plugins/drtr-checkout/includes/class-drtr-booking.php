@@ -189,12 +189,20 @@ class DRTR_Booking {
             return false;
         }
         
+        // Get old status before update
+        $old_status = get_post_status($booking_id);
+        
         wp_update_post(array(
             'ID' => $booking_id,
             'post_status' => $status
         ));
         
         update_post_meta($booking_id, '_booking_status_updated', current_time('mysql'));
+        
+        // Trigger action when status changes
+        if ($old_status !== $status) {
+            do_action('drtr_booking_status_changed', $booking_id, $old_status, $status);
+        }
         
         return true;
     }
