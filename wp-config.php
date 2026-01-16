@@ -92,6 +92,8 @@ $table_prefix = 'wp_';
 if ( ! defined( 'WP_DEBUG' ) ) {
 	define( 'WP_DEBUG', true );
 }
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
 
 define( 'FS_METHOD', 'direct' );
 define( 'COOKIEHASH', '40dc58be7b8e201d5014ed7c9fc84aec' );

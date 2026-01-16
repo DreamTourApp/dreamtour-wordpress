@@ -47,6 +47,7 @@ class DRTR_Posti {
     private function init_hooks() {
         add_action('plugins_loaded', array($this, 'init'));
         register_activation_hook(__FILE__, array($this, 'activate'));
+        add_filter('template_include', array($this, 'load_custom_template'));
     }
     
     public function init() {
@@ -63,7 +64,27 @@ class DRTR_Posti {
     public function activate() {
         DRTR_Posti_DB::create_tables();
         $this->create_seat_selection_page();
+        $this->create_debug_page();
         flush_rewrite_rules();
+    }
+    
+    /**
+     * Create debug logs page
+     */
+    private function create_debug_page() {
+        $page = get_page_by_path('debug-posti-logs');
+        
+        if (!$page) {
+            wp_insert_post(array(
+                'post_title'   => __('Debug Posti Logs', 'drtr-posti'),
+                'post_name'    => 'debug-posti-logs',
+                'post_content' => '<!-- Debug page managed by plugin -->',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+                'page_template' => 'debug-logs.php'
+            ));
+        }
     }
     
     /**
@@ -83,6 +104,19 @@ class DRTR_Posti {
                 'page_template' => 'page-seleziona-posti.php'
             ));
         }
+    }
+    
+    /**
+     * Load custom template for debug page
+     */
+    public function load_custom_template($template) {
+        if (is_page('debug-posti-logs')) {
+            $custom_template = DRTR_POSTI_PLUGIN_DIR . 'debug-logs.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        return $template;
     }
 }
 
