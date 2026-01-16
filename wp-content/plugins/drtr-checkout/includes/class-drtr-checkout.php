@@ -197,7 +197,7 @@ class DRTR_Checkout {
      * Inviare email di conferma
      */
     private function send_booking_emails($booking_id, $booking_data) {
-        tour = get_post($booking_data['tour_id']);
+        $tour = get_post($booking_data['tour_id']);
         $tour_title = $tour->post_title;
         
         // Add start date and time to tour title
