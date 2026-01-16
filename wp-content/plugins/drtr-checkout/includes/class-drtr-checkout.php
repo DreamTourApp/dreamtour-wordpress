@@ -24,7 +24,17 @@ class DRTR_Checkout {
     private function __construct() {
         add_action('wp_ajax_drtr_process_checkout', array($this, 'process_checkout'));
         add_action('wp_ajax_nopriv_drtr_process_checkout', array($this, 'process_checkout'));
+        add_action('wp_ajax_drtr_test_ajax', array($this, 'test_ajax'));
+        add_action('wp_ajax_nopriv_drtr_test_ajax', array($this, 'test_ajax'));
         add_shortcode('drtr_checkout', array($this, 'checkout_shortcode'));
+    }
+    
+    /**
+     * Test AJAX semplice
+     */
+    public function test_ajax() {
+        error_log('TEST AJAX CHIAMATO!');
+        wp_send_json_success(array('message' => 'AJAX funziona!'));
     }
     
     /**
