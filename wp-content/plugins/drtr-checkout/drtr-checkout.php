@@ -3,7 +3,7 @@
  * Plugin Name: DRTR - Checkout & Prenotazioni
  * Plugin URI: https://dreamtourviaggi.it
  * Description: Sistema completo di gestione checkout e prenotazioni per DreamTour
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: DreamTour Team
  * Author URI: https://dreamtourviaggi.it
  * Text Domain: drtr-checkout
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 require_once WP_CONTENT_DIR . '/version-helper.php';
 
 // Definir constantes
-define('DRTR_CHECKOUT_VERSION', dreamtour_get_version('1.0.0'));
+define('DRTR_CHECKOUT_VERSION', dreamtour_get_version('1.1.0'));
 define('DRTR_CHECKOUT_DIR', plugin_dir_path(__FILE__));
 define('DRTR_CHECKOUT_URL', plugin_dir_url(__FILE__));
 define('DRTR_CHECKOUT_BASENAME', plugin_basename(__FILE__));
