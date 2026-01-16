@@ -162,6 +162,9 @@ class DRTR_Checkout {
      * Inviare email di conferma
      */
     private function send_booking_emails($booking_id, $booking_data) {
+        // Suppress any output during email sending
+        ob_start();
+        
         $tour = get_post($booking_data['tour_id']);
         $tour_title = $tour->post_title;
         
@@ -190,6 +193,9 @@ class DRTR_Checkout {
         $message_admin = $this->get_admin_email_template($booking_id, $booking_data, $tour_title);
         
         wp_mail($admin_email, $subject_admin, $message_admin, $headers);
+        
+        // Clean any output buffer
+        ob_end_clean();
     }
     
     /**
