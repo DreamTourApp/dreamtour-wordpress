@@ -25,7 +25,19 @@ if (!defined('ABSPATH')) {
                 <?php endif; ?>
                 
                 <div class="tour-summary-details">
-                    <h3><?php echo esc_html($tour->post_title); ?></h3>
+                    <h3>
+                        <?php 
+                        echo esc_html($tour->post_title);
+                        // Add start date and time if available
+                        $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+                        if ($tour_start_date) {
+                            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                            if ($date_obj) {
+                                echo ' - ' . $date_obj->format('d/m/y H:i');
+                            }
+                        }
+                        ?>
+                    </h3>
                     
                     <div class="summary-row">
                         <span class="label"><?php _e('Adulti:', 'drtr-tours'); ?></span>
