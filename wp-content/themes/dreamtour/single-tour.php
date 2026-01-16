@@ -53,7 +53,18 @@ while (have_posts()) :
                         <?php endif; ?>
                         <div class="tour-top-info">
                             <header class="tour-header">
-                                <h1 class="tour-title"><?php the_title(); ?></h1>
+                                <h1 class="tour-title">
+                                    <?php 
+                                    the_title(); 
+                                    // Add start date and time if available
+                                    if ($tour_start_date) {
+                                        $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+                                        if ($date_obj) {
+                                            echo ' - ' . $date_obj->format('d/m/y H:i');
+                                        }
+                                    }
+                                    ?>
+                                </h1>
                                 
                                 <!-- Quick Meta Info -->
                                 <div class="tour-meta-list">
