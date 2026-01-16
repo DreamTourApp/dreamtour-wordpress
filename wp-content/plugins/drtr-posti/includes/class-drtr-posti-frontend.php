@@ -29,7 +29,20 @@ class DRTR_Posti_Frontend {
     }
     
     public function enqueue_assets() {
-        if (is_page('seleziona-posti') || isset($_GET['page']) && $_GET['page'] === 'seleziona-posti') {
+        global $post;
+        
+        // Check if we're on the seat selection page or if the shortcode is in the content
+        $is_seat_page = false;
+        
+        if (is_page('seleziona-posti')) {
+            $is_seat_page = true;
+        } elseif (isset($_GET['token']) && !empty($_GET['token'])) {
+            $is_seat_page = true;
+        } elseif ($post && has_shortcode($post->post_content, 'drtr_seat_selector')) {
+            $is_seat_page = true;
+        }
+        
+        if ($is_seat_page) {
             wp_enqueue_style('drtr-posti', DRTR_POSTI_PLUGIN_URL . 'assets/css/posti.css', array(), DRTR_POSTI_VERSION);
             wp_enqueue_script('drtr-posti', DRTR_POSTI_PLUGIN_URL . 'assets/js/posti.js', array('jquery'), DRTR_POSTI_VERSION, true);
             

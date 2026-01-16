@@ -81,10 +81,23 @@ class DRTR_Posti_Email {
         
         // Generate token for seat selection
         $token = DRTR_Posti_DB::generate_token($booking_id);
-        $selection_url = add_query_arg([
-            'page' => 'seleziona-posti',
-            'token' => $token
-        ], home_url());
+        
+        // Get or create seat selection page
+        $page = get_page_by_path('seleziona-posti');
+        if (!$page) {
+            // Create page if it doesn't exist
+            $page_id = wp_insert_post(array(
+                'post_title'   => __('Seleziona Posti', 'drtr-posti'),
+                'post_name'    => 'seleziona-posti',
+                'post_content' => '[drtr_seat_selector]',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+            ));
+            $selection_url = add_query_arg('token', $token, get_permalink($page_id));
+        } else {
+            $selection_url = add_query_arg('token', $token, get_permalink($page->ID));
+        }
         
         // Email content
         $subject = sprintf(__('Seleziona i tuoi posti - %s', 'drtr-posti'), get_the_title($tour_id));

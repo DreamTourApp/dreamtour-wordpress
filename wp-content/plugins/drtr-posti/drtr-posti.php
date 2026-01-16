@@ -62,7 +62,27 @@ class DRTR_Posti {
     
     public function activate() {
         DRTR_Posti_DB::create_tables();
+        $this->create_seat_selection_page();
         flush_rewrite_rules();
+    }
+    
+    /**
+     * Create seat selection page
+     */
+    private function create_seat_selection_page() {
+        $page = get_page_by_path('seleziona-posti');
+        
+        if (!$page) {
+            wp_insert_post(array(
+                'post_title'   => __('Seleziona Posti', 'drtr-posti'),
+                'post_name'    => 'seleziona-posti',
+                'post_content' => '[drtr_seat_selector]',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+                'page_template' => 'page-seleziona-posti.php'
+            ));
+        }
     }
 }
 
