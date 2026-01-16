@@ -231,6 +231,9 @@ class DRTR_Checkout {
      * Template email cliente
      */
     private function get_customer_email_template($booking_data, $tour_title) {
+        $payment_type_label = $booking_data['payment_type'] === 'deposit' ? __('Acconto 50%', 'drtr-tours') : __('Pagamento Completo', 'drtr-tours');
+        $payment_method_label = $booking_data['payment_method'] === 'bank_transfer' ? __('Bonifico Bancario', 'drtr-tours') : __('Carta di Credito', 'drtr-tours');
+        
         $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.png');
         ob_start();
         ?>

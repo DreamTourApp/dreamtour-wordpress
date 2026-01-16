@@ -118,7 +118,7 @@ class DRTR_Posti_Email {
         
         $subject = sprintf(__('Seleziona i tuoi posti - %s', 'drtr-posti'), $tour_title);
         
-        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.svg');
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.png');
         
         $message = '
         <html>
