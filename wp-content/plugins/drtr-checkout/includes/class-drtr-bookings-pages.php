@@ -22,6 +22,7 @@ class DRTR_Bookings_Pages {
         add_shortcode('drtr_user_bookings', array($this, 'render_user_bookings_page'));
         add_shortcode('drtr_admin_bookings', array($this, 'render_admin_bookings_page'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));
+        add_action('wp_ajax_drtr_update_booking_status', array($this, 'ajax_update_booking_status'));
     }
     
     /**
@@ -29,8 +30,21 @@ class DRTR_Bookings_Pages {
      */
     public function enqueue_assets() {
         if (is_page(array('mie-prenotazioni', 'gestione-prenotazioni'))) {
-            // Usa gli stili del reserved area che sono già caricati
-            // Oppure crea stili specifici se necessario
+            // Toast notification styles and script
+            wp_enqueue_style('drtr-toast', plugin_dir_url(dirname(__FILE__)) . 'assets/css/toast.css', array(), '1.0.0');
+            wp_enqueue_script('drtr-booking-status', plugin_dir_url(dirname(__FILE__)) . 'assets/js/booking-status.js', array('jquery'), '1.0.0', true);
+            
+            wp_localize_script('drtr-booking-status', 'drtrBooking', array(
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('drtr-booking-nonce'),
+                'strings' => array(
+                    'updating' => __('Aggiornamento in corso...', 'drtr-checkout'),
+                    'success' => __('Status aggiornato con successo!', 'drtr-checkout'),
+                    'emailSent' => __('Email inviata al cliente', 'drtr-checkout'),
+                    'error' => __('Errore durante l\'aggiornamento', 'drtr-checkout'),
+                    'confirm' => __('Confermi di voler cambiare lo status?', 'drtr-checkout')
+                )
+            ));
         }
     }
     
@@ -557,5 +571,57 @@ class DRTR_Bookings_Pages {
         
         echo '</form>';
         echo '</div>';
+    }
+    
+    /**
+     * AJAX handler for updating booking status
+     */
+    public function ajax_update_booking_status() {
+        check_ajax_referer('drtr-booking-nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Permessi insufficienti', 'drtr-checkout')));
+        }
+        
+        $booking_id = intval($_POST['booking_id']);
+        $new_status = sanitize_text_field($_POST['status']);
+        
+        if (!$booking_id || !$new_status) {
+            wp_send_json_error(array('message' => __('Dati mancanti', 'drtr-checkout')));
+        }
+        
+        // Get booking instance
+        $booking = DRTR_Booking::get_instance();
+        
+        // Update status
+        $result = $booking->update_status($booking_id, $new_status);
+        
+        if ($result) {
+            // Get status label for response
+            $status_labels = array(
+                'booking_pending' => __('In Attesa', 'drtr-checkout'),
+                'booking_deposit' => __('Acconto Pagato', 'drtr-checkout'),
+                'booking_paid' => __('Pagato', 'drtr-checkout'),
+                'booking_cancelled' => __('Cancellato', 'drtr-checkout'),
+                'booking_completed' => __('Completato', 'drtr-checkout'),
+            );
+            
+            $status_label = isset($status_labels[$new_status]) ? $status_labels[$new_status] : $new_status;
+            
+            // Check if email should be sent
+            $email_sent = false;
+            if (in_array($new_status, array('booking_paid', 'booking_deposit'))) {
+                $email_sent = true;
+            }
+            
+            wp_send_json_success(array(
+                'message' => sprintf(__('Status aggiornato a: %s', 'drtr-checkout'), $status_label),
+                'status' => $new_status,
+                'status_label' => $status_label,
+                'email_sent' => $email_sent
+            ));
+        } else {
+            wp_send_json_error(array('message' => __('Errore durante l\'aggiornamento dello status', 'drtr-checkout')));
+        }
     }
 }
