@@ -176,38 +176,27 @@ class DRTR_Checkout {
         // Lo status rimane 'booking_pending' fino a quando l'admin conferma il pagamento
         // Non serve cambiare lo status qui perché create_booking già imposta 'booking_pending'
         
-        // Inviare email
-        file_put_contents($debug_file, "Inviando email...\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: inviando email...');
-        
-        // TEMPORANEO: Invio email in background per evitare timeout
-        wp_schedule_single_event(time() + 5, 'drtr_send_booking_emails_async', array($booking_id, $booking_data));
-        
-        file_put_contents($debug_file, "Email schedulata in background\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: email schedulata');
-        
-        file_put_contents($debug_file, "Inviando risposta JSON success...\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: inviando risposta JSON success');
-        wp_send_json_success(array(
-            'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
-            'booking_id' in background (async) per evitare timeout AJAX
-        wp_schedule_single_event(time() + 5, 'drtr_send_booking_emails_async', array($booking_id, $booking_data));
+        // Inviare email (ora che SMTP è configurato, funziona senza timeout)
+        $this->send_booking_emails($booking_id, $booking_data);
         
         wp_send_json_success(array(
             'message' => __('Prenotazione creata con successo!', 'drtr-tours'),
             'booking_id' => $booking_id,
             'redirect' => add_query_arg('booking_id', $booking_id, home_url('/grazie-prenotazione'))
-        )
-        file_put_contents($debug_file, "send_booking_emails() START\n", FILE_APPEND);
-        
-        $tour = get_post($booking_data['tour_id']);
-        $tour_title = $tour->post_title;
-        
-        file_put_contents($debug_file, "Tour title: $tour_title\n", FILE_APPEND);
-        
-        // Add start date and time to tour title
-        $tour_start_date = get_post_meta($booking_data['tour_id'], '_drtr_start_date', true) ?: get_post_meta($booking_data['tour_id'], 'start_date', true);
-        file_put_contents($debug_file, "Tour start date: $tour_start_date\n", FILE_APPEND);
+        ));
+    }
+    
+    /**
+     * Send emails asynchronously (kept for backward compatibility, not used anymore)
+     */
+    public function send_emails_async($booking_id, $booking_data) {
+        $this->send_booking_emails($booking_id, $booking_data);
+    }
+    
+    /**
+     * Inviare email di conferma
+     */
+    private function send_booking_emails($booking_id, $booking_data) {
         tour = get_post($booking_data['tour_id']);
         $tour_title = $tour->post_title;
         
