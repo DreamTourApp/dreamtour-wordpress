@@ -27,6 +27,7 @@ class DRTR_Checkout {
         add_action('wp_ajax_drtr_test_ajax', array($this, 'test_ajax'));
         add_action('wp_ajax_nopriv_drtr_test_ajax', array($this, 'test_ajax'));
         add_action('wp_ajax_drtr_clear_debug_log', array($this, 'clear_debug_log'));
+        add_action('drtr_send_booking_emails_async', array($this, 'send_emails_async'), 10, 2);
         add_shortcode('drtr_checkout', array($this, 'checkout_shortcode'));
         add_shortcode('drtr_debug_checkout', array($this, 'debug_checkout_shortcode'));
     }
@@ -215,9 +216,12 @@ class DRTR_Checkout {
         // Inviare email
         file_put_contents($debug_file, "Inviando email...\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: inviando email...');
-        $this->send_booking_emails($booking_id, $booking_data);
-        file_put_contents($debug_file, "Email inviate\n", FILE_APPEND);
-        error_log('DRTR CHECKOUT: email inviate');
+        
+        // TEMPORANEO: Invio email in background per evitare timeout
+        wp_schedule_single_event(time() + 5, 'drtr_send_booking_emails_async', array($booking_id, $booking_data));
+        
+        file_put_contents($debug_file, "Email schedulata in background\n", FILE_APPEND);
+        error_log('DRTR CHECKOUT: email schedulata');
         
         file_put_contents($debug_file, "Inviando risposta JSON success...\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: inviando risposta JSON success');
@@ -228,6 +232,13 @@ class DRTR_Checkout {
         ));
         file_put_contents($debug_file, "FINE - Non dovrebbe arrivare qui\n", FILE_APPEND);
         error_log('DRTR CHECKOUT: fine metodo (non dovrebbe arrivare qui)');
+    }
+    
+    /**
+     * Send emails asynchronously
+     */
+    public function send_emails_async($booking_id, $booking_data) {
+        $this->send_booking_emails($booking_id, $booking_data);
     }
     
     /**
