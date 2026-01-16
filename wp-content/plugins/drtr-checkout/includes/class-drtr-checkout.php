@@ -392,6 +392,3 @@ class DRTR_Checkout {
         return ob_get_clean();
     }
 }
-
-// Inizializzare
-DRTR_Checkout::get_instance();
