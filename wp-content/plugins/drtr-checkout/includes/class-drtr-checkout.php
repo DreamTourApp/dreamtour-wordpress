@@ -26,7 +26,18 @@ class DRTR_Checkout {
         add_action('wp_ajax_nopriv_drtr_process_checkout', array($this, 'process_checkout'));
         add_action('wp_ajax_drtr_test_ajax', array($this, 'test_ajax'));
         add_action('wp_ajax_nopriv_drtr_test_ajax', array($this, 'test_ajax'));
+        add_action('wp_ajax_drtr_clear_debug_log', array($this, 'clear_debug_log'));
         add_shortcode('drtr_checkout', array($this, 'checkout_shortcode'));
+        add_shortcode('drtr_debug_checkout', array($this, 'debug_checkout_shortcode'));
+    }
+    
+    /**
+     * Shortcode per pagina debug
+     */
+    public function debug_checkout_shortcode($atts) {
+        ob_start();
+        include DRTR_CHECKOUT_DIR . 'templates/debug-checkout.php';
+        return ob_get_clean();
     }
     
     /**
@@ -35,6 +46,17 @@ class DRTR_Checkout {
     public function test_ajax() {
         error_log('TEST AJAX CHIAMATO!');
         wp_send_json_success(array('message' => 'AJAX funziona!'));
+    }
+    
+    /**
+     * Clear debug log
+     */
+    public function clear_debug_log() {
+        $debug_file = WP_CONTENT_DIR . '/drtr-checkout-debug.txt';
+        if (file_exists($debug_file)) {
+            unlink($debug_file);
+        }
+        wp_send_json_success(array('message' => 'Log cancellato'));
     }
     
     /**
@@ -111,6 +133,12 @@ class DRTR_Checkout {
             define('DONOTCACHEDB', true);
         }
         
+        // Write to file for debugging
+        $debug_file = WP_CONTENT_DIR . '/drtr-checkout-debug.txt';
+        $timestamp = date('Y-m-d H:i:s');
+        file_put_contents($debug_file, "\n[$timestamp] METODO CHIAMATO!\n", FILE_APPEND);
+        file_put_contents($debug_file, "POST data: " . print_r($_POST, true) . "\n", FILE_APPEND);
+        
         // Send headers immediately
         @header('Content-Type: application/json; charset=utf-8');
         @header('Cache-Control: no-cache, must-revalidate, max-age=0');
@@ -118,19 +146,25 @@ class DRTR_Checkout {
         error_log('DRTR CHECKOUT: process_checkout chiamato');
         error_log('DRTR CHECKOUT: POST data: ' . print_r($_POST, true));
         
+        file_put_contents($debug_file, "Prima del nonce check\n", FILE_APPEND);
+        
         // TEMPORANEAMENTE COMMENTATO PER DEBUG
         // check_ajax_referer('dreamtour-nonce', 'nonce');
         
         error_log('DRTR CHECKOUT: nonce verificato (SKIPPED)');
+        file_put_contents($debug_file, "Dopo nonce check (SKIPPED)\n", FILE_APPEND);
         
         // Validare dati
         $required_fields = array('tour_id', 'adults', 'first_name', 'last_name', 'email', 'phone', 'payment_method');
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
                 error_log('DRTR CHECKOUT: campo mancante - ' . $field);
+                file_put_contents($debug_file, "Campo mancante: $field\n", FILE_APPEND);
                 wp_send_json_error(array('message' => sprintf(__('Campo obbligatorio mancante: %s', 'drtr-tours'), $field)));
             }
         }
+        
+        file_put_contents($debug_file, "Tutti i campi validati\n", FILE_APPEND);
         
         error_log('DRTR CHECKOUT: tutti i campi validati');
         
