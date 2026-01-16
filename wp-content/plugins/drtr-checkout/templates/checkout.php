@@ -473,10 +473,14 @@ jQuery(document).ready(function($) {
     // Submit checkout form
     $('#drtr-checkout-form').on('submit', function(e) {
         e.preventDefault();
+        console.log('=== CHECKOUT SUBMIT INIZIATO ===');
         
         const $form = $(this);
         const $submitBtn = $('#submit-checkout');
         const $message = $('#checkout-message');
+        
+        console.log('Form element:', $form[0]);
+        console.log('dreamtourData:', dreamtourData);
         
         // Disable submit button
         $submitBtn.prop('disabled', true).text(<?php echo wp_json_encode(__('Elaborazione...', 'drtr-checkout')); ?>);
@@ -486,6 +490,15 @@ jQuery(document).ready(function($) {
         formData.append('action', 'drtr_process_checkout');
         formData.append('nonce', dreamtourData.nonce);
         
+        // Log FormData contents
+        console.log('FormData contents:');
+        for (let pair of formData.entries()) {
+            console.log('  ' + pair[0] + ': ' + pair[1]);
+        }
+        
+        console.log('AJAX URL:', dreamtourData.ajaxUrl);
+        console.log('Inviando richiesta AJAX...');
+        
         // AJAX request
         $.ajax({
             url: dreamtourData.ajaxUrl,
@@ -493,25 +506,56 @@ jQuery(document).ready(function($) {
             data: formData,
             processData: false,
             contentType: false,
+            beforeSend: function(jqXHR, settings) {
+                console.log('beforeSend - URL:', settings.url);
+                console.log('beforeSend - Type:', settings.type);
+            },
             success: function(response) {
+                console.log('=== AJAX SUCCESS ===');
+                console.log('Response completa:', response);
+                console.log('Response type:', typeof response);
+                console.log('Response.success:', response.success);
+                console.log('Response.data:', response.data);
+                
                 if (response.success) {
+                    console.log('Prenotazione creata con successo!');
+                    console.log('Message:', response.data.message);
+                    console.log('Booking ID:', response.data.booking_id);
+                    console.log('Redirect:', response.data.redirect);
+                    
                     $message.removeClass('error').addClass('success')
                         .html(response.data.message).show();
                     
                     // Redirect dopo 2 secondi
                     setTimeout(function() {
+                        console.log('Redirecting to:', response.data.redirect);
                         window.location.href = response.data.redirect;
                     }, 2000);
                 } else {
+                    console.log('Errore dal server:', response.data.message);
                     $message.removeClass('success').addClass('error')
                         .html(response.data.message).show();
                     $submitBtn.prop('disabled', false).text(<?php echo wp_json_encode(__('Conferma Prenotazione', 'drtr-checkout')); ?>);
                 }
             },
-            error: function() {
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('=== AJAX ERROR ===');
+                console.log('jqXHR:', jqXHR);
+                console.log('Status:', jqXHR.status);
+                console.log('Status Text:', jqXHR.statusText);
+                console.log('Response Text:', jqXHR.responseText);
+                console.log('textStatus:', textStatus);
+                console.log('errorThrown:', errorThrown);
+                console.log('Ready State:', jqXHR.readyState);
+                
                 $message.removeClass('success').addClass('error')
                     .html(<?php echo wp_json_encode(__('Errore durante l\'elaborazione. Riprova.', 'drtr-checkout')); ?>).show();
                 $submitBtn.prop('disabled', false).text(<?php echo wp_json_encode(__('Conferma Prenotazione', 'drtr-checkout')); ?>);
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('=== AJAX COMPLETE ===');
+                console.log('textStatus:', textStatus);
+                console.log('Response Headers:', jqXHR.getAllResponseHeaders());
             }
         });
     });
