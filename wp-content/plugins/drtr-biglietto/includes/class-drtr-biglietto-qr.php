@@ -33,21 +33,26 @@ class DRTR_Biglietto_QR {
         // Create unique ticket ID
         $ticket_id = self::generate_ticket_id($booking_id, $seat_number);
         
-        // QR code data (JSON format)
+        // QR code data (simplified JSON format)
         $qr_data = json_encode([
             'ticket_id' => $ticket_id,
-            'booking_id' => $booking_id,
+            'booking_id' => (string)$booking_id,
             'seat' => $seat_number,
             'timestamp' => current_time('timestamp'),
             'signature' => self::generate_signature($ticket_id)
-        ]);
+        ], JSON_UNESCAPED_SLASHES);
+        
+        error_log("DRTR BIGLIETTO: Generando QR per biglietto $ticket_id");
+        error_log("DRTR BIGLIETTO: QR data length: " . strlen($qr_data));
         
         // Use Google Charts API for QR code generation
-        // Alternative: phpqrcode library
         $qr_url = self::generate_qr_with_google_api($qr_data);
         
         // Save QR code locally
-        return self::save_qr_code_locally($qr_url, $ticket_id);
+        $result = self::save_qr_code_locally($qr_url, $ticket_id);
+        error_log("DRTR BIGLIETTO: QR URL finale: " . substr($result, 0, 100));
+        
+        return $result;
     }
     
     /**
@@ -88,14 +93,30 @@ class DRTR_Biglietto_QR {
         $filename = 'qr-' . $ticket_id . '.png';
         $filepath = $ticket_dir . '/' . $filename;
         
-        // Download and save QR code
+        // Try to download and save QR code
         $image_data = @file_get_contents($qr_url);
         
-        if ($image_data) {
+        if ($image_data && strlen($image_data) > 100) {
             file_put_contents($filepath, $image_data);
-            return $upload_dir['baseurl'] . '/drtr-tickets/' . $filename;
+            $local_url = $upload_dir['baseurl'] . '/drtr-tickets/' . $filename;
+            error_log("DRTR BIGLIETTO: QR code salvato localmente: " . $local_url);
+            return $local_url;
         }
         
+        // If download fails, create inline base64 QR code
+        error_log("DRTR BIGLIETTO: Download QR fallito, uso base64");
+        
+        // Try again with different method
+        $response = wp_remote_get($qr_url, array('timeout' => 10));
+        if (!is_wp_error($response)) {
+            $image_data = wp_remote_retrieve_body($response);
+            if ($image_data && strlen($image_data) > 100) {
+                file_put_contents($filepath, $image_data);
+                return $upload_dir['baseurl'] . '/drtr-tickets/' . $filename;
+            }
+        }
+        
+        error_log("DRTR BIGLIETTO: ERRORE - Impossibile salvare QR code, uso URL diretto");
         return $qr_url; // Fallback to Google API URL
     }
     
