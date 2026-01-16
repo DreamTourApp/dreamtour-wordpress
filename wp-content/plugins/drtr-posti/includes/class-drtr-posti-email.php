@@ -27,18 +27,27 @@ class DRTR_Posti_Email {
      * Send seat selection email when booking is paid
      */
     public function send_seat_selection_email($booking_id, $old_status, $new_status) {
+        error_log("DRTR POSTI: Hook chiamato - Booking ID: $booking_id, Old: $old_status, New: $new_status");
+        
         // Only send if status changes to paid or deposit paid
         if (!in_array($new_status, ['booking_paid', 'booking_deposit'])) {
+            error_log("DRTR POSTI: Status non valido - New status: $new_status");
             return;
         }
+        
+        error_log("DRTR POSTI: Status valido, procedo...");
         
         // Check if tables exist before proceeding
         if (!DRTR_Posti_DB::tables_exist()) {
+            error_log("DRTR POSTI: Tabelle non esistono!");
             return;
         }
         
+        error_log("DRTR POSTI: Tabelle esistono");
+        
         $booking = get_post($booking_id);
         if (!$booking) {
+            error_log("DRTR POSTI: Booking non trovato!");
             return;
         }
         
@@ -47,7 +56,10 @@ class DRTR_Posti_Email {
         $tour_id = get_post_meta($booking_id, '_booking_tour_id', true);
         $tour = get_post($tour_id);
         
+        error_log("DRTR POSTI: Email: $customer_email, Nome: $customer_name, Tour ID: $tour_id");
+        
         if (!$customer_email || !$tour) {
+            error_log("DRTR POSTI: Email o tour mancante!");
             return;
         }
         
@@ -64,13 +76,19 @@ class DRTR_Posti_Email {
         });
         
         if (!empty($booking_seats)) {
+            error_log("DRTR POSTI: Posti già assegnati!");
             return; // Seats already assigned
         }
         
+        error_log("DRTR POSTI: Nessun posto già assegnato");
+        
         // Check tour settings
         $settings = DRTR_Posti_DB::get_tour_settings($tour_id);
+        error_log("DRTR POSTI: Settings tour - Enabled: " . ($settings['selection_enabled'] ? 'SI' : 'NO') . ", Auto-assign: " . ($settings['auto_assign'] ? 'SI' : 'NO'));
+        error_log("DRTR POSTI: Settings tour - Enabled: " . ($settings['selection_enabled'] ? 'SI' : 'NO') . ", Auto-assign: " . ($settings['auto_assign'] ? 'SI' : 'NO'));
         
         if (!$settings['selection_enabled'] || $settings['auto_assign']) {
+            error_log("DRTR POSTI: Selezione non abilitata o auto-assign attivo, assegno automaticamente");
             // Auto assign seats
             $num_people = intval(get_post_meta($booking_id, '_booking_adults', true)) + 
                          intval(get_post_meta($booking_id, '_booking_children', true));
@@ -84,8 +102,11 @@ class DRTR_Posti_Email {
             return;
         }
         
+        error_log("DRTR POSTI: Procedo con invio email...");
+        
         // Generate token for seat selection
         $token = DRTR_Posti_DB::generate_token($booking_id);
+        error_log("DRTR POSTI: Token generato: $token");
         
         // Get or create seat selection page
         $page = get_page_by_path('seleziona-posti');
@@ -156,6 +177,17 @@ class DRTR_Posti_Email {
         </html>';
         
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        wp_mail($customer_email, $subject, $message, $headers);
+        
+        error_log("DRTR POSTI: Invio email a: $customer_email");
+        error_log("DRTR POSTI: Subject: $subject");
+        error_log("DRTR POSTI: Link selezione: $selection_url");
+        
+        $result = wp_mail($customer_email, $subject, $message, $headers);
+        
+        if ($result) {
+            error_log("DRTR POSTI: Email inviata con successo!");
+        } else {
+            error_log("DRTR POSTI: ERRORE - Email NON inviata!");
+        }
     }
 }
