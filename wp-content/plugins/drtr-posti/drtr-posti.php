@@ -129,6 +129,13 @@ class DRTR_Posti {
             }
         }
         
+        if (is_page('debug-pullman')) {
+            $custom_template = DRTR_POSTI_PLUGIN_DIR . 'templates/debug-pullman.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        
         return $template;
     }
     
@@ -143,6 +150,20 @@ class DRTR_Posti {
                 'post_title'   => __('Visualizza Posti Pullman', 'drtr-posti'),
                 'post_name'    => 'visualizza-posti-pullman',
                 'post_content' => '<!-- Admin bus view managed by plugin -->',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+            ));
+        }
+        
+        // Create debug page
+        $debug_page = get_page_by_path('debug-pullman');
+        
+        if (!$debug_page) {
+            wp_insert_post(array(
+                'post_title'   => __('Debug Pullman', 'drtr-posti'),
+                'post_name'    => 'debug-pullman',
+                'post_content' => '<!-- Debug page managed by plugin -->',
                 'post_status'  => 'publish',
                 'post_type'    => 'page',
                 'post_author'  => 1,
