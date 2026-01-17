@@ -145,11 +145,12 @@ class DRTR_Biglietto_QR {
             return $qr_url;
         }
         
-        $local_url = $upload_dir['baseurl'] . '/drtr-tickets/' . $filename;
-        error_log("DRTR BIGLIETTO: QR code salvato localmente: " . $local_url);
+        // Use PHP endpoint to serve image (bypasses .htaccess restrictions)
+        $qr_image_url = home_url('/qr-image.php?ticket=' . urlencode($ticket_id));
+        error_log("DRTR BIGLIETTO: QR code salvato, URL endpoint: " . $qr_image_url);
         
-        // Return local URL - works better in emails than base64
-        return $local_url;
+        // Return PHP endpoint URL - bypasses server restrictions
+        return $qr_image_url;
     }
     
     /**
