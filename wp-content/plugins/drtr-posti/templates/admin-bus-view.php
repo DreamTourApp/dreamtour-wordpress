@@ -144,13 +144,13 @@ foreach ($seats as $seat) {
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-bottom: 30px;
+        gap: 15px;
+        margin-bottom: 20px;
     }
     
     .stat-card {
-        padding: 20px;
-        border-radius: 8px;
+        padding: 15px;
+        border-radius: 6px;
         text-align: center;
     }
     
@@ -170,13 +170,13 @@ foreach ($seats as $seat) {
     }
     
     .stat-number {
-        font-size: 48px;
+        font-size: 32px;
         font-weight: bold;
-        margin: 10px 0;
+        margin: 5px 0;
     }
     
     .stat-label {
-        font-size: 16px;
+        font-size: 13px;
         color: #666;
         text-transform: uppercase;
     }
@@ -365,8 +365,8 @@ foreach ($seats as $seat) {
         
         <!-- Tour Info -->
         <?php if ($selected_tour_title): ?>
-            <div style="text-align: center; margin: 20px 0; padding: 15px; background: #f0f7ff; border-left: 4px solid #003284; border-radius: 4px;">
-                <h2 style="margin: 0; color: #003284; font-size: 24px;">
+            <div style="text-align: center; margin: 15px 0; padding: 10px; background: #f0f7ff; border-left: 4px solid #003284; border-radius: 4px;">
+                <h2 style="margin: 0; color: #003284; font-size: 20px;">
                     <?php echo esc_html($selected_tour_title); ?>
                     <?php if ($selected_tour_date): ?>
                         <span style="color: #1aabe7; font-weight: 600;"> - <?php echo esc_html($selected_tour_date); ?></span>
