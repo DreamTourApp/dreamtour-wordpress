@@ -16,17 +16,17 @@ get_header();
 // Get all tours with seat settings
 global $wpdb;
 $tours_table = $wpdb->prefix . 'posts';
-$settings_table = $wpdb->prefix . 'drtr_tour_seat_settings';
 
+// Get all published tours
 $tours = $wpdb->get_results("
-    SELECT p.ID, p.post_title, 
-           COALESCE(ts.selection_enabled, 0) as selection_enabled
-    FROM $tours_table p
-    LEFT JOIN $settings_table ts ON p.ID = ts.tour_id
-    WHERE p.post_type = 'tour' 
-    AND p.post_status = 'publish'
-    ORDER BY p.post_title ASC
+    SELECT ID, post_title
+    FROM $tours_table
+    WHERE post_type = 'tour' 
+    AND post_status = 'publish'
+    ORDER BY post_title ASC
 ");
+
+error_log("DRTR POSTI VIEW: Found " . count($tours) . " tours");
 
 // Get selected tour
 $selected_tour = isset($_GET['tour_id']) ? intval($_GET['tour_id']) : 0;
