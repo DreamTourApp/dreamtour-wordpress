@@ -5,7 +5,7 @@
  */
 
 // Load WordPress
-require_once __DIR__ . '/../../wp-load.php';
+require_once __DIR__ . '/wp-load.php';
 
 // Get ticket ID from query string
 $ticket_id = isset($_GET['ticket']) ? sanitize_text_field($_GET['ticket']) : '';
