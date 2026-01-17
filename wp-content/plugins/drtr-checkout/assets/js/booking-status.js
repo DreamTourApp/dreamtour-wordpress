@@ -90,6 +90,90 @@
             $(this).data('original-status', $(this).val());
         });
         
+        // Send tickets button click
+        $('.drtr-send-tickets').on('click', function(e) {
+            e.preventDefault();
+            
+            const button = $(this);
+            const bookingId = button.data('booking-id');
+            
+            if (!confirm('Sei sicuro di voler inviare i biglietti via email?')) {
+                return;
+            }
+            
+            // Disable button
+            button.prop('disabled', true).addClass('loading');
+            const originalText = button.html();
+            button.html('<i class="dashicons dashicons-update spin"></i> Invio...');
+            
+            // AJAX request
+            $.ajax({
+                url: drtrBooking.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'drtr_send_tickets',
+                    nonce: drtrBooking.nonce,
+                    booking_id: bookingId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showToast(response.data.message, 'success');
+                    } else {
+                        showToast(response.data.message || 'Errore durante l\'invio dei biglietti', 'error');
+                    }
+                },
+                error: function() {
+                    showToast('Errore di connessione', 'error');
+                },
+                complete: function() {
+                    button.prop('disabled', false).removeClass('loading');
+                    button.html(originalText);
+                }
+            });
+        });
+        
+        // Send acceptance email button click
+        $('.drtr-send-acceptance').on('click', function(e) {
+            e.preventDefault();
+            
+            const button = $(this);
+            const bookingId = button.data('booking-id');
+            
+            if (!confirm('Sei sicuro di voler inviare l\'email di conferma prenotazione?')) {
+                return;
+            }
+            
+            // Disable button
+            button.prop('disabled', true).addClass('loading');
+            const originalText = button.html();
+            button.html('<i class="dashicons dashicons-update spin"></i> Invio...');
+            
+            // AJAX request
+            $.ajax({
+                url: drtrBooking.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'drtr_send_acceptance',
+                    nonce: drtrBooking.nonce,
+                    booking_id: bookingId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showToast(response.data.message, 'success');
+                    } else {
+                        showToast(response.data.message || 'Errore durante l\'invio della conferma', 'error');
+                    }
+                },
+                error: function() {
+                    showToast('Errore di connessione', 'error');
+                },
+                complete: function() {
+                    button.prop('disabled', false).removeClass('loading');
+                    button.html(originalText);
+                }
+            });
+        });
+        
     });
     
     /**

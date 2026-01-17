@@ -23,6 +23,8 @@ class DRTR_Bookings_Pages {
         add_shortcode('drtr_admin_bookings', array($this, 'render_admin_bookings_page'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));
         add_action('wp_ajax_drtr_update_booking_status', array($this, 'ajax_update_booking_status'));
+        add_action('wp_ajax_drtr_send_tickets', array($this, 'ajax_send_tickets'));
+        add_action('wp_ajax_drtr_send_acceptance', array($this, 'ajax_send_acceptance'));
     }
     
     /**
@@ -488,6 +490,12 @@ class DRTR_Bookings_Pages {
                 echo '<td>';
                 echo '<button class="drtr-ra-btn drtr-ra-btn-small drtr-update-status" data-booking-id="' . esc_attr($booking_id) . '">';
                 echo '<i class="dashicons dashicons-update"></i> ' . __('Aggiorna', 'drtr-checkout');
+                echo '</button><br>';
+                echo '<button class="drtr-ra-btn drtr-ra-btn-small drtr-send-tickets" data-booking-id="' . esc_attr($booking_id) . '" style="margin-top: 5px; background: #1ba4ce;">';
+                echo '<i class="dashicons dashicons-tickets-alt"></i> ' . __('Invia Biglietti', 'drtr-checkout');
+                echo '</button><br>';
+                echo '<button class="drtr-ra-btn drtr-ra-btn-small drtr-send-acceptance" data-booking-id="' . esc_attr($booking_id) . '" style="margin-top: 5px; background: #28a745;">';
+                echo '<i class="dashicons dashicons-yes-alt"></i> ' . __('Conferma', 'drtr-checkout');
                 echo '</button>';
                 echo '</td>';
                 echo '</tr>';
@@ -665,5 +673,196 @@ class DRTR_Bookings_Pages {
             error_log('DRTR: Failed to update status');
             wp_send_json_error(array('message' => __('Errore durante l\'aggiornamento dello status', 'drtr-checkout')));
         }
+    }
+    
+    /**
+     * AJAX handler for sending tickets email
+     */
+    public function ajax_send_tickets() {
+        // Check nonce
+        if (!check_ajax_referer('drtr-booking-nonce', 'nonce', false)) {
+            wp_send_json_error(array('message' => __('Verifica di sicurezza fallita', 'drtr-checkout')));
+            return;
+        }
+        
+        // Check permissions
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Permessi insufficienti', 'drtr-checkout')));
+            return;
+        }
+        
+        $booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : 0;
+        
+        if (!$booking_id) {
+            wp_send_json_error(array('message' => __('ID prenotazione mancante', 'drtr-checkout')));
+            return;
+        }
+        
+        // Get booking data
+        $booking = get_post($booking_id);
+        if (!$booking || $booking->post_type !== 'drtr_booking') {
+            wp_send_json_error(array('message' => __('Prenotazione non trovata', 'drtr-checkout')));
+            return;
+        }
+        
+        // Get seats data from wp_drtr_posti
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'drtr_posti';
+        
+        $seats = $wpdb->get_results($wpdb->prepare(
+            "SELECT seat_number, passenger_name FROM $table_name WHERE booking_id = %d ORDER BY seat_number ASC",
+            $booking_id
+        ), ARRAY_A);
+        
+        if (empty($seats)) {
+            wp_send_json_error(array('message' => __('Nessun posto assegnato per questa prenotazione', 'drtr-checkout')));
+            return;
+        }
+        
+        // Check if DRTR_Biglietto_Email exists
+        if (!class_exists('DRTR_Biglietto_Email')) {
+            wp_send_json_error(array('message' => __('Sistema di biglietti non disponibile', 'drtr-checkout')));
+            return;
+        }
+        
+        // Send tickets email
+        $email_handler = DRTR_Biglietto_Email::get_instance();
+        $email_handler->send_tickets_email($booking_id, $seats);
+        
+        wp_send_json_success(array(
+            'message' => __('Biglietti inviati con successo!', 'drtr-checkout')
+        ));
+    }
+    
+    /**
+     * AJAX handler for sending acceptance email
+     */
+    public function ajax_send_acceptance() {
+        // Check nonce
+        if (!check_ajax_referer('drtr-booking-nonce', 'nonce', false)) {
+            wp_send_json_error(array('message' => __('Verifica di sicurezza fallita', 'drtr-checkout')));
+            return;
+        }
+        
+        // Check permissions
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Permessi insufficienti', 'drtr-checkout')));
+            return;
+        }
+        
+        $booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : 0;
+        
+        if (!$booking_id) {
+            wp_send_json_error(array('message' => __('ID prenotazione mancante', 'drtr-checkout')));
+            return;
+        }
+        
+        // Get booking data
+        $booking = get_post($booking_id);
+        if (!$booking || $booking->post_type !== 'drtr_booking') {
+            wp_send_json_error(array('message' => __('Prenotazione non trovata', 'drtr-checkout')));
+            return;
+        }
+        
+        // Get booking details
+        $customer_email = get_post_meta($booking_id, '_booking_email', true);
+        $customer_name = get_post_meta($booking_id, '_booking_name', true);
+        $first_name = get_post_meta($booking_id, '_booking_first_name', true);
+        $tour_id = get_post_meta($booking_id, '_booking_tour_id', true);
+        
+        if (!$customer_email) {
+            wp_send_json_error(array('message' => __('Email cliente non trovata', 'drtr-checkout')));
+            return;
+        }
+        
+        // Get tour info
+        $tour = get_post($tour_id);
+        $tour_title = $tour ? get_the_title($tour_id) : __('Tour', 'drtr-checkout');
+        
+        // Add tour date
+        $tour_start_date = get_post_meta($tour_id, '_drtr_start_date', true) ?: get_post_meta($tour_id, 'start_date', true);
+        if ($tour_start_date) {
+            $date_obj = @DateTime::createFromFormat('Y-m-d\TH:i', $tour_start_date);
+            if ($date_obj && !DateTime::getLastErrors()['warning_count']) {
+                $tour_title .= ' - ' . $date_obj->format('d/m/y H:i');
+            }
+        }
+        
+        $display_name = $first_name ?: $customer_name;
+        
+        // Send acceptance email
+        $this->send_acceptance_email($customer_email, $display_name, $tour_title, $booking_id);
+        
+        wp_send_json_success(array(
+            'message' => __('Email di conferma inviata con successo!', 'drtr-checkout')
+        ));
+    }
+    
+    /**
+     * Send booking acceptance confirmation email
+     */
+    private function send_acceptance_email($email, $name, $tour_title, $booking_id) {
+        $subject = sprintf(__('Prenotazione confermata per %s', 'drtr-checkout'), $tour_title);
+        
+        $logo_url = home_url('/wp-content/themes/dreamtour/assets/images/logos/logo.png');
+        
+        $message = '
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .header img { max-width: 200px; }
+                .content { background: #f9f9f9; padding: 30px; border-radius: 8px; }
+                .success-box { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; border-radius: 4px; }
+                .info-box { background: #e7f3ff; border-left: 4px solid #1ba4ce; padding: 15px; margin: 20px 0; }
+                .button { display: inline-block; background: #003284; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+                .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <img src="' . esc_url($logo_url) . '" alt="Dream Tour">
+                </div>
+                <div class="content">
+                    <h2>✅ ' . __('Prenotazione Confermata!', 'drtr-checkout') . '</h2>
+                    
+                    <div class="success-box">
+                        <h3 style="margin-top: 0; color: #28a745;">' . __('Ciao', 'drtr-checkout') . ' ' . esc_html($name) . '!</h3>
+                        <p style="margin-bottom: 0;">' . __('La tua prenotazione è stata confermata con successo.', 'drtr-checkout') . '</p>
+                    </div>
+                    
+                    <h3 style="color: #003284;">' . esc_html($tour_title) . '</h3>
+                    <p><strong>' . __('Numero prenotazione:', 'drtr-checkout') . '</strong> #' . esc_html($booking_id) . '</p>
+                    
+                    <div class="info-box">
+                        <strong>📋 ' . __('Cosa succede ora?', 'drtr-checkout') . '</strong>
+                        <ul style="margin: 10px 0;">
+                            <li>' . __('Riceverai i tuoi biglietti via email prima della partenza', 'drtr-checkout') . '</li>
+                            <li>' . __('Potrai visualizzare i dettagli nell\'area riservata', 'drtr-checkout') . '</li>
+                            <li>' . __('Ti contatteremo per eventuali aggiornamenti', 'drtr-checkout') . '</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="text-align: center;">
+                        <a href="' . esc_url(home_url('/area-riservata')) . '" class="button">' . __('Vai all\'Area Riservata', 'drtr-checkout') . '</a>
+                    </p>
+                    
+                    <p>' . __('Grazie per aver scelto DreamTour!', 'drtr-checkout') . '</p>
+                    <p>' . __('Se hai domande, non esitare a contattarci.', 'drtr-checkout') . '</p>
+                </div>
+                
+                <div class="footer">
+                    <p>© ' . date('Y') . ' DreamTour - ' . __('I tuoi viaggi da sogno', 'drtr-checkout') . '</p>
+                    <p>' . __('Questa è una email automatica, per favore non rispondere.', 'drtr-checkout') . '</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+        
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        wp_mail($email, $subject, $message, $headers);
     }
 }
