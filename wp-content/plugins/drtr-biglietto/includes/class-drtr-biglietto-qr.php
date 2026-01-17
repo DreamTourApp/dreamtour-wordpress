@@ -81,76 +81,40 @@ class DRTR_Biglietto_QR {
     }
     
     /**
-     * Save QR code image locally
+     * Save QR code image locally (optional backup) and return API URL
      */
     private static function save_qr_code_locally($qr_url, $ticket_id) {
-        // Download and save QR code locally, then return local URL for email
+        // Use direct API URL for emails - no server permission issues
+        // The QR Server API is reliable and always accessible
         
-        error_log("DRTR BIGLIETTO: Scarico QR code da: " . $qr_url);
+        error_log("DRTR BIGLIETTO: Usando URL API diretto per email: " . $qr_url);
         
-        // Download QR code image
-        $response = wp_remote_get($qr_url, array(
-            'timeout' => 15,
-            'sslverify' => false
-        ));
-        
-        if (is_wp_error($response)) {
-            error_log("DRTR BIGLIETTO: Errore download QR: " . $response->get_error_message());
-            // Fallback to direct API URL
-            return $qr_url;
-        }
-        
-        $image_data = wp_remote_retrieve_body($response);
-        
-        if (empty($image_data) || strlen($image_data) < 100) {
-            error_log("DRTR BIGLIETTO: QR code vuoto o corrotto");
-            // Fallback to direct API URL
-            return $qr_url;
-        }
-        
-        // Save locally
+        // Optionally save locally as backup (non-blocking)
         $upload_dir = wp_upload_dir();
         $ticket_dir = $upload_dir['basedir'] . '/drtr-tickets';
         
         if (!file_exists($ticket_dir)) {
             wp_mkdir_p($ticket_dir);
-            
-            // Create .htaccess to allow access to images
-            $htaccess_content = "# Allow access to QR code images and ticket files\n";
-            $htaccess_content .= "<IfModule mod_rewrite.c>\n";
-            $htaccess_content .= "    RewriteEngine Off\n";
-            $htaccess_content .= "</IfModule>\n\n";
-            $htaccess_content .= "# Allow direct access to all files\n";
-            $htaccess_content .= "<FilesMatch \".*\">\n";
-            $htaccess_content .= "    Order allow,deny\n";
-            $htaccess_content .= "    Allow from all\n";
-            $htaccess_content .= "    Require all granted\n";
-            $htaccess_content .= "</FilesMatch>\n\n";
-            $htaccess_content .= "# Prevent directory listing\n";
-            $htaccess_content .= "Options -Indexes\n\n";
-            $htaccess_content .= "# Allow from all\n";
-            $htaccess_content .= "Satisfy Any\n";
-            
-            file_put_contents($ticket_dir . '/.htaccess', $htaccess_content);
-            error_log("DRTR BIGLIETTO: .htaccess creato per permettere accesso alle immagini");
         }
         
-        $filename = 'qr-' . $ticket_id . '.png';
-        $filepath = $ticket_dir . '/' . $filename;
+        // Try to download and save (best effort, don't fail if it doesn't work)
+        $response = wp_remote_get($qr_url, array(
+            'timeout' => 10,
+            'sslverify' => false
+        ));
         
-        $saved = file_put_contents($filepath, $image_data);
-        
-        if ($saved === false) {
-            error_log("DRTR BIGLIETTO: Errore salvataggio file");
-            return $qr_url;
+        if (!is_wp_error($response)) {
+            $image_data = wp_remote_retrieve_body($response);
+            if (!empty($image_data) && strlen($image_data) > 100) {
+                $filename = 'qr-' . $ticket_id . '.png';
+                $filepath = $ticket_dir . '/' . $filename;
+                @file_put_contents($filepath, $image_data);
+                error_log("DRTR BIGLIETTO: QR salvato localmente come backup");
+            }
         }
         
-        // Use PHP endpoint to serve image (bypasses .htaccess restrictions)
-        $qr_image_url = home_url('/qr-image.php?ticket=' . urlencode($ticket_id));
-        error_log("DRTR BIGLIETTO: QR code salvato, URL endpoint: " . $qr_image_url);
-        
-        // Return PHP endpoint URL - bypasses server restrictions
-        return $qr_image_url;
+        // Return direct API URL - works perfectly in emails
+        return $qr_url;
     }
     
     /**
