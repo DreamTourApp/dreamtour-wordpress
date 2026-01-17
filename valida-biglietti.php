@@ -28,11 +28,19 @@ if (isset($_POST['action']) && $_POST['action'] === 'validate_ticket') {
         exit;
     }
     
+    // Log for debugging
+    error_log("DRTR VALIDATOR: QR Data ricevuto: " . $qr_data);
+    
     // Parse QR code data
     $ticket_data = json_decode($qr_data, true);
     
     if (!$ticket_data || !isset($ticket_data['booking_id']) || !isset($ticket_data['seat'])) {
-        echo json_encode(['success' => false, 'message' => 'QR code non valido']);
+        error_log("DRTR VALIDATOR: Errore decodifica JSON o campi mancanti");
+        echo json_encode([
+            'success' => false, 
+            'message' => 'QR code non valido o formato errato',
+            'debug_data' => substr($qr_data, 0, 200) // First 200 chars for debugging
+        ]);
         exit;
     }
     
