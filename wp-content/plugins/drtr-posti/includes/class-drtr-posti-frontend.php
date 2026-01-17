@@ -164,6 +164,5 @@ class DRTR_Posti_Frontend {
         }
         
         // Add WC at the end
-        echo '<div class="bus-wc"><span>🚽 WC</span></div>';
     }
 }

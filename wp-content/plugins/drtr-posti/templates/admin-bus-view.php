@@ -265,16 +265,6 @@ foreach ($seats as $seat) {
         color: #664400;
     }
     
-    .bus-wc {
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-        background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
-        border: 2px solid #1976d2;
-        border-radius: 8px;
-        font-weight: bold;
-        color: #0d47a1;
-    }
     
     .seat {
         width: 50px;
@@ -656,9 +646,6 @@ foreach ($seats as $seat) {
                 
             <?php endfor; ?>
             
-            <div class="bus-wc">
-                <span>🚽 WC</span>
-            </div>
         </div>
         
         <!-- Legend -->
