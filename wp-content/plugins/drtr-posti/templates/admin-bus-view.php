@@ -66,18 +66,25 @@ if ($selected_tour > 0) {
     error_log("DRTR BUS VIEW: Total seats in database: " . count($all_seats));
     if (!empty($all_seats)) {
         foreach ($all_seats as $s) {
-            error_log("DRTR BUS VIEW: DB Seat - Tour ID: " . $s->tour_id . ", Booking: " . $s->booking_id . ", Seat: " . $s->seat_number . ", Passenger: " . $s->passenger_name);
+            error_log("DRTR BUS VIEW: DB Seat - Tour ID: " . $s->tour_id . " (type: " . gettype($s->tour_id) . "), Booking: " . $s->booking_id . ", Seat: " . $s->seat_number . ", Row: " . $s->row_number . ", Pos: " . $s->position);
         }
     }
     
+    // Try query with explicit type casting
     $seats = $wpdb->get_results($wpdb->prepare("
-        SELECT seat_number, passenger_name, booking_id, assigned_at, assigned_by, row_number, position
+        SELECT seat_number, passenger_name, booking_id, assigned_at, assigned_by, 
+               COALESCE(row_number, 0) as row_number, 
+               COALESCE(position, '') as position
         FROM $posti_table
         WHERE tour_id = %d
-        ORDER BY row_number, position
+        ORDER BY COALESCE(row_number, 99), COALESCE(position, 'Z')
     ", $selected_tour), ARRAY_A);
     
-    error_log("DRTR BUS VIEW: Selected tour ID: " . $selected_tour . " - Found " . count($seats) . " seats");
+    error_log("DRTR BUS VIEW: Query: " . $wpdb->last_query);
+    error_log("DRTR BUS VIEW: Selected tour ID: " . $selected_tour . " (type: " . gettype($selected_tour) . ") - Found " . count($seats) . " seats");
+    if ($wpdb->last_error) {
+        error_log("DRTR BUS VIEW: SQL Error: " . $wpdb->last_error);
+    }
     
     $stats['occupied'] = count($seats);
     $stats['available'] = $stats['total'] - $stats['occupied'];
