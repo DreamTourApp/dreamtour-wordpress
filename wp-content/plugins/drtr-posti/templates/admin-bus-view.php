@@ -70,14 +70,14 @@ if ($selected_tour > 0) {
         }
     }
     
-    // Try query with explicit type casting
+    // Try query with explicit type casting and backticks for reserved keywords
     $seats = $wpdb->get_results($wpdb->prepare("
         SELECT seat_number, passenger_name, booking_id, assigned_at, assigned_by, 
-               COALESCE(row_number, 0) as row_number, 
-               COALESCE(position, '') as position
+               COALESCE(`row_number`, 0) as row_number, 
+               COALESCE(`position`, '') as position
         FROM $posti_table
         WHERE tour_id = %d
-        ORDER BY COALESCE(row_number, 99), COALESCE(position, 'Z')
+        ORDER BY COALESCE(`row_number`, 99), COALESCE(`position`, 'Z')
     ", $selected_tour), ARRAY_A);
     
     error_log("DRTR BUS VIEW: Query: " . $wpdb->last_query);
