@@ -69,6 +69,7 @@ class DRTR_Posti {
         DRTR_Posti_DB::create_tables();
         $this->create_seat_selection_page();
         $this->create_debug_page();
+        $this->create_admin_bus_view_page();
         flush_rewrite_rules();
     }
     
@@ -120,7 +121,33 @@ class DRTR_Posti {
                 return $custom_template;
             }
         }
+        
+        if (is_page('visualizza-posti-pullman')) {
+            $custom_template = DRTR_POSTI_PLUGIN_DIR . 'templates/admin-bus-view.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        
         return $template;
+    }
+    
+    /**
+     * Create admin bus view page
+     */
+    private function create_admin_bus_view_page() {
+        $page = get_page_by_path('visualizza-posti-pullman');
+        
+        if (!$page) {
+            wp_insert_post(array(
+                'post_title'   => __('Visualizza Posti Pullman', 'drtr-posti'),
+                'post_name'    => 'visualizza-posti-pullman',
+                'post_content' => '<!-- Admin bus view managed by plugin -->',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+            ));
+        }
     }
 }
 
