@@ -17,14 +17,16 @@ get_header();
 global $wpdb;
 $tours_table = $wpdb->prefix . 'posts';
 
-// Get all published tours
+// Get all published tours (from drtr-gestione-tours plugin)
 $tours = $wpdb->get_results("
     SELECT ID, post_title
     FROM $tours_table
-    WHERE post_type = 'tour' 
+    WHERE post_type = 'drtr_tour' 
     AND post_status = 'publish'
     ORDER BY post_title ASC
 ");
+
+error_log("DRTR POSTI VIEW: Found " . count($tours) . " drtr_tour tours");
 
 error_log("DRTR POSTI VIEW: Found " . count($tours) . " tours");
 
