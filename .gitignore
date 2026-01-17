@@ -1,0 +1,45 @@
+# WordPress core files
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/xmlrpc.php
+/license.txt
+/readme.html
+
+# WordPress config
+wp-config.php
+
+# Debug and log files
+debug.log
+wp-content/debug.log
+*.log
+
+# Cache and temp files
+wp-content/cache/
+wp-content/uploads/cache/
+wp-content/litespeed/
+
+# Backup files
+*.sql
+*.sql.gz
+*.bak
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Composer
+/vendor/
+composer.lock
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
