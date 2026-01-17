@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Pagina Migrazione</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #003284;
+            margin-bottom: 20px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #003284;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .step h3 {
+            margin-top: 0;
+            color: #003284;
+        }
+        
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 50, 132, 0.3);
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Setup Pagina Migrazione Posti</h1>
+        
+        <div class="warning">
+            <strong>⚠️ Nota:</strong> La pagina di migrazione potrebbe non essere accessibile a causa di problemi con le rewrite rules di WordPress.
+        </div>
+        
+        <div class="step">
+            <h3>Opzione 1: Accesso Diretto al Template</h3>
+            <p>Accedi direttamente al file PHP della migrazione:</p>
+            <a href="wp-content/plugins/drtr-posti/templates/migrate-seats.php" class="btn">
+                🔄 Vai alla Migrazione
+            </a>
+        </div>
+        
+        <div class="step">
+            <h3>Opzione 2: Flush Permalink da WordPress Admin</h3>
+            <ol>
+                <li>Accedi a WordPress Admin: <code>https://dreamtourviaggi.it/wp-admin/</code></li>
+                <li>Vai su <strong>Impostazioni → Permalink</strong></li>
+                <li>Scorri in fondo e clicca <strong>"Salva modifiche"</strong> (non cambiare nulla)</li>
+                <li>Torna qui e prova: <a href="migra-posti-pullman/" class="btn">Pagina Migrazione</a></li>
+            </ol>
+        </div>
+        
+        <div class="step">
+            <h3>Opzione 3: Crea Pagina Manualmente</h3>
+            <ol>
+                <li>Vai su <strong>Pagine → Aggiungi pagina</strong> in WordPress Admin</li>
+                <li>Titolo: <code>Migrazione Posti Pullman</code></li>
+                <li>Slug URL: <code>migra-posti-pullman</code></li>
+                <li>Nel contenuto, inserisci questo shortcode: <code>[migration_page]</code></li>
+                <li>Pubblica la pagina</li>
+            </ol>
+        </div>
+        
+        <div class="step">
+            <h3>📋 Link Utili</h3>
+            <a href="visualizza-posti-pullman/" class="btn">🚌 Visualizza Posti</a>
+            <a href="debug-pullman/" class="btn">🔍 Debug Dati</a>
+            <a href="wp-admin/" class="btn">⚙️ WordPress Admin</a>
+        </div>
+        
+        <div class="warning">
+            <strong>💡 Suggerimento:</strong> Se nessuna opzione funziona, usa <strong>Opzione 1</strong> (accesso diretto al file PHP) che funziona sempre indipendentemente dalle rewrite rules di WordPress.
+        </div>
+    </div>
+</body>
+</html>

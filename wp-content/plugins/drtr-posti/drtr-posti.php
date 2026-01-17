@@ -70,6 +70,7 @@ class DRTR_Posti {
         $this->create_seat_selection_page();
         $this->create_debug_page();
         $this->create_admin_bus_view_page();
+        $this->create_migration_page();
         flush_rewrite_rules();
     }
     
@@ -136,6 +137,13 @@ class DRTR_Posti {
             }
         }
         
+        if (is_page('migra-posti-pullman')) {
+            $custom_template = DRTR_POSTI_PLUGIN_DIR . 'templates/migrate-seats.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        
         return $template;
     }
     
@@ -162,7 +170,25 @@ class DRTR_Posti {
         if (!$debug_page) {
             wp_insert_post(array(
                 'post_title'   => __('Debug Pullman', 'drtr-posti'),
-                'post_name'    => 'debug-pullman',
+     
+    
+    /**
+     * Create migration page for seat number conversion
+     */
+    private function create_migration_page() {
+        $page = get_page_by_path('migra-posti-pullman');
+        
+        if (!$page) {
+            wp_insert_post(array(
+                'post_title'   => __('Migrazione Posti Pullman', 'drtr-posti'),
+                'post_name'    => 'migra-posti-pullman',
+                'post_content' => '<!-- Migration page managed by plugin -->',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+            ));
+        }
+    }           'post_name'    => 'debug-pullman',
                 'post_content' => '<!-- Debug page managed by plugin -->',
                 'post_status'  => 'publish',
                 'post_type'    => 'page',

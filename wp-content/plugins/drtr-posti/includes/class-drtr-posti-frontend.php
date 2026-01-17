@@ -126,33 +126,44 @@ class DRTR_Posti_Frontend {
     }
     
     private function render_bus_seats() {
+        $seat_number = 1;
+        
+        // Layout: 13 rows, 4 seats per row (last row 5 seats) = 53 total
         for ($row = 1; $row <= 13; $row++) {
             echo '<div class="seat-row" data-row="' . $row . '">';
             
-            // Row number
+            // Row number label
             echo '<span class="row-number">' . $row . '</span>';
             
-            // Seats A and B (left side)
+            // Left side seats (2 seats)
             echo '<div class="seat-group left">';
-            echo '<div class="seat" data-seat="' . $row . 'A" data-row="' . $row . '" data-position="A"><span>' . $row . 'A</span></div>';
-            echo '<div class="seat" data-seat="' . $row . 'B" data-row="' . $row . '" data-position="B"><span>' . $row . 'B</span></div>';
+            for ($i = 0; $i < 2; $i++) {
+                echo '<div class="seat" data-seat="' . $seat_number . '" data-row="' . $row . '"><span>' . $seat_number . '</span></div>';
+                $seat_number++;
+            }
             echo '</div>';
             
             // Aisle
             echo '<div class="aisle"></div>';
             
-            // Seats C and D (right side)
+            // Right side seats (2 seats normally, 3 on last row)
             echo '<div class="seat-group right">';
-            echo '<div class="seat" data-seat="' . $row . 'C" data-row="' . $row . '" data-position="C"><span>' . $row . 'C</span></div>';
-            echo '<div class="seat" data-seat="' . $row . 'D" data-row="' . $row . '" data-position="D"><span>' . $row . 'D</span></div>';
-            
-            // Last row has 5 seats
-            if ($row == 13) {
-                echo '<div class="seat" data-seat="' . $row . 'E" data-row="' . $row . '" data-position="E"><span>' . $row . 'E</span></div>';
+            $seats_right = ($row == 13) ? 3 : 2;
+            for ($i = 0; $i < $seats_right; $i++) {
+                echo '<div class="seat" data-seat="' . $seat_number . '" data-row="' . $row . '"><span>' . $seat_number . '</span></div>';
+                $seat_number++;
             }
+            echo '</div>';
             
             echo '</div>';
-            echo '</div>';
+            
+            // Add door indicator after row 6
+            if ($row == 6) {
+                echo '<div class="bus-door"><span>🚪 PORTA / DOOR</span></div>';
+            }
         }
+        
+        // Add WC at the end
+        echo '<div class="bus-wc"><span>🚽 WC</span></div>';
     }
 }

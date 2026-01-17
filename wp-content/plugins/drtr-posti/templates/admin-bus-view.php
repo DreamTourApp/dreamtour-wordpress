@@ -91,28 +91,31 @@ if ($selected_tour > 0) {
     $stats['available'] = $stats['total'] - $stats['occupied'];
 }
 
-// Create seat map (13 rows, 4 seats per row, last row 5 seats)
+// Create seat map (13 rows, 4 seats per row, last row 5 seats) - Numeric seats 1-53
 $seat_map = [];
+$seat_counter = 1;
+
 for ($row = 1; $row <= 13; $row++) {
     $seats_in_row = ($row == 13) ? 5 : 4;
     for ($pos = 1; $pos <= $seats_in_row; $pos++) {
-        $seat_number = $row . chr(64 + $pos); // 1A, 1B, 1C, 1D, etc.
-        $seat_map[$seat_number] = [
+        $seat_map[$seat_counter] = [
             'row' => $row,
             'position' => $pos,
             'occupied' => false,
             'passenger' => '',
             'booking_id' => 0
         ];
+        $seat_counter++;
     }
 }
 
 // Mark occupied seats
 foreach ($seats as $seat) {
-    if (isset($seat_map[$seat['seat_number']])) {
-        $seat_map[$seat['seat_number']]['occupied'] = true;
-        $seat_map[$seat['seat_number']]['passenger'] = $seat['passenger_name'];
-        $seat_map[$seat['seat_number']]['booking_id'] = $seat['booking_id'];
+    $seat_id = intval($seat['seat_number']);
+    if (isset($seat_map[$seat_id])) {
+        $seat_map[$seat_id]['occupied'] = true;
+        $seat_map[$seat_id]['passenger'] = $seat['passenger_name'];
+        $seat_map[$seat_id]['booking_id'] = $seat['booking_id'];
     }
 }
 ?>
@@ -225,18 +228,52 @@ foreach ($seats as $seat) {
     .bus-row {
         display: flex;
         justify-content: center;
-        gap: 60px;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 15px;
     }
     
     .bus-row.last {
-        justify-content: center;
-        gap: 20px;
+        gap: 10px;
+    }
+    
+    .row-label {
+        width: 30px;
+        text-align: center;
+        font-weight: 600;
+        color: #003284;
+        font-size: 14px;
+    }
+    
+    .aisle-spacer {
+        width: 40px;
     }
     
     .seat-group {
         display: flex;
         gap: 10px;
+    }
+    
+    .bus-door {
+        text-align: center;
+        padding: 15px;
+        margin: 10px 0;
+        background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+        border: 2px dashed #cc9900;
+        border-radius: 8px;
+        font-weight: bold;
+        color: #664400;
+    }
+    
+    .bus-wc {
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px solid #1976d2;
+        border-radius: 8px;
+        font-weight: bold;
+        color: #0d47a1;
     }
     
     .seat {
@@ -560,59 +597,68 @@ foreach ($seats as $seat) {
         <div class="bus-layout">
             <div class="bus-front">⬆ AUTISTA ⬆</div>
             
-            <?php for ($row = 1; $row <= 13; $row++): ?>
+            <?php 
+            $seat_counter = 1;
+            for ($row = 1; $row <= 13; $row++): 
+                $seats_in_row = ($row == 13) ? 5 : 4;
+            ?>
                 <div class="bus-row <?php echo $row == 13 ? 'last' : ''; ?>">
-                    <?php if ($row == 13): ?>
-                        <!-- Last row: 5 seats -->
-                        <?php for ($pos = 1; $pos <= 5; $pos++):
-                            $seat_num = $row . chr(64 + $pos);
-                            $seat_info = $seat_map[$seat_num];
+                    <span class="row-label"><?php echo $row; ?></span>
+                    
+                    <!-- Left side: 2 seats -->
+                    <div class="seat-group">
+                        <?php for ($i = 0; $i < 2; $i++):
+                            $seat_info = $seat_map[$seat_counter];
                             $status = $seat_info['occupied'] ? 'occupied' : 'available';
                         ?>
                             <div class="seat <?php echo $status; ?>" 
                                  title="<?php echo $seat_info['occupied'] ? esc_attr($seat_info['passenger']) : 'Disponibile'; ?>">
-                                <span class="seat-number"><?php echo $seat_num; ?></span>
+                                <span class="seat-number"><?php echo $seat_counter; ?></span>
                                 <?php if ($seat_info['occupied']): ?>
                                     <span class="passenger-name"><?php echo esc_html(substr($seat_info['passenger'], 0, 12)); ?></span>
                                 <?php endif; ?>
                             </div>
-                        <?php endfor; ?>
-                    <?php else: ?>
-                        <!-- Regular rows: 2 seats - aisle - 2 seats -->
-                        <div class="seat-group">
-                            <?php for ($pos = 1; $pos <= 2; $pos++):
-                                $seat_num = $row . chr(64 + $pos);
-                                $seat_info = $seat_map[$seat_num];
-                                $status = $seat_info['occupied'] ? 'occupied' : 'available';
-                            ?>
-                                <div class="seat <?php echo $status; ?>"
-                                     title="<?php echo $seat_info['occupied'] ? esc_attr($seat_info['passenger']) : 'Disponibile'; ?>">
-                                    <span class="seat-number"><?php echo $seat_num; ?></span>
-                                    <?php if ($seat_info['occupied']): ?>
-                                        <span class="passenger-name"><?php echo esc_html(substr($seat_info['passenger'], 0, 12)); ?></span>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endfor; ?>
-                        </div>
-                        
-                        <div class="seat-group">
-                            <?php for ($pos = 3; $pos <= 4; $pos++):
-                                $seat_num = $row . chr(64 + $pos);
-                                $seat_info = $seat_map[$seat_num];
-                                $status = $seat_info['occupied'] ? 'occupied' : 'available';
-                            ?>
-                                <div class="seat <?php echo $status; ?>"
-                                     title="<?php echo $seat_info['occupied'] ? esc_attr($seat_info['passenger']) : 'Disponibile'; ?>">
-                                    <span class="seat-number"><?php echo $seat_num; ?></span>
-                                    <?php if ($seat_info['occupied']): ?>
-                                        <span class="passenger-name"><?php echo esc_html(substr($seat_info['passenger'], 0, 12)); ?></span>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endfor; ?>
-                        </div>
-                    <?php endif; ?>
+                        <?php 
+                            $seat_counter++;
+                        endfor; 
+                        ?>
+                    </div>
+                    
+                    <div class="aisle-spacer"></div>
+                    
+                    <!-- Right side: 2 seats (3 on last row) -->
+                    <div class="seat-group">
+                        <?php 
+                        $right_seats = ($row == 13) ? 3 : 2;
+                        for ($i = 0; $i < $right_seats; $i++):
+                            $seat_info = $seat_map[$seat_counter];
+                            $status = $seat_info['occupied'] ? 'occupied' : 'available';
+                        ?>
+                            <div class="seat <?php echo $status; ?>"
+                                 title="<?php echo $seat_info['occupied'] ? esc_attr($seat_info['passenger']) : 'Disponibile'; ?>">
+                                <span class="seat-number"><?php echo $seat_counter; ?></span>
+                                <?php if ($seat_info['occupied']): ?>
+                                    <span class="passenger-name"><?php echo esc_html(substr($seat_info['passenger'], 0, 12)); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        <?php 
+                            $seat_counter++;
+                        endfor; 
+                        ?>
+                    </div>
                 </div>
+                
+                <?php if ($row == 6): ?>
+                    <div class="bus-door">
+                        <span>🚪 PORTA / DOOR</span>
+                    </div>
+                <?php endif; ?>
+                
             <?php endfor; ?>
+            
+            <div class="bus-wc">
+                <span>🚽 WC</span>
+            </div>
         </div>
         
         <!-- Legend -->

@@ -1,0 +1,2 @@
+[17-Jan-2026 01:19:59 UTC] PHP Warning:  mysqli_real_connect(): (HY000/1045): Access denied for user 'u802332889_3wVLe'@'localhost' (using password: YES) in /Users/aynix/Documents/GitHub/dreamtour-wordpress/wp-includes/class-wpdb.php on line 1994
+[17-Jan-2026 01:22:36 UTC] PHP Warning:  mysqli_real_connect(): (HY000/1045): Access denied for user 'u802332889_3wVLe'@'localhost' (using password: YES) in /Users/aynix/Documents/GitHub/dreamtour-wordpress/wp-includes/class-wpdb.php on line 1994
