@@ -317,21 +317,21 @@ if (isset($_GET['test_booking'])) {
 
 // Test 5: Google API Test
 echo '<div class="section">';
-echo '<h2>🌐 Test 5: Google Charts API</h2>';
+echo '<h2>🌐 Test 5: QR Server API (api.qrserver.com)</h2>';
 
 $test_data = 'DreamTour Test QR Code - ' . date('Y-m-d H:i:s');
-$google_url = 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=' . urlencode($test_data) . '&choe=UTF-8';
+$qr_url = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . urlencode($test_data);
 
-echo '<p><strong>URL Google API:</strong></p>';
-echo '<pre>' . esc_html($google_url) . '</pre>';
+echo '<p><strong>URL QR Server API:</strong></p>';
+echo '<pre>' . esc_html($qr_url) . '</pre>';
 
 echo '<div class="qr-preview">';
-echo '<h4>QR Code Diretto da Google:</h4>';
-echo '<img src="' . esc_url($google_url) . '" alt="Google QR Test">';
+echo '<h4>QR Code da QR Server:</h4>';
+echo '<img src="' . esc_url($qr_url) . '" alt="QR Server Test">';
 echo '</div>';
 
 // Test download
-$response = wp_remote_get($google_url, ['timeout' => 15, 'sslverify' => false]);
+$response = wp_remote_get($qr_url, ['timeout' => 15, 'sslverify' => false]);
 
 if (is_wp_error($response)) {
     echo '<div class="test-result error">❌ Errore download: ' . $response->get_error_message() . '</div>';

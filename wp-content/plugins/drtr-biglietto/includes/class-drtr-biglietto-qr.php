@@ -71,12 +71,13 @@ class DRTR_Biglietto_QR {
     }
     
     /**
-     * Generate QR code using Google Charts API
+     * Generate QR code using QR Server API (Google Charts deprecated)
      */
     private static function generate_qr_with_google_api($data) {
         $encoded_data = urlencode($data);
-        $size = '300x300';
-        return "https://chart.googleapis.com/chart?chs={$size}&cht=qr&chl={$encoded_data}&choe=UTF-8";
+        $size = '300'; // Size in pixels
+        // Using api.qrserver.com - free and reliable alternative
+        return "https://api.qrserver.com/v1/create-qr-code/?size={$size}x{$size}&data={$encoded_data}";
     }
     
     /**
