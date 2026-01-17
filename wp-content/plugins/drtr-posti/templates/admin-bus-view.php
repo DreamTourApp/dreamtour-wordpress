@@ -70,15 +70,16 @@ if ($selected_tour > 0) {
         }
     }
     
-    // Try query with explicit type casting and backticks for reserved keywords
-    $seats = $wpdb->get_results($wpdb->prepare("
-        SELECT seat_number, passenger_name, booking_id, assigned_at, assigned_by, 
-               COALESCE(`row_number`, 0) as row_number, 
-               COALESCE(`position`, '') as position
-        FROM $posti_table
+    // Simplified query - avoid reserved keywords in SELECT
+    $seats_query = $wpdb->prepare("
+        SELECT seat_number, passenger_name, booking_id, assigned_at, assigned_by
+        FROM {$wpdb->prefix}drtr_posti
         WHERE tour_id = %d
-        ORDER BY COALESCE(`row_number`, 99), COALESCE(`position`, 'Z')
-    ", $selected_tour), ARRAY_A);
+        ORDER BY id
+    ", $selected_tour);
+    
+    error_log("DRTR BUS VIEW: Query to execute: " . $seats_query);
+    $seats = $wpdb->get_results($seats_query, ARRAY_A);
     
     error_log("DRTR BUS VIEW: Query: " . $wpdb->last_query);
     error_log("DRTR BUS VIEW: Selected tour ID: " . $selected_tour . " (type: " . gettype($selected_tour) . ") - Found " . count($seats) . " seats");
