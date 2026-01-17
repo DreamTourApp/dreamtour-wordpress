@@ -116,18 +116,20 @@ class DRTR_Biglietto_QR {
             wp_mkdir_p($ticket_dir);
             
             // Create .htaccess to allow access to images
-            $htaccess_content = "# Allow access to QR code images\n";
+            $htaccess_content = "# Allow access to QR code images and ticket files\n";
             $htaccess_content .= "<IfModule mod_rewrite.c>\n";
             $htaccess_content .= "    RewriteEngine Off\n";
             $htaccess_content .= "</IfModule>\n\n";
-            $htaccess_content .= "# Allow direct access to PNG files\n";
-            $htaccess_content .= "<FilesMatch \"\\.(png|jpg|jpeg|gif)$\">\n";
+            $htaccess_content .= "# Allow direct access to all files\n";
+            $htaccess_content .= "<FilesMatch \".*\">\n";
             $htaccess_content .= "    Order allow,deny\n";
             $htaccess_content .= "    Allow from all\n";
             $htaccess_content .= "    Require all granted\n";
             $htaccess_content .= "</FilesMatch>\n\n";
             $htaccess_content .= "# Prevent directory listing\n";
-            $htaccess_content .= "Options -Indexes\n";
+            $htaccess_content .= "Options -Indexes\n\n";
+            $htaccess_content .= "# Allow from all\n";
+            $htaccess_content .= "Satisfy Any\n";
             
             file_put_contents($ticket_dir . '/.htaccess', $htaccess_content);
             error_log("DRTR BIGLIETTO: .htaccess creato per permettere accesso alle immagini");

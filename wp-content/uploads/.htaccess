@@ -1,0 +1,9 @@
+# WordPress uploads directory - allow all files
+<Files *>
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Files>
+
+# Allow from all
+Satisfy Any

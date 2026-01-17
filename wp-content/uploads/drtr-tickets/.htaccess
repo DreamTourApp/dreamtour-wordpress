@@ -1,10 +1,10 @@
-# Allow access to QR code images
+# Allow access to QR code images and ticket files
 <IfModule mod_rewrite.c>
     RewriteEngine Off
 </IfModule>
 
-# Allow direct access to PNG files
-<FilesMatch "\.(png|jpg|jpeg|gif)$">
+# Allow direct access to all files
+<FilesMatch ".*">
     Order allow,deny
     Allow from all
     Require all granted
@@ -12,3 +12,6 @@
 
 # Prevent directory listing
 Options -Indexes
+
+# Allow from all
+Satisfy Any
