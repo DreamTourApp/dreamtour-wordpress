@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso Migrazione Posti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #003284;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #003284;
+        }
+        
+        .option h3 {
+            color: #003284;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 50, 132, 0.3);
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        code {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔄 Migrazione Posti Pullman</h1>
+        <p class="subtitle">Scegli come accedere alla pagina di migrazione</p>
+        
+        <div class="option">
+            <h3>📂 Opzione 1: Accesso Diretto Plugin (CONSIGLIATO)</h3>
+            <p>Accedi direttamente al file del plugin, bypassa WordPress completamente:</p>
+            <a href="wp-content/plugins/drtr-posti/templates/migrate-seats.php" class="btn">
+                🚀 Vai alla Migrazione
+            </a>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Devi essere loggato come amministratore WordPress prima di procedere.
+        </div>
+        
+        <div class="option">
+            <h3>🔧 Opzione 2: Via WordPress Admin</h3>
+            <p>Metodo alternativo tramite il pannello di amministrazione:</p>
+            <ol style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
+                <li>Vai su <code>Impostazioni → Permalink</code></li>
+                <li>Clicca "Salva modifiche" in fondo alla pagina</li>
+                <li>Poi accedi a: <code>/migra-posti-pullman/</code></li>
+            </ol>
+            <a href="wp-admin/options-permalink.php" class="btn">⚙️ Vai ai Permalink</a>
+        </div>
+        
+        <div class="option">
+            <h3>📋 Link Rapidi</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                <a href="visualizza-posti-pullman/" class="btn" style="font-size: 14px; padding: 10px 20px;">
+                    🚌 Visualizza Posti
+                </a>
+                <a href="debug-pullman/" class="btn" style="font-size: 14px; padding: 10px 20px;">
+                    🔍 Debug
+                </a>
+                <a href="wp-admin/" class="btn" style="font-size: 14px; padding: 10px 20px;">
+                    🏠 Admin
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>💡 <strong>Suggerimento:</strong> Usa l'Opzione 1 per accesso immediato</p>
+        </div>
+    </div>
+</body>
+</html>
