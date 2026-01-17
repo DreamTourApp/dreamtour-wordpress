@@ -3,7 +3,7 @@
  * Plugin Name: DRTR Gestione Posti
  * Plugin URI: https://dreamtourviaggi.it
  * Description: Sistema di gestione posti nell'autobus per tour DreamTour
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: DreamTour Team
  * Text Domain: drtr-posti
  * Domain Path: /languages
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('DRTR_POSTI_VERSION', '1.0.0');
+define('DRTR_POSTI_VERSION', '2.0.0');
 define('DRTR_POSTI_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DRTR_POSTI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
