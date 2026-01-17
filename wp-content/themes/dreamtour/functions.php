@@ -308,7 +308,9 @@ add_filter('body_class', 'dreamtour_body_classes');
 
 /**
  * Custom Post Type: Tours
+ * DISABLED - Now using drtr_tour from drtr-gestione-tours plugin
  */
+/*
 function dreamtour_register_tour_post_type() {
     $labels = array(
         'name'               => _x('Tours', 'post type general name', 'dreamtour'),
@@ -347,10 +349,13 @@ function dreamtour_register_tour_post_type() {
     register_post_type('tour', $args);
 }
 add_action('init', 'dreamtour_register_tour_post_type');
+*/
 
 /**
  * Taxonomía: Destinos
+ * DISABLED - Using drtr_destination from drtr-gestione-tours plugin
  */
+/*
 function dreamtour_register_destination_taxonomy() {
     $labels = array(
         'name'              => _x('Destinos', 'taxonomy general name', 'dreamtour'),
@@ -377,10 +382,13 @@ function dreamtour_register_destination_taxonomy() {
     register_taxonomy('destination', array('tour'), $args);
 }
 add_action('init', 'dreamtour_register_destination_taxonomy');
+*/
 
 /**
  * Taxonomía: Tipo de Viaje
+ * DISABLED - Using drtr_tour_type from drtr-gestione-tours plugin
  */
+/*
 function dreamtour_register_tour_type_taxonomy() {
     $labels = array(
         'name'              => _x('Tipos de Viaje', 'taxonomy general name', 'dreamtour'),
@@ -407,6 +415,7 @@ function dreamtour_register_tour_type_taxonomy() {
     register_taxonomy('tour_type', array('tour'), $args);
 }
 add_action('init', 'dreamtour_register_tour_type_taxonomy');
+*/
 
 /**
  * Función auxiliar para obtener precio del tour
