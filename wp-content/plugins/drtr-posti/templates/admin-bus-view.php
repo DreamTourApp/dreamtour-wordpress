@@ -331,6 +331,143 @@ foreach ($seats as $seat) {
         color: #003284;
         margin-bottom: 10px;
     }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .bus-container {
+            margin: 20px 10px;
+            padding: 15px;
+        }
+        
+        .page-header {
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .page-header h1 {
+            font-size: 24px;
+        }
+        
+        .tour-selector {
+            width: 100%;
+            flex-direction: column;
+        }
+        
+        .tour-selector select {
+            min-width: 100%;
+            width: 100%;
+        }
+        
+        .tour-selector button {
+            width: 100%;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .stat-card {
+            padding: 12px;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+        }
+        
+        .bus-layout {
+            padding: 20px 10px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        .bus-row {
+            gap: 40px;
+        }
+        
+        .seat {
+            width: 40px;
+            height: 50px;
+        }
+        
+        .seat-number {
+            font-size: 12px;
+        }
+        
+        .passenger-name {
+            font-size: 8px;
+        }
+        
+        .legend {
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+        }
+        
+        .legend-box {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .passengers-list {
+            padding: 15px;
+            overflow-x: auto;
+        }
+        
+        .passengers-table {
+            font-size: 13px;
+        }
+        
+        .passengers-table th,
+        .passengers-table td {
+            padding: 8px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .page-header h1 {
+            font-size: 20px;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+        }
+        
+        .bus-row {
+            gap: 30px;
+        }
+        
+        .seat {
+            width: 35px;
+            height: 45px;
+        }
+        
+        .seat-number {
+            font-size: 11px;
+        }
+        
+        .passenger-name {
+            font-size: 7px;
+        }
+        
+        .passengers-table {
+            font-size: 12px;
+        }
+        
+        .passengers-table th,
+        .passengers-table td {
+            padding: 6px;
+        }
+    }
 </style>
 
 <div class="bus-container">
