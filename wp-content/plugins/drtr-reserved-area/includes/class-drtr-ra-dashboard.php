@@ -225,6 +225,18 @@ class DRTR_RA_Dashboard {
                             </a>
                         </div>
                         
+                        <!-- Card Validazione Biglietti - Solo Admin -->
+                        <div class="drtr-ra-card drtr-ra-card-highlight">
+                            <div class="drtr-ra-card-icon drtr-ra-icon-primary">
+                                <i class="dashicons dashicons-tickets-alt"></i>
+                            </div>
+                            <h3><?php _e('Validazione Biglietti', 'drtr-reserved-area'); ?></h3>
+                            <p><?php _e('Scansiona i QR code dei biglietti alla partenza', 'drtr-reserved-area'); ?></p>
+                            <a href="<?php echo esc_url(home_url('/valida-biglietti.php')); ?>" class="drtr-ra-btn drtr-ra-btn-primary">
+                                📱 <?php _e('Scanner Biglietti', 'drtr-reserved-area'); ?>
+                            </a>
+                        </div>
+                        
                     <?php else : ?>
                         
                         <!-- Card para usuarios no-admin -->
