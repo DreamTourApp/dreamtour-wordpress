@@ -19,11 +19,12 @@ $tours_table = $wpdb->prefix . 'posts';
 
 // Get all published tours (from drtr-gestione-tours plugin)
 $tours = $wpdb->get_results("
-    SELECT ID, post_title
-    FROM $tours_table
-    WHERE post_type = 'drtr_tour' 
-    AND post_status = 'publish'
-    ORDER BY post_title ASC
+    SELECT p.ID, p.post_title, pm.meta_value as start_date
+    FROM $tours_table p
+    LEFT JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id AND pm.meta_key = '_drtr_start_date'
+    WHERE p.post_type = 'drtr_tour' 
+    AND p.post_status = 'publish'
+    ORDER BY p.post_title ASC
 ");
 
 error_log("DRTR POSTI VIEW: Found " . count($tours) . " drtr_tour tours");
@@ -32,6 +33,26 @@ error_log("DRTR POSTI VIEW: Found " . count($tours) . " tours");
 
 // Get selected tour
 $selected_tour = isset($_GET['tour_id']) ? intval($_GET['tour_id']) : 0;
+$selected_tour_title = '';
+$selected_tour_date = '';
+
+if ($selected_tour > 0) {
+    $tour_post = get_post($selected_tour);
+    if ($tour_post) {
+        $selected_tour_title = $tour_post->post_title;
+        $start_date = get_post_meta($selected_tour, '_drtr_start_date', true);
+        if ($start_date) {
+            // Convert date to d/m/Y format without time
+            $date_obj = DateTime::createFromFormat('Y-m-d', $start_date);
+            if (!$date_obj) {
+                $date_obj = DateTime::createFromFormat('Y-m-d H:i:s', $start_date);
+            }
+            if ($date_obj) {
+                $selected_tour_date = $date_obj->format('d/m/Y');
+            }
+        }
+    }
+}
 
 // Get seats for selected tour
 $seats = [];
@@ -323,7 +344,18 @@ foreach ($seats as $seat) {
                 <option value="">-- Seleziona un tour --</option>
                 <?php foreach ($tours as $tour): ?>
                     <option value="<?php echo $tour->ID; ?>" <?php selected($selected_tour, $tour->ID); ?>>
-                        <?php echo esc_html($tour->post_title); ?>
+                        <?php 
+                        echo esc_html($tour->post_title);
+                        if (!empty($tour->start_date)) {
+                            $date_obj = DateTime::createFromFormat('Y-m-d', $tour->start_date);
+                            if (!$date_obj) {
+                                $date_obj = DateTime::createFromFormat('Y-m-d H:i:s', $tour->start_date);
+                            }
+                            if ($date_obj) {
+                                echo ' - ' . $date_obj->format('d/m/Y');
+                            }
+                        }
+                        ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -332,6 +364,18 @@ foreach ($seats as $seat) {
     </div>
     
     <?php if ($selected_tour > 0): ?>
+        
+        <!-- Tour Info -->
+        <?php if ($selected_tour_title): ?>
+            <div style="text-align: center; margin: 20px 0; padding: 15px; background: #f0f7ff; border-left: 4px solid #003284; border-radius: 4px;">
+                <h2 style="margin: 0; color: #003284; font-size: 24px;">
+                    <?php echo esc_html($selected_tour_title); ?>
+                    <?php if ($selected_tour_date): ?>
+                        <span style="color: #1aabe7; font-weight: 600;"> - <?php echo esc_html($selected_tour_date); ?></span>
+                    <?php endif; ?>
+                </h2>
+            </div>
+        <?php endif; ?>
         
         <!-- Statistics -->
         <div class="stats-grid">
