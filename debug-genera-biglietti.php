@@ -169,8 +169,18 @@ if (class_exists('DRTR_Biglietto_QR')) {
         
         echo '<h3>Risultato:</h3>';
         
-        // Check if it's a base64 data URI
-        if (strpos($qr_result, 'data:image/png;base64,') === 0) {
+        // Check if it's a URL or base64
+        if (strpos($qr_result, 'http') === 0) {
+            echo '<div class="test-result success">✅ Formato: URL locale (migliore per email)</div>';
+            echo '<p><strong>URL:</strong> <code>' . esc_html($qr_result) . '</code></p>';
+            
+            echo '<div class="qr-preview">';
+            echo '<h4>Anteprima QR Code:</h4>';
+            echo '<img src="' . esc_url($qr_result) . '" alt="QR Code Test">';
+            echo '<p style="text-align: center; margin-top: 10px; font-size: 12px; color: #666;">Posto ' . $test_seat . '</p>';
+            echo '</div>';
+            
+        } else if (strpos($qr_result, 'data:image/png;base64,') === 0) {
             echo '<div class="test-result success">✅ Formato: Base64 Data URI (corretto per email)</div>';
             echo '<p><strong>Lunghezza base64:</strong> ' . strlen($qr_result) . ' caratteri</p>';
             

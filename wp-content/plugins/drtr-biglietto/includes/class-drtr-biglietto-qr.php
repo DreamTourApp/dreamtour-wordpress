@@ -84,8 +84,7 @@ class DRTR_Biglietto_QR {
      * Save QR code image locally
      */
     private static function save_qr_code_locally($qr_url, $ticket_id) {
-        // For emails, use base64 embedded image instead of external URL
-        // This ensures QR code is always visible regardless of email client
+        // Download and save QR code locally, then return local URL for email
         
         error_log("DRTR BIGLIETTO: Scarico QR code da: " . $qr_url);
         
@@ -97,6 +96,7 @@ class DRTR_Biglietto_QR {
         
         if (is_wp_error($response)) {
             error_log("DRTR BIGLIETTO: Errore download QR: " . $response->get_error_message());
+            // Fallback to direct API URL
             return $qr_url;
         }
         
@@ -104,16 +104,11 @@ class DRTR_Biglietto_QR {
         
         if (empty($image_data) || strlen($image_data) < 100) {
             error_log("DRTR BIGLIETTO: QR code vuoto o corrotto");
+            // Fallback to direct API URL
             return $qr_url;
         }
         
-        // Convert to base64 for email embedding
-        $base64 = base64_encode($image_data);
-        $data_uri = 'data:image/png;base64,' . $base64;
-        
-        error_log("DRTR BIGLIETTO: QR code convertito in base64 (" . strlen($base64) . " bytes)");
-        
-        // Also save locally as backup
+        // Save locally
         $upload_dir = wp_upload_dir();
         $ticket_dir = $upload_dir['basedir'] . '/drtr-tickets';
         
@@ -124,13 +119,18 @@ class DRTR_Biglietto_QR {
         $filename = 'qr-' . $ticket_id . '.png';
         $filepath = $ticket_dir . '/' . $filename;
         
-        file_put_contents($filepath, $image_data);
+        $saved = file_put_contents($filepath, $image_data);
+        
+        if ($saved === false) {
+            error_log("DRTR BIGLIETTO: Errore salvataggio file");
+            return $qr_url;
+        }
         
         $local_url = $upload_dir['baseurl'] . '/drtr-tickets/' . $filename;
-        error_log("DRTR BIGLIETTO: QR code salvato anche localmente: " . $local_url);
+        error_log("DRTR BIGLIETTO: QR code salvato localmente: " . $local_url);
         
-        // Return base64 data URI for email
-        return $data_uri;
+        // Return local URL - works better in emails than base64
+        return $local_url;
     }
     
     /**
