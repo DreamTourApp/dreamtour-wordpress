@@ -170,7 +170,14 @@ class DRTR_Posti {
         if (!$debug_page) {
             wp_insert_post(array(
                 'post_title'   => __('Debug Pullman', 'drtr-posti'),
-     
+                'post_name'    => 'debug-pullman',
+                'post_content' => '<!-- Debug page managed by plugin -->',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_author'  => 1,
+            ));
+        }
+    }
     
     /**
      * Create migration page for seat number conversion
