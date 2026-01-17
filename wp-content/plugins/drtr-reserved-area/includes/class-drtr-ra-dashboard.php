@@ -213,6 +213,18 @@ class DRTR_RA_Dashboard {
                             </a>
                         </div>
                         
+                        <!-- Card Visualizza Posti Pullman - Solo Admin -->
+                        <div class="drtr-ra-card drtr-ra-card-highlight">
+                            <div class="drtr-ra-card-icon drtr-ra-icon-primary">
+                                <i class="dashicons dashicons-admin-multisite"></i>
+                            </div>
+                            <h3><?php _e('Posti Pullman', 'drtr-reserved-area'); ?></h3>
+                            <p><?php _e('Visualizza i posti occupati e disponibili nel pullman', 'drtr-reserved-area'); ?></p>
+                            <a href="<?php echo esc_url(home_url('/visualizza-posti-pullman')); ?>" class="drtr-ra-btn drtr-ra-btn-primary">
+                                🚌 <?php _e('Visualizza Posti', 'drtr-reserved-area'); ?>
+                            </a>
+                        </div>
+                        
                     <?php else : ?>
                         
                         <!-- Card para usuarios no-admin -->
