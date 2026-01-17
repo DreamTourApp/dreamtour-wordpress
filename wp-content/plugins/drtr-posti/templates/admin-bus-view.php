@@ -40,7 +40,10 @@ if ($selected_tour > 0) {
         $start_date = get_post_meta($selected_tour, '_drtr_start_date', true);
         if ($start_date) {
             // Convert date to d/m/Y format without time
-            $date_obj = DateTime::createFromFormat('Y-m-d', $start_date);
+            $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $start_date); // ISO 8601: 2026-01-17T06:30
+            if (!$date_obj) {
+                $date_obj = DateTime::createFromFormat('Y-m-d', $start_date);
+            }
             if (!$date_obj) {
                 $date_obj = DateTime::createFromFormat('Y-m-d H:i:s', $start_date);
             }
@@ -478,22 +481,20 @@ foreach ($seats as $seat) {
                 <option value="">-- Seleziona un tour --</option>
                 <?php foreach ($tours as $tour): 
                     $start_date = get_post_meta($tour->ID, '_drtr_start_date', true);
-                    error_log("DRTR BUS VIEW: Tour ID " . $tour->ID . " - Start date meta: " . $start_date);
                     
                     $date_formatted = '';
                     if (!empty($start_date)) {
-                        $date_obj = DateTime::createFromFormat('Y-m-d', $start_date);
+                        // Try different date formats
+                        $date_obj = DateTime::createFromFormat('Y-m-d\TH:i', $start_date); // ISO 8601: 2026-01-17T06:30
+                        if (!$date_obj) {
+                            $date_obj = DateTime::createFromFormat('Y-m-d', $start_date);
+                        }
                         if (!$date_obj) {
                             $date_obj = DateTime::createFromFormat('Y-m-d H:i:s', $start_date);
                         }
                         if ($date_obj) {
                             $date_formatted = ' - ' . $date_obj->format('d/m/Y');
-                            error_log("DRTR BUS VIEW: Date formatted: " . $date_formatted);
-                        } else {
-                            error_log("DRTR BUS VIEW: Failed to parse date: " . $start_date);
                         }
-                    } else {
-                        error_log("DRTR BUS VIEW: No start_date found for tour " . $tour->ID);
                     }
                 ?>
                     <option value="<?php echo $tour->ID; ?>" <?php selected($selected_tour, $tour->ID); ?>>
