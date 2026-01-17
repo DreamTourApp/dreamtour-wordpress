@@ -195,13 +195,6 @@ class DRTR_Posti {
                 'post_author'  => 1,
             ));
         }
-    }           'post_name'    => 'debug-pullman',
-                'post_content' => '<!-- Debug page managed by plugin -->',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
-                'post_author'  => 1,
-            ));
-        }
     }
 }
 
