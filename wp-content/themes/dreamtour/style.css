@@ -900,23 +900,69 @@ body.menu-open {
     position: relative;
   }
   
-  .nav-menu {
+  /* Mobile Menu Overlay */
+  .mobile-menu-overlay {
     display: none;
     position: fixed;
-    top: 70px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-menu-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  /* Mobile Menu Modal */
+  .nav-menu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
     background: var(--color-white);
     flex-direction: column;
-    padding: var(--spacing-md);
-    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     z-index: 999;
     overflow-y: auto;
+    transition: right 0.3s ease;
   }
   
   .nav-menu.active {
-    display: flex;
+    right: 0;
+  }
+  
+  /* Mobile Menu Close Button */
+  .mobile-menu-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+    z-index: 1000;
+  }
+  
+  .mobile-menu-close:hover {
+    color: var(--color-primary-light);
+  }
+  
+  .mobile-menu-close svg {
+    display: block;
+    width: 28px;
+    height: 28px;
   }
   
   .menu-toggle {

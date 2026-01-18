@@ -35,13 +35,26 @@
          */
         var mobileMenuToggle = $('.menu-toggle');
         var mobileMenu = $('.nav-menu');
+        var mobileOverlay = $('.mobile-menu-overlay');
         
+        // Create close button
+        if (!mobileMenu.find('.mobile-menu-close').length) {
+            mobileMenu.prepend('<button class="mobile-menu-close" aria-label="Chiudi menu"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>');
+        }
+        
+        // Open menu
         mobileMenuToggle.on('click', function() {
             var expanded = $(this).attr('aria-expanded') === 'true' || false;
             
             $(this).attr('aria-expanded', !expanded);
             mobileMenu.toggleClass('active');
+            mobileOverlay.toggleClass('active');
             $('body').toggleClass('menu-open');
+        });
+        
+        // Close menu with close button
+        $(document).on('click', '.mobile-menu-close', function() {
+            mobileMenuToggle.trigger('click');
         });
         
         // Close menu on ESC
@@ -51,16 +64,11 @@
             }
         });
         
-        // Close menu when clicking outside
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('.main-navigation').length && mobileMenu.hasClass('active')) {
+        // Close menu when clicking overlay
+        mobileOverlay.on('click', function() {
+            if (mobileMenu.hasClass('active')) {
                 mobileMenuToggle.trigger('click');
             }
-        });
-        
-        // Prevent closing when clicking inside menu
-        mobileMenu.on('click', function(e) {
-            e.stopPropagation();
         });
         
         /**

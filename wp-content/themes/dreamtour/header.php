@@ -82,6 +82,9 @@
             </div>
         </div>
         
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay"></div>
+        
         <!-- Search Form Overlay -->
         <div class="search-overlay">
             <div class="container">
