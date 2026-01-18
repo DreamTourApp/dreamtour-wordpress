@@ -52,12 +52,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'validate_ticket') {
     $seat_number = sanitize_text_field($ticket_data['seat']);
     $ticket_id = isset($ticket_data['ticket_id']) ? sanitize_text_field($ticket_data['ticket_id']) : '';
     
+    error_log("DRTR VALIDATOR: Cercando prenotazione #$booking_id, posto $seat_number");
+    
     // Verify signature
     if (isset($ticket_data['signature'])) {
         $secret_key = defined('AUTH_KEY') ? AUTH_KEY : 'dreamtour-secret';
         $expected_signature = hash_hmac('sha256', $ticket_id, $secret_key);
         
         if ($ticket_data['signature'] !== $expected_signature) {
+            error_log("DRTR VALIDATOR: Firma non valida");
             echo json_encode(['success' => false, 'message' => 'Firma di sicurezza non valida']);
             exit;
         }
@@ -67,7 +70,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'validate_ticket') {
     $booking = get_post($booking_id);
     
     if (!$booking || $booking->post_type !== 'drtr_booking') {
-        echo json_encode(['success' => false, 'message' => 'Prenotazione non trovata']);
+        error_log("DRTR VALIDATOR: Prenotazione #$booking_id non trovata o tipo errato");
+        echo json_encode([
+            'success' => false, 
+            'message' => "Prenotazione #$booking_id non trovata. Verifica che sia una prenotazione valida."
+        ]);
         exit;
     }
     
