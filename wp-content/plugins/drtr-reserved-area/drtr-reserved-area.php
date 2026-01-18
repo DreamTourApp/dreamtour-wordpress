@@ -50,6 +50,7 @@ class DRTR_Reserved_Area {
         require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-page-manager.php';
         require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-auth.php';
         require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-dashboard.php';
+        require_once DRTR_RA_PLUGIN_DIR . 'includes/class-drtr-ra-profile.php';
     }
     
     private function init_hooks() {
@@ -60,6 +61,7 @@ class DRTR_Reserved_Area {
         DRTR_RA_Page_Manager::get_instance();
         DRTR_RA_Auth::get_instance();
         DRTR_RA_Dashboard::get_instance();
+        DRTR_RA_Profile::get_instance();
     }
     
     public function load_textdomain() {
@@ -78,7 +80,7 @@ class DRTR_Reserved_Area {
     }
     
     public function enqueue_assets() {
-        if (is_page(array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni'))) {
+        if (is_page(array('area-riservata', 'mie-prenotazioni', 'gestione-prenotazioni', 'profilo'))) {
             wp_enqueue_style(
                 'drtr-ra-style',
                 DRTR_RA_PLUGIN_URL . 'assets/css/style.css',

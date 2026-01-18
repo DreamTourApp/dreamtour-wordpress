@@ -163,7 +163,7 @@ class DRTR_RA_Dashboard {
                         </div>
                         <h3><?php _e('Il Mio Profilo', 'drtr-reserved-area'); ?></h3>
                         <p><?php _e('Visualizza e modifica le tue informazioni personali', 'drtr-reserved-area'); ?></p>
-                        <a href="<?php echo esc_url(admin_url('profile.php')); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
+                        <a href="<?php echo esc_url(home_url('/profilo')); ?>" class="drtr-ra-btn drtr-ra-btn-outline">
                             <?php _e('Vai al Profilo', 'drtr-reserved-area'); ?>
                         </a>
                     </div>
