@@ -45,7 +45,7 @@ get_header();
                         </div>
                         <div>
                             <h3><?php esc_html_e('Telefono', 'dreamtour'); ?></h3>
-                            <p><a href="tel:+390000000000">+39 000 000 0000</a></p>
+                            <p><a href="tel:+393271294442">+39 327 129 4442</a></p>
                         </div>
                     </div>
                     
