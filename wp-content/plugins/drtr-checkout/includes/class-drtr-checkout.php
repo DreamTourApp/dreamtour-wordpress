@@ -161,8 +161,69 @@ class DRTR_Checkout {
             'total' => floatval($_POST['total']),
         );
         
+        $user_id = null;
+        
         if (is_user_logged_in()) {
-            $booking_data['user_id'] = get_current_user_id();
+            $user_id = get_current_user_id();
+            $booking_data['user_id'] = $user_id;
+        } elseif (!empty($_POST['create_account']) && $_POST['create_account'] == '1') {
+            // Creare account utente se richiesto
+            $password = !empty($_POST['account_password']) ? $_POST['account_password'] : '';
+            $confirm_password = !empty($_POST['account_password_confirm']) ? $_POST['account_password_confirm'] : '';
+            
+            if (empty($password) || strlen($password) < 8) {
+                wp_send_json_error(array('message' => __('La password deve essere di almeno 8 caratteri.', 'drtr-tours')));
+            }
+            
+            if ($password !== $confirm_password) {
+                wp_send_json_error(array('message' => __('Le password non coincidono.', 'drtr-tours')));
+            }
+            
+            // Verificare se l'email esiste già
+            if (email_exists($booking_data['email'])) {
+                wp_send_json_error(array('message' => __('Esiste già un account con questa email. Effettua il login.', 'drtr-tours')));
+            }
+            
+            // Creare username dall'email
+            $username = sanitize_user(current(explode('@', $booking_data['email'])));
+            
+            // Se username esiste già, aggiungere un numero
+            if (username_exists($username)) {
+                $username = $username . wp_rand(100, 999);
+            }
+            
+            // Creare utente
+            $user_id = wp_create_user(
+                $username,
+                $password,
+                $booking_data['email']
+            );
+            
+            if (is_wp_error($user_id)) {
+                wp_send_json_error(array('message' => $user_id->get_error_message()));
+            }
+            
+            // Aggiornare dati utente
+            wp_update_user(array(
+                'ID' => $user_id,
+                'first_name' => $booking_data['first_name'],
+                'last_name' => $booking_data['last_name'],
+                'display_name' => $booking_data['first_name'] . ' ' . $booking_data['last_name'],
+            ));
+            
+            // Salvare telefono
+            $full_phone = $booking_data['phone_prefix'] . ' ' . $booking_data['phone'];
+            update_user_meta($user_id, 'phone', $full_phone);
+            
+            // Impostare preferenze default
+            update_user_meta($user_id, 'drtr_email_notifications', '1');
+            update_user_meta($user_id, 'drtr_newsletter', '0');
+            
+            // Auto-login dell'utente
+            wp_set_current_user($user_id);
+            wp_set_auth_cookie($user_id);
+            
+            $booking_data['user_id'] = $user_id;
         }
         
         // Creare prenotazione

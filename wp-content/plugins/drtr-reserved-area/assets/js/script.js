@@ -365,6 +365,85 @@
             }, 5000);
         }
         
+        // ========================================================================
+        // REGISTRATION PAGE
+        // ========================================================================
+        
+        // Handle registration form submit
+        $('#drtr-register-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            var $form = $(this);
+            var $submitBtn = $form.find('button[type="submit"]');
+            var $message = $('#drtr-register-message');
+            
+            // Validate passwords
+            var password = $('#register-password').val();
+            var confirmPassword = $('#register-password-confirm').val();
+            
+            if (password !== confirmPassword) {
+                showRegisterMessage('error', 'Le password non coincidono.');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showRegisterMessage('error', 'La password deve essere di almeno 8 caratteri.');
+                return;
+            }
+            
+            var formData = $form.serialize() + '&action=drtr_register_user';
+            
+            $submitBtn.prop('disabled', true).html('<i class="dashicons dashicons-update"></i> Registrazione...');
+            
+            $.ajax({
+                url: drtrRA.ajaxurl,
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        showRegisterMessage('success', response.data.message);
+                        
+                        // Redirect after 2 seconds
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect;
+                        }, 2000);
+                    } else {
+                        showRegisterMessage('error', response.data.message);
+                        $submitBtn.prop('disabled', false).html('Registrati <i class="dashicons dashicons-arrow-right-alt2"></i>');
+                    }
+                },
+                error: function() {
+                    showRegisterMessage('error', 'Errore di connessione. Riprova.');
+                    $submitBtn.prop('disabled', false).html('Registrati <i class="dashicons dashicons-arrow-right-alt2"></i>');
+                }
+            });
+        });
+        
+        // Helper: Show register message
+        function showRegisterMessage(type, message) {
+            var alertClass = type === 'success' ? 'drtr-ra-alert-success' : 'drtr-ra-alert-error';
+            
+            var $alert = $('<div>', {
+                class: 'drtr-ra-alert ' + alertClass,
+                html: message
+            });
+            
+            $('#drtr-register-message').html($alert);
+            
+            // Scroll to message
+            $('html, body').animate({
+                scrollTop: $('#drtr-register-message').offset().top - 100
+            }, 500);
+            
+            if (type === 'success') {
+                setTimeout(function() {
+                    $alert.fadeOut(function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+            }
+        }
+        
     });
     
 })(jQuery);

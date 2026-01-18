@@ -100,6 +100,11 @@ if (!defined('ABSPATH')) {
                 <div class="form-section">
                     <h3><?php _e('Informazioni Personali', 'drtr-tours'); ?></h3>
                     
+                    <div class="drtr-info-box">
+                        <i class="dashicons dashicons-info"></i>
+                        <p><?php _e('Le tue informazioni personali verranno utilizzate per associare l\'ordine al tuo account e inviarti la conferma via email.', 'drtr-tours'); ?></p>
+                    </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="first_name"><?php _e('Nome *', 'drtr-tours'); ?></label>
@@ -115,12 +120,12 @@ if (!defined('ABSPATH')) {
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email"><?php _e('Email *', 'drtr-tours'); ?></label>
-                            <input type="email" id="email" name="email" value="<?php echo esc_attr($user_email); ?>" required>
+                            <input type="email" id="email" name="email" value="<?php echo esc_attr($user_email); ?>" required <?php echo is_user_logged_in() ? 'readonly' : ''; ?>>
                         </div>
                     </div>
                     
                     <div class="form-row">
-                        <div class="form-group" style="flex: 0 0 120px;">
+                        <div class="form-group" style="flex: 0 0 140px;">
                             <label for="phone_prefix"><?php _e('Prefisso *', 'drtr-tours'); ?></label>
                             <select id="phone_prefix" name="phone_prefix" required>
                                 <option value="+39">+39 (IT)</option>
@@ -137,6 +142,44 @@ if (!defined('ABSPATH')) {
                             <input type="tel" id="phone" name="phone" value="<?php echo esc_attr($user_phone); ?>" required>
                         </div>
                     </div>
+                    
+                    <?php if (!is_user_logged_in()) : ?>
+                    <div class="drtr-divider">
+                        <span><?php _e('oppure', 'drtr-tours'); ?></span>
+                    </div>
+                    
+                    <div class="drtr-account-options">
+                        <div class="account-option-box">
+                            <label class="account-option-label">
+                                <input type="checkbox" id="create_account" name="create_account" value="1">
+                                <div class="account-option-content">
+                                    <strong><?php _e('Crea un account', 'drtr-tours'); ?></strong>
+                                    <p><?php _e('Registrati per gestire le tue prenotazioni e accedere a offerte esclusive', 'drtr-tours'); ?></p>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div id="password-fields" class="password-fields" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="account_password"><?php _e('Password *', 'drtr-tours'); ?></label>
+                                    <input type="password" id="account_password" name="account_password" minlength="8">
+                                    <small class="form-hint"><?php _e('Minimo 8 caratteri', 'drtr-tours'); ?></small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="account_password_confirm"><?php _e('Conferma Password *', 'drtr-tours'); ?></label>
+                                    <input type="password" id="account_password_confirm" name="account_password_confirm" minlength="8">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="drtr-login-link">
+                            <?php _e('Hai già un account?', 'drtr-tours'); ?> 
+                            <a href="<?php echo esc_url(home_url('/area-riservata')); ?>"><?php _e('Accedi', 'drtr-tours'); ?></a>
+                        </p>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Metodo Pagamento -->
@@ -453,10 +496,175 @@ if (!defined('ABSPATH')) {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+/* Info Box */
+.drtr-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%);
+    border-left: 4px solid #003284;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.drtr-info-box .dashicons {
+    color: #003284;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.drtr-info-box p {
+    margin: 0;
+    color: #1e3a5f;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Divider con "oppure" */
+.drtr-divider {
+    position: relative;
+    text-align: center;
+    margin: 30px 0 25px;
+}
+
+.drtr-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+}
+
+.drtr-divider span {
+    position: relative;
+    background: white;
+    padding: 0 20px;
+    color: #718096;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Account Options */
+.drtr-account-options {
+    margin-top: 20px;
+}
+
+.account-option-box {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.account-option-box:hover {
+    border-color: #003284;
+    background: #ffffff;
+}
+
+.account-option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.account-option-label input[type="checkbox"] {
+    margin-top: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.account-option-content {
+    flex: 1;
+}
+
+.account-option-content strong {
+    display: block;
+    font-size: 16px;
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+
+.account-option-content p {
+    margin: 0;
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.5;
+}
+
+.password-fields {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #718096;
+    font-style: italic;
+}
+
+.drtr-login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.drtr-login-link a {
+    color: #003284;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.drtr-login-link a:hover {
+    color: #1ba4ce;
+    text-decoration: underline;
+}
 </style>
 
 <script>
 jQuery(document).ready(function($) {
+    // Toggle create account checkbox
+    $('#create_account').on('change', function() {
+        if ($(this).is(':checked')) {
+            $('#password-fields').slideDown(300);
+            $('#account_password, #account_password_confirm').prop('required', true);
+        } else {
+            $('#password-fields').slideUp(300);
+            $('#account_password, #account_password_confirm').prop('required', false).val('');
+        }
+    });
+    
     // Toggle payment method details
     $('input[name="payment_method"]').on('change', function() {
         const method = $(this).val();
@@ -478,6 +686,26 @@ jQuery(document).ready(function($) {
         const $form = $(this);
         const $submitBtn = $('#submit-checkout');
         const $message = $('#checkout-message');
+        
+        // Validate password if creating account
+        if ($('#create_account').is(':checked')) {
+            const password = $('#account_password').val();
+            const confirmPassword = $('#account_password_confirm').val();
+            
+            if (!password || password.length < 8) {
+                $message.removeClass('success').addClass('error')
+                    .html('La password deve essere di almeno 8 caratteri.')
+                    .show();
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                $message.removeClass('success').addClass('error')
+                    .html('Le password non coincidono.')
+                    .show();
+                return;
+            }
+        }
         
         console.log('Form element:', $form[0]);
         console.log('dreamtourData:', dreamtourData);
