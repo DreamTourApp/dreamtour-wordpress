@@ -149,9 +149,6 @@ get_header();
 
 <style>
 /* About Section Styles */
-.about-section {
-    padding: 4rem 0;
-}
 
 .about-hero {
     text-align: center;
@@ -336,6 +333,7 @@ get_header();
     font-size: 2.5rem;
     font-weight: 900;
     margin-bottom: 1rem;
+    color: white;
 }
 
 .cta-card p {

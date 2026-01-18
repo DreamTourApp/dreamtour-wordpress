@@ -52,11 +52,7 @@ class DRTR_RA_Dashboard {
         <div class="drtr-ra-login-container">
             <div class="drtr-ra-login-box">
                 <div class="drtr-ra-logo">
-                    <?php if (has_custom_logo()) : ?>
-                        <?php the_custom_logo(); ?>
-                    <?php else : ?>
-                        <h1><?php bloginfo('name'); ?></h1>
-                    <?php endif; ?>
+                    <img src="<?php echo esc_url(DRTR_RA_PLUGIN_URL . 'assets/images/logo.png'); ?>" alt="<?php esc_attr_e('Logo', 'drtr-reserved-area'); ?>">  
                 </div>
                 
                 <h2 class="drtr-ra-title"><?php _e('Area Riservata', 'drtr-reserved-area'); ?></h2>

@@ -490,6 +490,7 @@
     padding: 0 var(--spacing-md);
 }
 
+
 .single-post-wrapper {
     max-width: 800px;
     margin: var(--spacing-xxl) auto;
@@ -782,6 +783,10 @@
     
     .tour-hero-image {
         height: 200px;
+    }
+    
+    .page-wrapper {
+        padding: 0 var(--spacing-sm);
     }
 }
 
