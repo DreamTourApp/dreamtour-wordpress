@@ -164,7 +164,7 @@ class DRTR_Posti_Email {
                     <p>' . __('La tua prenotazione è stata confermata!', 'drtr-posti') . '</p>
                     <p><strong>' . __('Tour:', 'drtr-posti') . '</strong> ' . esc_html($tour_title) . '</p>
                     <p>' . __('Ora puoi selezionare i tuoi posti nell\'autobus. Clicca sul pulsante qui sotto per visualizzare la mappa dei posti disponibili:', 'drtr-posti') . '</p>
-                    <div style="text-align: center;">
+                    <div style="text-align: center; color: white;">
                         <a href="' . esc_url($selection_url) . '" class="button">' . __('Seleziona Posti', 'drtr-posti') . '</a>
                     </div>
                     <p><small>' . __('Questo link è valido per 7 giorni.', 'drtr-posti') . '</small></p>

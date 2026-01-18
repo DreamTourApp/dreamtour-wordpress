@@ -105,15 +105,15 @@ class DRTR_Biglietto_Email {
         $tickets_html = '';
         foreach ($tickets as $ticket) {
             $tickets_html .= '
-            <div style="border: 2px solid #1ba4ce; border-radius: 8px; padding: 20px; margin: 15px 0; background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 200px;">
-                        <h3 style="color: #003284; margin: 0 0 10px 0;">Posto: ' . esc_html($ticket['seat']) . '</h3>
-                        <p style="margin: 5px 0;"><strong>Passeggero:</strong> ' . esc_html($ticket['passenger']) . '</p>
+            <div class="ticket-item" style="border: 2px solid #1ba4ce; border-radius: 8px; padding: 20px; margin: 15px 0; background: white;">
+                <div class="ticket-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div class="ticket-info" style="flex: 1; min-width: 200px;">
+                        <h3 style="color: #003284; margin: 0 0 10px 0; font-size: 20px;">Posto: ' . esc_html($ticket['seat']) . '</h3>
+                        <p style="margin: 5px 0; font-size: 16px;"><strong>Passeggero:</strong> ' . esc_html($ticket['passenger']) . '</p>
                     </div>
-                    <div style="text-align: center; margin: 10px;">
-                        <img src="' . esc_url($ticket['qr_code']) . '" alt="QR Code" style="max-width: 150px; height: auto;">
-                        <p style="font-size: 11px; color: #666; margin-top: 5px;">Mostra questo QR code alla partenza</p>
+                    <div class="ticket-qr" style="text-align: center; padding: 10px;">
+                        <img src="' . esc_url($ticket['qr_code']) . '" alt="QR Code" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Mostra questo QR code alla partenza</p>
                     </div>
                 </div>
             </div>';
@@ -159,7 +159,7 @@ class DRTR_Biglietto_Email {
                         ' . $tickets_html . '
                     </div>
                     
-                    <div style="text-align: center; margin-top: 30px;">
+                    <div style="text-align: center; margin-top: 30px; color: white;">
                         <a href="' . esc_url($pdf_url) . '" class="button">' . __('Scarica PDF Biglietti', 'drtr-biglietto') . '</a>
                     </div>
                     
