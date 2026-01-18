@@ -832,6 +832,35 @@ body.menu-open {
   margin: 0;
 }
 
+.footer-contact-info {
+  margin-top: var(--spacing-md);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footer-contact-info p {
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.footer-contact-info strong {
+  color: var(--color-white);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.footer-contact-info a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-contact-info a:hover {
+  color: var(--color-primary-lighter);
+  text-decoration: underline;
+}
+
 /* Header Branding & Logo */
 .site-branding {
   width: 100%;
