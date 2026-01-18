@@ -16,11 +16,7 @@
         // Tour Booking Form
         initTourBookingForm();
         
-        // Mobile Menu Toggle
-        $('.menu-toggle').on('click', function() {
-            $(this).toggleClass('active');
-            $('.nav-menu').toggleClass('active');
-        });
+        // Mobile Menu Toggle handled by navigation.js
         
         // Search Toggle
         $('.search-toggle').on('click', function() {
