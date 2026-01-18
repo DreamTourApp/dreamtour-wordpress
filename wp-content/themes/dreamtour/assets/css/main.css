@@ -974,6 +974,13 @@
     .page-wrapper {
         padding: 0 var(--spacing-sm);
     }
+    
+    .page-content h2,
+    .page-content h3,
+    .post-content h2,
+    .post-content h3 {
+        margin-top: var(--spacing-md);
+    }
 }
 
 /* Comments */
