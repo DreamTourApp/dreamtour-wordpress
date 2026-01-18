@@ -233,6 +233,135 @@
     font-size: 14px;
 }
 
+/* Booking Modal Overlay */
+.booking-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    animation: fadeIn 0.3s ease;
+}
+
+.booking-modal-overlay.active {
+    display: block;
+}
+
+.booking-modal {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    max-height: 90vh;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    transition: bottom 0.3s ease-out;
+    overflow-y: auto;
+}
+
+.booking-modal.active {
+    bottom: 0;
+}
+
+.booking-modal-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.booking-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-text-medium);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.booking-modal-content {
+    padding: var(--spacing-md);
+}
+
+.mobile-booking-trigger {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: var(--spacing-md);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    border-top: 1px solid #e0e0e0;
+}
+
+.mobile-booking-trigger-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.mobile-price-info {
+    flex: 1;
+}
+
+.mobile-price-label {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-medium);
+    margin-bottom: 2px;
+}
+
+.mobile-price-amount {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--color-primary);
+}
+
+.mobile-book-btn {
+    flex-shrink: 0;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 50, 132, 0.3);
+}
+
+.mobile-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 50, 132, 0.4);
+}
+
 /* Responsive tweaks */
 @media (max-width: 1080px) {
     .single-tour-wrapper {
@@ -249,12 +378,38 @@
     }
 }
 
+@media (max-width: 768px) {
+    /* Hide sidebar booking card on mobile */
+    .tour-sidebar {
+        display: none;
+    }
+    
+    /* Show mobile trigger button */
+    .mobile-booking-trigger {
+        display: block;
+    }
+    
+    /* Add bottom padding to main content to prevent overlap with sticky button */
+    .tour-main-content {
+        padding-bottom: 100px;
+    }
+}
+
 @media (max-width: 640px) {
     .tour-top-image {
         height: 240px;
     }
     .tour-meta-list {
         gap: var(--spacing-sm);
+    }
+    
+    .mobile-price-amount {
+        font-size: 20px;
+    }
+    
+    .mobile-book-btn {
+        padding: 12px 24px;
+        font-size: 14px;
     }
 }
 
@@ -726,6 +881,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .header-search {

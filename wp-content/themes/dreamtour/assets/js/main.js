@@ -186,7 +186,44 @@
             $('.tour-card').fadeIn(300);
         });
         
+        // Mobile Booking Modal
+        initMobileBookingModal();
+        
     });
+    
+    /**
+     * Mobile Booking Modal
+     */
+    function initMobileBookingModal() {
+        const $trigger = $('.mobile-book-btn');
+        const $modal = $('.booking-modal');
+        const $overlay = $('.booking-modal-overlay');
+        const $closeBtn = $('.modal-close');
+        
+        // Open modal
+        $trigger.on('click', function() {
+            $overlay.addClass('active');
+            $modal.addClass('active');
+            $('body').css('overflow', 'hidden');
+        });
+        
+        // Close modal
+        function closeModal() {
+            $modal.removeClass('active');
+            $overlay.removeClass('active');
+            $('body').css('overflow', '');
+        }
+        
+        $closeBtn.on('click', closeModal);
+        $overlay.on('click', closeModal);
+        
+        // Close on ESC key
+        $(document).on('keyup', function(e) {
+            if (e.key === 'Escape' && $modal.hasClass('active')) {
+                closeModal();
+            }
+        });
+    }
     
     /**
      * Tour Booking Form Initialization
@@ -194,6 +231,8 @@
     function initTourBookingForm() {
         const $adultsInput = $('#adults');
         const $childrenInput = $('#children');
+        const $adultsModalInput = $('#adults-modal');
+        const $childrenModalInput = $('#children-modal');
         const pricePerPerson = parseFloat(document.querySelector('[data-price]')?.getAttribute('data-price') || 0);
         
         // Get price from the tour-price-box or from hidden data
@@ -212,62 +251,85 @@
             }
         }
         
-        function updatePriceCalculation() {
-            const adults = parseInt($adultsInput.val()) || 1;
-            const children = parseInt($childrenInput.val()) || 0;
+        function updatePriceCalculation(source = 'desktop') {
+            // Get values from the active source (desktop or modal)
+            let adults, children, paymentType;
+            
+            if (source === 'modal') {
+                adults = parseInt($adultsModalInput.val()) || 1;
+                children = parseInt($childrenModalInput.val()) || 0;
+                paymentType = $('input[name=\"payment-type-modal\"]:checked').val();
+            } else {
+                adults = parseInt($adultsInput.val()) || 1;
+                children = parseInt($childrenInput.val()) || 0;
+                paymentType = $('input[name=\"payment-type\"]:checked').val();
+            }
+            
             const subtotal = (adults * tourPrice) + (children * childPrice);
             const deposit = subtotal * 0.5;
-            const paymentType = $('input[name="payment-type"]:checked').val();
             const totalAmount = paymentType === 'deposit' ? deposit : subtotal;
             
+            // Update desktop version
             $('#subtotal').text('€' + subtotal.toFixed(2).replace('.', ','));
             $('#deposit').text('€' + deposit.toFixed(2).replace('.', ','));
+            $('#total-amount').text('€' + totalAmount.toFixed(2).replace('.', ','));
             
-            if (paymentType === 'deposit') {
-                $('#total-amount').text('€' + deposit.toFixed(2).replace('.', ','));
-            } else {
-                $('#total-amount').text('€' + subtotal.toFixed(2).replace('.', ','));
-            }
+            // Update modal version
+            $('#subtotal-modal').text('€' + subtotal.toFixed(2).replace('.', ','));
+            $('#deposit-modal').text('€' + deposit.toFixed(2).replace('.', ','));
+            $('#total-amount-modal').text('€' + totalAmount.toFixed(2).replace('.', ','));
         }
         
-        // Quantity controls
-        $('.qty-plus[data-type="adults"]').on('click', function() {
-            $adultsInput.val(parseInt($adultsInput.val()) + 1);
-            updatePriceCalculation();
+        // Desktop Quantity controls
+        $('.qty-plus[data-type=\"adults\"]').on('click', function() {
+            const isModal = $(this).closest('.booking-modal').length > 0;
+            const $input = isModal ? $adultsModalInput : $adultsInput;
+            $input.val(parseInt($input.val()) + 1);
+            updatePriceCalculation(isModal ? 'modal' : 'desktop');
         });
         
-        $('.qty-minus[data-type="adults"]').on('click', function() {
-            const currentVal = parseInt($adultsInput.val());
+        $('.qty-minus[data-type=\"adults\"]').on('click', function() {
+            const isModal = $(this).closest('.booking-modal').length > 0;
+            const $input = isModal ? $adultsModalInput : $adultsInput;
+            const currentVal = parseInt($input.val());
             if (currentVal > 1) {
-                $adultsInput.val(currentVal - 1);
-                updatePriceCalculation();
+                $input.val(currentVal - 1);
+                updatePriceCalculation(isModal ? 'modal' : 'desktop');
             }
         });
         
-        $('.qty-plus[data-type="children"]').on('click', function() {
-            $childrenInput.val(parseInt($childrenInput.val()) + 1);
-            updatePriceCalculation();
+        $('.qty-plus[data-type=\"children\"]').on('click', function() {
+            const isModal = $(this).closest('.booking-modal').length > 0;
+            const $input = isModal ? $childrenModalInput : $childrenInput;
+            $input.val(parseInt($input.val()) + 1);
+            updatePriceCalculation(isModal ? 'modal' : 'desktop');
         });
         
-        $('.qty-minus[data-type="children"]').on('click', function() {
-            const currentVal = parseInt($childrenInput.val());
+        $('.qty-minus[data-type=\"children\"]').on('click', function() {
+            const isModal = $(this).closest('.booking-modal').length > 0;
+            const $input = isModal ? $childrenModalInput : $childrenInput;
+            const currentVal = parseInt($input.val());
             if (currentVal > 0) {
-                $childrenInput.val(currentVal - 1);
-                updatePriceCalculation();
+                $input.val(currentVal - 1);
+                updatePriceCalculation(isModal ? 'modal' : 'desktop');
             }
         });
         
-        // Payment type change
-        $('input[name="payment-type"]').on('change', function() {
-            updatePriceCalculation();
+        // Payment type change (both desktop and modal)
+        $('input[name=\"payment-type\"], input[name=\"payment-type-modal\"]').on('change', function() {
+            const isModal = $(this).attr('name') === 'payment-type-modal';
+            updatePriceCalculation(isModal ? 'modal' : 'desktop');
         });
         
-        // Book button
-        $('#book-btn').on('click', function(e) {
+        // Book button (both desktop and modal)
+        $('#book-btn, #book-btn-modal').on('click', function(e) {
             e.preventDefault();
-            const adults = parseInt($adultsInput.val()) || 1;
-            const children = parseInt($childrenInput.val()) || 0;
-            const paymentType = $('input[name="payment-type"]:checked').val();
+            
+            // Determine if we're in modal or desktop
+            const isModal = $(this).attr('id') === 'book-btn-modal';
+            const adults = isModal ? parseInt($adultsModalInput.val()) || 1 : parseInt($adultsInput.val()) || 1;
+            const children = isModal ? parseInt($childrenModalInput.val()) || 0 : parseInt($childrenInput.val()) || 0;
+            const paymentType = isModal ? $('input[name=\"payment-type-modal\"]:checked').val() : $('input[name=\"payment-type\"]:checked').val();
             const tourId = $(this).data('tour-id') || $('[data-tour-id]').data('tour-id');
             
             // Costruire URL checkout

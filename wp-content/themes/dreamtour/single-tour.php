@@ -383,6 +383,130 @@ while (have_posts()) :
                     <?php endif; ?>
                 </div>
                 
+                <!-- Mobile Booking Trigger (only visible on mobile) -->
+                <div class="mobile-booking-trigger">
+                    <div class="mobile-booking-trigger-content">
+                        <div class="mobile-price-info">
+                            <span class="mobile-price-label"><?php _e('Desde', 'dreamtour'); ?></span>
+                            <span class="mobile-price-amount">€<?php echo esc_html(number_format($tour_price, 0, ',', '.')); ?></span>
+                        </div>
+                        <button type="button" class="mobile-book-btn">
+                            <?php _e('Reservar', 'dreamtour'); ?>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Booking Modal Overlay (mobile) -->
+                <div class="booking-modal-overlay"></div>
+                
+                <!-- Booking Modal (mobile) -->
+                <div class="booking-modal">
+                    <div class="booking-modal-header">
+                        <h3><?php _e('Reservar tu plaza', 'dreamtour'); ?></h3>
+                        <button type="button" class="modal-close">×</button>
+                    </div>
+                    <div class="booking-modal-content">
+                        <div class="tour-booking-card">
+                            <!-- Price Box -->
+                            <?php if ($tour_price) : ?>
+                                <div class="tour-price-box" data-price="<?php echo esc_attr($tour_price); ?>" data-child-price="<?php echo esc_attr($tour_child_price); ?>">
+                                    <span class="price-label"><?php _e('Precio por persona', 'dreamtour'); ?></span>
+                                    <span class="price-amount">€<?php echo esc_html(number_format($tour_price, 2, ',', '.')); ?></span>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <!-- Booking Form -->
+                            <div class="tour-booking-form">
+                                <h3><?php _e('Selecciona participantes', 'dreamtour'); ?></h3>
+                                
+                                <!-- Passengers Selection -->
+                                <div class="booking-field">
+                                    <label><?php _e('Adultos', 'dreamtour'); ?></label>
+                                    <div class="quantity-control">
+                                        <button type="button" class="qty-minus" data-type="adults">−</button>
+                                        <input type="number" id="adults-modal" name="adults" value="1" min="1" readonly>
+                                        <button type="button" class="qty-plus" data-type="adults">+</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="booking-field">
+                                    <label><?php _e('Niños (0-12 años)', 'dreamtour'); ?></label>
+                                    <div class="quantity-control">
+                                        <button type="button" class="qty-minus" data-type="children">−</button>
+                                        <input type="number" id="children-modal" name="children" value="0" min="0" readonly>
+                                        <button type="button" class="qty-plus" data-type="children">+</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Payment Preview -->
+                                <div class="payment-preview">
+                                    <div class="preview-row">
+                                        <span><?php _e('Subtotal', 'dreamtour'); ?></span>
+                                        <span id="subtotal-modal">€0</span>
+                                    </div>
+                                    
+                                    <div class="preview-row">
+                                        <span><?php _e('Acconto (50%)', 'dreamtour'); ?></span>
+                                        <span id="deposit-modal" class="deposit-amount">€0</span>
+                                    </div>
+                                    
+                                    <div class="preview-row total">
+                                        <span><?php _e('Total a pagar hoy', 'dreamtour'); ?></span>
+                                        <span id="total-amount-modal" class="total-amount">€0</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Payment Options -->
+                                <div class="payment-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="payment-type-modal" value="deposit" checked>
+                                        <span><?php _e('Pagar Acconto (50%)', 'dreamtour'); ?></span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="payment-type-modal" value="full">
+                                        <span><?php _e('Pagar completo', 'dreamtour'); ?></span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Book Button -->
+                                <button type="button" class="btn btn-primary btn-block" id="book-btn-modal" data-tour-id="<?php echo get_the_ID(); ?>">
+                                    <?php _e('Continuar a Reserva', 'dreamtour'); ?>
+                                </button>
+                                
+                                <p class="booking-notice"><?php _e('Cancelación flexible hasta 14 días antes', 'dreamtour'); ?></p>
+                            </div>
+                            
+                            <!-- Quick Info -->
+                            <ul class="tour-includes">
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <?php _e('Coordinador incluido', 'dreamtour'); ?>
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <?php _e('Seguro médico y de equipaje', 'dreamtour'); ?>
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <?php _e('Cancelación flexible', 'dreamtour'); ?>
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <?php _e('Grupo reducido', 'dreamtour'); ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Sidebar with Booking -->
                 <aside class="tour-sidebar">
                     <div class="tour-booking-card">
