@@ -1231,7 +1231,7 @@ body.menu-open {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .container,
+  .container:not(.site-footer .container),
   .container-wide,
   .container-full {
     padding: 0;
