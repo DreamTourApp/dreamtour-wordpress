@@ -262,8 +262,189 @@ if (!defined('ABSPATH')) {
 }
 
 @media (max-width: 768px) {
+    .drtr-checkout-container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    
     .drtr-checkout-wrapper {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .checkout-summary,
+    .checkout-form {
+        padding: 20px 15px;
+        border-radius: 6px;
+    }
+    
+    .checkout-summary h2,
+    .checkout-form h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .tour-summary-details {
+        padding: 15px;
+    }
+    
+    .tour-summary-details h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .summary-row {
+        padding: 6px 0;
+        font-size: 14px;
+    }
+    
+    .summary-total {
+        font-size: 18px;
+    }
+    
+    .form-section {
+        margin-bottom: 20px;
+    }
+    
+    .form-section h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 10px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .drtr-info-box {
+        padding: 12px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .drtr-info-box p {
+        font-size: 13px;
+    }
+    
+    .drtr-divider {
+        margin: 25px 0 20px;
+    }
+    
+    .account-option-box {
+        padding: 15px;
+    }
+    
+    .account-option-content strong {
+        font-size: 15px;
+    }
+    
+    .account-option-content p {
+        font-size: 12px;
+    }
+    
+    .password-fields {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    .payment-method {
+        padding: 12px;
+    }
+    
+    .info-box {
+        padding: 15px;
+    }
+    
+    .btn-primary {
+        padding: 12px 30px;
+        font-size: 15px;
+    }
+    
+    .form-actions {
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .drtr-checkout-container {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+    
+    .checkout-summary,
+    .checkout-form {
+        padding: 15px 12px;
+    }
+    
+    .checkout-summary h2,
+    .checkout-form h2 {
+        font-size: 18px;
+    }
+    
+    .tour-summary-details {
+        padding: 12px;
+    }
+    
+    .summary-row {
+        font-size: 13px;
+        padding: 5px 0;
+    }
+    
+    .summary-total {
+        font-size: 16px;
+        padding-top: 12px;
+    }
+    
+    .form-section h3 {
+        font-size: 15px;
+    }
+    
+    .drtr-info-box {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .drtr-info-box .dashicons {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .drtr-divider {
+        margin: 20px 0 15px;
+    }
+    
+    .drtr-divider span {
+        font-size: 13px;
+        padding: 0 15px;
+    }
+    
+    .account-option-box {
+        padding: 12px;
+    }
+    
+    .account-option-label {
+        gap: 12px;
+    }
+    
+    .account-option-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .account-option-content strong {
+        font-size: 14px;
+    }
+    
+    .btn-primary {
+        padding: 12px 20px;
+        font-size: 14px;
     }
 }
 
