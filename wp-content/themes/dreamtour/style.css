@@ -886,6 +886,11 @@ body.menu-open {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* Mobile Menu Close Button - Hidden by default */
+.mobile-menu-close {
+  display: none;
+}
+
 /* ===================================
    RESPONSIVE
    =================================== */
@@ -943,6 +948,7 @@ body.menu-open {
   
   /* Mobile Menu Close Button */
   .mobile-menu-close {
+    display: block;
     position: absolute;
     top: var(--spacing-md);
     right: var(--spacing-md);

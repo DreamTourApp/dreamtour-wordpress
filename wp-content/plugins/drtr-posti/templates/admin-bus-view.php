@@ -400,6 +400,20 @@ foreach ($seats as $seat) {
         }
         
         .tour-selector {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .tour-selector select {
+            width: 100%;
+            min-width: auto;
+        }
+        
+        .tour-selector button {
+            width: 100%;
+        }
+        
+        .tour-selector {
             width: 100%;
             flex-direction: column;
         }
@@ -557,13 +571,15 @@ foreach ($seats as $seat) {
         
         <!-- Tour Info -->
         <?php if ($selected_tour_title): ?>
-            <div style="text-align: center; margin: 15px 0; padding: 10px; background: #f0f7ff; border-left: 4px solid #003284; border-radius: 4px;">
-                <h2 style="margin: 0; color: #003284; font-size: 20px;">
-                    <?php echo esc_html($selected_tour_title); ?>
-                    <?php if ($selected_tour_date): ?>
-                        <span style="color: #1aabe7; font-weight: 600;"> - <?php echo esc_html($selected_tour_date); ?></span>
-                    <?php endif; ?>
+            <div style="text-align: center; margin: 20px 0 30px 0; padding: 20px 15px; background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%); border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 50, 132, 0.3);">
+                <h2 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    📍 <?php echo esc_html($selected_tour_title); ?>
                 </h2>
+                <?php if ($selected_tour_date): ?>
+                    <p style="margin: 8px 0 0 0; color: #ffffff; font-size: 18px; font-weight: 500; opacity: 0.95;">
+                        📅 <?php echo esc_html($selected_tour_date); ?>
+                    </p>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
         
