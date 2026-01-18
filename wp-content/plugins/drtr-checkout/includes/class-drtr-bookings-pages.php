@@ -317,10 +317,15 @@ class DRTR_Bookings_Pages {
         $filter_phone = isset($_GET['filter_phone']) ? sanitize_text_field($_GET['filter_phone']) : '';
         $filter_tour = isset($_GET['filter_tour']) ? absint($_GET['filter_tour']) : 0;
         
+        // Paginazione
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $per_page = 20;
+        
         // Ottenere tutte le prenotazioni
         $args = array(
             'post_type' => 'drtr_booking',
-            'posts_per_page' => -1,
+            'posts_per_page' => $per_page,
+            'paged' => $paged,
             'post_status' => 'any', // Includere tutti gli status personalizzati
             'orderby' => 'date',
             'order' => 'DESC'
@@ -529,6 +534,80 @@ class DRTR_Bookings_Pages {
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
+            
+            // Paginazione
+            if ($bookings_query->max_num_pages > 1) {
+                echo '<div class="drtr-pagination">';
+                
+                $current_page = max(1, $paged);
+                $total_pages = $bookings_query->max_num_pages;
+                
+                // Costruire URL base con i parametri di filtro
+                $base_url = add_query_arg(array(
+                    'filter_name' => $filter_name,
+                    'filter_email' => $filter_email,
+                    'filter_phone' => $filter_phone,
+                    'filter_tour' => $filter_tour,
+                ), remove_query_arg('paged'));
+                
+                // Pulsante Precedente
+                if ($current_page > 1) {
+                    $prev_url = add_query_arg('paged', ($current_page - 1), $base_url);
+                    echo '<a href="' . esc_url($prev_url) . '" class="drtr-pagination-btn drtr-pagination-prev">&laquo; ' . __('Precedente', 'drtr-checkout') . '</a>';
+                }
+                
+                // Numeri pagina
+                echo '<div class="drtr-pagination-numbers">';
+                
+                $range = 2; // Quanti numeri mostrare prima e dopo la pagina corrente
+                
+                // Prima pagina
+                if ($current_page > $range + 1) {
+                    $page_url = add_query_arg('paged', 1, $base_url);
+                    echo '<a href="' . esc_url($page_url) . '" class="drtr-pagination-number">1</a>';
+                    if ($current_page > $range + 2) {
+                        echo '<span class="drtr-pagination-dots">...</span>';
+                    }
+                }
+                
+                // Pagine centrali
+                for ($i = max(1, $current_page - $range); $i <= min($total_pages, $current_page + $range); $i++) {
+                    if ($i == $current_page) {
+                        echo '<span class="drtr-pagination-number drtr-pagination-current">' . $i . '</span>';
+                    } else {
+                        $page_url = add_query_arg('paged', $i, $base_url);
+                        echo '<a href="' . esc_url($page_url) . '" class="drtr-pagination-number">' . $i . '</a>';
+                    }
+                }
+                
+                // Ultima pagina
+                if ($current_page < $total_pages - $range) {
+                    if ($current_page < $total_pages - $range - 1) {
+                        echo '<span class="drtr-pagination-dots">...</span>';
+                    }
+                    $page_url = add_query_arg('paged', $total_pages, $base_url);
+                    echo '<a href="' . esc_url($page_url) . '" class="drtr-pagination-number">' . $total_pages . '</a>';
+                }
+                
+                echo '</div>';
+                
+                // Pulsante Successivo
+                if ($current_page < $total_pages) {
+                    $next_url = add_query_arg('paged', ($current_page + 1), $base_url);
+                    echo '<a href="' . esc_url($next_url) . '" class="drtr-pagination-btn drtr-pagination-next">' . __('Successivo', 'drtr-checkout') . ' &raquo;</a>';
+                }
+                
+                // Info pagine
+                echo '<div class="drtr-pagination-info">';
+                printf(
+                    __('Pagina %1$d di %2$d', 'drtr-checkout'),
+                    $current_page,
+                    $total_pages
+                );
+                echo '</div>';
+                
+                echo '</div>';
+            }
             
             wp_reset_postdata();
         } else {

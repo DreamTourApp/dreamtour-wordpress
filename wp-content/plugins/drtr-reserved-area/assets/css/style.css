@@ -695,6 +695,78 @@
 }
 
 /* =============================================================================
+   PAGINAZIONE
+   ============================================================================= */
+
+.drtr-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.drtr-pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.drtr-pagination-number,
+.drtr-pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    color: #003284;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.drtr-pagination-number:hover,
+.drtr-pagination-btn:hover {
+    background: #003284;
+    border-color: #003284;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 50, 132, 0.2);
+}
+
+.drtr-pagination-current {
+    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+    border-color: #003284;
+    color: white;
+    pointer-events: none;
+}
+
+.drtr-pagination-dots {
+    color: #999;
+    padding: 0 4px;
+}
+
+.drtr-pagination-info {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.drtr-pagination-prev,
+.drtr-pagination-next {
+    padding: 0 16px;
+    font-weight: 700;
+}
+
+/* =============================================================================
    RESPONSIVE
    ============================================================================= */
 
@@ -716,6 +788,27 @@
         gap: 1rem;
         align-items: flex-start;
         margin-bottom: 2rem;
+    }
+    
+    .drtr-pagination {
+        gap: 0.5rem;
+    }
+    
+    .drtr-pagination-number,
+    .drtr-pagination-btn {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+    
+    .drtr-pagination-prev,
+    .drtr-pagination-next {
+        font-size: 12px;
+    }
+    
+    .drtr-pagination-info {
+        font-size: 12px;
     }
     
     .drtr-ra-user-menu {
