@@ -259,11 +259,44 @@ class DRTR_Bookings_Pages {
             wp_reset_postdata();
         } else {
             echo '<div class="drtr-no-bookings">';
-            echo '<i class="dashicons dashicons-info"></i>';
-            echo '<p>' . __('Non hai ancora effettuato nessuna prenotazione.', 'drtr-checkout') . '</p>';
+            echo '<div class="drtr-no-bookings-icon">';
+            echo '<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">';
+            echo '<path d="M9 11l3 3L22 4"></path>';
+            echo '<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>';
+            echo '</svg>';
+            echo '</div>';
+            echo '<h3>' . __('Nessuna Prenotazione', 'drtr-checkout') . '</h3>';
+            echo '<p>' . __('Non hai ancora effettuato nessuna prenotazione. Inizia a esplorare i nostri tour e prenota la tua prossima avventura!', 'drtr-checkout') . '</p>';
             echo '<a href="' . esc_url(home_url('/tours')) . '" class="drtr-ra-btn drtr-ra-btn-primary">';
+            echo '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">';
+            echo '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>';
+            echo '<circle cx="12" cy="10" r="3"></circle>';
+            echo '</svg>';
             echo __('Esplora i Nostri Tour', 'drtr-checkout');
             echo '</a>';
+            echo '<div class="drtr-no-bookings-features">';
+            echo '<div class="drtr-feature-item">';
+            echo '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">';
+            echo '<path d="M12 2L2 7l10 5 10-5-10-5z"></path>';
+            echo '<path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>';
+            echo '</svg>';
+            echo '<span>' . __('Destinazioni uniche', 'drtr-checkout') . '</span>';
+            echo '</div>';
+            echo '<div class="drtr-feature-item">';
+            echo '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">';
+            echo '<circle cx="12" cy="12" r="10"></circle>';
+            echo '<polyline points="12 6 12 12 16 14"></polyline>';
+            echo '</svg>';
+            echo '<span>' . __('Prenotazione facile', 'drtr-checkout') . '</span>';
+            echo '</div>';
+            echo '<div class="drtr-feature-item">';
+            echo '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">';
+            echo '<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>';
+            echo '<circle cx="12" cy="7" r="4"></circle>';
+            echo '</svg>';
+            echo '<span>' . __('Guide esperte', 'drtr-checkout') . '</span>';
+            echo '</div>';
+            echo '</div>';
             echo '</div>';
         }
     }
