@@ -41,8 +41,7 @@ get_header();
             
             <?php dreamtour_pagination(); ?>
             
-        else :
-            ?>
+        <?php else : ?>
             <div class="no-content text-center">
                 <h2><?php esc_html_e('No se encontraron resultados', 'dreamtour'); ?></h2>
                 <p><?php esc_html_e('Intenta con otra búsqueda.', 'dreamtour'); ?></p>
