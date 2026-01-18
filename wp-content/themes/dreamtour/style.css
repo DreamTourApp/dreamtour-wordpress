@@ -1366,7 +1366,7 @@ body.menu-open {
 /* Mobile WhatsApp Button */
 @media (max-width: 768px) {
   .whatsapp-float {
-    bottom: 16px;
+    bottom: 126px;
     right: 16px;
     width: 56px;
     height: 56px;

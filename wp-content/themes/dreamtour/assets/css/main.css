@@ -329,16 +329,31 @@
     flex: 1;
 }
 
+.mobile-tour-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 4px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .mobile-price-label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--color-text-medium);
     margin-bottom: 2px;
 }
 
 .mobile-price-amount {
     display: block;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--color-primary);
 }
@@ -401,6 +416,12 @@
     }
     .tour-meta-list {
         gap: var(--spacing-sm);
+    }
+    
+    .mobile-tour-title {
+        font-size: 13px;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
     }
     
     .mobile-price-amount {

@@ -387,11 +387,12 @@ while (have_posts()) :
                 <div class="mobile-booking-trigger">
                     <div class="mobile-booking-trigger-content">
                         <div class="mobile-price-info">
+                            <span class="mobile-tour-title"><?php echo esc_html(wp_trim_words(get_the_title(), 6)); ?></span>
                             <span class="mobile-price-label"><?php _e('Desde', 'dreamtour'); ?></span>
                             <span class="mobile-price-amount">€<?php echo esc_html(number_format($tour_price, 0, ',', '.')); ?></span>
                         </div>
                         <button type="button" class="mobile-book-btn">
-                            <?php _e('Reservar', 'dreamtour'); ?>
+                            <?php _e('Prenota Ora', 'dreamtour'); ?>
                         </button>
                     </div>
                 </div>
