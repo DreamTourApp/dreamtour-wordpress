@@ -7,6 +7,22 @@
     
     $(document).ready(function() {
         
+        // Update status select color based on value
+        function updateStatusSelectColor($select) {
+            const selectedValue = $select.val();
+            $select.attr('data-current-status', selectedValue);
+        }
+        
+        // Initialize colors on page load
+        $('.drtr-status-select').each(function() {
+            updateStatusSelectColor($(this));
+        });
+        
+        // Update color on change
+        $(document).on('change', '.drtr-status-select', function() {
+            updateStatusSelectColor($(this));
+        });
+        
         // Update status button click
         $('.drtr-update-status').on('click', function(e) {
             e.preventDefault();

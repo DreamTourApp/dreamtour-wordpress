@@ -514,7 +514,7 @@ class DRTR_Bookings_Pages {
                 echo esc_html(ucfirst(str_replace('_', ' ', $payment_method)));
                 echo '</td>';
                 echo '<td>';
-                echo '<select class="drtr-status-select" data-booking-id="' . esc_attr($booking_id) . '" title="' . esc_attr(isset($status_descriptions[$status]) ? $status_descriptions[$status] : '') . '">';
+                echo '<select class="drtr-status-select" data-booking-id="' . esc_attr($booking_id) . '" data-current-status="' . esc_attr($status) . '" title="' . esc_attr(isset($status_descriptions[$status]) ? $status_descriptions[$status] : '') . '">';
                 foreach ($status_labels as $status_key => $status_name) {
                     $tooltip = isset($status_descriptions[$status_key]) ? $status_descriptions[$status_key] : '';
                     echo '<option value="' . esc_attr($status_key) . '" ' . selected($status, $status_key, false) . ' title="' . esc_attr($tooltip) . '">';
