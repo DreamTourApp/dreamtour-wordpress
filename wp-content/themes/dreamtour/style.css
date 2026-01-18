@@ -1229,8 +1229,14 @@ body.menu-open {
   }
 }
 
-/* Mobile WhatsApp Button */
+/* Mobile Responsive */
 @media (max-width: 768px) {
+  .container,
+  .container-wide,
+  .container-full {
+    padding: 0;
+  }
+  
   .whatsapp-float {
     bottom: 16px;
     right: 16px;

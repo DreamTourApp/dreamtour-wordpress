@@ -870,6 +870,14 @@
     animation: fadeIn 0.5s ease-out;
 }
 
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .page-wrapper,
+    .single-post-wrapper {
+        padding: 0;
+    }
+}
+
 /* Print Styles */
 @media print {
     .site-header,
