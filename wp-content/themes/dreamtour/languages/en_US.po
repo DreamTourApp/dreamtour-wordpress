@@ -116,8 +116,8 @@ msgstr "Cookie Policy"
 msgid "Todos los derechos reservados."
 msgstr "All rights reserved."
 
-msgid "Descubre el Mundo con DreamTour"
-msgstr "Discover the World with DreamTour"
+msgid "Descubre el Mundo con"
+msgstr "Discover the World with"
 
 msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
 msgstr "Group travels, unique experiences. Join our community of travelers."

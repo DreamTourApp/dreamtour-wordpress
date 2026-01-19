@@ -45,7 +45,7 @@ get_header();
     <div class="container">
         <div class="hero-content">
             <h1 class="hero-title">
-                <?php esc_html_e('Descubre el Mundo con DreamTour', 'dreamtour'); ?>
+                <?php esc_html_e('Descubre el Mundo con', 'dreamtour'); ?> <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svg/dreamtour.svg'); ?>" alt="DreamTour" class="hero-logo-inline">
             </h1>
             <p class="hero-subtitle">
                 <?php esc_html_e('Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros.', 'dreamtour'); ?>

@@ -119,7 +119,7 @@ msgid "Todos los derechos reservados."
 msgstr ""
 
 #: index.php
-msgid "Descubre el Mundo con DreamTour"
+msgid "Descubre el Mundo con"
 msgstr ""
 
 msgid "Viajes en grupo, experiencias únicas. Únete a nuestra comunidad de viajeros."
