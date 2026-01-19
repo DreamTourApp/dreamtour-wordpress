@@ -32,7 +32,7 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
     data-intents="<?php echo esc_attr(implode(',', $intent_slugs)); ?>">
     
     <?php if (current_user_can('manage_options')) : ?>
-        <a href="<?php echo esc_url(home_url('/gestione-tours?action=edit&id=' . get_the_ID())); ?>" 
+        <a href="<?php echo esc_url(home_url('/gestione-tours/?edit_tour=' . get_the_ID())); ?>" 
            class="tour-edit-btn" 
            title="Modifica Tour"
            onclick="event.stopPropagation();">
