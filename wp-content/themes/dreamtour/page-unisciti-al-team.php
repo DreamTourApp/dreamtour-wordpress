@@ -112,7 +112,7 @@ get_header();
                 
                 <div class="contact-info-box">
                     <p><?php esc_html_e('Per candidarti, invia il tuo CV e una lettera di presentazione a:', 'dreamtour'); ?></p>
-                    <a href="mailto:lavora@dreamtourviaggi.it" class="email-link">lavora@dreamtourviaggi.it</a>
+                    <a href="mailto:info@dreamtourviaggi.it" class="email-link">info@dreamtourviaggi.it</a>
                     <p class="note"><?php esc_html_e('Specifica nell\'oggetto la posizione per cui ti candidi', 'dreamtour'); ?></p>
                 </div>
             </div>
@@ -181,7 +181,7 @@ get_header();
 
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 3rem;
 }
 

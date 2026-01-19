@@ -149,6 +149,9 @@ get_header();
 
 <style>
 /* About Section Styles */
+.about-section{
+    margin-bottom: 2rem;
+}
 
 .about-hero {
     text-align: center;
