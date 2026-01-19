@@ -33,7 +33,7 @@ get_header();
                         </div>
                         <div>
                             <h3><?php esc_html_e('Email', 'dreamtour'); ?></h3>
-                            <p><a href="mailto:<?php echo esc_attr(get_option('admin_email')); ?>"><?php echo esc_html(get_option('admin_email')); ?></a></p>
+                            <p><a href="mailto:info@dreamtourviaggi.it">info@dreamtourviaggi.it</a></p>
                         </div>
                     </div>
                     
