@@ -57,11 +57,11 @@
                     <?php else : ?>
                         <h3><?php esc_html_e('DreamTour', 'dreamtour'); ?></h3>
                         <ul>
-                            <li><a href="#"><?php esc_html_e('Sobre Nosotros', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Cómo Funciona', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Blog', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Coordinadores', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Únete al Equipo', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/chi-siamo')); ?>"><?php esc_html_e('Chi Siamo', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/come-funziona')); ?>"><?php esc_html_e('Come Funziona', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/blog')); ?>"><?php esc_html_e('Blog', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/coordinatori')); ?>"><?php esc_html_e('Coordinatori', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/unisciti-al-team')); ?>"><?php esc_html_e('Unisciti al Team', 'dreamtour'); ?></a></li>
                         </ul>
                     <?php endif; ?>
                 </div>
