@@ -14,9 +14,9 @@
                         </div>
                         <p class="footer-company-info">Dream Tour by Manuel Fernando Araujo Morales</p>
                         <div class="footer-contact-info">
-                            <p><strong>Indirizzo:</strong><br>Via E. Pecchi N 8<br>Turano Lodigiano, Provincia di Lodi</p>
-                            <p><strong>P.IVA:</strong> 14518590964</p>
-                            <p><strong>Email:</strong> <a href="mailto:info@dreamtourviaggi.it">info@dreamtourviaggi.it</a></p>
+                            <p>Via E. Pecchi N 8<br>Turano Lodigiano, Provincia di Lodi</p>
+                            <p>14518590964</p>
+                            <p><a href="mailto:info@dreamtourviaggi.it">info@dreamtourviaggi.it</a></p>
                         </div>
                         <div class="social-links">
                             <a href="https://www.instagram.com/dream_tour_viaggi/?igsh=MW40bjZnZTZmd2I4dg%3D%3D&utm_source=qr#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">

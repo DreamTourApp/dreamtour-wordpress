@@ -800,3 +800,19 @@ function dreamtour_get_user_display_name($max_length = 6) {
     
     return $display_name;
 }
+
+/**
+ * Limit search results to tours only
+ * 
+ * @param WP_Query $query The WordPress query object
+ * @return void
+ * @since 1.0.0
+ */
+function dreamtour_limit_search_to_tours($query) {
+    // Only apply to main query and search queries on frontend
+    if (!is_admin() && $query->is_main_query() && $query->is_search()) {
+        // Limit search to tour post types only
+        $query->set('post_type', array('tours', 'drtr_tour'));
+    }
+}
+add_action('pre_get_posts', 'dreamtour_limit_search_to_tours');
