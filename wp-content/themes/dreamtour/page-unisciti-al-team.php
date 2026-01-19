@@ -121,5 +121,254 @@ get_header();
     </div>
 </section>
 
+<style>
+/* Unisciti al Team Styles - Based on Chi Siamo */
+
+.join-team-section {
+    padding: 2rem 0;
+}
+
+.page-hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 2px;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: #003284;
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+}
+
+.page-content {
+    margin-bottom: 4rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #003284;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.benefits-section {
+    margin-bottom: 5rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: #f7fafc;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 50, 132, 0.15);
+}
+
+.benefit-icon {
+    color: #1ba4ce;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #003284;
+    margin-bottom: 1rem;
+}
+
+.benefit-item p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.positions-section {
+    margin-bottom: 5rem;
+}
+
+.positions-list {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.position-card {
+    background: #f7fafc;
+    border-radius: 20px;
+    padding: 3rem;
+    border-left: 4px solid #1ba4ce;
+}
+
+.position-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #003284;
+    margin-bottom: 0.5rem;
+}
+
+.position-type {
+    color: #1ba4ce;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.position-card > p {
+    color: #2d3748;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.position-requirements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.position-requirements li {
+    padding-left: 2rem;
+    position: relative;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.position-requirements li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #1ba4ce;
+    font-weight: 900;
+    font-size: 1.25rem;
+}
+
+.application-form-section {
+    margin-bottom: 4rem;
+}
+
+.contact-info-box {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+}
+
+.contact-info-box p {
+    color: #4a5568;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
+.email-link {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1ba4ce;
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: #003284;
+}
+
+.note {
+    font-size: 0.875rem;
+    color: #718096;
+    font-style: italic;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.cta-card h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cta-card p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .benefits-grid {
+        gap: 2rem;
+    }
+    
+    .position-card {
+        padding: 2rem;
+    }
+    
+    .contact-info-box {
+        padding: 2rem;
+    }
+    
+    .cta-card {
+        padding: 3rem 1.5rem;
+    }
+    
+    .cta-card h2 {
+        font-size: 1.75rem;
+    }
+}
+</style>
+
 <?php
 get_footer();

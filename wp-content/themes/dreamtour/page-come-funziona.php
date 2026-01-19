@@ -97,5 +97,173 @@ get_header();
     </div>
 </section>
 
+<style>
+/* Come Funziona Styles - Based on Chi Siamo */
+
+.how-it-works-section {
+    padding: 2rem 0;
+}
+
+.page-hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 2px;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: #003284;
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+}
+
+.steps-section {
+    margin-bottom: 4rem;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+}
+
+.step-item {
+    text-align: center;
+    padding: 2rem;
+    background: #f7fafc;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 50, 132, 0.1);
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 50, 132, 0.3);
+}
+
+.step-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #003284;
+    margin-bottom: 1rem;
+}
+
+.step-description {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.page-content {
+    margin-bottom: 4rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2d3748;
+}
+
+.faq-preview {
+    background: #f7fafc;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.faq-preview h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #003284;
+    margin-bottom: 1rem;
+}
+
+.faq-preview p {
+    color: #4a5568;
+    margin-bottom: 2rem;
+}
+
+.page-cta {
+    margin-top: 4rem;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.cta-card h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cta-card p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .steps-grid {
+        gap: 2rem;
+    }
+    
+    .faq-preview {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-card {
+        padding: 3rem 1.5rem;
+    }
+    
+    .cta-card h2 {
+        font-size: 1.75rem;
+    }
+}
+</style>
+
 <?php
 get_footer();

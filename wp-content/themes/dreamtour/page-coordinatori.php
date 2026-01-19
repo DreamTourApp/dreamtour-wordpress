@@ -100,5 +100,166 @@ get_header();
     </div>
 </section>
 
+<style>
+/* Coordinatori Styles - Based on Chi Siamo */
+
+.coordinators-section {
+    padding: 2rem 0;
+}
+
+.page-hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 2px;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: #003284;
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+}
+
+.page-content {
+    margin-bottom: 4rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: center;
+}
+
+.coordinators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.coordinator-card {
+    background: #f7fafc;
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coordinator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 50, 132, 0.15);
+}
+
+.coordinator-card.placeholder {
+    opacity: 0.6;
+    border: 2px dashed #cbd5e0;
+    background: transparent;
+}
+
+.coordinator-image {
+    margin-bottom: 1.5rem;
+}
+
+.coordinator-photo-placeholder {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 50, 132, 0.1);
+}
+
+.coordinator-photo-placeholder svg {
+    color: #a0aec0;
+}
+
+.coordinator-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #003284;
+    margin-bottom: 0.5rem;
+}
+
+.coordinator-role {
+    font-size: 1.125rem;
+    color: #1ba4ce;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.coordinator-bio {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.page-cta {
+    margin-top: 4rem;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, #003284 0%, #1ba4ce 100%);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.cta-card h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cta-card p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .coordinators-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .cta-card {
+        padding: 3rem 1.5rem;
+    }
+    
+    .cta-card h2 {
+        font-size: 1.75rem;
+    }
+}
+</style>
+
 <?php
 get_footer();
