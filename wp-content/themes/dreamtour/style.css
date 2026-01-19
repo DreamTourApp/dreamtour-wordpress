@@ -674,8 +674,44 @@ body.menu-open {
 }
 
 .tour-price {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.price-item-adult {
   font-size: 20px;
   font-weight: 700;
+}
+
+.price-item-adult .price-label {
+  color: var(--color-text-medium);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.price-item-adult .price-value {
+  color: var(--color-primary);
+}
+
+.price-item-child {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.price-item-child .price-label {
+  color: var(--color-text-medium);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.price-item-child .price-value {
   color: var(--color-primary);
 }
 

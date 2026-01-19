@@ -6,6 +6,7 @@
  */
 
 $tour_price = get_post_meta(get_the_ID(), '_drtr_price', true);
+$tour_child_price = get_post_meta(get_the_ID(), '_drtr_child_price', true);
 $tour_duration = get_post_meta(get_the_ID(), '_drtr_duration', true);
 $tour_location = get_post_meta(get_the_ID(), '_drtr_location', true);
 $tour_transport = get_post_meta(get_the_ID(), '_drtr_transport_type', true);
@@ -120,7 +121,18 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
             
             <div class="tour-footer">
                 <?php if ($tour_price) : ?>
-                    <span class="tour-price">€<?php echo esc_html(number_format($tour_price, 0, ',', '.')); ?></span>
+                    <div class="tour-price">
+                        <div class="price-item price-item-adult">
+                            <span class="price-label">Adulto:</span>
+                            <span class="price-value">€<?php echo esc_html(number_format($tour_price, 0, ',', '.')); ?></span>
+                        </div>
+                        <?php if ($tour_child_price) : ?>
+                            <div class="price-item price-item-child">
+                                <span class="price-label">Bambino:</span>
+                                <span class="price-value">€<?php echo esc_html(number_format($tour_child_price, 0, ',', '.')); ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 <?php endif; ?>
                 
                 <?php if ($tour_max_people) : ?>
