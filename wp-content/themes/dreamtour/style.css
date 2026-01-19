@@ -477,7 +477,7 @@ body.menu-open {
 
 .hero-title {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 400;
   margin-bottom: var(--spacing-md);
   color: var(--color-white);
 }

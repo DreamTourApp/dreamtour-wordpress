@@ -54,7 +54,7 @@ get_header();
                 <a href="<?php echo esc_url(home_url('/tours')); ?>" class="btn btn-primary">
                     <?php esc_html_e('Explorar Tours', 'dreamtour'); ?>
                 </a>
-                <a href="<?php echo esc_url(home_url('/sobre-nosotros')); ?>" class="btn btn-outline">
+                <a href="<?php echo esc_url(home_url('/chi-siamo')); ?>" class="btn btn-outline">
                     <?php esc_html_e('Conocer Más', 'dreamtour'); ?>
                 </a>
             </div>
