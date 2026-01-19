@@ -674,7 +674,7 @@ body.menu-open {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgb(0 0 0 / 39%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -691,14 +691,6 @@ body.menu-open {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-  right: var(--spacing-sm);
-  background-color: var(--color-accent);
-  color: var(--color-white);
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
-  font-size: 12px;
-  font-weight: 600;
 }
 
 .tour-card-content {
