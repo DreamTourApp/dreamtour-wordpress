@@ -805,7 +805,6 @@ body.menu-open {
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
 }
 
 .footer-logo {

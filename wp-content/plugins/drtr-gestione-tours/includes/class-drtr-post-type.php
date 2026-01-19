@@ -140,7 +140,6 @@ class DRTR_Post_Type {
             'group_flights'      => array('label' => __('Voli di gruppo', 'drtr-tours'), 'icon' => '✈️'),
             'beach_days'         => array('label' => __('Giornate al mare', 'drtr-tours'), 'icon' => '🏖️'),
             'italy_trips'        => array('label' => __('Viaggi in Italia', 'drtr-tours'), 'icon' => '🇮🇹'),
-            'gift_cards'         => array('label' => __('Carte regalo', 'drtr-tours'), 'icon' => '🎁'),
             'bernina_express'    => array('label' => __('Bernina Express panoramico', 'drtr-tours'), 'icon' => '🚂'),
             'christmas_markets'  => array('label' => __('Mercatini di Natale', 'drtr-tours'), 'icon' => '🎄'),
             'mountain_trips'     => array('label' => __('Vacanze in montagna', 'drtr-tours'), 'icon' => '⛰️'),

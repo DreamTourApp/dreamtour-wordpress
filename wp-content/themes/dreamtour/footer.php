@@ -37,13 +37,15 @@
                     <?php if (is_active_sidebar('footer-2')) : ?>
                         <?php dynamic_sidebar('footer-2'); ?>
                     <?php else : ?>
-                        <h3><?php esc_html_e('Destinos', 'dreamtour'); ?></h3>
+                        <h3><?php esc_html_e('Categorie Tour', 'dreamtour'); ?></h3>
                         <ul>
-                            <li><a href="#"><?php esc_html_e('Europa', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Asia', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('América', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('África', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Oceanía', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=group_cruises')); ?>"><?php esc_html_e('Crociere di gruppo', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=group_flights')); ?>"><?php esc_html_e('Voli di gruppo', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=beach_days')); ?>"><?php esc_html_e('Giornate al mare', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=italy_trips')); ?>"><?php esc_html_e('Viaggi in Italia', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=bernina_express')); ?>"><?php esc_html_e('Bernina Express panoramico', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=christmas_markets')); ?>"><?php esc_html_e('Mercatini di Natale', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/tours?filter=mountain_trips')); ?>"><?php esc_html_e('Vacanze in montagna', 'dreamtour'); ?></a></li>
                         </ul>
                     <?php endif; ?>
                 </div>
