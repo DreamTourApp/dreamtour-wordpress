@@ -14,6 +14,19 @@
         const $experienceCheckboxes = $('.filter-experience-checkbox');
         const $monthCheckboxes = $('.filter-month-checkbox');
         
+        // Check for URL filter parameter on page load
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParam = urlParams.get('filter');
+        if (filterParam) {
+            // Check the corresponding checkbox
+            const $checkbox = $('.filter-experience-checkbox[value="' + filterParam + '"]');
+            if ($checkbox.length) {
+                $checkbox.prop('checked', true);
+                updateExperiencesCount();
+                filterTours();
+            }
+        }
+        
         // Toggle experiences dropdown
         $experiencesToggle.on('click', function(e) {
             e.stopPropagation();
