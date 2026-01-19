@@ -58,8 +58,12 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
                 $start = new DateTime($tour_start_date);
                 $now = new DateTime();
                 $diff = $now->diff($start);
-                if ($diff->days <= 30 && $start > $now) :
-                ?>
+                
+                if ($start < $now) : ?>
+                    <div class="tour-concluded-overlay">
+                        <span class="tour-concluded-label">Tour Concluso</span>
+                    </div>
+                <?php elseif ($diff->days <= 30 && $start > $now) : ?>
                     <span class="tour-badge"><?php esc_html_e('Próximo', 'dreamtour'); ?></span>
                 <?php endif; ?>
             <?php endif; ?>
