@@ -15,13 +15,13 @@ get_header();
             
             <!-- Hero -->
             <div class="page-hero">
-                <h1 class="page-title"><?php esc_html_e('Privacy Policy', 'dreamtour'); ?></h1>
-                <p class="page-subtitle"><?php esc_html_e('Informativa sul trattamento dei dati personali ai sensi del GDPR', 'dreamtour'); ?></p>
+                <h1 class="page-title">Privacy Policy</h1>
+                <p class="page-subtitle">Informativa sul trattamento dei dati personali ai sensi del GDPR</p>
             </div>
 
             <!-- Last Update -->
             <div class="last-update">
-                <p><?php esc_html_e('Ultimo aggiornamento:', 'dreamtour'); ?> <strong>19 Gennaio 2026</strong></p>
+                <p>Ultimo aggiornamento: <strong>19 Gennaio 2026</strong></p>
             </div>
 
             <!-- Privacy Content -->
@@ -32,8 +32,8 @@ get_header();
                 <?php else : ?>
                 
                 <div class="privacy-section-item">
-                    <h2>1. <?php esc_html_e('Titolare del Trattamento', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Il Titolare del trattamento dei dati è:', 'dreamtour'); ?></p>
+                    <h2>1. Titolare del Trattamento</h2>
+                    <p>Il Titolare del trattamento dei dati è:</p>
                     <div class="info-box">
                         <p><strong>DreamTour by Manuel Fernando Araujo Morales</strong></p>
                         <p>Via E. Pecchi N 8, Turano Lodigiano (LO)</p>
@@ -43,104 +43,104 @@ get_header();
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>2. <?php esc_html_e('Dati Raccolti', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Raccogliamo le seguenti categorie di dati personali:', 'dreamtour'); ?></p>
+                    <h2>2. Dati Raccolti</h2>
+                    <p>Raccogliamo le seguenti categorie di dati personali:</p>
                     <ul>
-                        <li><strong><?php esc_html_e('Dati Identificativi:', 'dreamtour'); ?></strong> <?php esc_html_e('nome, cognome, data di nascita', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Dati di Contatto:', 'dreamtour'); ?></strong> <?php esc_html_e('email, numero di telefono, indirizzo', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Dati di Pagamento:', 'dreamtour'); ?></strong> <?php esc_html_e('informazioni carta di credito (tramite Stripe)', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Dati di Navigazione:', 'dreamtour'); ?></strong> <?php esc_html_e('indirizzo IP, cookie, dati di utilizzo del sito', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Preferenze Viaggio:', 'dreamtour'); ?></strong> <?php esc_html_e('destinazioni preferite, esigenze alimentari/mediche', 'dreamtour'); ?></li>
+                        <li><strong>Dati Identificativi:</strong> nome, cognome, data di nascita</li>
+                        <li><strong>Dati di Contatto:</strong> email, numero di telefono, indirizzo</li>
+                        <li><strong>Dati di Pagamento:</strong> informazioni carta di credito (tramite Stripe)</li>
+                        <li><strong>Dati di Navigazione:</strong> indirizzo IP, cookie, dati di utilizzo del sito</li>
+                        <li><strong>Preferenze Viaggio:</strong> destinazioni preferite, esigenze alimentari/mediche</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>3. <?php esc_html_e('Finalità del Trattamento', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('I tuoi dati personali sono trattati per:', 'dreamtour'); ?></p>
+                    <h2>3. Finalità del Trattamento</h2>
+                    <p>I tuoi dati personali sono trattati per:</p>
                     <ul>
-                        <li><?php esc_html_e('Gestione prenotazioni e contratti di viaggio', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Erogazione dei servizi turistici acquistati', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Elaborazione pagamenti', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Comunicazioni relative al viaggio (conferme, modifiche, promemoria)', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Assistenza clienti e gestione reclami', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Marketing e invio newsletter (previo consenso)', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Adempimenti di legge (contabili, fiscali)', 'dreamtour'); ?></li>
+                        <li>Gestione prenotazioni e contratti di viaggio</li>
+                        <li>Erogazione dei servizi turistici acquistati</li>
+                        <li>Elaborazione pagamenti</li>
+                        <li>Comunicazioni relative al viaggio (conferme, modifiche, promemoria)</li>
+                        <li>Assistenza clienti e gestione reclami</li>
+                        <li>Marketing e invio newsletter (previo consenso)</li>
+                        <li>Adempimenti di legge (contabili, fiscali)</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>4. <?php esc_html_e('Base Giuridica', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Il trattamento dei dati è basato su:', 'dreamtour'); ?></p>
+                    <h2>4. Base Giuridica</h2>
+                    <p>Il trattamento dei dati è basato su:</p>
                     <ul>
-                        <li><strong><?php esc_html_e('Esecuzione contrattuale:', 'dreamtour'); ?></strong> <?php esc_html_e('per gestire la tua prenotazione', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Obbligo legale:', 'dreamtour'); ?></strong> <?php esc_html_e('per adempimenti fiscali e contabili', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Consenso:', 'dreamtour'); ?></strong> <?php esc_html_e('per attività di marketing', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Legittimo interesse:', 'dreamtour'); ?></strong> <?php esc_html_e('per migliorare i nostri servizi', 'dreamtour'); ?></li>
+                        <li><strong>Esecuzione contrattuale:</strong> per gestire la tua prenotazione</li>
+                        <li><strong>Obbligo legale:</strong> per adempimenti fiscali e contabili</li>
+                        <li><strong>Consenso:</strong> per attività di marketing</li>
+                        <li><strong>Legittimo interesse:</strong> per migliorare i nostri servizi</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>5. <?php esc_html_e('Destinatari dei Dati', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('I tuoi dati possono essere comunicati a:', 'dreamtour'); ?></p>
+                    <h2>5. Destinatari dei Dati</h2>
+                    <p>I tuoi dati possono essere comunicati a:</p>
                     <ul>
-                        <li><?php esc_html_e('Fornitori di servizi turistici (hotel, compagnie trasporto)', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Processori di pagamento (Stripe)', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Provider di hosting e servizi IT', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Commercialisti e consulenti legali', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Autorità pubbliche (se richiesto dalla legge)', 'dreamtour'); ?></li>
+                        <li>Fornitori di servizi turistici (hotel, compagnie trasporto)</li>
+                        <li>Processori di pagamento (Stripe)</li>
+                        <li>Provider di hosting e servizi IT</li>
+                        <li>Commercialisti e consulenti legali</li>
+                        <li>Autorità pubbliche (se richiesto dalla legge)</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>6. <?php esc_html_e('Trasferimento Dati Extra-UE', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Alcuni fornitori di servizi (es. Stripe) potrebbero trasferire dati al di fuori dell\'Unione Europea. In tali casi garantiamo che il trasferimento avvenga nel rispetto delle garanzie previste dal GDPR (clausole contrattuali standard, Privacy Shield).', 'dreamtour'); ?></p>
+                    <h2>6. Trasferimento Dati Extra-UE</h2>
+                    <p>Alcuni fornitori di servizi (es. Stripe) potrebbero trasferire dati al di fuori dell'Unione Europea. In tali casi garantiamo che il trasferimento avvenga nel rispetto delle garanzie previste dal GDPR (clausole contrattuali standard, Privacy Shield).</p>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>7. <?php esc_html_e('Conservazione dei Dati', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('I dati personali sono conservati per:', 'dreamtour'); ?></p>
+                    <h2>7. Conservazione dei Dati</h2>
+                    <p>I dati personali sono conservati per:</p>
                     <ul>
-                        <li><?php esc_html_e('Dati contrattuali: 10 anni (obblighi fiscali)', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Dati di marketing: fino a revoca del consenso', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Dati di navigazione: 24 mesi', 'dreamtour'); ?></li>
+                        <li>Dati contrattuali: 10 anni (obblighi fiscali)</li>
+                        <li>Dati di marketing: fino a revoca del consenso</li>
+                        <li>Dati di navigazione: 24 mesi</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>8. <?php esc_html_e('Diritti dell\'Interessato', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Hai il diritto di:', 'dreamtour'); ?></p>
+                    <h2>8. Diritti dell'Interessato</h2>
+                    <p>Hai il diritto di:</p>
                     <ul>
-                        <li><strong><?php esc_html_e('Accesso:', 'dreamtour'); ?></strong> <?php esc_html_e('ottenere conferma del trattamento e copia dei dati', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Rettifica:', 'dreamtour'); ?></strong> <?php esc_html_e('correggere dati inesatti o incompleti', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Cancellazione:', 'dreamtour'); ?></strong> <?php esc_html_e('ottenere la cancellazione dei dati (diritto all\'oblio)', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Limitazione:', 'dreamtour'); ?></strong> <?php esc_html_e('limitare il trattamento in determinati casi', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Portabilità:', 'dreamtour'); ?></strong> <?php esc_html_e('ricevere i dati in formato strutturato', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Opposizione:', 'dreamtour'); ?></strong> <?php esc_html_e('opporti al trattamento per marketing', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Revoca consenso:', 'dreamtour'); ?></strong> <?php esc_html_e('revocare il consenso in qualsiasi momento', 'dreamtour'); ?></li>
-                        <li><strong><?php esc_html_e('Reclamo:', 'dreamtour'); ?></strong> <?php esc_html_e('presentare reclamo al Garante Privacy', 'dreamtour'); ?></li>
+                        <li><strong>Accesso:</strong> ottenere conferma del trattamento e copia dei dati</li>
+                        <li><strong>Rettifica:</strong> correggere dati inesatti o incompleti</li>
+                        <li><strong>Cancellazione:</strong> ottenere la cancellazione dei dati (diritto all'oblio)</li>
+                        <li><strong>Limitazione:</strong> limitare il trattamento in determinati casi</li>
+                        <li><strong>Portabilità:</strong> ricevere i dati in formato strutturato</li>
+                        <li><strong>Opposizione:</strong> opporti al trattamento per marketing</li>
+                        <li><strong>Revoca consenso:</strong> revocare il consenso in qualsiasi momento</li>
+                        <li><strong>Reclamo:</strong> presentare reclamo al Garante Privacy</li>
                     </ul>
-                    <p><?php esc_html_e('Per esercitare i tuoi diritti, scrivi a: info@dreamtourviaggi.it', 'dreamtour'); ?></p>
+                    <p>Per esercitare i tuoi diritti, scrivi a: info@dreamtourviaggi.it</p>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>9. <?php esc_html_e('Cookie e Tecnologie di Tracciamento', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Il nostro sito utilizza cookie per migliorare l\'esperienza utente. Per maggiori informazioni consulta la nostra Cookie Policy.', 'dreamtour'); ?></p>
+                    <h2>9. Cookie e Tecnologie di Tracciamento</h2>
+                    <p>Il nostro sito utilizza cookie per migliorare l'esperienza utente. Per maggiori informazioni consulta la nostra Cookie Policy.</p>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>10. <?php esc_html_e('Sicurezza dei Dati', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Adottiamo misure tecniche e organizzative adeguate per proteggere i tuoi dati da accessi non autorizzati, perdita, distruzione o divulgazione:', 'dreamtour'); ?></p>
+                    <h2>10. Sicurezza dei Dati</h2>
+                    <p>Adottiamo misure tecniche e organizzative adeguate per proteggere i tuoi dati da accessi non autorizzati, perdita, distruzione o divulgazione:</p>
                     <ul>
-                        <li><?php esc_html_e('Crittografia SSL per le comunicazioni', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Backup regolari dei dati', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Accesso limitato ai dati solo al personale autorizzato', 'dreamtour'); ?></li>
-                        <li><?php esc_html_e('Firewall e sistemi di protezione aggiornati', 'dreamtour'); ?></li>
+                        <li>Crittografia SSL per le comunicazioni</li>
+                        <li>Backup regolari dei dati</li>
+                        <li>Accesso limitato ai dati solo al personale autorizzato</li>
+                        <li>Firewall e sistemi di protezione aggiornati</li>
                     </ul>
                 </div>
 
                 <div class="privacy-section-item">
-                    <h2>11. <?php esc_html_e('Modifiche alla Privacy Policy', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Ci riserviamo il diritto di modificare questa informativa in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con l\'indicazione della data di ultimo aggiornamento.', 'dreamtour'); ?></p>
+                    <h2>11. Modifiche alla Privacy Policy</h2>
+                    <p>Ci riserviamo il diritto di modificare questa informativa in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con l'indicazione della data di ultimo aggiornamento.</p>
                 </div>
 
                 <?php endif; ?>
@@ -150,10 +150,10 @@ get_header();
             <!-- CTA -->
             <div class="page-cta">
                 <div class="cta-card">
-                    <h2><?php esc_html_e('Hai domande sulla privacy?', 'dreamtour'); ?></h2>
-                    <p><?php esc_html_e('Contattaci per qualsiasi chiarimento sul trattamento dei tuoi dati', 'dreamtour'); ?></p>
+                    <h2>Hai domande sulla privacy?</h2>
+                    <p>Contattaci per qualsiasi chiarimento sul trattamento dei tuoi dati</p>
                     <a href="mailto:info@dreamtourviaggi.it" class="btn btn-primary btn-lg">
-                        <?php esc_html_e('Invia Email', 'dreamtour'); ?>
+                        Invia Email
                     </a>
                 </div>
             </div>
