@@ -71,13 +71,13 @@
                     <?php if (is_active_sidebar('footer-4')) : ?>
                         <?php dynamic_sidebar('footer-4'); ?>
                     <?php else : ?>
-                        <h3><?php esc_html_e('Ayuda', 'dreamtour'); ?></h3>
+                        <h3><?php esc_html_e('Aiuto', 'dreamtour'); ?></h3>
                         <ul>
-                            <li><a href="#"><?php esc_html_e('Contacto', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('FAQ', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Términos y Condiciones', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Política de Privacidad', 'dreamtour'); ?></a></li>
-                            <li><a href="#"><?php esc_html_e('Política de Cookies', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/contatti')); ?>"><?php esc_html_e('Contatti', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/faq')); ?>"><?php esc_html_e('FAQ', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/termini-condizioni')); ?>"><?php esc_html_e('Termini e Condizioni', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/privacy-policy')); ?>"><?php esc_html_e('Privacy Policy', 'dreamtour'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/cookie-policy')); ?>"><?php esc_html_e('Cookie Policy', 'dreamtour'); ?></a></li>
                         </ul>
                     <?php endif; ?>
                 </div>
@@ -85,7 +85,7 @@
             
             <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php esc_html_e('Todos los derechos reservados.', 'dreamtour'); ?></p>
+                <p>&copy; <?php echo date('Y'); ?> Dream Tour. <?php esc_html_e('Todos los derechos reservados.', 'dreamtour'); ?></p>
             </div>
         </div>
     </footer>
