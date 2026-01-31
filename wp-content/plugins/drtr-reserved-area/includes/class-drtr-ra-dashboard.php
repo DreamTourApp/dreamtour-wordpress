@@ -87,14 +87,19 @@ class DRTR_RA_Dashboard {
                             <i class="dashicons dashicons-lock"></i>
                             <?php _e('Password', 'drtr-reserved-area'); ?>
                         </label>
-                        <input 
-                            type="password" 
-                            id="drtr-password" 
-                            name="password" 
-                            class="drtr-ra-input" 
-                            placeholder="<?php esc_attr_e('Inserisci la tua password', 'drtr-reserved-area'); ?>"
-                            required
-                        >
+                        <div class="drtr-ra-password-wrapper">
+                            <input 
+                                type="password" 
+                                id="drtr-password" 
+                                name="password" 
+                                class="drtr-ra-input drtr-ra-password-input" 
+                                placeholder="<?php esc_attr_e('Inserisci la tua password', 'drtr-reserved-area'); ?>"
+                                required
+                            >
+                            <button type="button" class="drtr-ra-toggle-password" aria-label="<?php esc_attr_e('Mostra password', 'drtr-reserved-area'); ?>">
+                                <i class="dashicons dashicons-visibility"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="drtr-ra-form-group drtr-ra-remember">

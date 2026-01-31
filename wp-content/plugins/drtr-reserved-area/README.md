@@ -5,6 +5,7 @@ Sistema di login personalizzato e area riservata con gestione permessi per ruoli
 ## Caratteristiche
 
 ✅ **Login Personalizzato** - Formulario di accesso elegante e moderno fuori da wp-admin
+✅ **Password Toggle** - Bottone con icona occhio per mostrare/nascondere la password
 ✅ **Dashboard Dinamico** - Interfaccia adattiva basata sul ruolo utente
 ✅ **Gestione Permessi** - Contenuti diversi per amministratori e utenti standard
 ✅ **Multilingue** - Supporto completo per Italiano, Spagnolo e Inglese

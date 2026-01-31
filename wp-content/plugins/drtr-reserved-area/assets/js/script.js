@@ -8,6 +8,23 @@
     
     $(document).ready(function() {
         
+        // Toggle visibilità password
+        $(document).on('click', '.drtr-ra-toggle-password', function() {
+            var $button = $(this);
+            var $input = $button.siblings('.drtr-ra-password-input');
+            var $icon = $button.find('.dashicons');
+            
+            if ($input.attr('type') === 'password') {
+                $input.attr('type', 'text');
+                $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
+                $button.attr('aria-label', drtrRA.strings.hide_password || 'Nascondi password');
+            } else {
+                $input.attr('type', 'password');
+                $icon.removeClass('dashicons-hidden').addClass('dashicons-visibility');
+                $button.attr('aria-label', drtrRA.strings.show_password || 'Mostra password');
+            }
+        });
+        
         // Manejar envío del formulario de login
         $('#drtr-ra-login-form').on('submit', function(e) {
             e.preventDefault();

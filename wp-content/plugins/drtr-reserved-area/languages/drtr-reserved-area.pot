@@ -44,6 +44,12 @@ msgstr ""
 msgid "Inserisci la tua password"
 msgstr ""
 
+msgid "Mostra password"
+msgstr ""
+
+msgid "Nascondi password"
+msgstr ""
+
 msgid "Ricordami"
 msgstr ""
 

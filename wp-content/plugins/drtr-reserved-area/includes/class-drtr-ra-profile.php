@@ -192,27 +192,37 @@ class DRTR_RA_Profile {
                             <label for="current_password">
                                 <?php _e('Password Attuale', 'drtr-reserved-area'); ?> *
                             </label>
-                            <input 
-                                type="password" 
-                                id="current_password" 
-                                name="current_password" 
-                                class="drtr-ra-input"
-                                required
-                            >
+                            <div class="drtr-ra-password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="current_password" 
+                                    name="current_password" 
+                                    class="drtr-ra-input drtr-ra-password-input"
+                                    required
+                                >
+                                <button type="button" class="drtr-ra-toggle-password" aria-label="<?php esc_attr_e('Mostra password', 'drtr-reserved-area'); ?>">
+                                    <i class="dashicons dashicons-visibility"></i>
+                                </button>
+                            </div>
                         </div>
                         
                         <div class="drtr-profile-field">
                             <label for="new_password">
                                 <?php _e('Nuova Password', 'drtr-reserved-area'); ?> *
                             </label>
-                            <input 
-                                type="password" 
-                                id="new_password" 
-                                name="new_password" 
-                                class="drtr-ra-input"
-                                minlength="8"
-                                required
-                            >
+                            <div class="drtr-ra-password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="new_password" 
+                                    name="new_password" 
+                                    class="drtr-ra-input drtr-ra-password-input"
+                                    minlength="8"
+                                    required
+                                >
+                                <button type="button" class="drtr-ra-toggle-password" aria-label="<?php esc_attr_e('Mostra password', 'drtr-reserved-area'); ?>">
+                                    <i class="dashicons dashicons-visibility"></i>
+                                </button>
+                            </div>
                             <small class="drtr-field-hint">
                                 <?php _e('Minimo 8 caratteri', 'drtr-reserved-area'); ?>
                             </small>
@@ -222,14 +232,19 @@ class DRTR_RA_Profile {
                             <label for="confirm_password">
                                 <?php _e('Conferma Nuova Password', 'drtr-reserved-area'); ?> *
                             </label>
-                            <input 
-                                type="password" 
-                                id="confirm_password" 
-                                name="confirm_password" 
-                                class="drtr-ra-input"
-                                minlength="8"
-                                required
-                            >
+                            <div class="drtr-ra-password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="confirm_password" 
+                                    name="confirm_password" 
+                                    class="drtr-ra-input drtr-ra-password-input"
+                                    minlength="8"
+                                    required
+                                >
+                                <button type="button" class="drtr-ra-toggle-password" aria-label="<?php esc_attr_e('Mostra password', 'drtr-reserved-area'); ?>">
+                                    <i class="dashicons dashicons-visibility"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     

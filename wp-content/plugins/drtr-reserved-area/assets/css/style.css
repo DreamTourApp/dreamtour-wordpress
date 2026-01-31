@@ -243,6 +243,48 @@
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+/* Password wrapper con bottone toggle */
+.drtr-ra-password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.drtr-ra-password-input {
+    padding-right: 3rem;
+}
+
+.drtr-ra-toggle-password {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #718096;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drtr-ra-toggle-password:hover {
+    color: #667eea;
+}
+
+.drtr-ra-toggle-password:focus {
+    outline: none;
+    color: #667eea;
+}
+
+.drtr-ra-toggle-password .dashicons {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
 .drtr-ra-remember {
     margin-bottom: 1.5rem;
 }

@@ -104,6 +104,8 @@ class DRTR_Reserved_Area {
                 'strings' => array(
                     'login_error' => __('Errore di login. Verifica le tue credenziali.', 'drtr-reserved-area'),
                     'required_fields' => __('Tutti i campi sono obbligatori.', 'drtr-reserved-area'),
+                    'show_password' => __('Mostra password', 'drtr-reserved-area'),
+                    'hide_password' => __('Nascondi password', 'drtr-reserved-area'),
                 )
             ));
         }
