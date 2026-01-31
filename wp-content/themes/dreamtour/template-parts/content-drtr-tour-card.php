@@ -23,9 +23,17 @@ $intent_slugs = array();
 if ($travel_intents && !is_wp_error($travel_intents)) {
     $intent_slugs = wp_list_pluck($travel_intents, 'slug');
 }
+
+// Check if tour is concluded
+$is_concluded = false;
+if ($tour_start_date) {
+    $start = new DateTime($tour_start_date);
+    $now = new DateTime();
+    $is_concluded = $start < $now;
+}
 ?>
 
-<div class="tour-card" 
+<div class="tour-card<?php echo $is_concluded ? ' tour-concluded' : ''; ?>" 
     data-destination="<?php echo $destinations && !is_wp_error($destinations) ? esc_attr($destinations[0]->slug) : ''; ?>" 
     data-transport="<?php echo esc_attr($tour_transport); ?>" 
     data-duration="<?php echo esc_attr($tour_duration); ?>"
@@ -43,7 +51,11 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
         </a>
     <?php endif; ?>
     
+    <?php if (!$is_concluded) : ?>
     <a href="<?php the_permalink(); ?>" class="tour-card-link">
+    <?php else : ?>
+    <div class="tour-card-link tour-card-disabled">
+    <?php endif; ?>
         
         <div class="tour-card-image">
             <?php if ($image_id) : 
@@ -166,5 +178,9 @@ if ($travel_intents && !is_wp_error($travel_intents)) {
             </div>
         </div>
         
+    <?php if (!$is_concluded) : ?>
     </a>
+    <?php else : ?>
+    </div>
+    <?php endif; ?>
 </div>
